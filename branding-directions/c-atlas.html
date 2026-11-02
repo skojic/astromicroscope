@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction C · Sky Atlas · Astromicroscope</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --chalk:#EEF0EC;
+    --graphite:#23262D;
+    --fire:#E04A2C;
+    --earth:#7A8A3A;
+    --air:#A8C9E4;
+    --water:#1D6874;
+    --f:"Bricolage Grotesque",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--chalk);color:var(--graphite);font:400 1.125rem/1.55 var(--f);font-variation-settings:"opsz" 14;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--graphite);outline-offset:3px}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+  .review{position:fixed;z-index:50;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:#fff;border:1.5px solid var(--graphite);border-radius:12px;padding:4px;font:500 13px/1 var(--f)}
+  .review a{text-decoration:none;padding:8px 14px;border-radius:8px}
+  .review a[aria-current]{background:var(--graphite);color:#fff}
+
+  header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.25rem/1 var(--f);font-stretch:85%;letter-spacing:-.02em}
+  nav{display:flex;gap:26px;font-weight:500;font-size:.98rem}
+  nav a{text-decoration:none}
+  nav a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+  .btn{display:inline-block;font:600 1rem/1 var(--f);padding:15px 22px;border-radius:12px;text-decoration:none;background:var(--graphite);color:#fff;border:0;cursor:pointer}
+  .btn:hover{background:var(--water)}
+  .btn.alt{background:transparent;color:var(--graphite);box-shadow:inset 0 0 0 2px var(--graphite)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:5fr 7fr;gap:40px;padding:36px 0 100px;align-items:start}
+  .hero h1{font:800 clamp(3rem,6.2vw,5.6rem)/.92 var(--f);font-variation-settings:"opsz" 96;font-stretch:78%;letter-spacing:-.03em;margin-bottom:26px}
+  .hero .lede{font-size:1.25rem;max-width:32ch;margin-bottom:32px}
+  .ctas{display:flex;gap:10px;flex-wrap:wrap}
+  .panel{margin-top:40px;background:#fff;border-radius:16px;padding:22px 24px;border:1.5px solid var(--graphite);min-height:168px}
+  .panel .t{display:flex;align-items:center;gap:12px;font:700 1.5rem/1 var(--f);font-stretch:85%;margin-bottom:8px}
+  .panel .tag{font:600 .8rem/1 var(--f);padding:6px 10px;border-radius:999px;color:#fff}
+  .panel p{font-size:1rem}
+  .atlas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .sign{all:unset;box-sizing:border-box;aspect-ratio:1;border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;position:relative;transition:transform .2s}
+  .sign:hover,.sign[aria-pressed=true]{transform:translateY(-4px)}
+  .sign[aria-pressed=true]{box-shadow:0 0 0 3px var(--chalk),0 0 0 6px var(--graphite)}
+  .sign:focus-visible{outline:3px solid var(--graphite);outline-offset:4px}
+  .sign svg{width:56%;height:auto;align-self:flex-end}
+  .sign span{font:600 .95rem/1 var(--f)}
+  .fire{background:var(--fire);color:#fff}
+  .earth{background:var(--earth);color:#fff}
+  .air{background:var(--air);color:var(--graphite)}
+  .water{background:var(--water);color:#fff}
+  @media (prefers-reduced-motion:reduce){.sign{transition:none}}
+
+  .section{padding:100px 0;border-top:2px solid var(--graphite)}
+  h2{font:800 clamp(2.3rem,4.4vw,3.8rem)/.95 var(--f);font-variation-settings:"opsz" 96;font-stretch:80%;letter-spacing:-.025em;margin-bottom:18px;max-width:18ch}
+  .intro{max-width:56ch;margin-bottom:52px}
+
+  /* consultations as lesson plans */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .plan{background:#fff;border-radius:16px;border:1.5px solid var(--graphite);display:flex;flex-direction:column;overflow:hidden}
+  .plan .top{padding:22px 22px 18px;color:#fff}
+  .plan .top h3{font:800 2.2rem/1 var(--f);font-stretch:80%;letter-spacing:-.02em}
+  .plan .top p{font-size:1rem;opacity:.92;margin-top:6px}
+  .plan ul{list-style:none;padding:20px 22px;flex:1;display:grid;gap:10px;font-size:1rem}
+  .plan li{padding-left:22px;position:relative}
+  .plan li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:50%;border:2px solid var(--graphite)}
+  .plan .foot{padding:18px 22px;border-top:1.5px solid var(--graphite);display:flex;justify-content:space-between;align-items:center;font-weight:600}
+
+  /* curriculum */
+  .curr{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--graphite);border-radius:16px;overflow:hidden;background:#fff}
+  .lvl{padding:28px 26px;border-right:1.5px solid var(--graphite)}
+  .lvl:last-child{border-right:0}
+  .lvl .n{font:800 4.5rem/1 var(--f);font-stretch:75%;margin-bottom:10px}
+  .lvl h3{font:700 1.35rem/1.15 var(--f);margin-bottom:8px}
+  .lvl p{font-size:1rem}
+  .lvl .st{display:inline-block;margin-top:16px;font:600 .85rem/1 var(--f);padding:7px 11px;border-radius:999px;background:var(--chalk)}
+  .wait{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .wait input{font:400 1.05rem var(--f);padding:14px 16px;border-radius:12px;border:2px solid var(--graphite);min-width:280px;background:#fff}
+  .wait small{flex-basis:100%;font-size:.9rem}
+
+  .about{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:center}
+  .ph{aspect-ratio:1;border-radius:16px;background:conic-gradient(var(--fire) 0 25%,var(--earth) 0 50%,var(--air) 0 75%,var(--water) 0);padding:14px}
+  .ph div{width:100%;height:100%;background:var(--chalk);border-radius:10px;display:grid;place-items:center;text-align:center;font-size:.95rem;color:#5b5f68;padding:20px}
+  .about p+p{margin-top:1em}
+
+  footer{padding:40px 0 110px;border-top:2px solid var(--graphite);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.95rem}
+
+  .kit{background:#fff;padding:100px 0 150px;border-top:2px solid var(--graphite)}
+  .kit .intro{max-width:66ch}
+  .kg{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .tile{border:1.5px solid var(--graphite);border-radius:16px;padding:24px;font-size:1rem}
+  .tile h3{font:600 .95rem/1 var(--f);margin-bottom:18px;color:#5b5f68}
+  .t-logo{grid-column:span 7}
+  .t-logo .row{display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+  .t-logo .word{font:800 2.8rem/1 var(--f);font-stretch:78%;letter-spacing:-.03em}
+  .t-pal{grid-column:span 5}
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .chip{aspect-ratio:1.5;border-radius:10px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;font:500 .75rem/1.3 var(--f)}
+  .t-type{grid-column:span 6}
+  .t-type .big{font:800 4.6rem/.9 var(--f);font-stretch:75%;letter-spacing:-.03em}
+  .t-type .light{font:300 2rem/1.1 var(--f);font-stretch:100%;margin:10px 0 14px}
+  .t-ig{grid-column:span 6;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+  .t-ig h3{grid-column:1/-1}
+  .ig{aspect-ratio:4/5;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+  .t-voice{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .t-voice h3{grid-column:1/-1;margin:0}
+  .t-voice b{display:block;margin-bottom:4px}
+
+  @media (max-width:900px){
+    nav{display:none}
+    .hero,.about{grid-template-columns:1fr}
+    .atlas{grid-template-columns:repeat(3,1fr)}
+    .plans,.curr{grid-template-columns:1fr}
+    .lvl{border-right:0;border-bottom:1.5px solid var(--graphite)}
+    .t-logo,.t-pal,.t-type,.t-ig{grid-column:span 12}
+    .t-voice{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="review" aria-label="Review navigation">
+  <a href="index.html">Overview</a>
+  <a href="a-specimen.html">A · Lens</a>
+  <a href="b-cycles.html">B · Cycles</a>
+  <a href="c-atlas.html" aria-current="page">C · Atlas</a>
+  <a href="d-midnight-lens.html">D · Midnight Lens</a>
+</nav>
+
+<div class="wrap">
+  <header>
+    <a class="logo" href="#"><svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 L20 2 A18 18 0 0 1 38 20Z" fill="#E04A2C"/><path d="M20 20 L38 20 A18 18 0 0 1 20 38Z" fill="#7A8A3A"/><path d="M20 20 L20 38 A18 18 0 0 1 2 20Z" fill="#A8C9E4"/><path d="M20 20 L2 20 A18 18 0 0 1 20 2Z" fill="#1D6874"/><circle cx="20" cy="20" r="6" fill="#EEF0EC"/></svg>astromicroscope</a>
+    <nav aria-label="Main"><a href="#consult">Consultations</a><a href="#learn">Learn astrology</a><a href="#about">About</a><a href="#">EN / SR</a></nav>
+    <a class="btn" href="#consult">Book a consultation</a>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Astrology, explained. Then applied to you.</h1>
+      <p class="lede">Consultations and, soon, courses from Gorica Vićentijević, a graduated astrologer who loves teaching the why behind every chart.</p>
+      <div class="ctas"><a class="btn" href="#consult">Book a consultation</a><a class="btn alt" href="#learn">Join the course waitlist</a></div>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+    <div>
+      <div class="atlas" id="atlas" role="group" aria-label="The twelve signs. Choose a sign to read about it."></div>
+    </div>
+  </section>
+</div>
+
+<section class="section" id="consult">
+  <div class="wrap">
+    <h2>Three consultations. Each one teaches you something.</h2>
+    <p class="intro">You get a reading and an explanation of how it was made, so you leave understanding your own chart a little better. Online, in English or Serbian, recorded.</p>
+    <div class="plans">
+      <article class="plan"><div class="top" style="background:var(--water)"><h3>Natal</h3><p>Your birth chart, read in full.</p></div>
+        <ul><li>Sun, Moon and rising sign</li><li>All planets by sign and house</li><li>Your strongest patterns and talents</li><li>Chart PDF and recording</li></ul>
+        <div class="foot"><span>90 min, € [price]</span><a href="#">Book natal</a></div></article>
+      <article class="plan"><div class="top" style="background:var(--fire)"><h3>Predictive</h3><p>The next twelve months.</p></div>
+        <ul><li>Major transits, month by month</li><li>Progressed Moon and solar return</li><li>Best timing for big decisions</li><li>Chart PDF and recording</li></ul>
+        <div class="foot"><span>75 min, € [price]</span><a href="#">Book predictive</a></div></article>
+      <article class="plan"><div class="top" style="background:var(--earth)"><h3>Karmic</h3><p>The lessons your chart repeats.</p></div>
+        <ul><li>North and South Node story</li><li>Saturn and the twelfth house</li><li>Patterns to release, and what replaces them</li><li>Chart PDF and recording</li></ul>
+        <div class="foot"><span>90 min, € [price]</span><a href="#">Book karmic</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="learn">
+  <div class="wrap">
+    <h2>Learn to read charts yourself.</h2>
+    <p class="intro">A course in three levels, built on the university curriculum Gorica studied. Each level ends with you reading a real chart.</p>
+    <div class="curr">
+      <div class="lvl"><div class="n" style="color:var(--fire)">1</div><h3>The alphabet</h3><p>Signs, planets, houses and elements. How to draw up and read the parts of a chart.</p><span class="st">First to open</span></div>
+      <div class="lvl"><div class="n" style="color:var(--water)">2</div><h3>The natal reading</h3><p>Aspects, chart rulers and synthesis. Turning symbols into a story about a person.</p><span class="st">In preparation</span></div>
+      <div class="lvl"><div class="n" style="color:var(--earth)">3</div><h3>Timing</h3><p>Transits, progressions and solar returns. How predictive astrology is actually done.</p><span class="st">In preparation</span></div>
+    </div>
+    <form class="wait" onsubmit="event.preventDefault();this.querySelector('small').textContent='You are on the waitlist. You will hear first when Level 1 opens.'">
+      <label for="em" style="position:absolute;left:-9999px">Email address</label>
+      <input id="em" type="email" placeholder="Your email" required><button class="btn">Join the waitlist</button>
+      <small>One email when Level 1 opens.</small>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="ph"><div>Portrait of Gorica<br>teaching at a whiteboard, or with a printed chart</div></div>
+    <div>
+      <h2>Gorica Vićentijević</h2>
+      <p>Graduated astrologer, with a university degree in astrology from [institution]. Gorica reads natal, predictive and karmic charts, and shares what she knows on Instagram, where her followers come to learn as much as to be read.</p>
+      <p>Her approach is a teacher's: every conclusion is shown, every term is explained, and nothing is meant to frighten you.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><footer><span>Astromicroscope, Gorica Vićentijević</span><span>Instagram @astromicroscope</span></footer></div>
+
+<section class="kit">
+  <div class="wrap">
+    <h2>Direction C · Brand snapshot</h2>
+    <p class="intro" style="margin-bottom:44px">The idea: a school, not a salon. The four elements become a colour code that runs through everything, from the logo and the sign tiles to course levels and Instagram carousels, the way a good textbook colour-codes its chapters. It is the most scalable direction for courses and printed materials. The bold move is the system: twelve tiles, four colours, one chunky condensed typeface.</p>
+    <div class="kg">
+      <div class="tile t-logo">
+        <h3>Logo system</h3>
+        <div class="row">
+          <svg width="110" height="110" viewBox="0 0 40 40" aria-label="Element wheel mark"><path d="M20 20 L20 2 A18 18 0 0 1 38 20Z" fill="#E04A2C"/><path d="M20 20 L38 20 A18 18 0 0 1 20 38Z" fill="#7A8A3A"/><path d="M20 20 L20 38 A18 18 0 0 1 2 20Z" fill="#A8C9E4"/><path d="M20 20 L2 20 A18 18 0 0 1 20 2Z" fill="#1D6874"/><circle cx="20" cy="20" r="6" fill="#fff"/></svg>
+          <div class="word">astromicroscope</div>
+        </div>
+        <p>The element wheel: fire, earth, air and water as four quadrants around an open centre, the lens. Each course level and sub-brand can take one quadrant as its own mark.</p>
+      </div>
+      <div class="tile t-pal">
+        <h3>Palette</h3>
+        <div class="chips">
+          <div class="chip fire">Fire<br>#E04A2C</div>
+          <div class="chip earth">Earth<br>#7A8A3A</div>
+          <div class="chip air">Air<br>#A8C9E4</div>
+          <div class="chip water">Water<br>#1D6874</div>
+          <div class="chip" style="background:#EEF0EC;box-shadow:inset 0 0 0 1px #c7cbc5">Chalk<br>#EEF0EC</div>
+          <div class="chip" style="background:#23262D;color:#fff">Graphite<br>#23262D</div>
+        </div>
+      </div>
+      <div class="tile t-type">
+        <h3>Typography</h3>
+        <div class="big">Water signs</div>
+        <div class="light">Cancer, Scorpio, Pisces</div>
+        <p>One family, Bricolage Grotesque, used across its width and weight range: condensed extra bold for headings, regular for teaching text. It feels friendly and handmade without being childish.</p>
+      </div>
+      <div class="tile t-ig">
+        <h3>Instagram, sample posts</h3>
+        <div class="ig water"><span style="font-weight:600;font-size:.85rem">Astrology 101, part 4</span><div style="font:800 1.9rem/.95 var(--f);font-stretch:78%">What does the 8th house actually mean?</div><span style="font-size:.85rem">Swipe for the answer</span></div>
+        <div class="ig air"><span style="font-weight:600;font-size:.85rem">Planets and days</span><div style="font:800 1.9rem/.95 var(--f);font-stretch:78%">Why Tuesday belongs to Mars.</div><span style="font-size:.85rem">astromicroscope</span></div>
+      </div>
+      <div class="tile t-voice">
+        <h3>Voice</h3>
+        <p><b>The good teacher</b>“Let's take this one step at a time. First, find your Moon.”</p>
+        <p><b>Curious, a little playful</b>Questions as headlines, answers in the carousel. Built for saves and shares.</p>
+        <p><b>Always shows the work</b>Every reading explains the chart detail behind it, which turns clients into students.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const signs = [
+    ['Aries','fire','♈','Cardinal fire, ruled by Mars. Starts things, fast and direct.'],
+    ['Taurus','earth','♉','Fixed earth, ruled by Venus. Builds slowly and keeps what it builds.'],
+    ['Gemini','air','♊','Mutable air, ruled by Mercury. Curious, quick, needs to talk it through.'],
+    ['Cancer','water','♋','Cardinal water, ruled by the Moon. Protects, remembers, feels first.'],
+    ['Leo','fire','♌','Fixed fire, ruled by the Sun. Generous, proud, made to be seen.'],
+    ['Virgo','earth','♍','Mutable earth, ruled by Mercury. Refines, serves, notices everything.'],
+    ['Libra','air','♎','Cardinal air, ruled by Venus. Seeks balance, beauty and a fair deal.'],
+    ['Scorpio','water','♏','Fixed water, ruled by Mars and Pluto. Goes deep, all or nothing.'],
+    ['Sagittarius','fire','♐','Mutable fire, ruled by Jupiter. Wants meaning, distance and truth.'],
+    ['Capricorn','earth','♑','Cardinal earth, ruled by Saturn. Climbs patiently, plays the long game.'],
+    ['Aquarius','air','♒','Fixed air, ruled by Saturn and Uranus. Thinks in systems and futures.'],
+    ['Pisces','water','♓','Mutable water, ruled by Jupiter and Neptune. Dissolves edges, imagines.']
+  ];
+  const colors = { fire: '#E04A2C', earth: '#7A8A3A', air: '#A8C9E4', water: '#1D6874' };
+  const atlas = document.getElementById('atlas'), panel = document.getElementById('panel');
+  function show(i) {
+    const [n, e, g, t] = signs[i];
+    panel.innerHTML = `<div class="t">${n}<span class="tag" style="background:${colors[e]};color:${e === 'air' ? '#23262D' : '#fff'}">${e[0].toUpperCase() + e.slice(1)}</span></div><p>${t}</p>`;
+    atlas.querySelectorAll('.sign').forEach((b, j) => b.setAttribute('aria-pressed', i === j));
+  }
+  signs.forEach(([n, e, g], i) => {
+    const b = document.createElement('button');
+    b.className = 'sign ' + e;
+    b.innerHTML = `<span>${n}</span><svg viewBox="0 0 40 40" aria-hidden="true"><text x="20" y="31" text-anchor="middle" font-size="34" fill="currentColor">${g}︎</text></svg>`;
+    b.addEventListener('click', () => show(i));
+    b.addEventListener('mouseenter', () => show(i));
+    atlas.appendChild(b);
+  });
+  show(7);
+</script>
+</body>
+</html>
