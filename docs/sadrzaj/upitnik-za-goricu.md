@@ -1,44 +1,60 @@
 # Upitnik za Goricu
 
-Sve što samo ti znaš, na jednom mestu. Odgovori kratko, može i u natuknicama. Ako nešto još nije odlučeno, napiši „ne znam još". Odgovori idu u fajlove 01–07 umesto teksta u [uglastim zagradama].
+Odgovori Gorice od 2026-11-02 (razgovor sa Filipom). Odgovori su preneti u fajlove 01–07. **Otvoreno** znači da odgovor još ne postoji.
 
 ## Opšte
-1. Da li se na sajtu obraćamo posetiocu sa **ti** („nauči, pogledaj") ili sa **vi**?
-2. ~~Prvo ili treće lice?~~ **Odgovoreno: prvo lice („ja").**
-3. Naslov na početnoj: „Astrologija, pod lupom." ti odgovara, ili imaš bolji?
+1. **Ti ili vi?** → **Ti.**
+2. **Prvo ili treće lice?** → **Prvo lice jednine („ja").**
+3. **Naslov na početnoj?** → **„Astrologija u službi evolucije svesti."**
 
 ## O tebi
-Sa starog sajta već znamo tvoju priču, diplomu (Institut Johannes Kepler, astrolog istraživač, 2025) i zašto „Astromicroscope". Predlog je u `05-o-meni.md`; samo potvrdi ili ispravi.
-4. ~~Sme li da se pomene Nikola Stojanović?~~ **Odgovoreno: da.**
-5. Kako da prevedemo zvanje na engleski: „research astrologer"?
-6. ~~Portret?~~ **Odgovoreno: biće nova fotografija, Gorica je bira.**
-7. Dečja astrologija te najviše inspiriše: da li da bude i posebna usluga i posebna tema na sajtu?
+4. **Sme li da se pomene Nikola Stojanović?** → **Ne.** Tekst sa starog sajta se zadržava do dela u kojem se on pominje, jer nema zvanične potvrde o toj edukaciji. (Ispravlja raniji usmeni odgovor „da".)
+5. **Zvanje?** → **Profesionalni astrolog / Professional Astrologer.**
+6. **Portret?** → Poslala novu fotografiju: `slike/gorica-portret.jpg`.
+7. **Dečja astrologija?** → Posebno interesovanje (tekst u `05-o-meni.md`): porodično nasleđe, genetske predispozicije, nesvesni obrasci, uticaj ranog detinjstva; razvojni put deteta i uloga roditelja. **Tema tekstova, ne posebna usluga** (na sajtu su četiri usluge, odgovor 12).
 
 ## Edukacija
-> **Kursevi kreću 2027.** (odluka 2026-11-02). Pitanja 8–10 preskoči za sada; ostaje samo pitanje 11.
+> Kursevi kreću 2027 (D14); pitanja 8–10 su odložena.
 
-8. Koji kursevi i programi postoje na startu sajta? Za svaki: naziv, za koga je, šta polaznik zna na kraju, broj lekcija, uživo ili snimljeno, cena.
-9. Kada kreće sledeća grupa (datum)?
-10. Digitalni proizvodi koje imaš ili planiraš (vodiči, radne sveske), sa cenama.
-11. Koliko često možeš da objavljuješ tekstove?
+8. Kursevi i programi → odloženo za 2027.
+9. Datum sledeće grupe → odloženo za 2027.
+10. Digitalni proizvodi → odloženo za 2027.
+11. **Koliko često tekstovi?** → **Dva puta mesečno.**
 
 ## Individualne analize
-12. Stari sajt je imao: natalnu kartu, godišnji horoskop (solarna), uporedni horoskop, konsultaciju o trenutnoj situaciji, analizu perioda za 12 meseci i seansu za stare klijente. Brief pominje natalnu, solarnu, karmičku i konsultacije. Koje usluge ostaju na novom sajtu?
-13. Cena za svaku uslugu koja ostaje.
-14. Koliko analiza mesečno primaš?
-15. Kako izgleda analiza: trajanje, Zoom ili nešto drugo, da li klijent dobija snimak ili pisani izveštaj, za koliko dana.
-16. Kako klijent zakazuje i plaća (obrazac, mejl, Instagram, unapred)?
-17. Smemo li da koristimo „Utiske klijenata" sa Instagrama (uz njihovu dozvolu)?
+12. **Koje usluge?** → Četiri, sa njenim opisima (`04-individualne-analize.md`): natalna analiza, solarna analiza, karmička analiza, astrološke konsultacije.
+13. **Cene** →
+
+| Usluga | RSD | EUR |
+|---|---|---|
+| Natalna analiza | 15.000 | 130 |
+| Solarna analiza | 8.000 | 70 |
+| Karmička analiza | 10.000 | 85 |
+| Astrološke konsultacije | 6.000 | 50 |
+
+14. **Broj analiza mesečno?** → **Otvoreno** (nema konačan odgovor).
+15. **Kako izgleda analiza?** → Natalna do 90 minuta; solarna, karmička i konsultacije do 60 minuta. Uglavnom **telefonom**.
+16. **Zakazivanje i plaćanje?** → Termin se rezerviše **uplatom unapred**.
+17. **Utisci klijenata sa Instagrama?** → **Ne.**
 
 ## Video i newsletter
-18. Možeš li da dodaš titlove na YouTube video snimke, ili da ih napravimo automatski pa da ih ti proveriš?
-19. Planiraš li video snimke i na engleskom?
-20. Imaš li već mejl listu (Mailchimp, MailerLite…)?
-21. Da li bi dala poklon za prijavu na mejl listu (na primer PDF vodič kroz tranzite 2026)?
+18. **Titlovi?** → Za postojeće video snimke trenutno ne; **novi snimci će imati titlove**.
+19. **Video na engleskom?** → **Ne još.**
+20. **Mejl lista?** → **Aktivan nalog na MailerLite-u.**
+21. **Poklon za prijavu?** → **Ne.**
 
 ## Kontakt i pravno
-22. Mejl koji ide javno na sajt (astromicroscope@gmail.com?).
-23. Za koliko dana obično odgovaraš na poruke?
-24. Druge mreže osim Instagrama i YouTube-a?
-25. Posluješ li kao preduzetnik (naziv, PIB) zbog uslova korišćenja i računa?
-26. Da li dozvoljavaš AI alatima (ChatGPT i slični) da uče iz tvojih tekstova? Pretraga ih vidi u svakom slučaju; ovo je samo za treniranje modela (P03).
+22. **Javni mejl** → **astromicroscope@gmail.com**
+23. **Rok za odgovor** → **Tri dana.**
+24. **Druge mreže?** → **Ne.**
+25. **Preduzetnik (naziv, PIB)?** → **Ne još.** Uticaj: uplata unapred za analize, računi i uslovi korišćenja (`plan/challenge.md` A9).
+26. **AI alati smeju da uče iz tekstova (P03)?** → **Otvoreno.**
+
+## Dodatno od Gorice
+- Citat za englesku verziju: “When an inner situation is not made conscious, it happens outside, as fate.” (C. G. Jung)
+
+## Još treba pitati
+- Da li radi analize i na engleskom?
+- Kada stiže godišnji horoskop za 2027 (M07)?
+- Postoji li originalni vektorski logo od dizajnera?
+- Bezbednost: da li je promenila lozinke i uključila 2FA na Gmail-u, Instagramu i YouTube-u (`specs/09` §2)?

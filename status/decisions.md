@@ -22,11 +22,16 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D15 | 2026-11-02 | Security baseline `specs/09-security.md`: static site without admin login, 2FA on every account, protected `main`, secret scanning and push protection, Dependabot alerts (on), security headers, cleanup of the old site's spam URLs | Srdjan, after the old site was hacked |
 | D16 | 2026-11-02 | **Hosting on Filip's Cloudflare account**, not Srdjan's; Cloudflare Workers with static assets (Pages is now part of Workers). A test deploy to Srdjan's account was made and deleted the same minute | Srdjan |
 | D17 | 2026-11-02 | Translation: machine-translated first draft is acceptable; Filip edits every text; **Srdjan does the final English review**; **all texts in English at launch** | Srdjan |
+| D18 | 2026-11-02 | Tone: the site addresses the visitor with **ti**; Gorica writes in the **first person** | Gorica's answers (questionnaire 1–2) |
+| D19 | 2026-11-02 | **Four private analyses**: natal (up to 90 min, 15,000 RSD / 130 EUR), solar return (60 min, 8,000 / 70), karmic (60 min, 10,000 / 85), consultation (60 min, 6,000 / 50); by phone; booked with payment in advance; descriptions in Gorica's words (`docs/sadrzaj/04`); no client testimonials; children's astrology is a topic, not a service. Resolves P05 | Gorica's answers (7, 12–17) |
+| D20 | 2026-11-02 | Headline “Astrologija u službi evolucije svesti”; credential on the site **profesionalni astrolog / Professional Astrologer** (Johannes Kepler Institute, 2025); Nikola Stojanović is not mentioned. Replaces “research astrologer” from M01-03 | Gorica's answers (3–5) |
+| D21 | 2026-11-02 | Newsletter on Gorica's existing **MailerLite** account, no sign-up gift; new articles **twice a month**; contact reply within three days; no other social networks | Gorica's answers (11, 20–24) |
 
 ## Pending
 | ID | Question | Owner | Blocks |
 |---|---|---|---|
-| P02b | Remaining iteration-1 choices: form handling, newsletter provider, analytics (course platform and CMS moved to iteration 2, D14) | Srdjan | M12 |
+| P02b | Remaining iteration-1 choices: form handling, analytics (newsletter: MailerLite, D21) (course platform and CMS moved to iteration 2, D14) | Srdjan | M12 |
 | P03 | Allow AI training crawlers (for example GPTBot)? Search crawlers are allowed either way | Gorica, Srdjan | robots.txt |
 | P04 | Domain astromicroscope.com in expired state at Hostinger: renew, auto-renew, registrar lock; DNS to Filip's Cloudflare later | Srdjan, Gorica | launch |
-| P05 | Launch offer: which private analyses and prices (courses in 2027) | Gorica | M09 |
+| ~~P05~~ | ~~Launch offer: which private analyses and prices~~ resolved by D19 | Gorica | M09 |
+| P06 | Prepayment for analyses while Gorica is not a registered business: how it is taken, invoices, terms (A9) | Gorica, Srdjan | M09, M12, launch |

@@ -14,6 +14,22 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 | B1 launch scope | — | **Resolved**: launch without courses (follows from A3) |
 | Hosting | Not on Srdjan's Cloudflare; on Filip's account once he creates it | D16; M00-08. Note: Cloudflare Pages is now part of Workers, so the site deploys as a Worker with static assets, and a custom domain needs DNS on Cloudflare |
 
+## Update 2026-11-02: Gorica's answers
+Answers in `docs/sadrzaj/upitnik-za-goricu.md`, carried into `docs/sadrzaj/01–07` (Filip, branch `docs/odgovori-gorice`).
+
+| Item | Answer | Effect on the plan |
+|---|---|---|
+| A4 questionnaire | Answered except 14 (sessions per month) and 26 (AI training, P03) | M09, M10, M12 can start from the drafts |
+| A8 portrait | New photo sent: `docs/sadrzaj/slike/gorica-portret.jpg` | M10 makes the responsive versions |
+| A9 legal / payments | **Not registered as a business yet**; analyses are booked with payment in advance | **New risk**: how the prepayment is taken and what the terms say must be settled before launch (Gorica, Srdjan); M09 and M12 keep the payment step outside the site until then |
+| B2 tone | ti, first person (D18) | M02-06: old texts are mostly “vi”; edit to “ti” without changing meaning |
+| B5 children's astrology | Topic, not a service (D19) | Topic hub stays (concept) |
+| B7 services | Natal, solar return, karmic, consultation; prices in RSD and EUR; by phone; 60–90 min (D19) | M09-01 data file; P05 resolved |
+| Headline and credential | “Astrologija u službi evolucije svesti”; professional astrologer; no mention of Nikola Stojanović (D20) | M05, M10; brand kit and specs mention “research astrologer” (request to Srdjan) |
+| Newsletter | Active MailerLite account; no sign-up gift (D21) | P02b newsletter provider: MailerLite |
+| Articles | Twice a month (D21) | Publishing load for Filip until a CMS (D14) |
+| Videos | No subtitles for existing videos; new ones will have them; no English videos yet | M11 transcripts stay machine-made and marked unchecked |
+
 ## A. Holes: things the plan cannot solve by itself
 
 | # | Hole | Why it matters | What to do | Owner |
@@ -34,12 +50,12 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 | # | Dilemma | Options | Recommendation |
 |---|---|---|---|
 | B1 | **Launch scope** | (a) launch everything at once, including courses; (b) **launch in two steps**: first articles, horoscope, videos, private analyses with a request form, About, and education as “coming soon” with a waitlist; courses and products when Gorica has them | **(b).** It puts the existing 20,000 words online sooner, starts SEO earlier, and does not wait for the course offer. It goes against “education first” on day one, so the education section must still be first in the navigation and show the waitlist clearly |
-| B2 | **Tone: ti or vi** | Old site mixes: services in “ti”, About and Contact in “vi”, horoscope texts in “vi” | Pick one in Phase 0 (questionnaire 1). If “ti”, the old texts need editing (more M02/M06 work) |
+| B2 | **Tone: ti or vi** — **resolved: ti, first person (D18)** | Old site mixes: services in “ti”, About and Contact in “vi”, horoscope texts in “vi” | Pick one in Phase 0 (questionnaire 1). If “ti”, the old texts need editing (more M02/M06 work) |
 | B3 | **Old texts as they are or edited** | Publish as written, or restructure for search (answer first, question headings, split the 4,095-word article) | Edit lightly: answer first, headings, verified dates; keep Gorica's voice; she approves every edited text |
 | B4 | **Editing for Gorica** | (a) she sends texts and a developer publishes; (b) a git-based CMS on top of the Markdown files, added after launch | (a) for launch, (b) as a follow-up module once publishing frequency is known (questionnaire 11). Do not choose a CMS product now; check current options then |
-| B5 | **Children's astrology** | Only a topic, or also a service (“child's chart”) | Topic at launch (one article exists); service if Gorica confirms (questionnaire 7) |
+| B5 | **Children's astrology** | Only a topic, or also a service (“child's chart”) | **Resolved (D19): topic only**; the four services do not include a child's chart |
 | B6 | **Repository stays public?** | Public: free branch rules (rulesets) work, but drafts, the questionnaire and Gorica's details are visible. Private: privacy, but rulesets may need a paid GitHub plan (GitHub docs say rulesets are for Team and Enterprise; on our free public repo they work) | Decide before Gorica's answers (prices, business data) go in. Option: keep public, put private answers outside the repo |
-| B7 | **Old service list vs brief** | Old site: natal, solar/yearly, comparative (synastry), current situation, 12-month period, returning-client session. Brief: natal, solar, karmic, life-area consultation | Gorica decides (questionnaire 12). The plan's M09 works with any list (data file) |
+| B7 | **Old service list vs brief** — **resolved: four services with prices (D19)** | Old site: natal, solar/yearly, comparative (synastry), current situation, 12-month period, returning-client session. Brief: natal, solar, karmic, life-area consultation | Gorica decides (questionnaire 12). The plan's M09 works with any list (data file) |
 
 ## C. Weaknesses of this plan
 
@@ -57,10 +73,10 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 
 ## Phase 0 checklist
 - [ ] Domain renewed, auto-renew and registrar lock on (A1)
-- [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2)
+- [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2) — spam list done: `docs/sadrzaj/stari-sajt/spam-adrese.md` (143 URLs); Filip's Cloudflare 2FA on
 - [ ] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16)
-- [ ] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2)
+- [x] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2); open: 14, 26
 - [x] 2027 horoscope: new edition coming soon (A5)
-- [ ] Portrait plan (A8)
+- [x] Portrait plan (A8): new photo in `docs/sadrzaj/slike/`
 - [ ] Repository visibility decided (B6)
 - [x] Course platform and payments: postponed to iteration 2 (A7, D14)

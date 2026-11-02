@@ -44,7 +44,7 @@ Canvas cost on low-end phones
 ### Component spec: Home hero
 
 #### Purpose
-States in one screen what Astromicroscope is (learn astrology from a research astrologer) and offers two paths: courses (primary) and private analyses (secondary).
+States in one screen what Astromicroscope is (“Astrologija u službi evolucije svesti” / “Astrology in service of the evolution of consciousness”, by a professional astrologer, D20) and offers two paths: courses (primary) and private analyses (secondary).
 
 #### Content (sr and en)
 H1, one-sentence lede, two buttons; the signature visual of direction D: the night-sky background with the star field and the natal chart with the magnifying lens (`brand/home-reference.html`).
