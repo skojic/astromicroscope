@@ -12,3 +12,4 @@ Bilingual (sr default, en) education-first astrology site for Gorica Vićentijev
 5. End every task by updating `status/STATUS.md` (the "Now" block and the module table) and adding an entry to `status/log.md`.
 6. Decisions go in `status/decisions.md`; never reverse one silently.
 7. `branding-directions/` is a frozen design showcase. Do not edit it while building the site.
+8. Changes reach `main` only through a pull request from a `feature/`, `fix/` or `docs/` branch, approved by the owner (`CONTRIBUTING.md`). The owner may bypass.

@@ -1,0 +1,109 @@
+# Checks that every pull request comes from a branch named
+#   feature/<short-description>, fix/<short-description> or docs/<short-description>
+# (lowercase letters, digits and hyphens). If the name is wrong, the check fails and
+# leaves one comment on the pull request, in Serbian and English, explaining how to fix it.
+# The comment is updated, not repeated, on every new run. The check is required on main
+# (see CONTRIBUTING.md and status/decisions.md).
+name: branch-name
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  branch-name:
+    name: branch-name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the branch name
+        env:
+          BRANCH: ${{ github.head_ref }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          PATTERN='^(feature|fix|docs)/[a-z0-9]+(-[a-z0-9]+)*$'
+          MARKER='<!-- branch-name-check -->'
+
+          if [[ "$BRANCH" =~ $PATTERN ]]; then
+            echo "Branch name OK: $BRANCH"
+            echo "### ✅ Branch name OK: \`$BRANCH\`" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          # Suggest a corrected name: lowercase, anything else becomes a hyphen,
+          # keep a valid prefix if there is one, otherwise use feature/.
+          lower=$(printf '%s' "$BRANCH" | tr '[:upper:]' '[:lower:]')
+          prefix="feature"
+          rest="$lower"
+          for p in feature fix docs; do
+            case "$lower" in "$p"/*|"$p"-*|"$p"_*) prefix="$p"; rest="${lower#"$p"}"; rest="${rest#?}";; esac
+          done
+          slug=$(printf '%s' "$rest" | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+          [ -n "$slug" ] || slug="kratak-opis"
+          SUGGEST="$prefix/$slug"
+
+          body=$(cat <<EOF
+          $MARKER
+          ## ❌ Naziv grane nije ispravan · Branch name is not valid: \`$BRANCH\`
+
+          **🇷🇸 Srpski**
+
+          Sve izmene idu preko grane čiji naziv počinje sa **\`feature/\`** (nova funkcija), **\`fix/\`** (ispravka greške) ili **\`docs/\`** (dokumentacija), a posle toga kratak opis: mala slova, cifre i crtice.
+          Primeri: \`feature/hero-sekcija\`, \`fix/prevod-footer\`, \`docs/uputstvo-za-git\`.
+
+          Granu ovog pull requesta ne možemo da preimenujemo, zato prebacujemo izmene na novu granu:
+
+          \`\`\`bash
+          git switch $BRANCH
+          git switch -c $SUGGEST
+          git push -u origin $SUGGEST
+          \`\`\`
+
+          1. Otvori novi pull request iz grane \`$SUGGEST\` (GitHub će ti ponuditi dugme **Compare & pull request**).
+          2. Zatvori ovaj pull request (**Close pull request**).
+          3. Obriši staru granu: \`git push origin --delete $BRANCH\`
+
+          Ako ti predloženi naziv ne opisuje dobro izmenu, izaberi bolji, samo da prati pravilo. Detaljno uputstvo: \`CONTRIBUTING.md\`, korak 2.
+
+          ---
+
+          **🇬🇧 English**
+
+          Every change goes through a branch whose name starts with **\`feature/\`** (new feature), **\`fix/\`** (bug fix) or **\`docs/\`** (documentation), followed by a short description: lowercase letters, digits and hyphens.
+          Examples: \`feature/hero-section\`, \`fix/footer-translation\`, \`docs/git-guide\`.
+
+          The branch of this pull request cannot be renamed, so move the changes to a new branch:
+
+          \`\`\`bash
+          git switch $BRANCH
+          git switch -c $SUGGEST
+          git push -u origin $SUGGEST
+          \`\`\`
+
+          1. Open a new pull request from \`$SUGGEST\` (GitHub will offer a **Compare & pull request** button).
+          2. Close this pull request (**Close pull request**).
+          3. Delete the old branch: \`git push origin --delete $BRANCH\`
+
+          If the suggested name does not describe the change well, pick a better one that follows the rule. Full guide: \`CONTRIBUTING.md\`, step 2.
+          EOF
+          )
+          body=$(printf '%s\n' "$body" | sed -E 's/^          //')
+
+          # One comment per pull request: update it if it exists, otherwise create it.
+          existing=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | contains(\"$MARKER\"))) | .id" | head -n1)
+          if [ -n "$existing" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$existing" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/$REPO/issues/$PR/comments" -f body="$body" > /dev/null
+          fi
+
+          printf '%s\n' "$body" | sed '1d' >> "$GITHUB_STEP_SUMMARY"
+          echo "::error title=Branch name / Naziv grane::'$BRANCH' must look like feature/..., fix/... or docs/... (lowercase, digits, hyphens). Suggested: $SUGGEST. See the comment on the pull request."
+          exit 1

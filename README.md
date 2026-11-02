@@ -75,6 +75,8 @@ start branding-directions\index.html      # Windows
 | `specs/` | **Šta** se pravi: proizvod, mapa sajta, dizajn sistem, tehnologija, sadržaj, jezici, SEO i AI pretraga, performanse i Core Web Vitals, pristupačnost |
 | `modules/` | **Kako** se pravi svaki deo sajta, sa zadacima |
 | `testing/` | **Kada je gotovo**: kapije kvaliteta (G0–G5), plan testiranja, kontrolne liste |
+| `CONTRIBUTING.md` | **Kako radimo**: grane `feature/`, `fix/`, `docs/`, pull request, pregled i spajanje (uputstvo za saradnike) |
+| `.github/` | Pravila za GitHub: ko pregleda (CODEOWNERS), provera naziva grane, šablon za pull request |
 | `status/` | **Gde smo**: `STATUS.md` (trenutno stanje i tabela svih delova), `log.md` (dnevnik rada), `decisions.md` (odluke i otvorena pitanja) |
 
 Trenutno stanje projekta je uvek u [`status/STATUS.md`](status/STATUS.md).

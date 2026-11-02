@@ -11,6 +11,7 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D04 | 2026-11-02 | Harness structure: specs / modules / testing / status, with gates G0–G5 | approved by Srdjan |
 | D05 | 2026-11-02 | SEO, AI search, Core Web Vitals and accessibility (WCAG 2.2 AA) are acceptance criteria | Srdjan's request |
 | D06 | 2026-11-02 | The four bilingual directions are the approved reference on `main`; after Gorica's choice, one final branding kit is made from that direction | Srdjan's approval |
+| D07 | 2026-11-02 | `main` is protected: changes only via pull request from `feature/`, `fix/` or `docs/` branches; 1 approval from the owner (CODEOWNERS); approvals reset on new commits; conversations resolved; required `branch-name` check that comments in Serbian and English; squash merge only; no force push or deletion. Filip merges after approval (the owner may too). The owner bypasses all rules | train Filip on a production-like workflow; Srdjan's request |
 
 ## Pending
 | ID | Question | Owner | Blocks |
