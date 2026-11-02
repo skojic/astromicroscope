@@ -10,110 +10,134 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --midnight:#0E1450;   /* night sky, hero and footer */
-    --midnight-2:#18216A; /* chart face on the sky */
-    --gold:#D4AF5C;       /* the logo, sparkles, nothing else */
-    --gold-hi:#F6E3A1;
-    --glass:#E4EAE6;      /* slide glass, light sections */
-    --glass-2:#D3DCD7;
-    --gentian:#3F2A7A;    /* actions on light */
-    --eosin:#E59AAE;      /* actions on dark, highlights */
-    --ink:#1A1D24;
-    --reticle:#7C8782;
-    --white:#FAFCFB;
+    --midnight:#0E1450;  /* deep blue: hero sky, footer */
+    --uranus:#2E5BA6;    /* Uranus blue: actions on light */
+    --ice:#DCE7F4;       /* light blue: actions on midnight, tints */
+    --beige:#F3ECE2;     /* soft beige: alternate sections */
+    --white:#FFFFFF;     /* main page */
+    --gold:#D4AF5C;      /* logo, stars, fine details */
+    --ink:#141A33;       /* text */
+    --muted:#5D6478;
+    --line:#E3DACB;
     --sans:"Schibsted Grotesk",system-ui,sans-serif;
     --serif:"Newsreader",Georgia,serif;
   }
   *{box-sizing:border-box;margin:0}
   html{scroll-behavior:smooth}
-  body{background:var(--glass);color:var(--ink);font-family:var(--serif);font-size:1.1875rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:var(--white);color:var(--ink);font-family:var(--serif);font-size:1.1875rem;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  :focus-visible{outline:2px solid var(--gentian);outline-offset:3px}
+  :focus-visible{outline:2px solid var(--uranus);outline-offset:3px}
   .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
   .sr{position:absolute;left:-9999px}
 
-  .review{position:fixed;z-index:50;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:#fff;border:1px solid #c9d1cd;border-radius:999px;padding:4px;font:500 13px/1 var(--sans);box-shadow:0 6px 24px rgba(14,20,80,.25)}
+  .review{position:fixed;z-index:50;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;font:500 13px/1 var(--sans);box-shadow:0 6px 24px rgba(14,20,80,.2)}
   .review a{text-decoration:none;padding:8px 14px;border-radius:999px;white-space:nowrap}
   .review a[aria-current]{background:var(--midnight);color:#fff}
 
-  .btn{display:inline-flex;align-items:center;gap:10px;font:600 1rem/1 var(--sans);text-decoration:none;padding:15px 22px;border-radius:999px;background:var(--gentian);color:var(--white);border:0;cursor:pointer}
-  .btn:hover{background:#2f1f5e}
+  .btn{display:inline-flex;align-items:center;font:600 1rem/1 var(--sans);text-decoration:none;padding:15px 22px;border-radius:999px;background:var(--uranus);color:#fff;border:0;cursor:pointer}
+  .btn:hover{background:#244b8b}
   .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+  .tlink{font:600 1rem/1 var(--sans);color:var(--uranus);text-underline-offset:4px}
 
-  /* ---------- hero: the night sky ---------- */
-  .sky{background:var(--midnight);color:var(--glass);position:relative;overflow:hidden;isolation:isolate}
-  .sky::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(70% 90% at 78% 40%,#1E2C7A 0,transparent 60%),radial-gradient(50% 60% at 10% 100%,rgba(63,42,122,.55) 0,transparent 70%)}
+  /* ---------- hero: night sky ---------- */
+  .sky{background:var(--midnight);color:#EAF0F8;position:relative;overflow:hidden;isolation:isolate}
+  .sky::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(70% 90% at 78% 40%,#1F3384 0,transparent 60%),radial-gradient(50% 60% at 8% 100%,rgba(46,91,166,.45) 0,transparent 70%)}
   #stars{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-  .sky :focus-visible{outline-color:var(--eosin)}
-  header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .sky :focus-visible{outline-color:var(--gold)}
+  header{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:24px}
   .lockup{display:flex;align-items:center;gap:14px;text-decoration:none}
   .lockup .name{display:flex;flex-direction:column;gap:3px}
-  .lockup .name b{font:500 1.45rem/1 var(--serif);letter-spacing:.005em}
+  .lockup .name b{font:500 1.45rem/1 var(--serif)}
   .lockup .name span{font:400 .78rem/1 var(--sans);opacity:.7}
-  nav{display:flex;gap:28px;font:500 .95rem/1 var(--sans)}
+  nav{display:flex;gap:26px;font:500 .95rem/1 var(--sans)}
   nav a{text-decoration:none}
-  nav a:hover{color:var(--eosin)}
+  nav a:hover{color:var(--gold)}
   .lang{opacity:.6}
-  .sky .btn{background:var(--eosin);color:var(--midnight)}
-  .sky .btn:hover{background:#f0b7c6}
-  .sky .btn.ghost{background:transparent;color:var(--glass);box-shadow:inset 0 0 0 1.5px rgba(228,234,230,.7)}
-  .sky .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--glass)}
+  .sky .btn{background:var(--ice);color:var(--midnight)}
+  .sky .btn:hover{background:#fff}
+  .sky .btn.ghost{background:transparent;color:#EAF0F8;box-shadow:inset 0 0 0 1.5px rgba(234,240,248,.7)}
   .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;padding:40px 0 104px}
-  .hero h1{font:700 clamp(3rem,6.4vw,5.6rem)/.95 var(--sans);letter-spacing:-.045em;margin-bottom:28px;color:var(--white)}
-  .hero p.lede{font-size:1.35rem;line-height:1.5;max-width:30ch;margin-bottom:36px;color:rgba(228,234,230,.86)}
+  .hero h1{font:700 clamp(3rem,6.2vw,5.4rem)/.95 var(--sans);letter-spacing:-.045em;margin-bottom:28px;color:#fff}
+  .hero p.lede{font-size:1.3rem;line-height:1.5;max-width:32ch;margin-bottom:36px;color:rgba(234,240,248,.86)}
   .ctas{display:flex;gap:12px;flex-wrap:wrap}
   .scope svg{width:100%;height:auto;display:block;touch-action:none;cursor:none}
-  .scope figcaption{font:400 .9rem/1.4 var(--sans);color:rgba(228,234,230,.6);margin-top:10px;display:flex;justify-content:space-between}
+  .scope figcaption{font:400 .9rem/1.4 var(--sans);color:rgba(234,240,248,.6);margin-top:10px;display:flex;justify-content:space-between}
 
-  /* ---------- light sections (as in A) ---------- */
-  .section{padding:96px 0;border-top:1px solid var(--glass-2)}
-  .section h2{font:700 clamp(2.2rem,4vw,3.4rem)/1 var(--sans);letter-spacing:-.035em;margin-bottom:16px;max-width:18ch}
-  .section .intro{max-width:56ch;margin-bottom:56px}
-  .slides{display:grid;gap:22px}
-  .slide{display:grid;grid-template-columns:200px 1fr auto;background:rgba(250,252,251,.55);border:1px solid #c5cfca;border-radius:6px;min-height:150px;overflow:hidden}
-  .slide .label{background:var(--white);border-right:1px solid #c5cfca;padding:20px;font:500 .85rem/1.45 var(--sans)}
-  .slide .label strong{font:700 1.5rem/1 var(--sans);letter-spacing:-.03em;display:block;margin-bottom:6px}
-  .slide .body{padding:24px 32px;display:flex;align-items:center;gap:32px}
-  .slide .body p{max-width:46ch}
-  .slide .stain{width:120px;height:120px;flex:none;border-radius:50%}
-  .slide .meta{padding:24px 28px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:12px;font:500 .95rem/1.2 var(--sans);white-space:nowrap}
-  .slide .meta .price{font-size:1.4rem;font-weight:700}
+  /* ---------- sections ---------- */
+  .section{padding:104px 0}
+  .section.beige{background:var(--beige)}
+  .section h2{font:700 clamp(2.2rem,4vw,3.4rem)/1 var(--sans);letter-spacing:-.035em;margin-bottom:16px;max-width:20ch}
+  .section .intro{max-width:56ch;margin-bottom:52px;color:var(--muted)}
 
-  .about{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start}
-  .portrait{aspect-ratio:4/5;border-radius:50% 50% 6px 6px;background:var(--midnight);display:grid;place-items:center;text-align:center;font:500 .9rem/1.4 var(--sans);color:rgba(228,234,230,.7);position:relative;overflow:hidden}
-  .portrait::after{content:"";position:absolute;inset:18px;border-radius:50% 50% 2px 2px;border:1px solid rgba(212,175,92,.5)}
-  .about h2{margin-bottom:24px}
+  /* learning formats as microscope slides */
+  .slides{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .slide{display:grid;grid-template-rows:auto 1fr auto;background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .slide .label{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--beige);font:500 .85rem/1 var(--sans);color:var(--muted)}
+  .slide .label i{width:28px;height:2px;background:var(--gold);display:block}
+  .slide .body{padding:28px 26px;display:flex;gap:26px;align-items:flex-start}
+  .slide .stain{width:84px;height:84px;flex:none;border-radius:50%}
+  .slide h3{font:700 1.6rem/1.05 var(--sans);letter-spacing:-.03em;margin-bottom:8px}
+  .slide p{font-size:1.05rem}
+  .slide .foot{padding:16px 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font:500 .95rem/1.2 var(--sans)}
+
+  /* approach */
+  .approach{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start}
+  .principles{display:grid;gap:0;border-top:1.5px solid var(--midnight)}
+  .principles div{padding:22px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:24px}
+  .principles b{font:700 1.15rem/1.3 var(--sans)}
+
+  /* articles */
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .art{text-decoration:none;display:flex;flex-direction:column;gap:12px}
+  .art .img{aspect-ratio:4/3;border-radius:6px;background:var(--midnight);position:relative;overflow:hidden}
+  .art .img svg{position:absolute;inset:0;margin:auto}
+  .art h3{font:600 1.35rem/1.2 var(--sans);letter-spacing:-.02em}
+  .art:hover h3{color:var(--uranus);text-decoration:underline;text-underline-offset:4px}
+  .art span{font:400 .9rem/1 var(--sans);color:var(--muted)}
+
+  /* premium */
+  .premium{background:var(--white);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:1fr 1.5fr;overflow:hidden}
+  .premium .side{background:var(--midnight);color:#EAF0F8;padding:48px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;position:relative}
+  .premium .side::after{content:"";position:absolute;inset:14px;border:1px solid rgba(212,175,92,.45);border-radius:3px;pointer-events:none}
+  .premium .side h2{color:#fff}
+  .premium .side p{color:rgba(234,240,248,.8);max-width:36ch}
+  .premium .side .btn{background:var(--ice);color:var(--midnight);align-self:flex-start;position:relative;z-index:1}
+  .premium ul{list-style:none;padding:0}
+  .premium li{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:26px 36px;border-bottom:1px solid var(--line)}
+  .premium li:last-child{border-bottom:0}
+  .premium li b{font:700 1.3rem/1.2 var(--sans);letter-spacing:-.02em}
+  .premium li p{grid-column:1;font-size:1.02rem;color:var(--muted)}
+  .premium li span{grid-row:1;grid-column:2;font:600 1rem/1.3 var(--sans);text-align:right;white-space:nowrap}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:center}
+  .portrait{aspect-ratio:4/5;border-radius:50% 50% 6px 6px;background:var(--ice);display:grid;place-items:center;text-align:center;font:500 .9rem/1.4 var(--sans);color:var(--muted);position:relative}
+  .portrait::after{content:"";position:absolute;inset:16px;border-radius:50% 50% 2px 2px;border:1px solid var(--gold)}
   .about p+p{margin-top:1em}
-  .facts{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink)}
+  .facts{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--midnight)}
   .facts div{padding:16px 16px 0 0;font:400 .95rem/1.4 var(--sans)}
-  .facts b{display:block;font:700 1.1rem/1.2 var(--sans);margin-bottom:4px}
+  .facts b{display:block;font:700 1.05rem/1.2 var(--sans);margin-bottom:4px}
 
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);counter-reset:s;border-top:1.5px solid var(--ink);padding:0}
-  .steps li{list-style:none;padding:20px 24px 0 0;font:400 1rem/1.5 var(--sans)}
-  .steps li::before{counter-increment:s;content:counter(s);display:block;font:700 2.6rem/1 var(--sans);color:var(--gentian);margin-bottom:12px;letter-spacing:-.04em}
-  .steps b{display:block;font-size:1.15rem;margin-bottom:4px}
+  /* newsletter */
+  .letter{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end}
+  .letter form{display:flex;gap:8px;background:var(--white);border:1.5px solid var(--midnight);border-radius:999px;padding:6px}
+  .letter input{flex:1;border:0;background:transparent;font:400 1rem var(--sans);padding:0 16px;min-width:0}
+  .letter input:focus{outline:none}
+  .letter form:focus-within{outline:2px solid var(--uranus);outline-offset:3px}
+  .letter small{display:block;margin-top:10px;font:400 .85rem/1.4 var(--sans);color:var(--muted)}
 
-  .school{background:var(--gentian);color:var(--white);border-radius:6px;padding:64px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end}
-  .school p{max-width:44ch;opacity:.9}
-  .school form{display:flex;gap:8px;background:var(--white);border-radius:999px;padding:6px}
-  .school input{flex:1;border:0;background:transparent;font:400 1rem var(--sans);padding:0 16px;min-width:0}
-  .school input:focus{outline:none}
-  .school form:focus-within{outline:2px solid var(--eosin);outline-offset:3px}
-  .school .btn{background:var(--midnight)}
-  .school small{display:block;margin-top:10px;font:400 .85rem/1.4 var(--sans);opacity:.75}
-
-  footer{background:var(--midnight);color:rgba(228,234,230,.7);padding:48px 0 120px;font:400 .95rem/1.5 var(--sans)}
+  footer{background:var(--midnight);color:rgba(234,240,248,.75);padding:48px 0 120px;font:400 .95rem/1.5 var(--sans)}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 
   /* ---------- brand snapshot ---------- */
-  .kit{background:var(--white);padding:96px 0 140px}
+  .kit{background:var(--beige);padding:96px 0 140px}
   .kit h2{font:700 2.4rem/1 var(--sans);letter-spacing:-.03em;margin-bottom:12px}
-  .kit .intro{max-width:64ch;margin-bottom:48px}
+  .kit .intro{max-width:66ch;margin-bottom:44px}
   .kg{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
-  .tile{border:1px solid #d6ddd9;border-radius:6px;padding:24px;font:400 .95rem/1.5 var(--sans)}
-  .tile h3{font:600 .95rem/1 var(--sans);color:var(--reticle);margin-bottom:18px}
-  .t-primary{grid-column:span 5;background:var(--midnight);border:0;color:var(--glass);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;min-height:380px;text-align:center}
-  .t-primary h3{color:rgba(228,234,230,.6);align-self:flex-start}
+  .tile{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px;font:400 .95rem/1.5 var(--sans)}
+  .tile h3{font:600 .95rem/1 var(--sans);color:var(--muted);margin-bottom:18px}
+  .t-primary{grid-column:span 5;background:var(--midnight);border:0;color:#EAF0F8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;min-height:380px;text-align:center}
+  .t-primary h3{color:rgba(234,240,248,.6);align-self:flex-start}
   .t-variants{grid-column:span 7;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-content:start}
   .t-variants h3{grid-column:1/-1;margin-bottom:6px}
   .var{border-radius:4px;aspect-ratio:1;display:grid;place-items:center;position:relative}
@@ -126,25 +150,22 @@
   .t-pal{grid-column:span 12}
   .chips{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
   .chip{aspect-ratio:1/1.1;border-radius:4px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;font:500 .75rem/1.3 var(--sans)}
-  .ratio{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-top:14px}
+  .ratio{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-top:14px;box-shadow:inset 0 0 0 1px var(--line)}
   .t-type{grid-column:span 6}
   .t-type .big{font:700 4rem/1 var(--sans);letter-spacing:-.045em}
   .t-type .ser{font:italic 300 2rem/1.2 var(--serif);margin:12px 0 16px}
   .t-ig{grid-column:span 6;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
   .t-ig h3{grid-column:1/-1}
-  .ig{aspect-ratio:4/5;border-radius:4px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+  .ig{aspect-ratio:4/5;border-radius:4px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
   .t-notes{grid-column:span 12}
-  .t-notes ul{padding-left:1.1em;display:grid;gap:6px;max-width:80ch}
+  .t-notes ul{padding-left:1.1em;display:grid;gap:6px;max-width:84ch}
 
   @media (max-width:900px){
     nav{display:none}
-    .hero,.about,.school{grid-template-columns:1fr}
-    .slide{grid-template-columns:1fr}
-    .slide .label{border-right:0;border-bottom:1px solid #c5cfca}
-    .slide .meta{align-items:flex-start}
-    .slide .stain{display:none}
-    .steps{grid-template-columns:1fr 1fr;row-gap:32px}
-    .school{padding:36px}
+    .hero,.about,.approach,.letter,.premium{grid-template-columns:1fr}
+    .slides,.articles{grid-template-columns:1fr}
+    .principles div{grid-template-columns:1fr;gap:6px}
+    .premium li{padding:22px}
     .t-primary,.t-variants,.t-type,.t-ig{grid-column:span 12}
     .t-lockup{grid-template-columns:1fr}
     .chips{grid-template-columns:repeat(4,1fr)}
@@ -155,7 +176,6 @@
 </head>
 <body>
 
-<!-- The mark, drawn once and reused. Recreated as vector from the @astromicroscope avatar. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="gold" x1="0" y1="0" x2=".9" y2="1">
@@ -167,7 +187,7 @@
     <symbol id="mark" viewBox="36 30 136 140">
       <path d="M129.4 54 A52 60 0 1 0 122 152 L123 145 A34 52 0 1 1 127.9 60.2 Z"/>
       <path d="M127 41 L135 39 L135 66 L127.5 62 Z"/>
-      <path fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" d="M113 79 C141 84 147 128 118 146" style="stroke:var(--mark-stroke,currentColor)"/>
+      <path fill="none" stroke-width="9" stroke-linecap="round" d="M113 79 C141 84 147 128 118 146" style="stroke:var(--mark-stroke,currentColor)"/>
       <g transform="rotate(-32 99 84)"><rect x="93" y="62" width="12" height="36" rx="2"/><rect x="90" y="57" width="18" height="6" rx="1.5"/><rect x="95.5" y="98" width="7" height="9" rx="1"/></g>
       <circle cx="114" cy="90" r="6"/>
       <rect x="82" y="121" width="56" height="6" rx="1.5"/>
@@ -177,6 +197,7 @@
       <path d="M145 74 Q145 79 150 79 Q145 79 145 84 Q145 79 140 79 Q145 79 145 74 Z"/>
       <path d="M163 80 Q163 85 168 85 Q163 85 163 90 Q163 85 158 85 Q163 85 163 80 Z"/>
     </symbol>
+    <symbol id="spark" viewBox="-10 -10 20 20"><path d="M0 -10 Q0 0 10 0 Q0 0 0 10 Q0 0 -10 0 Q0 0 0 -10Z"/></symbol>
   </defs>
 </svg>
 
@@ -186,6 +207,7 @@
   <a href="b-cycles.html">B · Cycles</a>
   <a href="c-atlas.html">C · Atlas</a>
   <a href="d-midnight-lens.html" aria-current="page">D · Midnight Lens</a>
+  <span class="langs" role="group" aria-label="Language"><button type="button" data-lang="sr">SR</button><button type="button" data-lang="en">EN</button></span>
 </nav>
 
 <section class="sky" id="top">
@@ -197,21 +219,22 @@
         <span class="name"><b>Astromicroscope</b><span>Gorica Vićentijević</span></span>
       </a>
       <nav aria-label="Main">
-        <a href="#readings">Readings</a>
-        <a href="#about">About Gorica</a>
-        <a href="#school">School</a>
-        <a href="#" class="lang">EN / SR</a>
+        <a href="#learn">Courses</a>
+        <a href="#watch">Videos</a>
+        <a href="#approach">Approach</a>
+        <a href="#private">Private analyses</a>
+        <span class="langs" role="group" aria-label="Language"><button type="button" data-lang="sr">SR</button><button type="button" data-lang="en">EN</button></span>
       </nav>
-      <a class="btn" href="#book">Book a reading</a>
+      <a class="btn" href="#learn">Explore courses</a>
     </header>
 
     <div class="hero">
       <div>
-        <h1>Your chart, looked at closely.</h1>
-        <p class="lede">Astrology readings from a university-trained astrologer. Natal, predictive and karmic, read with the patience of someone who studied it properly.</p>
+        <h1>Astrology, looked at closely.</h1>
+        <p class="lede">Learn to read a chart the way a graduated astrologer does. Courses, recorded lessons and guides by Gorica Vićentijević.</p>
         <div class="ctas">
-          <a class="btn" href="#book">Book a reading</a>
-          <a class="btn ghost" href="#readings">See the three readings</a>
+          <a class="btn" href="#learn">Explore courses</a>
+          <a class="btn ghost" href="#private">Private analyses</a>
         </div>
       </div>
       <figure class="scope">
@@ -222,74 +245,115 @@
   </div>
 </section>
 
-<section class="section" id="readings">
+<section class="section" id="learn">
   <div class="wrap">
-    <h2>Three readings, three depths of focus.</h2>
-    <p class="intro">Each reading is a live, one-to-one session online, recorded so you can go back to it. Bring your birth date, time and place. Gorica prepares your chart before you meet.</p>
+    <h2>Learn astrology, at the depth you want.</h2>
+    <p class="intro">Every format teaches the method, not just the meanings: how a chart is built, how it is read, and why. Start with a free article or go all the way to reading charts yourself.</p>
     <div class="slides">
       <article class="slide">
-        <div class="label"><strong>Natal</strong>Who you are</div>
-        <div class="body"><span class="stain" style="background:radial-gradient(circle at 40% 40%,#E59AAE 0 30%,#d27f95 31% 55%,transparent 56%)"></span><p>The map of the sky at the moment you were born. Temperament, talents, the patterns you keep meeting in love and work, and why.</p></div>
-        <div class="meta"><span class="price">€ [price]</span><span>90 minutes</span></div>
+        <div class="label"><span>Live with Gorica</span><i></i></div>
+        <div class="body"><span class="stain" style="background:radial-gradient(circle at 45% 45%,#0E1450 0 26%,#2E5BA6 27% 52%,transparent 53%)"></span>
+          <div><h3>Educational programs</h3><p>Group programs in small cohorts, from the twelve signs to a full chart reading, with live sessions and homework on real charts.</p></div></div>
+        <div class="foot"><span>Next cohort [date]</span><a class="tlink" href="#">See the programs</a></div>
       </article>
       <article class="slide">
-        <div class="label"><strong>Predictive</strong>What is coming</div>
-        <div class="body"><span class="stain" style="background:radial-gradient(circle at 55% 45%,#0E1450 0 22%,#3F2A7A 23% 50%,transparent 51%)"></span><p>The next twelve months, read through transits and progressions. When to push, when to wait, and which months ask for the most care.</p></div>
-        <div class="meta"><span class="price">€ [price]</span><span>75 minutes</span></div>
+        <div class="label"><span>At your own pace</span><i></i></div>
+        <div class="body"><span class="stain" style="background:radial-gradient(circle at 50% 50%,#D4AF5C 0 16%,#2E5BA6 17% 40%,#DCE7F4 41% 56%,transparent 57%)"></span>
+          <div><h3>Recorded courses</h3><p>Video lessons with chart examples and exercises. Watch them when it suits you and keep them for good.</p></div></div>
+        <div class="foot"><span>From € [price]</span><a class="tlink" href="#">Browse courses</a></div>
       </article>
       <article class="slide">
-        <div class="label"><strong>Karmic</strong>Where you come from</div>
-        <div class="body"><span class="stain" style="background:radial-gradient(circle at 50% 50%,#D4AF5C 0 14%,#0E1450 15% 38%,#E59AAE 39% 54%,transparent 55%)"></span><p>The lunar nodes, Saturn and the twelfth house. The lessons your chart keeps repeating, and what it looks like to finally learn them.</p></div>
-        <div class="meta"><span class="price">€ [price]</span><span>90 minutes</span></div>
+        <div class="label"><span>To download</span><i></i></div>
+        <div class="body"><span class="stain" style="background:radial-gradient(circle at 40% 40%,#DCE7F4 0 30%,#9DBCE6 31% 54%,transparent 55%)"></span>
+          <div><h3>Digital products</h3><p>Workbooks, chart worksheets and the yearly guide to the major transits, ready to print or use on screen.</p></div></div>
+        <div class="foot"><span>From € [price]</span><a class="tlink" href="#">See the shop</a></div>
       </article>
+      <article class="slide">
+        <div class="label"><span>Free</span><i></i></div>
+        <div class="body"><span class="stain" style="background:radial-gradient(circle at 55% 45%,#F3ECE2 0 20%,#D4AF5C 21% 34%,#0E1450 35% 54%,transparent 55%)"></span>
+          <div><h3>Articles</h3><p>Gorica's own writing on planets, transits and how astrology is actually practised. A good place to start.</p></div></div>
+        <div class="foot"><span>New every [week]</span><a class="tlink" href="#">Read the articles</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section beige" id="approach">
+  <div class="wrap approach">
+    <div>
+      <h2>How Gorica works.</h2>
+      <p class="intro" style="margin-bottom:0">A university degree in astrology, and a teacher's habit of showing the working. These three rules run through every lesson and every analysis.</p>
+    </div>
+    <div class="principles">
+      <div><b>Show the method</b><p>Every conclusion comes with the chart detail behind it, so you learn to see it yourself.</p></div>
+      <div><b>No fatalism</b><p>A chart describes tendencies and timing, not a verdict. You leave with options, not fear.</p></div>
+      <div><b>Simple and practical</b><p>Clear words, real examples, and something you can use the same day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="watch">
+  <div class="wrap">
+    <h2>Free lessons, on YouTube.</h2>
+    <p class="intro">Gorica's latest videos, in Serbian. Each one explains a transit and what it means for every sign.</p>
+    <div class="articles">
+      <a class="art" href="https://www.youtube.com/watch?v=dKAlRLQdYno"><div class="img"><img src="https://i.ytimg.com/vi/dKAlRLQdYno/hqdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><span>YouTube, September 2026</span><h3>Oktobar i izazovi: šta nam donosi retrogradna Venera?</h3></a>
+      <a class="art" href="https://www.youtube.com/watch?v=PrHLFJm0y08"><div class="img"><img src="https://i.ytimg.com/vi/PrHLFJm0y08/hqdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><span>YouTube, February 2026</span><h3>Retrogradni Merkur u Ribama 2026</h3></a>
+      <a class="art" href="https://www.youtube.com/watch?v=WWeq6JZtTYY"><div class="img"><img src="https://i.ytimg.com/vi/WWeq6JZtTYY/hqdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><span>YouTube, February 2026</span><h3>Saturn u Ovnu: uticaj na sve znakove zodijaka</h3></a>
+    </div>
+    <p style="margin-top:36px"><a class="tlink" href="https://www.youtube.com/@astromicroscope">See all videos on YouTube</a></p>
+  </div>
+</section>
+
+<section class="section beige" id="private">
+  <div class="wrap">
+    <div class="premium">
+      <div class="side">
+        <div>
+          <h2>Work with Gorica, one to one.</h2>
+          <p>For people who want a personal analysis and like her way of working. A small number of private sessions each month [confirm], online, in English or Serbian, recorded.</p>
+        </div>
+        <a class="btn" href="#">Request a private analysis</a>
+      </div>
+      <ul>
+        <li><b>Natal analysis</b><span>€ [price]</span><p>Your birth chart in full: temperament, talents and the patterns that repeat in love and work.</p></li>
+        <li><b>Solar analysis</b><span>€ [price]</span><p>Your year from one birthday to the next, read from the solar return chart.</p></li>
+        <li><b>Karmic analysis</b><span>€ [price]</span><p>The lunar nodes, Saturn and the twelfth house: the lessons your chart keeps returning to.</p></li>
+        <li><b>Consultation on one area of life</b><span>€ [price]</span><p>A focused session on one question: relationships, career, money, relocation or health routines.</p></li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="section" id="about">
   <div class="wrap about">
-    <div class="portrait">Portrait of Gorica<br>warm light, against a dark blue wall</div>
+    <div class="portrait">Portrait of Gorica<br>soft daylight, white or beige background</div>
     <div>
       <h2>Gorica Vićentijević, graduated astrologer.</h2>
-      <p>Gorica studied astrology at university level and holds a degree in it. She treats a chart the way a scientist treats a sample: carefully, without rushing to conclusions, and with every claim explained.</p>
-      <p>Her readings are in English and Serbian. No fatalism, no vague promises. You leave knowing what the chart says, how she got there, and what you can do with it.</p>
+      <p>Gorica studied astrology at university level and holds a degree in it. Astromicroscope is where she teaches what she learned: carefully, with every step explained, and without promises a chart cannot keep.</p>
+      <p>She writes, teaches and gives a limited number of private analyses in English and Serbian.</p>
       <div class="facts">
         <div><b>[Institution]</b>Astrology degree</div>
-        <div><b>English, Serbian</b>Session languages</div>
+        <div><b>English, Serbian</b>Teaching languages</div>
         <div><b>Online</b>Any time zone</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="book">
-  <div class="wrap">
-    <h2>How a reading works.</h2>
-    <p class="intro">From booking to your recording, usually within a week.</p>
-    <ol class="steps">
-      <li><b>Choose a reading</b>Pick natal, predictive or karmic and a time that suits you.</li>
-      <li><b>Send your birth data</b>Date, exact time and place. A birth certificate time is best.</li>
-      <li><b>Meet online</b>A live session where you can ask anything.</li>
-      <li><b>Keep the recording</b>Plus your chart as a PDF, to come back to.</li>
-    </ol>
-  </div>
-</section>
-
-<section class="section" id="school">
-  <div class="wrap">
-    <div class="school">
-      <div>
-        <h2>Learn to read your own chart.</h2>
-        <p>Gorica is preparing a course for beginners who want to understand astrology properly, from the planets to a full chart reading. Join the list to hear first when it opens.</p>
-      </div>
-      <div>
-        <form onsubmit="event.preventDefault();this.nextElementSibling.textContent='You are on the list. We will email you when enrolment opens.'">
-          <label class="sr" for="em">Email address</label>
-          <input id="em" type="email" placeholder="Your email" required>
-          <button class="btn">Join the list</button>
-        </form>
-        <small>One email when the course opens. Nothing else.</small>
-      </div>
+<section class="section beige">
+  <div class="wrap letter">
+    <div>
+      <h2>New lessons and articles, by email.</h2>
+      <p class="intro" style="margin-bottom:0">One email when there is something worth reading: a new article, a course opening, or the yearly transit guide.</p>
+    </div>
+    <div>
+      <form onsubmit="event.preventDefault();this.nextElementSibling.textContent='You are subscribed. The next email will come when there is something new.'">
+        <label class="sr" for="em">Email address</label>
+        <input id="em" type="email" placeholder="Your email" required>
+        <button class="btn">Subscribe</button>
+      </form>
+      <small>No spam. Unsubscribe with one click.</small>
     </div>
   </div>
 </section>
@@ -297,15 +361,14 @@
 <footer>
   <div class="wrap">
     <span style="display:flex;align-items:center;gap:12px"><svg width="30" height="31" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>Astromicroscope, Gorica Vićentijević</span>
-    <span>Instagram @astromicroscope</span>
+    <span>astromicroscope@gmail.com, Instagram and YouTube @astromicroscope</span>
   </div>
 </footer>
 
-<!-- ============ BRAND SNAPSHOT ============ -->
 <section class="kit">
   <div class="wrap">
     <h2>Direction D · Brand snapshot</h2>
-    <p class="intro">Direction A's microscope idea, now carrying Gorica's existing mark. The hero becomes a night sky in Midnight, and the lab colours (slide glass, gentian, eosin) carry the rest of the site. Gold belongs to the logo and the sparkles only. That keeps the familiar gold-on-blue avatar recognisable without turning the whole brand into the gold-and-navy look every astrology account uses.</p>
+    <p class="intro">The microscope idea, carrying Gorica's existing G-and-microscope mark. Following the brief, the page is mostly white and soft beige. Blue runs from light ice blue to deep Midnight (Uranus: originality and a different view), and gold appears only as fine detail: the logo, the stars, a hairline frame. The night-sky hero is the one deep-blue moment.</p>
     <div class="kg">
       <div class="tile t-primary">
         <h3>Primary mark, redrawn as vector</h3>
@@ -313,29 +376,29 @@
           <circle cx="100" cy="100" r="100" fill="url(#avatarSky)"/>
           <svg x="32" y="30" width="136" height="140" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
         </svg>
-        <p>The G of Gorica, with a microscope built into its counter and three stars beside it. Same idea and composition as the current Instagram avatar, now drawn as clean vector shapes, so it stays sharp from favicon to print.</p>
+        <p>The G of Gorica with a microscope in its counter and three stars beside it: the current Instagram avatar, redrawn as clean vector shapes.</p>
       </div>
       <div class="tile t-variants">
         <h3>Colour versions and sizes</h3>
-        <div class="var" style="background:var(--midnight)"><svg width="110" height="113" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg><small style="color:#E4EAE6">Gold on Midnight</small></div>
-        <div class="var" style="background:var(--glass)"><svg width="110" height="113" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg><small>Midnight on glass</small></div>
-        <div class="var" style="background:var(--gentian)"><svg width="110" height="113" fill="#E4EAE6" style="--mark-stroke:#E4EAE6"><use href="#mark"/></svg><small style="color:#E4EAE6">Glass on gentian</small></div>
-        <div class="var" style="background:var(--eosin)"><svg width="110" height="113" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg><small>Midnight on eosin</small></div>
-        <div class="var" style="background:#fff;box-shadow:inset 0 0 0 1px #d6ddd9"><svg width="110" height="113" fill="#1A1D24" style="--mark-stroke:#1A1D24"><use href="#mark"/></svg><small>One colour, for stamps and print</small></div>
-        <div class="var" style="background:var(--midnight);display:flex;gap:14px;align-items:center;justify-content:center">
+        <div class="var" style="background:#0E1450"><svg width="110" height="113" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg><small style="color:#EAF0F8">Gold on Midnight</small></div>
+        <div class="var" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--line)"><svg width="110" height="113" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg><small>Midnight on white</small></div>
+        <div class="var" style="background:#F3ECE2"><svg width="110" height="113" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg><small>Gold on beige, large sizes only</small></div>
+        <div class="var" style="background:#2E5BA6"><svg width="110" height="113" fill="#FFFFFF" style="--mark-stroke:#FFFFFF"><use href="#mark"/></svg><small style="color:#fff">White on Uranus blue</small></div>
+        <div class="var" style="background:#DCE7F4"><svg width="110" height="113" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg><small>Midnight on ice</small></div>
+        <div class="var" style="background:#0E1450;display:flex;gap:14px;align-items:center;justify-content:center">
           <svg width="16" height="16" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
           <svg width="32" height="33" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
           <svg width="64" height="66" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
-          <small style="color:#E4EAE6">16, 32, 64 px</small>
+          <small style="color:#EAF0F8">16, 32, 64 px</small>
         </div>
       </div>
       <div class="tile t-lockup">
         <h3>Lockups</h3>
-        <div class="lk" style="background:var(--midnight);color:var(--glass)">
+        <div class="lk" style="background:#0E1450;color:#EAF0F8">
           <svg width="76" height="78" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
           <div><b>Astromicroscope</b><span>Gorica Vićentijević</span></div>
         </div>
-        <div class="lk" style="background:var(--glass);color:var(--midnight)">
+        <div class="lk" style="background:#FFFFFF;color:#0E1450;box-shadow:inset 0 0 0 1px var(--line)">
           <svg width="76" height="78" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg>
           <div><b>Astromicroscope</b><span>Gorica Vićentijević</span></div>
         </div>
@@ -343,42 +406,42 @@
       <div class="tile t-pal">
         <h3>Palette, with the share of each colour in a typical layout</h3>
         <div class="chips">
+          <div class="chip" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--line)">White<br>#FFFFFF</div>
+          <div class="chip" style="background:#F3ECE2">Soft beige<br>#F3ECE2</div>
+          <div class="chip" style="background:#DCE7F4">Ice blue<br>#DCE7F4</div>
+          <div class="chip" style="background:#2E5BA6;color:#fff">Uranus blue<br>#2E5BA6</div>
           <div class="chip" style="background:#0E1450;color:#fff">Midnight<br>#0E1450</div>
-          <div class="chip" style="background:#E4EAE6;box-shadow:inset 0 0 0 1px #c9d1cd">Slide glass<br>#E4EAE6</div>
-          <div class="chip" style="background:#3F2A7A;color:#fff">Gentian<br>#3F2A7A</div>
-          <div class="chip" style="background:#E59AAE">Eosin<br>#E59AAE</div>
           <div class="chip" style="background:linear-gradient(135deg,#F6E3A1,#D4AF5C 45%,#A47E33)">Gold<br>#D4AF5C</div>
-          <div class="chip" style="background:#1A1D24;color:#fff">Lab ink<br>#1A1D24</div>
-          <div class="chip" style="background:#7C8782;color:#fff">Reticle<br>#7C8782</div>
+          <div class="chip" style="background:#141A33;color:#fff">Ink<br>#141A33</div>
         </div>
-        <div class="ratio" aria-hidden="true"><span style="flex:30;background:#0E1450"></span><span style="flex:45;background:#E4EAE6"></span><span style="flex:10;background:#3F2A7A"></span><span style="flex:6;background:#E59AAE"></span><span style="flex:2;background:#D4AF5C"></span><span style="flex:7;background:#1A1D24"></span></div>
-        <p style="margin-top:12px">Midnight is the sky: hero, footer, avatar. Glass is the page. Gentian marks actions on light backgrounds and eosin marks actions on Midnight. Gold appears only in the logo and the stars.</p>
+        <div class="ratio" aria-hidden="true"><span style="flex:42;background:#FFFFFF"></span><span style="flex:24;background:#F3ECE2"></span><span style="flex:6;background:#DCE7F4"></span><span style="flex:6;background:#2E5BA6"></span><span style="flex:16;background:#0E1450"></span><span style="flex:1.5;background:#D4AF5C"></span><span style="flex:4.5;background:#141A33"></span></div>
+        <p style="margin-top:12px">White and beige carry about two thirds of every layout. Uranus blue marks actions on light backgrounds; ice blue marks them on Midnight. Gold stays under 2%.</p>
       </div>
       <div class="tile t-type">
         <h3>Typography</h3>
         <div class="big">Saturn returns.</div>
         <div class="ser">A slow planet asks for patience, and repays it.</div>
-        <p>Schibsted Grotesk for headings and the interface. Newsreader for reading text and the “Astromicroscope” name in the lockup; its contrast echoes the thick and thin strokes of the G.</p>
+        <p>Schibsted Grotesk for headings and the interface. Newsreader for lessons, articles and the “Astromicroscope” name; its thick and thin strokes echo the G.</p>
       </div>
       <div class="tile t-ig">
         <h3>Instagram, sample posts</h3>
-        <div class="ig" style="background:radial-gradient(90% 80% at 70% 20%,#1E2C7A,#0E1450 70%);color:#E4EAE6">
-          <svg width="34" height="35" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
-          <div style="font:700 1.7rem/1 var(--sans);letter-spacing:-.03em">Mercury retrograde, looked at closely.</div>
-          <span style="font:500 .8rem var(--sans);color:#E59AAE">Swipe for the dates</span>
+        <div class="ig" style="background:#F3ECE2;color:#0E1450">
+          <span style="font:500 .8rem var(--sans);color:#5D6478">Astrology 101, lesson 3</span>
+          <div style="font:700 1.6rem/1.02 var(--sans);letter-spacing:-.03em">What the eighth house actually means.</div>
+          <svg width="30" height="31" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
         </div>
-        <div class="ig" style="background:#E4EAE6;box-shadow:inset 0 0 0 1px #c9d1cd">
-          <span style="font:500 .8rem var(--sans);color:#7C8782">Client words</span>
-          <div style="font:italic 400 1.25rem/1.3 var(--serif)">“[A real quote from the Utisci klijenata highlight goes here.]”</div>
-          <svg width="28" height="29" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg>
+        <div class="ig" style="background:radial-gradient(90% 80% at 70% 20%,#1F3384,#0E1450 70%);color:#EAF0F8">
+          <svg width="30" height="31" fill="url(#gold)" style="--mark-stroke:url(#gold)"><use href="#mark"/></svg>
+          <div style="font:700 1.6rem/1.02 var(--sans);letter-spacing:-.03em">New recorded course: reading your natal chart.</div>
+          <span style="font:500 .8rem var(--sans);color:#DCE7F4">Link in bio</span>
         </div>
       </div>
       <div class="tile t-notes">
         <h3>About the redrawn logo</h3>
         <ul>
           <li>Redrawn by hand from a screenshot of the Instagram avatar, not traced from an original file. If the designer's original vector exists, the full kit should start from it.</li>
-          <li>Source file: <a href="logo/astromicroscope-mark.svg">logo/astromicroscope-mark.svg</a> (avatar version on the Midnight disc).</li>
-          <li>The full kit will add exports (SVG, PNG at 1×, 2×, 3×, favicon set, Instagram avatar at 320 px and 1080 px) and clear-space rules.</li>
+          <li>Source file: <a href="logo/astromicroscope-mark.svg">logo/astromicroscope-mark.svg</a>.</li>
+          <li>Gold on beige or white is for large sizes only; at small sizes use the Midnight version.</li>
         </ul>
       </div>
     </div>
@@ -391,7 +454,7 @@
   const svg = document.getElementById('chart');
   const NS = 'http://www.w3.org/2000/svg';
   const C = 300, R1 = 280, R2 = 235, R3 = 165, R4 = 60;
-  const LINE = '#E4EAE6', DIM = 'rgba(228,234,230,.45)', PINK = '#E59AAE', GOLD = '#D4AF5C';
+  const LINE = '#EAF0F8', DIM = 'rgba(234,240,248,.45)', PINK = '#9DBCE6', GOLD = '#D4AF5C';
   const el = (n, a, p = svg) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
   const pt = (r, deg) => { const a = (deg - 90) * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
 
@@ -475,7 +538,7 @@
   const cx = cv.getContext('2d');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const GAP = 28, RADIUS = 210;
-  const TINTS = { w: '228,234,230', g: '232,200,120', p: '229,154,174' };
+  const TINTS = { w: '234,240,248', g: '232,200,120', p: '157,188,230' };
   let W = 0, H = 0, pts = [], sparks = [], raf = 0, visible = true;
   let mouse = { x: -999, y: -999 }, last = null;
   const t0 = performance.now();
@@ -567,5 +630,7 @@
   }
 })();
 </script>
+<script src="i18n/sr.js"></script>
+<script src="i18n/i18n.js"></script>
 </body>
 </html>
