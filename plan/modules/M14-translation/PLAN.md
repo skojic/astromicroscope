@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | Filip (+ review) |
+| Owner | Filip (final English review: Srdjan) |
 | Needs first | M02 |
 | Size | L |
 | Specs | specs/05, plan/contracts.md §2 |
@@ -28,11 +28,12 @@ M02 files; `docs/sadrzaj/01–07` (EN already drafted for home sections)
 | M14-02 | Core pages first: home sections, about, analyses, contact, legal |  |
 | M14-03 | Horoscope texts |  |
 | M14-04 | Articles |  |
-| M14-05 | Review by a fluent reader; track word counts in the report | C4 |
+| M14-05 | Machine-translated first draft, edited by Filip; Srdjan reviews and approves each batch in its pull request; track word counts in the report | D17 |
 
 ## Acceptance criteria
 - [ ] Every Serbian file has an English pair with the same translationKey
-- [ ] Reviewer sign-off recorded per batch
+- [ ] Srdjan's approval recorded per batch (pull request)
+- [ ] Everything in English before launch (D17)
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks

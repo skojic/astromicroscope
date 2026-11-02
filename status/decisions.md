@@ -21,6 +21,7 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D14 | 2026-11-02 | **Iteration 1 launches without courses.** Courses (2027) become a separate React platform or part of it, with their own plan; a CMS for Gorica is evaluated in iteration 2; until then Filip publishes all content (Srdjan helps). See `plan/iteration-2.md` | Srdjan; course videos not recorded yet |
 | D15 | 2026-11-02 | Security baseline `specs/09-security.md`: static site without admin login, 2FA on every account, protected `main`, secret scanning and push protection, Dependabot alerts (on), security headers, cleanup of the old site's spam URLs | Srdjan, after the old site was hacked |
 | D16 | 2026-11-02 | **Hosting on Filip's Cloudflare account**, not Srdjan's; Cloudflare Workers with static assets (Pages is now part of Workers). A test deploy to Srdjan's account was made and deleted the same minute | Srdjan |
+| D17 | 2026-11-02 | Translation: machine-translated first draft is acceptable; Filip edits every text; **Srdjan does the final English review**; **all texts in English at launch** | Srdjan |
 
 ## Pending
 | ID | Question | Owner | Blocks |

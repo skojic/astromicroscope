@@ -19,10 +19,10 @@ Not started. Wait for: M02. Then read `PLAN.md` and `plan/contracts.md`, create 
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- Waiting for Srdjan's answers (2026-11-02): (1) is a machine-translated first draft acceptable if a person edits every text; (2) who gives the final English review; (3) must all 20,000 words be in English at launch, or core pages at launch and the rest within weeks after.
 - What, since when, who can unblock it.
 
 ## Decisions taken in this module
+- 2026-11-02 (D17): machine-translated first draft is fine; Filip edits every text; **Srdjan gives the final English review**; **everything in English at launch**.
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
 
 ## Requests to other modules

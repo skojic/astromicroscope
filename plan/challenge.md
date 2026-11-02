@@ -9,7 +9,7 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 | A3, A7 courses | Courses come in 2027 as a separate React platform or part of the platform; videos not recorded yet | **Resolved for iteration 1**: M08 shows free learning + waitlist; course platform in `plan/iteration-2.md` (D14) |
 | A4 questionnaire | Where is it? | `docs/sadrzaj/upitnik-za-goricu.md`; course questions (8–10) moved to 2027 |
 | A5 horoscope | A new edition is coming soon; the 2026 texts stay current about one more month | M07 publishes the new edition; 2026 becomes the archive |
-| A6 translation | — | Open: see the three questions in the M14 report |
+| A6 translation | Machine translation is fine; Srdjan checks the English; everything at launch | **Resolved** (D17). Risk stays: launch date depends on M14 finishing all 20,000 words |
 | A10, B4 publishing | Filip publishes, Srdjan helps; CMS for Gorica maybe in iteration 2 | **Resolved**: iteration 1 without CMS; evaluation in `plan/iteration-2.md` |
 | B1 launch scope | — | **Resolved**: launch without courses (follows from A3) |
 | Hosting | Not on Srdjan's Cloudflare; on Filip's account once he creates it | D16; M00-08. Note: Cloudflare Pages is now part of Workers, so the site deploys as a Worker with static assets, and a custom domain needs DNS on Cloudflare |

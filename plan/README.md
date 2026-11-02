@@ -6,6 +6,7 @@ How the Astromicroscope website gets built: by two developers, in parallel, modu
 
 | File | What it is |
 |---|---|
+| [`UPUTSTVO-ZA-FILIPA.md`](UPUTSTVO-ZA-FILIPA.md) | **Start here, Filip**: what to read, your modules, your Phase 0 tasks (Serbian) |
 | [`concept.md`](concept.md) | The approved site concept: idea, sitemap, page layouts, signature interactions, where every old text goes |
 | [`contracts.md`](contracts.md) | The integration contract: code layout and ownership, content schemas, i18n, component interfaces. Read before writing code |
 | [`challenge.md`](challenge.md) | Holes, dilemmas and weaknesses of this plan, with what to do about each |
