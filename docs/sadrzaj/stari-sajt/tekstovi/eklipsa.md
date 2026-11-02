@@ -21,7 +21,7 @@ Mlad Mesec uz solarnu eklipsu poziva na promenu i pomeranje napred, ali zbog Vod
 
 Vreme je za promene, ali one moraju biti promišljene.
 
-**Tunel eklipsi zatvara lunarno pomračenje u znaku Device 3. marta 2026.** Ono se događa na 12. stepenu Device, u konjunkciji sa Južnim mesečevim čvorom. 
+**Tunel eklipsi zatvara lunarno pomračenje u znaku Device 3. marta 2026.** Ono se događa na 12. stepenu Device, u konjunkciji sa Južnim mesečevim čvorom.
 
 Najpre će uticati na Device, zatim na Ribe, Strelčeve i Blizance, dok povoljniji uticaj može imati na Jarčeve i Bikove, kao i na Škorpije i Rakove.
 Lunarno pomračenje nosi snažnu dinamiku jer su Sunce i Mesec u opoziciji, pa će najveći naglasak biti na odnosima i emotivnim i poslovnim. Kroz druge ljude mogu nam se otvoriti novi uvidi, jer ih često dobijamo kao ogledalo sopstvenih potisnutih osobina koje je potrebno prepoznati i integrisati.

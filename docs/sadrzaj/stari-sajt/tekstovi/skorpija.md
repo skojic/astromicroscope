@@ -4,8 +4,6 @@
 
 ## GODIŠNJI HOROSKOP ZA ŠKORPIJU
 
-#### 
-
 ### **Godina ličnih odluka, hrabrih poteza i oslobađanja**
 
 ###### **OPŠTA ENERGIJA GODINE**

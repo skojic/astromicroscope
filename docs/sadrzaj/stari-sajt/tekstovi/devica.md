@@ -14,7 +14,7 @@ Device koje rade u okviru kolektiva mogu očekivati unapređenje, promenu pozici
 
 ###### **Stabilizacija posle velikog testiranja**
 
-Poslednje dve i po godine, dok je Saturn prolazio kroz vašu sedmu kuću, odnosi su bili testirani i mnogi su dobili jasnu sliku svoje vrednosti. U 2026. ostaje oko vas krug ljudi koji su iskreni, stabilni i lojalni. Slobodne Device imaju veliku šansu da započnu stabilnu emotivnu vezu, iako može postojati razlika u godinama. 
+Poslednje dve i po godine, dok je Saturn prolazio kroz vašu sedmu kuću, odnosi su bili testirani i mnogi su dobili jasnu sliku svoje vrednosti. U 2026. ostaje oko vas krug ljudi koji su iskreni, stabilni i lojalni. Slobodne Device imaju veliku šansu da započnu stabilnu emotivnu vezu, iako može postojati razlika u godinama.
 
 Merkur, kao vaš vladar, u retrogradnim fazama ima poseban značaj jer može vratiti stare partnere, nerešene razgovore i pravna pitanja. Ove faze nisu vreme za nove početke, već za završavanje započetog i sređivanje prethodnih situacija.
 

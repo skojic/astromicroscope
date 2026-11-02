@@ -4,8 +4,6 @@
 
 ## **Godišnji horoskop za Ovna**
 
-## 
-
 ### **Godina novog početka i sudbinskih promena**
 
 ###### **Zašto je 2026. prelomna godina za Ovna?**

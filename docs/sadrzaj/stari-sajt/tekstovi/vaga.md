@@ -4,8 +4,6 @@
 
 ## GODIŠNJI HOROSKOP ZA VAGU
 
-#### 
-
 ### **Godina velikih odluka u odnosima i profesionalnih preokreta**
 
 ###### **OPŠTA SLIKA GODINE**

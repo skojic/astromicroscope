@@ -4,8 +4,6 @@
 
 ## **Godišnji horoskop za Raka**
 
-## 
-
 ### **Godina stabilizacije, lične sigurnosti i velikih životnih odluka**
 
 2026. godina donosi Rakovima period u kom se ponovo grade mir, stabilnost i osećaj sigurnog tla pod nogama.
