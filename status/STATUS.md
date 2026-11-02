@@ -4,7 +4,7 @@ Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved �
 
 ## Now
 - **Current focus:** choosing the design direction (P01). Four directions in `branding-directions/`, bilingual SR/EN.
-- **Last step:** contributor workflow for Filip is live (D07): protected `main`, pull requests from `feature/`, `fix/`, `docs/`, owner approval, bilingual branch-name check. Before that: designs and harness pushed to `main`.
+- **Last step:** content preparation proposed in `docs/sadrzaj/` (SR/EN copy per section, questionnaire for Gorica). Before that: contributor workflow for Filip is live (D07): protected `main`, pull requests from `feature/`, `fix/`, `docs/`, owner approval, bilingual branch-name check. Before that: designs and harness pushed to `main`.
 - **Next step:** Gorica chooses a direction (P01); Srdjan makes changes; then one final branding kit from that direction, `specs/02` filled in, and the tech stack decided (`specs/03`).
 - **Blocked by:** P01 (design direction), P02 (tech stack).
 
