@@ -14,4 +14,4 @@ A module moves to the next stage only when it passes the gate. Each gate pass is
 Rules
 - Failing a gate sends the module back to `building` with the failing item named in `status/STATUS.md`.
 - Gates are never skipped. If one cannot run (for example no CrUX data yet), the log says so explicitly.
-- The release gate for the whole site also requires `checklists/content.md` and `checklists/performance.md` to pass on every template.
+- The release gate for the whole site also requires `checklists/content.md` and `checklists/performance.md` to pass on every template, and `checklists/security.md` to pass once.

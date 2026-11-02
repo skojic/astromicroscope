@@ -3,10 +3,10 @@
 Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
-- **Current focus:** Phase 0 of the build plan (`plan/challenge.md`): renew the domain, clean up after the hacked old site, Gorica's answers, launch scope. No development yet.
+- **Current focus:** Phase 0 of the build plan (`plan/challenge.md`): renew the domain, secure accounts (`specs/09`), Gorica's answers, Filip's Cloudflare account. No development yet.
 - **Last step:** site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
 - **Next step:** Phase 0 checklist in `plan/challenge.md`; then M00 (Srdjan) and M02 + M14 (Filip) start in parallel.
-- **Blocked by:** Phase 0: domain (A1), Gorica's answers (A4), launch scope (B1), course platform and forms (P02b).
+- **Blocked by:** Phase 0: domain (A1), Gorica's answers (A4), Filip's Cloudflare account (D16), translation decisions (M14).
 
 ## Specs
 | ID | File | Status |
@@ -34,7 +34,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M05 Home page | Srdjan | idea | M03, sections | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Filip | idea | M00, M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | idea | M00, M02, 2027 texts | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
-| M08 Education | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M08-education/REPORT.md) |
+| M08 Education (free learning + waitlist) | Filip | idea | M00 | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Filip | idea | M00 | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | idea | M00 | [REPORT](../plan/modules/M11-videos/REPORT.md) |

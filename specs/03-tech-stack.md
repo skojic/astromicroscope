@@ -1,7 +1,7 @@
 ---
 id: SPEC-03
 title: Tech stack
-status: draft
+status: partly decided
 updated: 2026-11-02
 ---
 
@@ -20,10 +20,10 @@ No decisions yet. This file lists what must be decided and the criteria that fol
 ## To decide (record each in `status/decisions.md`)
 | Item | Options to evaluate | Notes |
 |---|---|---|
-| Site framework | static site generator vs server-rendered framework | verify current versions before choosing |
-| CMS | Markdown in the repository vs headless CMS | Gorica edits in Serbian and English |
-| Hosting / CDN | Hostinger vs a static host with CDN | HTTPS must work |
-| Course delivery | own pages + video host vs course platform | affects payments and logins |
+| Site framework | **Decided (D09): Astro**, React only where needed | latest on npm 2026-11-02: astro 7.4.5 |
+| CMS | **Iteration 1: Markdown in the repository, Filip publishes. Iteration 2: CMS for Gorica (D14)** | `plan/iteration-2.md` |
+| Hosting / CDN | **Decided (D16): Filip's Cloudflare account, Workers with static assets** (Pages is now part of Workers) | DNS must move to Cloudflare for the custom domain |
+| Course delivery | **Iteration 2 (D14)**: separate React platform or part of the site | `plan/iteration-2.md` |
 | Payments | to be decided | Serbia: invoices, currency, VAT questions |
 | Newsletter | to be decided | double opt-in, GDPR/ZZPL consent |
 | Analytics | privacy-friendly, cookieless if possible | avoid a cookie banner if the law allows |

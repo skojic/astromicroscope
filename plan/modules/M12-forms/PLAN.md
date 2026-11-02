@@ -9,11 +9,11 @@
 | Branch | `feature/m12-forms` |
 
 ## Goal
-Newsletter sign-up, contact and analysis-request forms that actually send, with consent and spam protection.
+Newsletter sign-up (also the waitlist for the 2027 courses), contact and analysis-request forms that actually send, with consent and spam protection.
 
 ## Scope
 - In: Endpoints, provider integration, success/error states
-- Out: Payments (A7)
+- Out: Payments (iteration 2)
 
 ## Inputs
 Decision P02b (newsletter provider, form handling); questionnaire 20–23

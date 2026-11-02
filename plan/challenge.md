@@ -2,6 +2,18 @@
 
 A critical look at this plan (2026-11-02). Each item says why it matters and what to do. Items marked **Phase 0** must be settled before or while M00 starts.
 
+## Update 2026-11-02: Srdjan's answers
+| Item | Answer | Effect on the plan |
+|---|---|---|
+| A2 hacked old site | “Protect me from all of this in the future” | `specs/09-security.md` and `testing/checklists/security.md` (D15); Dependabot alerts turned on; account and domain actions in Phase 0 |
+| A3, A7 courses | Courses come in 2027 as a separate React platform or part of the platform; videos not recorded yet | **Resolved for iteration 1**: M08 shows free learning + waitlist; course platform in `plan/iteration-2.md` (D14) |
+| A4 questionnaire | Where is it? | `docs/sadrzaj/upitnik-za-goricu.md`; course questions (8–10) moved to 2027 |
+| A5 horoscope | A new edition is coming soon; the 2026 texts stay current about one more month | M07 publishes the new edition; 2026 becomes the archive |
+| A6 translation | — | Open: see the three questions in the M14 report |
+| A10, B4 publishing | Filip publishes, Srdjan helps; CMS for Gorica maybe in iteration 2 | **Resolved**: iteration 1 without CMS; evaluation in `plan/iteration-2.md` |
+| B1 launch scope | — | **Resolved**: launch without courses (follows from A3) |
+| Hosting | Not on Srdjan's Cloudflare; on Filip's account once he creates it | D16; M00-08. Note: Cloudflare Pages is now part of Workers, so the site deploys as a Worker with static assets, and a custom domain needs DNS on Cloudflare |
+
 ## A. Holes: things the plan cannot solve by itself
 
 | # | Hole | Why it matters | What to do | Owner |
@@ -44,10 +56,11 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 | C9 | **Two plan systems could drift** (`plan/` reports and `status/STATUS.md`) | `STATUS.md` keeps only a one-line row per module that points to the report; the report is the detail |
 
 ## Phase 0 checklist
-- [ ] Domain renewed (A1)
-- [ ] Passwords changed; spam-URL list prepared (A2)
-- [ ] Call with Gorica: questionnaire answered, tone chosen, launch scope agreed (A3, A4, B1, B2)
-- [ ] 2027 horoscope: yes/no and deadline (A5)
+- [ ] Domain renewed, auto-renew and registrar lock on (A1)
+- [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2)
+- [ ] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16)
+- [ ] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2)
+- [x] 2027 horoscope: new edition coming soon (A5)
 - [ ] Portrait plan (A8)
 - [ ] Repository visibility decided (B6)
-- [ ] Course platform and payments: decided or explicitly postponed (A7)
+- [x] Course platform and payments: postponed to iteration 2 (A7, D14)

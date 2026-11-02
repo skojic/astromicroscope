@@ -15,6 +15,8 @@ Sa starog sajta već znamo tvoju priču, diplomu (Institut Johannes Kepler, astr
 7. Dečja astrologija te najviše inspiriše: da li da bude i posebna usluga i posebna tema na sajtu?
 
 ## Edukacija
+> **Kursevi kreću 2027.** (odluka 2026-11-02). Pitanja 8–10 preskoči za sada; ostaje samo pitanje 11.
+
 8. Koji kursevi i programi postoje na startu sajta? Za svaki: naziv, za koga je, šta polaznik zna na kraju, broj lekcija, uživo ili snimljeno, cena.
 9. Kada kreće sledeća grupa (datum)?
 10. Digitalni proizvodi koje imaš ili planiraš (vodiči, radne sveske), sa cenama.

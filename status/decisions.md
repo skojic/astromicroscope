@@ -18,11 +18,14 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D11 | 2026-11-02 | Developers: **Srdjan Kojic** (M00, M01, M03, M04, M05, M07, M11, M12) and **Filip Vicentijevic** (M02, M06, M08, M09, M10, M14); M13 together | Srdjan |
 | D12 | 2026-11-02 | Build plan in `plan/` (concept, contracts, challenge, 15 modules with PLAN.md + REPORT.md) replaces `modules/`; reports are the place to resume work | Srdjan approved the concept and plan |
 | D13 | 2026-11-02 | Logo: Gorica's original mark from the old website, traced to vector (potrace), replaces the hand redraw in `brand/logo/` | Srdjan |
+| D14 | 2026-11-02 | **Iteration 1 launches without courses.** Courses (2027) become a separate React platform or part of it, with their own plan; a CMS for Gorica is evaluated in iteration 2; until then Filip publishes all content (Srdjan helps). See `plan/iteration-2.md` | Srdjan; course videos not recorded yet |
+| D15 | 2026-11-02 | Security baseline `specs/09-security.md`: static site without admin login, 2FA on every account, protected `main`, secret scanning and push protection, Dependabot alerts (on), security headers, cleanup of the old site's spam URLs | Srdjan, after the old site was hacked |
+| D16 | 2026-11-02 | **Hosting on Filip's Cloudflare account**, not Srdjan's; Cloudflare Workers with static assets (Pages is now part of Workers). A test deploy to Srdjan's account was made and deleted the same minute | Srdjan |
 
 ## Pending
 | ID | Question | Owner | Blocks |
 |---|---|---|---|
-| P02b | Remaining tech choices: course platform and payments, form handling, newsletter provider, analytics, CMS for Gorica (D09 settled framework and hosting) | Srdjan, Gorica | M08, M12 |
+| P02b | Remaining iteration-1 choices: form handling, newsletter provider, analytics (course platform and CMS moved to iteration 2, D14) | Srdjan | M12 |
 | P03 | Allow AI training crawlers (for example GPTBot)? Search crawlers are allowed either way | Gorica, Srdjan | robots.txt |
-| P04 | Hosting and HTTPS for astromicroscope.com (registered at Hostinger) | Srdjan | launch |
-| P05 | Launch offer: which courses, products and prices | Gorica | content |
+| P04 | Domain astromicroscope.com in expired state at Hostinger: renew, auto-renew, registrar lock; DNS to Filip's Cloudflare later | Srdjan, Gorica | launch |
+| P05 | Launch offer: which private analyses and prices (courses in 2027) | Gorica | M09 |

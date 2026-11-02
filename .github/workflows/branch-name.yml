@@ -30,6 +30,12 @@ jobs:
           PATTERN='^(feature|fix|docs)/[a-z0-9]+(-[a-z0-9]+)*$'
           MARKER='<!-- branch-name-check -->'
 
+          # Dependabot opens its own branches (dependabot/...); they are reviewed like any other pull request.
+          if [[ "$BRANCH" == dependabot/* ]]; then
+            echo "Dependabot branch, name check skipped: $BRANCH"
+            exit 0
+          fi
+
           if [[ "$BRANCH" =~ $PATTERN ]]; then
             echo "Branch name OK: $BRANCH"
             echo "### ✅ Branch name OK: \`$BRANCH\`" >> "$GITHUB_STEP_SUMMARY"

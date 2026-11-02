@@ -3,17 +3,17 @@
 | | |
 |---|---|
 | Owner | Filip |
-| Needs first | M00, Gorica's answers |
-| Size | M |
+| Needs first | M00 |
+| Size | S |
 | Specs | specs/00, plan/concept.md |
 | Branch | `feature/m08-education` |
 
 ## Goal
-Learn hub, course and product pages driven by data files; waitlist while there is nothing to sell.
+The education section and hub show what you can learn for free now (articles, videos, yearly horoscope) and invite visitors to the waitlist for the courses that start in 2027.
 
 ## Scope
-- In: Hub, course/product templates, home section, waitlist state
-- Out: Checkout and logins (A7)
+- In: hub, home section, waitlist call to action (form in M12), placeholders for future course pages
+- Out: course pages, products, checkout, logins (iteration 2, `plan/iteration-2.md`)
 
 ## Inputs
 `docs/sadrzaj/02`; questionnaire 8–10
@@ -24,16 +24,16 @@ Learn hub, course and product pages driven by data files; waitlist while there i
 ## Tasks
 | ID | Task | Notes |
 |---|---|---|
-| M08-01 | Home section with four formats |  |
-| M08-02 | Hub and course template from data |  |
-| M08-03 | “Coming soon” state with waitlist link (M12) | B1 |
+| M08-01 | Home section: free learning formats + “Courses in 2027” with waitlist | |
+| M08-02 | Education hub linking articles, videos and horoscope | |
+| M08-03 | Waitlist call to action (uses the M12 form) | |
 
 ## Acceptance criteria
-- [ ] Pages render with zero courses (empty state) and with sample data
+- [ ] Section and hub make clear that courses start in 2027 and how to join the waitlist
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-No course offer at launch (A3)
+Visitors expecting courses now; the waitlist must be clear
 
 
 ## Component specs (moved from `modules/`)

@@ -18,9 +18,9 @@ From the old site (`docs/sadrzaj/stari-sajt/`, about 20,000 words) and Filip's d
 | Page | sr | en | Source |
 |---|---|---|---|
 | Home | `/` | `/en/` | drafts 01–07 |
-| Education hub, course, product | `/edukacija/…` | `/en/learn/…` | draft 02 + questionnaire |
+| Education hub (free learning + course waitlist; courses in 2027) | `/edukacija/` | `/en/learn/` | draft 02 |
 | **Yearly horoscope** hub | `/horoskop/` | `/en/horoscope/` | new |
-| Sign page, current year | `/horoskop/2027/ovan/` … | `/en/horoscope/2027/aries/` … | Gorica writes 2027 |
+| Sign page, current year | `/horoskop/2027/ovan/` … | `/en/horoscope/2027/aries/` … | Gorica is writing the new edition; the 2026 texts stay current about one more month |
 | Sign page, archive | `/horoskop/2026/ovan/` … | `/en/horoscope/2026/aries/` … | old site, 12 texts |
 | Articles hub, topic, article | `/tekstovi/…` | `/en/articles/…` | old site, 10 texts |
 | **Topic: children's astrology** | `/tekstovi/tema/decja-astrologija/` | `/en/articles/topic/childrens-astrology/` | old article + future texts |
@@ -35,7 +35,8 @@ From the old site (`docs/sadrzaj/stari-sajt/`, about 20,000 words) and Filip's d
 │  Astrologija, pod lupom.            ( natal chart + lens )   │
 │  lede · [Explore courses] [Private analyses]                 │
 ├──────────────────────────────────────────────────────────────┤
-│ EDUCATION: four “microscope slides”                          │
+│ EDUCATION: free learning now (articles, videos, horoscope)   │
+│ + “Courses in 2027” with a waitlist                          │
 ├──────────────────────────────────────────────────────────────┤
 │ YEARLY HOROSCOPE: zodiac wheel as navigation; the lens sits  │
 │ on the chosen sign and shows its opening paragraph + “Read”  │

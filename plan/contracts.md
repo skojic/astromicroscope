@@ -33,7 +33,7 @@ The website lives in `site/` (an Astro project). A module changes only the paths
 | `site/src/data/analyses.*` | M09 | |
 | `site/src/data/videos.*` | M11 | generated at build time |
 | `site/src/pages/` | per route, see section 4 | one file per route group, owned by its module |
-| `site/functions/` (Cloudflare) | M12 | form endpoints |
+| Form endpoints (Cloudflare Worker code; exact path set in M00 to match the Astro adapter) | M12 | server-side validation, no secrets in the repo (`specs/09`) |
 | `site/public/` | M00 (icons from `brand/logo/png`) | |
 | `.github/workflows/` | M00 (site CI), M13 | |
 | `brand/` | M01 | frozen while building; changes only through M01 |

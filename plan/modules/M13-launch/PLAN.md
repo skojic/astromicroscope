@@ -26,9 +26,10 @@ Redirects file, DNS records, `status/log.md` entries
 |---|---|---|
 | M13-01 | Full crawl in both languages: status codes, canonicals, hreflang, orphans |  |
 | M13-02 | Redirects from old URLs (M02 map); 410 for spam URLs (A2) |  |
-| M13-03 | DNS to Cloudflare Pages; HTTPS; one host |  |
+| M13-03 | DNS moved to Filip's Cloudflare account; custom domain on the Worker; HTTPS; one host; DNSSEC |  |
 | M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked |  |
-| M13-05 | Launch checklist: content, performance, accessibility |  |
+| M13-05 | Launch checklist: content, performance, accessibility, security (`testing/checklists/security.md`) |  |
+| M13-06 | Search Console: Security issues, Manual actions, removal of spam URLs; monitoring set up (`specs/09` §6–7) | |
 
 ## Acceptance criteria
 - [ ] All gates G2–G5 recorded
