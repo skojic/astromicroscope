@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand kit · Astromicroscope</title>
+<link rel="icon" href="logo/avatar.svg" type="image/svg+xml">
+<link rel="stylesheet" href="tokens/tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--am-white);color:var(--am-ink);font:var(--am-text-body);-webkit-font-smoothing:antialiased}
+  a{color:var(--am-uranus);text-underline-offset:3px}
+  :focus-visible{outline:2px solid var(--am-focus);outline-offset:3px}
+  code{font:500 .85em/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--am-beige);padding:2px 6px;border-radius:4px}
+  .wrap{max-width:var(--am-container);margin:0 auto;padding:0 var(--am-gutter)}
+  .sr{position:absolute;left:-9999px}
+
+  /* top */
+  .sky{background:var(--am-sky);color:var(--am-sky-text);position:relative;overflow:hidden;isolation:isolate}
+  #stars{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+  .sky :focus-visible{outline-color:var(--am-gold)}
+  .sky a{color:inherit}
+  header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0}
+  .lockup{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .lockup b{font:500 1.45rem/1 var(--am-font-serif);display:block}
+  .lockup span{font:400 .78rem/1 var(--am-font-sans);opacity:.7;display:block;margin-top:3px}
+  .intro{padding:56px 0 88px;max-width:760px}
+  .intro h1{font:var(--am-text-display);letter-spacing:var(--am-tracking-display);color:#fff;margin-bottom:24px}
+  .intro p{font:var(--am-text-lede);color:rgba(234,240,248,.86);max-width:44ch}
+  .meta{margin-top:28px;font:var(--am-text-small);color:rgba(234,240,248,.65)}
+
+  /* contents */
+  .toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:var(--am-border)}
+  .toc ol{list-style:none;padding:0;display:flex;gap:4px;overflow-x:auto;font:var(--am-text-label)}
+  .toc a{display:block;padding:14px 10px;color:var(--am-ink);text-decoration:none;white-space:nowrap}
+  .toc a:hover{color:var(--am-uranus)}
+
+  section.block{padding:var(--am-space-9) 0;scroll-margin-top:52px}
+  section.block.alt{background:var(--am-beige)}
+  .block h2{font:var(--am-text-h2);letter-spacing:var(--am-tracking-heading);margin-bottom:14px}
+  .block .lead{max-width:var(--am-measure);color:var(--am-muted);margin-bottom:44px}
+  .block h3{font:var(--am-text-h4);margin:40px 0 14px}
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--am-white);border:var(--am-border);border-radius:var(--am-radius-card);padding:24px;font:var(--am-text-small)}
+  .card h4{font:600 1.05rem/1.25 var(--am-font-sans);margin-bottom:8px}
+  .card p+p{margin-top:.6em}
+  .rules{padding-left:1.1em;display:grid;gap:8px;max-width:var(--am-measure)}
+  table{width:100%;border-collapse:collapse;font:var(--am-text-small);background:var(--am-white)}
+  th,td{text-align:left;padding:11px 12px;border-bottom:var(--am-border);vertical-align:top}
+  thead th{background:var(--am-beige);font-weight:600}
+  .ok{color:#1E6B3A;font-weight:600}.warn{color:var(--am-gold-text);font-weight:600}.no{color:#A12B2B;font-weight:600}
+
+  /* essence */
+  .pillars .card{font:var(--am-text-body);font-size:1.02rem}
+  .pillars .card h4{font:700 1.3rem/1.15 var(--am-font-sans);letter-spacing:-.02em}
+  .signature{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+  .signature div{border-radius:var(--am-radius-card);padding:36px}
+  .signature small{display:block;font:var(--am-text-label);opacity:.7;margin-bottom:14px}
+  .signature b{font:700 2.2rem/1 var(--am-font-sans);letter-spacing:-.035em}
+
+  /* logo */
+  .tile{border-radius:var(--am-radius-card);aspect-ratio:1;display:grid;place-items:center;position:relative}
+  .tile small{position:absolute;left:12px;bottom:10px;font:var(--am-text-label)}
+  .clearspace{background:var(--am-white);border:var(--am-border);border-radius:var(--am-radius-card);padding:40px;display:grid;place-items:center}
+  .cs{position:relative;padding:34px;outline:1px dashed var(--am-uranus);background:repeating-linear-gradient(45deg,rgba(46,91,166,.06) 0 8px,transparent 8px 16px)}
+  .cs svg{display:block;background:var(--am-white)}
+  .sizes{display:flex;align-items:flex-end;gap:28px;padding:28px;background:var(--am-midnight);border-radius:var(--am-radius-card);color:var(--am-sky-text);font:var(--am-text-label)}
+  .sizes div{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .dont .tile{aspect-ratio:1.3}
+  .dont .tile::after{content:"✕";position:absolute;top:8px;right:12px;color:#A12B2B;font:700 1.1rem/1 var(--am-font-sans)}
+
+  /* colour */
+  .swatch{border-radius:var(--am-radius-card);overflow:hidden;border:var(--am-border);background:var(--am-white)}
+  .swatch .c{height:120px}
+  .swatch div.t{padding:14px 16px;font:var(--am-text-small)}
+  .swatch b{display:block;font:600 1rem/1.3 var(--am-font-sans)}
+  .ratio{display:flex;height:18px;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--am-line);margin:28px 0 10px}
+
+  /* type */
+  .specimen{background:var(--am-white);border:var(--am-border);border-radius:var(--am-radius-card);padding:32px}
+  .specimen .name{font:var(--am-text-label);color:var(--am-muted);margin-bottom:16px}
+  .glyphs{font:500 2.4rem/1.25 var(--am-font-sans);letter-spacing:-.01em;word-break:break-word}
+  .glyphs.serif{font:400 2.4rem/1.25 var(--am-font-serif)}
+  .scale td:first-child{white-space:nowrap}
+
+  /* elements */
+  .el{border-radius:var(--am-radius-card);min-height:220px;display:grid;place-items:center;position:relative;overflow:hidden}
+  .slide-demo{background:var(--am-white);border:var(--am-border);border-radius:var(--am-radius-card);overflow:hidden;width:86%}
+  .slide-demo .lab{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--am-beige);border-bottom:var(--am-border);font:var(--am-text-label);color:var(--am-muted)}
+  .slide-demo .lab i{width:24px;height:2px;background:var(--am-gold);display:block}
+  .slide-demo .bd{padding:18px 16px;display:flex;gap:16px;align-items:center;font:600 1.1rem/1.2 var(--am-font-sans)}
+  .stain{width:52px;height:52px;border-radius:50%;flex:none;background:radial-gradient(circle at 45% 45%,#0E1450 0 26%,#2E5BA6 27% 52%,transparent 53%)}
+
+  /* components */
+  .btn{display:inline-flex;align-items:center;font:var(--am-text-ui);text-decoration:none;padding:15px 22px;border-radius:var(--am-radius-pill);background:var(--am-action);color:#fff;border:0;cursor:pointer;transition:background var(--am-duration) var(--am-ease)}
+  .btn:hover{background:var(--am-action-hover)}
+  .btn.ghost{background:transparent;color:var(--am-ink);box-shadow:inset 0 0 0 1.5px var(--am-ink)}
+  .on-dark .btn{background:var(--am-ice);color:var(--am-midnight)}
+  .on-dark .btn.ghost{background:transparent;color:var(--am-sky-text);box-shadow:inset 0 0 0 1.5px rgba(234,240,248,.7)}
+  .demo{border-radius:var(--am-radius-card);padding:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .on-dark{background:var(--am-midnight);color:var(--am-sky-text)}
+  .on-light{background:var(--am-white);border:var(--am-border)}
+  .field{display:flex;gap:8px;background:var(--am-white);border:1.5px solid var(--am-midnight);border-radius:var(--am-radius-pill);padding:6px;max-width:440px;width:100%}
+  .field input{flex:1;border:0;background:transparent;font:400 1rem var(--am-font-sans);padding:0 16px;min-width:0}
+  .field input:focus{outline:none}.field:focus-within{outline:2px solid var(--am-uranus);outline-offset:3px}
+  .focusdemo{outline:2px solid var(--am-focus);outline-offset:3px}
+
+  /* social */
+  .social img{width:100%;height:auto;display:block;border-radius:4px;border:var(--am-border)}
+  .social figure{display:flex;flex-direction:column;gap:10px}
+  .social figcaption{font:var(--am-text-small)}
+
+  /* voice */
+  .voice td:first-child{font-weight:600;white-space:nowrap}
+  .say{color:#1E6B3A}.avoid{color:#A12B2B}
+
+  footer{background:var(--am-midnight);color:rgba(234,240,248,.75);padding:44px 0 110px;font:var(--am-text-small)}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+
+  .review{position:fixed;z-index:50;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:4px;align-items:center;background:#fff;border:var(--am-border);border-radius:999px;padding:4px;font:500 13px/1 var(--am-font-sans);box-shadow:var(--am-shadow-float)}
+  .review a{text-decoration:none;padding:8px 14px;border-radius:999px;color:var(--am-ink);white-space:nowrap}
+  .review a[aria-current]{background:var(--am-midnight);color:#fff}
+
+  @media (max-width:900px){
+    .g2,.g3,.g4,.signature{grid-template-columns:1fr}
+    .g4.keep2{grid-template-columns:1fr 1fr}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#F6E3A1"/><stop offset=".45" stop-color="#D4AF5C"/><stop offset="1" stop-color="#A47E33"/></linearGradient>
+    <radialGradient id="avatarSky" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="#34539A"/><stop offset=".55" stop-color="#1B2A72"/><stop offset="1" stop-color="#0E1450"/></radialGradient>
+    <symbol id="mark" viewBox="380 10 2144 2648"><g transform="translate(0.000000,2668.000000) scale(0.100000,-0.100000)">
+<path d="M12980 26420 c-58 -5 -177 -13 -265 -19 -88 -6 -207 -18 -265 -26
+-58 -7 -141 -18 -185 -24 -214 -27 -426 -62 -555 -92 -47 -11 -97 -19 -111
+-19 -14 0 -55 -8 -90 -19 -35 -10 -86 -23 -114 -29 -27 -6 -88 -20 -135 -32
+-47 -12 -114 -28 -149 -36 -35 -8 -71 -19 -80 -23 -9 -5 -43 -14 -76 -21 -33
+-7 -72 -19 -87 -26 -15 -8 -36 -14 -46 -14 -11 0 -39 -9 -63 -20 -24 -11 -55
+-20 -69 -20 -14 0 -43 -9 -65 -20 -22 -11 -48 -19 -58 -20 -11 0 -33 -7 -50
+-15 -34 -15 -88 -35 -177 -65 -30 -10 -80 -28 -110 -40 -30 -12 -73 -28 -95
+-36 -22 -8 -49 -19 -60 -24 -11 -5 -49 -21 -85 -35 -36 -15 -83 -36 -106 -46
+-23 -10 -44 -19 -48 -19 -15 0 -181 -80 -466 -224 -286 -144 -324 -164 -401
+-210 -20 -11 -71 -41 -114 -66 -97 -57 -98 -58 -168 -103 -31 -20 -61 -37 -66
+-37 -4 0 -16 -9 -26 -20 -10 -11 -22 -20 -26 -20 -9 0 -122 -73 -194 -125 -27
+-20 -70 -50 -95 -66 -80 -52 -249 -178 -414 -309 -437 -348 -777 -678 -1206
+-1171 -64 -73 -232 -282 -304 -378 -27 -36 -53 -69 -57 -75 -8 -10 -45 -60
+-193 -264 -17 -23 -55 -77 -83 -120 -29 -42 -69 -99 -88 -127 -20 -27 -42 -64
+-50 -82 -8 -17 -19 -34 -24 -38 -5 -3 -24 -31 -42 -63 -18 -31 -36 -59 -39
+-62 -4 -3 -24 -36 -46 -73 -21 -38 -46 -79 -54 -92 -19 -30 -154 -265 -164
+-285 -4 -8 -20 -37 -36 -65 -35 -58 -358 -704 -379 -756 -14 -36 -39 -93 -76
+-174 -13 -27 -35 -79 -50 -115 -15 -36 -33 -78 -40 -95 -7 -16 -16 -41 -20
+-55 -4 -14 -14 -34 -21 -45 -8 -11 -14 -26 -14 -35 -1 -8 -9 -33 -20 -55 -11
+-22 -20 -47 -20 -55 0 -8 -9 -33 -20 -55 -11 -22 -19 -46 -20 -53 0 -7 -9 -30
+-20 -52 -11 -22 -20 -47 -20 -56 0 -9 -7 -30 -15 -47 -18 -40 -43 -108 -60
+-167 -17 -55 -44 -133 -61 -180 -8 -19 -19 -57 -24 -85 -6 -27 -15 -54 -19
+-60 -5 -5 -12 -26 -16 -45 -6 -33 -21 -85 -66 -225 -10 -33 -19 -68 -19 -77 0
+-10 -7 -39 -16 -65 -9 -26 -23 -73 -30 -103 -11 -48 -25 -103 -62 -255 -6 -22
+-19 -83 -30 -135 -12 -52 -28 -126 -36 -165 -14 -63 -22 -103 -56 -285 -74
+-398 -145 -949 -170 -1325 -6 -82 -15 -195 -20 -250 -28 -290 -60 -1123 -60
+-1555 0 -716 55 -1587 135 -2145 8 -55 19 -140 25 -190 6 -49 15 -108 20 -130
+5 -22 14 -78 20 -125 6 -47 17 -114 24 -150 8 -36 19 -96 26 -135 11 -64 20
+-117 63 -340 9 -44 23 -107 31 -140 9 -32 16 -69 16 -80 0 -12 8 -51 19 -86
+10 -35 23 -86 29 -114 6 -27 20 -87 31 -132 12 -46 30 -118 40 -160 24 -96 55
+-214 71 -268 6 -22 20 -71 31 -110 11 -38 28 -97 39 -130 10 -33 22 -76 26
+-95 4 -19 12 -48 19 -65 7 -16 23 -64 35 -105 21 -69 38 -118 70 -210 7 -19
+18 -55 26 -80 7 -25 27 -83 44 -130 17 -47 35 -99 41 -117 5 -18 16 -45 24
+-60 8 -15 15 -35 15 -43 0 -8 9 -33 20 -55 11 -22 19 -46 20 -52 0 -7 9 -32
+19 -55 10 -24 28 -65 39 -93 47 -119 59 -147 162 -390 8 -20 50 -110 110 -240
+56 -121 208 -426 256 -515 25 -47 61 -114 80 -150 19 -36 45 -83 59 -105 13
+-22 31 -53 39 -70 9 -16 27 -48 41 -70 14 -22 30 -49 35 -60 6 -11 24 -40 40
+-65 16 -25 43 -70 61 -100 18 -30 35 -57 38 -60 12 -10 61 -90 61 -99 0 -5 7
+-14 15 -21 8 -7 29 -35 46 -64 16 -28 50 -78 75 -111 24 -33 64 -89 88 -125
+65 -97 323 -416 460 -570 155 -173 395 -412 567 -566 147 -131 452 -378 557
+-451 37 -26 69 -49 72 -53 5 -6 70 -51 175 -120 29 -19 63 -42 76 -51 13 -9
+56 -37 94 -61 39 -25 90 -58 115 -74 25 -16 56 -34 70 -41 14 -7 39 -21 55
+-32 17 -10 46 -27 65 -38 19 -11 53 -30 75 -43 22 -13 58 -33 80 -46 167 -94
+666 -330 878 -415 26 -10 68 -28 95 -38 26 -11 74 -29 107 -41 33 -12 79 -31
+103 -41 23 -10 50 -19 60 -19 9 -1 35 -9 57 -20 22 -11 49 -20 60 -20 11 0 38
+-9 60 -20 22 -11 49 -20 60 -20 11 0 38 -9 60 -20 22 -11 50 -19 62 -20 12 0
+34 -5 50 -11 64 -26 317 -95 508 -139 28 -7 68 -16 90 -22 73 -18 219 -48 328
+-68 59 -10 111 -21 116 -24 5 -3 53 -10 107 -16 55 -6 113 -15 129 -21 17 -5
+64 -12 105 -17 66 -6 76 -10 87 -32 18 -35 19 -1780 1 -1798 -9 -9 -370 -12
+-1565 -12 l-1553 0 -62 -21 c-164 -56 -301 -178 -363 -324 -41 -96 -45 -152
+-44 -605 0 -493 4 -536 63 -644 48 -89 86 -135 155 -189 70 -54 131 -84 224
+-108 70 -18 230 -19 5534 -19 5370 0 5463 0 5540 19 178 44 309 147 385 302
+65 133 68 157 68 636 0 378 -3 437 -19 509 -25 109 -72 195 -151 275 -73 73
+-130 108 -235 144 l-72 25 -1515 0 c-1430 0 -1516 1 -1530 18 -9 9 -37 67 -63
+127 -48 110 -80 180 -134 298 -16 34 -41 89 -56 122 -15 33 -33 74 -40 90 -8
+17 -28 60 -45 98 -16 37 -44 97 -60 135 -17 37 -37 81 -45 97 -7 17 -39 89
+-70 160 -31 72 -61 134 -66 140 -5 5 -9 15 -9 23 0 8 -9 33 -19 56 -10 23 -31
+70 -46 106 -15 36 -33 79 -41 97 -8 17 -14 37 -14 45 0 7 -6 22 -14 33 -7 11
+-17 31 -21 45 -4 14 -14 40 -23 58 -8 19 -11 37 -6 42 10 9 164 50 191 50 10
+1 36 9 58 20 22 11 49 19 60 20 11 0 29 6 40 14 11 7 31 17 45 21 14 4 50 19
+80 32 30 14 71 32 90 40 53 23 288 142 345 174 28 16 64 36 80 44 17 9 39 21
+50 28 11 6 58 33 105 60 47 26 92 52 100 57 8 5 57 33 108 62 51 29 104 60
+117 68 13 8 52 32 87 53 105 63 208 131 325 214 49 35 99 71 113 80 13 10 79
+62 147 116 134 107 230 199 403 386 123 134 180 181 216 181 34 0 90 -62 129
+-142 64 -131 149 -221 250 -266 145 -64 621 -70 960 -12 123 20 255 52 340 82
+17 6 50 16 75 24 59 17 169 58 195 71 11 5 42 21 70 34 61 30 169 101 214 143
+52 48 102 133 118 200 12 52 14 428 13 2654 0 1876 2 2609 10 2655 11 61 56
+217 72 247 4 8 21 44 38 80 56 116 157 239 245 297 22 15 49 34 60 43 11 9 49
+29 85 44 36 15 79 34 97 42 17 8 38 14 46 14 8 0 41 8 73 19 33 10 97 22 143
+26 240 21 331 156 331 490 0 171 -16 297 -45 362 -19 43 -30 54 -62 64 -54 19
+-1184 24 -1876 9 -517 -11 -539 -10 -570 7 -33 20 -72 70 -107 138 -19 38 -39
+72 -81 140 -11 17 -25 41 -32 55 -11 22 -57 98 -95 156 -7 10 -19 33 -27 50
+-7 17 -21 36 -29 44 -9 7 -16 16 -16 21 0 9 -48 88 -60 99 -3 3 -21 30 -40 60
+-19 30 -37 57 -40 60 -3 3 -21 30 -40 60 -19 30 -37 57 -40 60 -3 3 -19 25
+-35 50 -45 68 -376 508 -489 650 -326 409 -637 724 -976 985 -42 33 -93 73
+-113 89 -20 16 -66 50 -104 77 -37 27 -94 68 -127 91 -57 42 -117 83 -207 142
+-24 15 -55 36 -68 45 -13 9 -31 21 -40 26 -81 50 -97 60 -101 65 -3 4 -33 24
+-68 46 -35 21 -75 47 -90 57 -26 16 -270 137 -362 179 -67 30 -229 112 -275
+138 -22 13 -65 36 -95 53 -30 16 -66 37 -80 46 -32 20 -45 28 -117 70 -32 18
+-66 40 -76 49 -9 8 -26 20 -36 26 -102 58 -157 90 -161 95 -3 4 -30 22 -60 41
+-30 19 -60 39 -66 45 -7 5 -37 30 -68 54 -54 42 -103 97 -138 152 -25 39 -58
+143 -58 181 0 46 32 141 73 223 89 175 110 263 88 367 -13 64 -69 182 -112
+235 -17 22 -34 51 -71 123 -22 44 -28 68 -28 124 0 64 3 75 45 147 25 42 52
+83 60 89 8 7 15 17 15 22 0 6 8 22 19 36 10 15 32 52 48 82 17 30 39 71 51 91
+29 52 37 68 61 124 12 28 27 57 32 65 5 8 19 29 30 47 11 18 41 44 67 58 46
+26 50 27 167 20 188 -9 311 23 393 106 38 38 79 110 97 169 4 14 11 30 16 35
+4 6 13 40 19 75 5 36 15 83 20 105 25 104 4 192 -64 263 -48 51 -83 71 -316
+179 -41 19 -158 77 -260 128 -162 81 -228 115 -380 197 -35 18 -80 43 -275
+147 -176 95 -201 109 -310 171 -16 9 -48 27 -70 40 -22 13 -53 31 -70 41 -16
+10 -43 26 -60 35 -16 9 -55 33 -85 52 -30 19 -71 45 -90 57 -19 13 -67 43
+-105 68 -100 64 -147 90 -255 143 -52 26 -107 53 -121 60 -54 28 -155 54 -209
+54 -122 0 -267 -89 -373 -229 -71 -93 -89 -136 -94 -232 -5 -74 -2 -92 18
+-140 13 -29 37 -72 54 -95 66 -89 117 -161 141 -198 l25 -38 -27 -52 c-14 -28
+-32 -58 -39 -66 -6 -8 -15 -22 -19 -30 -3 -8 -26 -46 -51 -85 -25 -38 -51 -84
+-59 -101 -8 -17 -22 -36 -30 -44 -9 -7 -16 -16 -16 -21 0 -5 -17 -35 -37 -66
+-21 -32 -44 -70 -53 -85 -23 -40 -93 -156 -112 -186 -10 -15 -26 -43 -37 -64
+-26 -46 -63 -75 -115 -89 -47 -12 -151 -41 -246 -69 -36 -10 -80 -22 -98 -25
+-18 -4 -45 -13 -60 -21 -15 -8 -36 -14 -47 -14 -11 0 -36 -8 -55 -18 -19 -11
+-47 -22 -61 -25 -54 -14 -112 -86 -189 -237 -66 -132 -119 -234 -290 -565 -32
+-60 -67 -128 -80 -150 -12 -22 -53 -98 -90 -170 -90 -173 -240 -464 -310 -600
+-32 -60 -67 -128 -80 -150 -12 -22 -54 -101 -93 -175 -38 -74 -101 -196 -140
+-270 -39 -74 -96 -184 -127 -245 -32 -60 -67 -128 -80 -150 -13 -22 -66 -123
+-119 -225 -52 -102 -114 -221 -138 -265 -23 -44 -61 -116 -84 -160 -23 -44
+-50 -96 -61 -115 -10 -19 -36 -66 -56 -105 -86 -159 -120 -222 -142 -260 -37
+-65 -66 -116 -100 -180 -18 -33 -38 -67 -44 -75 -7 -8 -18 -26 -24 -40 -7 -14
+-20 -37 -30 -52 -9 -14 -34 -56 -56 -93 -21 -37 -51 -86 -65 -109 -15 -22 -42
+-63 -59 -91 -17 -27 -45 -70 -62 -95 -112 -164 -149 -249 -157 -365 -5 -69 -2
+-90 20 -152 14 -40 42 -98 63 -128 41 -62 136 -151 213 -199 28 -17 82 -51
+121 -76 67 -42 109 -67 170 -102 14 -8 42 -24 63 -36 64 -37 110 -64 152 -87
+46 -26 690 -348 750 -375 139 -63 576 -279 720 -356 44 -24 96 -52 115 -62 19
+-10 51 -28 71 -39 20 -12 47 -27 60 -35 13 -7 32 -19 41 -26 22 -18 64 -41
+173 -95 189 -93 349 -85 487 26 40 32 125 135 146 177 6 14 22 43 35 65 13 22
+45 81 72 130 94 174 102 190 125 230 13 22 35 63 50 90 15 28 41 75 57 105 17
+30 40 73 53 95 13 22 32 56 42 75 10 19 23 42 28 50 5 8 37 65 70 125 33 61
+65 117 70 125 5 8 29 48 52 88 77 131 132 217 146 226 11 7 82 -8 149 -31 83
+-28 230 -46 413 -51 197 -4 306 8 440 49 36 10 71 19 77 19 24 0 279 123 361
+174 77 48 254 198 303 256 29 34 50 50 66 50 26 0 223 -95 318 -153 11 -7 44
+-26 74 -42 30 -17 61 -35 70 -40 113 -72 271 -175 286 -188 6 -4 31 -22 57
+-40 57 -39 229 -170 249 -189 8 -7 55 -47 104 -88 116 -95 430 -409 525 -525
+41 -49 77 -92 80 -95 11 -8 173 -227 205 -276 69 -105 86 -132 122 -193 21
+-35 49 -82 62 -105 35 -62 151 -293 151 -302 0 -4 8 -25 19 -48 50 -111 61
+-137 61 -149 1 -6 9 -30 20 -52 11 -22 19 -48 20 -58 0 -10 5 -28 12 -40 27
+-52 148 -551 148 -614 0 -15 7 -64 15 -108 27 -138 44 -423 57 -940 15 -609
+-1 -950 -53 -1173 -10 -45 -19 -93 -19 -105 0 -21 -22 -101 -61 -222 -10 -33
+-19 -67 -19 -75 -1 -8 -9 -33 -20 -55 -11 -22 -19 -46 -20 -52 0 -12 -11 -38
+-61 -149 -11 -23 -19 -45 -19 -49 0 -9 -122 -252 -156 -310 -13 -22 -31 -54
+-41 -71 -37 -65 -64 -110 -81 -135 -9 -14 -30 -47 -47 -73 -16 -27 -41 -63
+-55 -82 -14 -18 -41 -56 -60 -84 -216 -312 -589 -757 -782 -931 -51 -46 -102
+-92 -113 -103 -11 -10 -72 -57 -135 -104 -63 -47 -131 -97 -150 -111 -19 -14
+-55 -39 -81 -56 -26 -16 -57 -37 -70 -46 -71 -49 -200 -129 -208 -129 -5 0
+-14 -7 -21 -16 -8 -8 -27 -22 -44 -30 -17 -8 -62 -34 -101 -59 -66 -41 -172
+-106 -216 -131 -10 -6 -27 -18 -37 -27 -10 -10 -22 -17 -26 -17 -6 0 -86 -50
+-96 -60 -15 -16 -96 -62 -175 -100 -87 -43 -93 -44 -190 -44 -109 -1 -129 6
+-265 92 -30 20 -77 50 -105 67 -229 145 -670 230 -965 185 -36 -6 -96 -14
+-135 -20 -38 -5 -87 -16 -107 -24 -21 -9 -48 -16 -60 -16 -13 -1 -41 -9 -63
+-20 -22 -11 -47 -20 -55 -20 -13 0 -92 -39 -382 -187 -94 -47 -168 -65 -239
+-56 -49 5 -183 49 -214 70 -11 7 -26 13 -33 13 -8 0 -28 6 -45 14 -18 8 -66
+29 -107 47 -86 36 -458 225 -478 242 -8 6 -22 16 -32 22 -107 61 -150 87 -155
+95 -3 5 -29 23 -58 40 -182 109 -484 362 -811 681 -188 183 -248 249 -351 384
+-8 10 -15 29 -15 42 l0 23 1833 2 1832 3 52 29 c67 36 110 90 134 167 17 55
+19 96 19 409 0 313 -2 354 -19 409 -23 74 -66 130 -129 168 l-47 28 -3005 0
+-3005 0 -32 -22 c-17 -13 -35 -23 -40 -23 -16 0 -68 -64 -91 -111 -22 -45 -22
+-55 -22 -448 l0 -402 26 -52 c27 -53 70 -107 87 -107 5 0 23 -10 40 -22 l32
+-23 628 -3 c554 -3 629 -5 634 -18 8 -22 -14 -172 -36 -235 -17 -51 -20 -55
+-67 -70 -37 -12 -113 -17 -309 -22 -143 -4 -396 -14 -562 -23 -289 -16 -307
+-16 -400 1 -123 22 -180 51 -252 124 -69 71 -90 101 -120 171 -13 30 -30 69
+-37 85 -24 50 -54 177 -79 326 -21 134 -19 376 5 581 11 92 24 178 29 190 5
+13 12 48 16 78 4 30 16 82 27 115 55 163 131 244 260 279 75 20 216 19 518 -3
+212 -15 746 -41 849 -41 140 0 172 35 157 173 -4 34 -16 96 -26 137 -10 41
+-24 98 -30 125 -6 28 -19 86 -29 130 -10 44 -24 107 -31 140 -7 33 -18 80 -26
+105 -7 25 -18 74 -23 110 -6 36 -18 83 -26 105 -8 22 -14 54 -15 70 0 17 -9
+63 -20 104 -11 41 -20 84 -20 96 0 11 -7 48 -16 80 -8 33 -22 96 -30 140 -9
+44 -24 123 -34 175 -10 52 -23 127 -30 165 -6 39 -17 99 -25 135 -8 36 -19
+104 -25 153 -6 48 -14 97 -19 110 -5 12 -14 72 -20 132 -7 61 -16 126 -21 145
+-5 19 -14 89 -20 155 -6 66 -15 145 -20 175 -5 30 -14 114 -20 185 -6 72 -15
+157 -20 190 -5 33 -12 103 -15 155 -3 52 -12 167 -20 255 -20 219 -53 797 -66
+1160 -14 386 -14 1384 0 1770 13 346 46 954 61 1100 5 55 14 165 20 245 5 80
+17 206 24 280 8 74 20 180 25 235 31 303 62 554 132 1045 35 248 82 538 139
+855 10 55 23 129 29 165 7 36 20 106 31 155 19 90 34 165 52 260 12 66 45 219
+59 275 14 57 43 178 68 278 11 42 29 109 41 147 11 39 29 99 40 135 26 92 56
+189 70 230 7 19 20 58 30 85 9 28 22 64 27 80 6 17 17 46 23 65 7 19 21 55 31
+80 10 25 29 77 44 115 14 39 32 82 40 97 8 14 15 32 15 38 0 7 9 34 21 59 12
+25 29 64 39 86 10 22 36 78 59 125 23 47 41 89 41 93 0 10 125 260 161 322 16
+28 32 57 36 65 7 15 90 161 130 228 12 20 25 44 29 52 10 20 57 94 65 100 3 3
+20 30 38 60 17 30 50 80 71 110 22 30 44 62 50 70 108 157 162 228 296 389
+220 264 466 512 694 699 58 47 107 89 110 92 3 3 39 30 80 60 41 30 77 57 80
+60 8 8 117 81 174 117 28 17 56 36 61 41 6 4 41 26 79 48 37 21 84 49 104 60
+111 65 266 143 397 198 61 26 122 54 137 62 14 8 32 14 40 14 7 1 31 9 53 20
+22 11 46 19 53 20 7 0 34 8 60 19 149 58 488 142 697 171 305 42 648 58 905
+41 333 -22 541 -49 855 -111 199 -39 202 -40 385 -89 25 -7 71 -19 103 -26 32
+-7 76 -21 98 -29 22 -9 48 -16 58 -16 10 0 38 -9 62 -20 24 -11 55 -20 69 -20
+14 0 43 -9 65 -20 22 -11 49 -20 60 -20 11 0 38 -9 60 -20 22 -11 48 -19 57
+-20 10 0 37 -9 60 -19 24 -10 70 -29 103 -41 141 -51 406 -183 611 -305 71
+-42 335 -232 354 -254 3 -3 50 -45 105 -92 238 -204 588 -591 756 -834 19 -27
+38 -54 42 -60 33 -42 138 -195 167 -240 19 -31 42 -67 50 -80 112 -177 129
+-205 177 -294 18 -32 45 -81 62 -107 39 -66 210 -407 260 -522 22 -51 80 -174
+129 -275 48 -100 99 -207 111 -237 13 -30 32 -71 42 -91 11 -20 19 -42 19 -48
+0 -7 8 -31 19 -54 10 -23 22 -58 26 -77 4 -19 14 -47 21 -62 8 -15 14 -35 14
+-46 0 -10 8 -48 19 -83 10 -35 28 -107 39 -159 12 -52 27 -115 33 -140 6 -25
+16 -72 23 -105 50 -237 135 -362 288 -422 67 -26 83 -28 198 -27 249 2 430 83
+496 222 l27 57 10 785 c5 432 10 1620 11 2640 1 2006 2 1950 -52 2070 -31 70
+-113 150 -189 187 -50 24 -70 28 -143 28 -62 0 -98 -5 -130 -19 -133 -57 -275
+-188 -435 -401 -204 -272 -282 -351 -412 -416 l-88 -44 -150 1 c-128 1 -159 4
+-210 22 -32 12 -66 22 -75 22 -8 1 -33 9 -55 20 -22 11 -44 19 -49 20 -4 0
+-37 14 -72 30 -84 39 -176 81 -244 110 -51 22 -90 39 -245 110 -33 15 -89 39
+-125 55 -36 15 -108 48 -160 73 -166 77 -215 99 -635 282 -11 5 -54 23 -95 40
+-41 17 -84 35 -95 40 -11 5 -38 16 -60 24 -22 8 -65 24 -95 36 -30 12 -75 28
+-100 36 -25 8 -59 21 -77 29 -17 8 -37 15 -45 15 -7 1 -31 9 -53 20 -22 11
+-47 19 -57 20 -9 0 -40 8 -70 19 -29 10 -84 28 -123 39 -38 11 -95 28 -125 37
+-30 9 -82 22 -115 30 -33 7 -80 18 -105 24 -25 6 -88 21 -140 32 -52 11 -124
+27 -160 34 -36 8 -108 22 -160 30 -52 9 -124 20 -160 26 -36 6 -103 17 -150
+25 -47 8 -134 19 -195 25 -60 5 -141 14 -180 20 -191 27 -512 41 -980 44 -269
+2 -537 -1 -595 -5z m939 -6472 c141 -74 254 -134 351 -186 19 -10 103 -54 185
+-98 83 -43 186 -97 230 -121 44 -23 109 -57 145 -76 36 -18 77 -41 93 -51 27
+-19 36 -49 16 -61 -5 -4 -15 -17 -20 -28 -5 -12 -29 -53 -53 -92 -25 -38 -63
+-101 -86 -140 -22 -38 -49 -82 -58 -97 -9 -14 -35 -56 -57 -93 -22 -37 -50
+-83 -62 -103 -12 -20 -31 -53 -41 -72 -48 -90 -86 -156 -94 -167 -27 -34 -122
+-25 -248 24 -84 32 -574 274 -624 308 -20 14 -39 25 -41 25 -2 0 -30 17 -62
+38 -32 20 -66 42 -75 47 -33 21 -133 90 -138 95 -3 3 -29 23 -57 44 -29 21
+-53 44 -53 53 0 8 29 58 65 111 78 117 131 194 142 207 4 6 25 35 45 65 20 30
+59 87 86 125 118 171 155 223 188 273 20 28 43 52 51 52 9 0 86 -37 172 -82z
+m311 -2978 c63 -10 132 -26 152 -34 21 -9 44 -16 52 -16 17 0 179 -77 236
+-112 97 -60 222 -173 304 -275 116 -146 187 -290 238 -483 20 -73 23 -110 23
+-260 0 -236 -24 -342 -121 -535 -70 -138 -89 -166 -173 -262 -111 -126 -225
+-213 -371 -284 -114 -55 -147 -69 -161 -69 -8 0 -39 -8 -69 -19 -30 -10 -110
+-24 -177 -31 -141 -15 -322 -1 -427 32 -32 10 -64 18 -71 18 -21 0 -197 84
+-263 125 -261 164 -459 436 -528 725 -32 132 -35 158 -35 305 0 118 5 166 21
+225 11 41 20 83 20 93 0 11 6 33 14 50 8 18 29 65 46 105 59 138 122 233 234
+350 46 48 179 157 231 189 45 28 227 113 241 113 8 0 31 7 52 16 54 23 233 52
+332 53 47 0 137 -8 200 -19z m-349 -11756 c31 -8 67 -14 80 -14 13 -1 42 -9
+64 -20 22 -11 46 -19 53 -20 11 0 51 -20 161 -79 45 -25 174 -127 217 -172 44
+-47 132 -160 150 -194 43 -78 74 -141 74 -150 0 -5 7 -23 15 -39 14 -27 36
+-110 55 -216 11 -59 11 -244 0 -295 -32 -149 -41 -185 -55 -211 -8 -16 -15
+-33 -15 -37 0 -8 -53 -119 -73 -152 -49 -81 -80 -120 -151 -190 -124 -123
+-149 -142 -282 -211 -201 -105 -446 -147 -637 -110 -40 8 -89 17 -109 21 -20
+3 -50 12 -65 20 -15 8 -35 15 -44 15 -25 0 -135 58 -229 119 -100 65 -217 180
+-282 277 -52 78 -128 225 -128 249 0 9 -7 32 -16 53 -23 55 -44 195 -44 300 0
+109 23 277 45 318 8 16 15 36 15 44 0 16 69 157 117 240 33 56 222 248 283
+285 169 106 331 166 500 185 84 10 230 2 301 -16z"/>
+<path d="M13893 16255 c-147 -50 -240 -132 -307 -270 -30 -63 -46 -188 -35
+-270 9 -64 46 -168 73 -204 35 -46 139 -142 175 -160 157 -80 327 -80 481 0
+74 39 161 134 205 224 l39 80 0 130 c0 119 -2 135 -26 186 -39 82 -83 143
+-137 188 -27 23 -52 41 -57 41 -4 0 -15 6 -23 14 -9 8 -51 26 -95 40 -103 34
+-193 34 -293 1z"/>
+<path d="M13584 4531 c-33 -10 -71 -24 -85 -31 -44 -24 -128 -112 -155 -163
+-26 -48 -28 -60 -28 -172 0 -112 2 -123 27 -170 68 -124 150 -184 280 -206
+140 -23 255 16 349 121 160 176 119 457 -86 584 -40 25 -153 56 -201 55 -22 0
+-67 -9 -101 -18z"/>
+<path d="M23271 19811 c-11 -11 -25 -38 -31 -60 -6 -21 -17 -52 -25 -68 -8
+-15 -15 -36 -15 -46 0 -10 -9 -35 -20 -57 -11 -22 -20 -45 -20 -52 -1 -7 -9
+-31 -20 -53 -11 -22 -20 -47 -20 -55 0 -8 -9 -33 -20 -55 -11 -22 -19 -47 -20
+-55 0 -9 -6 -24 -14 -35 -7 -11 -17 -31 -21 -45 -4 -14 -13 -38 -20 -55 -7
+-16 -37 -84 -66 -150 -44 -102 -107 -230 -153 -310 -74 -130 -160 -203 -411
+-345 -130 -75 -630 -319 -683 -335 -13 -4 -21 -12 -19 -18 3 -11 242 -136 260
+-137 8 0 254 -122 327 -162 353 -192 444 -263 532 -413 19 -32 194 -386 209
+-420 58 -141 72 -174 84 -197 8 -14 15 -32 15 -40 1 -7 9 -31 20 -53 11 -22
+19 -44 20 -49 0 -5 8 -27 19 -50 18 -41 30 -72 59 -156 26 -79 64 -104 76 -52
+9 34 35 106 105 280 24 61 70 171 81 197 5 11 25 58 45 105 20 47 41 89 46 94
+5 6 9 16 9 23 0 12 72 162 122 253 78 145 139 216 243 287 79 53 105 69 185
+116 47 27 475 242 560 281 47 21 105 50 129 63 51 29 47 36 -39 73 -80 34
+-525 253 -594 292 -32 18 -75 43 -95 55 -20 11 -49 28 -65 37 -33 18 -102 68
+-152 110 -39 33 -113 125 -136 171 -8 17 -24 46 -35 66 -33 57 -76 147 -103
+214 -5 11 -17 40 -28 65 -11 25 -32 74 -47 110 -15 36 -35 84 -46 108 -10 23
+-19 47 -19 53 0 6 -7 25 -15 42 -13 30 -22 54 -55 147 -7 19 -21 55 -30 80
+-24 61 -35 95 -56 163 -9 31 -21 57 -26 57 -4 0 -17 -9 -27 -19z"/>
+<path d="M21095 16588 c-2 -7 -14 -40 -25 -73 -11 -33 -26 -76 -32 -95 -5 -19
+-17 -44 -24 -55 -8 -11 -14 -26 -14 -33 0 -8 -6 -28 -14 -45 -8 -18 -29 -66
+-47 -107 -28 -67 -43 -98 -90 -181 -27 -47 -95 -111 -158 -147 -93 -54 -214
+-121 -231 -128 -22 -9 -183 -83 -198 -92 -8 -4 -14 -11 -14 -17 0 -5 93 -57
+208 -115 215 -108 314 -170 363 -225 30 -35 110 -187 161 -305 17 -41 38 -89
+46 -107 8 -17 14 -34 14 -38 0 -3 8 -25 19 -48 10 -23 22 -57 26 -74 5 -27 11
+-33 34 -33 23 0 29 6 43 48 8 26 25 72 38 102 12 30 29 73 37 95 14 39 130
+277 157 323 42 71 143 139 399 267 110 55 199 105 199 110 -1 12 14 4 -202
+111 -273 134 -355 190 -397 269 -46 88 -103 205 -116 240 -8 22 -25 65 -37 95
+-12 30 -28 73 -36 95 -8 22 -19 49 -24 60 -6 11 -16 40 -23 65 -10 34 -18 46
+-35 48 -12 2 -24 -3 -27 -10z"/>
+<path d="M24147 15228 c-13 -29 -30 -69 -37 -88 -30 -87 -42 -117 -55 -147 -8
+-17 -15 -36 -15 -43 0 -6 -8 -28 -19 -48 -10 -20 -47 -95 -82 -166 -86 -174
+-91 -178 -414 -341 -104 -53 -198 -104 -208 -114 -18 -18 -13 -21 175 -115
+354 -176 375 -194 481 -416 35 -74 74 -160 87 -190 12 -30 31 -73 41 -96 11
+-23 19 -47 19 -54 0 -18 52 -110 62 -110 4 0 8 5 8 11 0 15 67 187 116 296 8
+17 14 34 14 37 0 6 72 153 114 232 35 68 142 152 290 228 34 18 70 37 81 44
+29 16 186 88 213 96 12 4 22 13 22 20 0 25 -30 42 -200 117 -25 11 -52 24 -60
+29 -8 6 -31 18 -50 28 -19 10 -53 29 -75 42 -22 13 -53 30 -68 38 -16 8 -52
+38 -82 66 -53 53 -98 130 -164 286 -18 41 -36 84 -41 95 -5 11 -16 38 -24 60
+-7 22 -19 56 -26 75 -7 19 -21 55 -31 80 -10 25 -20 57 -24 73 -8 40 -20 33
+-48 -25z"/>
+<path d="M9598 13363 c-8 -10 -53 -90 -98 -178 -168 -324 -198 -381 -220 -420
+-13 -22 -62 -117 -111 -210 -104 -202 -121 -264 -100 -373 17 -84 33 -112 113
+-188 74 -71 111 -98 193 -141 33 -18 76 -40 95 -51 19 -10 115 -60 213 -110
+591 -306 812 -420 867 -450 114 -62 243 -122 263 -122 13 0 46 -7 73 -15 27
+-8 86 -15 130 -15 93 0 153 21 194 67 29 32 31 36 112 191 33 64 79 151 101
+192 22 41 56 104 74 140 19 36 54 97 78 135 24 39 52 86 63 105 36 68 64 115
+73 125 5 5 9 16 9 25 0 8 9 32 20 53 11 20 20 46 20 56 0 20 -48 61 -70 61
+-20 0 -95 36 -556 268 -541 272 -513 257 -640 340 -10 7 -30 18 -44 25 -14 6
+-50 28 -80 48 -30 19 -62 38 -70 42 -8 4 -35 21 -60 37 -25 16 -72 45 -105 65
+-33 20 -87 54 -120 75 -33 22 -76 49 -95 60 -19 11 -62 38 -95 60 -113 74
+-191 120 -202 120 -5 0 -17 -8 -25 -17z"/>
+<path d="M15713 12851 c-49 -27 -59 -38 -83 -84 -42 -81 -63 -433 -36 -582 30
+-164 112 -232 326 -275 335 -66 564 -154 705 -270 38 -31 222 -215 257 -256
+33 -40 126 -173 155 -221 47 -81 123 -228 123 -239 0 -3 7 -20 14 -37 23 -49
+56 -147 66 -195 5 -23 14 -51 20 -61 5 -11 17 -63 26 -118 56 -345 66 -508 68
+-1050 1 -422 3 -484 17 -498 14 -14 17 -13 36 7 33 36 76 163 114 341 10 49
+21 92 23 96 3 3 15 94 27 201 39 339 29 822 -22 1120 -5 30 -16 96 -24 145
+-16 100 -38 197 -66 294 -11 35 -19 72 -19 82 0 10 -9 41 -20 69 -11 28 -20
+61 -20 73 -1 12 -9 40 -20 62 -11 22 -20 49 -20 60 0 11 -9 38 -20 60 -11 22
+-20 47 -20 55 0 8 -9 33 -20 55 -11 22 -19 46 -20 52 0 7 -9 32 -19 55 -11 24
+-32 72 -46 108 -84 200 -288 608 -351 703 -33 49 -134 157 -148 157 -5 0 -17
+6 -25 14 -9 8 -45 24 -81 36 -74 25 -320 45 -662 54 -184 5 -206 3 -235 -13z"/>
+</g></symbol>
+    <symbol id="spark" viewBox="-10 -10 20 20"><path d="M0 -10 Q0 0 10 0 Q0 0 0 10 Q0 0 -10 0 Q0 0 0 -10Z"/></symbol>
+  </defs>
+</svg>
+
+<nav class="review" aria-label="Brand kit navigation">
+  <a href="index.html" aria-current="page">Brand kit</a>
+  <a href="home-reference.html">Home page reference</a>
+  <span class="langs" role="group" aria-label="Language"><button type="button" data-lang="sr">SR</button><button type="button" data-lang="en">EN</button></span>
+</nav>
+
+<section class="sky" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <header>
+      <a class="lockup" href="#top">
+        <svg width="38" height="47" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>
+        <span><b>Astromicroscope</b><span>Gorica Vićentijević</span></span>
+      </a>
+      <span class="langs" role="group" aria-label="Language"><button type="button" data-lang="sr">SR</button><button type="button" data-lang="en">EN</button></span>
+    </header>
+    <div class="intro">
+      <h1>Brand kit</h1>
+      <p>Everything needed to make Astromicroscope look and sound the same everywhere: the website, Instagram, YouTube, courses and print.</p>
+      <p class="meta">Direction D, Midnight Lens · version 1.0 · 2 November 2026 · chosen by Gorica Vićentijević</p>
+    </div>
+  </div>
+</section>
+
+<nav class="toc" aria-label="Contents">
+  <div class="wrap"><ol>
+    <li><a href="#essence">Essence</a></li>
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#type">Typography</a></li>
+    <li><a href="#elements">Graphic elements</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#motion">Motion</a></li>
+    <li><a href="#photo">Photography</a></li>
+    <li><a href="#social">Social media</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#files">Files</a></li>
+  </ol></div>
+</nav>
+
+<main>
+<section class="block" id="essence">
+  <div class="wrap">
+    <h2>Essence</h2>
+    <p class="lead">Astromicroscope looks at astrology closely and explains what it sees. The microscope stands for precision and method; the night sky for astrology itself; the light pages for clarity. Education comes first, and private analyses are the exclusive part of the offer.</p>
+    <div class="grid g4 pillars">
+      <div class="card"><h4>Precise</h4><p>Every claim is backed by the chart and explained. A research astrologer's eye.</p></div>
+      <div class="card"><h4>Clear</h4><p>Simple, practical language. No jargon without an explanation.</p></div>
+      <div class="card"><h4>Calm</h4><p>No fatalism and no fear. A chart shows tendencies and timing, not a verdict.</p></div>
+      <div class="card"><h4>Elegant</h4><p>Light pages, deep blue, a touch of gold. Quality without decoration.</p></div>
+    </div>
+    <div class="signature">
+      <div class="on-dark"><small>Main line (website)</small><b>Astrology, looked at closely.</b></div>
+      <div style="background:var(--am-ice);color:var(--am-midnight)"><small>Signature line (Instagram bio)</small><b>Your nature. Your cycles.</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="logo">
+  <div class="wrap">
+    <h2>Logo</h2>
+    <p class="lead">The G of Gorica with a microscope in its counter and three stars beside it. It is Gorica's original mark, traced into clean vector shapes from the file on her old website. Use only the supplied files; never redraw or retype it.</p>
+    <div class="grid g4 keep2">
+      <div class="tile" style="background:var(--am-midnight)"><svg width="100" height="124" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg><small style="color:var(--am-sky-text)">Primary: gold on Midnight</small></div>
+      <div class="tile" style="background:var(--am-white);box-shadow:inset 0 0 0 1px var(--am-line)"><svg width="100" height="124" fill="#0E1450" style="--mark-stroke:#0E1450" aria-hidden="true"><use href="#mark"/></svg><small>Midnight on white</small></div>
+      <div class="tile" style="background:var(--am-uranus)"><svg width="100" height="124" fill="#FFFFFF" style="--mark-stroke:#FFFFFF" aria-hidden="true"><use href="#mark"/></svg><small style="color:#fff">White on Uranus blue</small></div>
+      <div class="tile" style="background:var(--am-ice)"><svg width="100" height="124" fill="#0E1450" style="--mark-stroke:#0E1450" aria-hidden="true"><use href="#mark"/></svg><small>Midnight on ice</small></div>
+    </div>
+
+    <h3>Lockups</h3>
+    <div class="grid g2">
+      <img src="logo/png/lockup-on-midnight-1520.png" alt="Logo with the name Astromicroscope and Gorica Vićentijević, on Midnight" style="width:100%;border-radius:6px">
+      <img src="logo/png/lockup-on-light-1520.png" alt="Logo with the name Astromicroscope and Gorica Vićentijević, on white" style="width:100%;border-radius:6px;border:1px solid var(--am-line)">
+    </div>
+
+    <h3>Clear space and minimum size</h3>
+    <div class="grid g2">
+      <div class="clearspace"><div class="cs"><svg width="91" height="113" fill="#0E1450" style="--mark-stroke:#0E1450" aria-hidden="true"><use href="#mark"/></svg></div>
+        <p style="font:var(--am-text-small);margin-top:16px;max-width:36ch;text-align:center">Keep free space around the mark of at least a quarter of its height on every side. Nothing else enters this area.</p></div>
+      <div>
+        <div class="sizes">
+          <div><svg width="13" height="16" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>16</div>
+          <div><svg width="20" height="25" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>24</div>
+          <div><svg width="27" height="33" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>32</div>
+          <div><svg width="53" height="66" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>64 px</div>
+        </div>
+        <ul class="rules" style="margin-top:20px;font:var(--am-text-small)">
+          <li>Smallest size for the mark: 24 px on screen, 10 mm in print. Below that the microscope details merge.</li>
+          <li>For favicons (16–48 px) use the avatar file on the Midnight disc, which stays readable.</li>
+          <li>With the name (lockup): at least 140 px wide on screen.</li>
+          <li>Gold on white or beige only from 64 px up; at smaller sizes use the Midnight version.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Do not</h3>
+    <div class="grid g4 keep2 dont">
+      <div class="tile" style="background:var(--am-white);box-shadow:inset 0 0 0 1px var(--am-line)"><svg width="140" height="90" viewBox="0 0 140 90" aria-hidden="true"><svg width="73" height="90" preserveAspectRatio="none" fill="#0E1450" style="--mark-stroke:#0E1450"><use href="#mark"/></svg></svg><small>Stretch or squash</small></div>
+      <div class="tile" style="background:var(--am-white);box-shadow:inset 0 0 0 1px var(--am-line)"><svg width="75" height="93" fill="#C2185B" style="--mark-stroke:#C2185B" aria-hidden="true"><use href="#mark"/></svg><small>Use colours outside the palette</small></div>
+      <div class="tile" style="background:var(--am-white);box-shadow:inset 0 0 0 1px var(--am-line)"><svg width="75" height="93" fill="#0E1450" style="--mark-stroke:#0E1450;filter:drop-shadow(6px 8px 4px rgba(0,0,0,.45));transform:rotate(-18deg)" aria-hidden="true"><use href="#mark"/></svg><small>Rotate or add effects</small></div>
+      <div class="tile" style="background:var(--am-white);box-shadow:inset 0 0 0 1px var(--am-line)"><svg width="33" height="41" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg><small>Small gold on light</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="colour">
+  <div class="wrap">
+    <h2>Colour</h2>
+    <p class="lead">Mostly white and soft beige, with blue from light ice to deep Midnight. For Gorica, blue stands for Uranus: originality and a different view of the world. Gold is a detail, never a background.</p>
+    <div class="grid g4 keep2">
+      <div class="swatch"><div class="c" style="background:#FFFFFF;border-bottom:1px solid var(--am-line)"></div><div class="t"><b>White</b>#FFFFFF · rgb 255 255 255<br>Main page background</div></div>
+      <div class="swatch"><div class="c" style="background:#F3ECE2"></div><div class="t"><b>Soft beige</b>#F3ECE2 · rgb 243 236 226<br>Alternate sections, cards</div></div>
+      <div class="swatch"><div class="c" style="background:#DCE7F4"></div><div class="t"><b>Ice blue</b>#DCE7F4 · rgb 220 231 244<br>Buttons on Midnight, tints</div></div>
+      <div class="swatch"><div class="c" style="background:#2E5BA6"></div><div class="t"><b>Uranus blue</b>#2E5BA6 · rgb 46 91 166<br>Buttons and links on light</div></div>
+      <div class="swatch"><div class="c" style="background:#0E1450"></div><div class="t"><b>Midnight</b>#0E1450 · rgb 14 20 80<br>Night-sky hero, footer, logo ground</div></div>
+      <div class="swatch"><div class="c" style="background:var(--am-gold-foil)"></div><div class="t"><b>Gold</b>#D4AF5C · foil #F6E3A1 → #A47E33<br>Logo, stars, hairlines</div></div>
+      <div class="swatch"><div class="c" style="background:#141A33"></div><div class="t"><b>Ink</b>#141A33 · rgb 20 26 51<br>Body text</div></div>
+      <div class="swatch"><div class="c" style="background:#8A6A2A"></div><div class="t"><b>Gold for text</b>#8A6A2A · rgb 138 106 42<br>Small gold text on white only</div></div>
+    </div>
+    <div class="ratio" aria-hidden="true"><span style="flex:42;background:#FFFFFF"></span><span style="flex:24;background:#F3ECE2"></span><span style="flex:6;background:#DCE7F4"></span><span style="flex:6;background:#2E5BA6"></span><span style="flex:16;background:#0E1450"></span><span style="flex:1.5;background:#D4AF5C"></span><span style="flex:4.5;background:#141A33"></span></div>
+    <p style="font:var(--am-text-small);color:var(--am-muted)">Share of each colour in a typical layout: white and beige about two thirds, Midnight about a sixth, gold under 2%.</p>
+
+    <h3>Contrast (WCAG 2.2: text 4.5:1, large text and UI 3:1)</h3>
+    <table>
+      <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>Ink #141A33</td><td>White</td><td>17.14:1</td><td class="ok">All text</td></tr>
+        <tr><td>Ink #141A33</td><td>Beige</td><td>14.61:1</td><td class="ok">All text</td></tr>
+        <tr><td>Muted #5D6478</td><td>White / beige</td><td>5.90:1 / 5.03:1</td><td class="ok">Secondary text</td></tr>
+        <tr><td>Uranus #2E5BA6</td><td>White / beige / ice</td><td>6.64:1 / 5.66:1 / 5.30:1</td><td class="ok">Links, buttons, text</td></tr>
+        <tr><td>White</td><td>Uranus #2E5BA6</td><td>6.64:1</td><td class="ok">Button labels</td></tr>
+        <tr><td>Sky text #EAF0F8</td><td>Midnight</td><td>14.84:1</td><td class="ok">Text on dark</td></tr>
+        <tr><td>Midnight</td><td>Ice</td><td>13.59:1</td><td class="ok">Button labels on dark sections</td></tr>
+        <tr><td>Gold #D4AF5C</td><td>Midnight</td><td>8.17:1</td><td class="ok">Gold text allowed on Midnight</td></tr>
+        <tr><td>Gold for text #8A6A2A</td><td>White / beige</td><td>5.03:1 / 4.29:1</td><td class="warn">White: all text; beige: large text only</td></tr>
+        <tr><td>Gold #D4AF5C</td><td>White / beige</td><td>2.08:1 / 1.78:1</td><td class="no">Decoration only (logo from 64 px, hairlines)</td></tr>
+        <tr><td>Line #E3DACB</td><td>White</td><td>1.39:1</td><td class="no">Decorative borders only</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block alt" id="type">
+  <div class="wrap">
+    <h2>Typography</h2>
+    <p class="lead">Two families. Schibsted Grotesk for headings and the interface: precise and modern. Newsreader for reading text and the Astromicroscope name: calm and literary, with the thick-and-thin contrast of the G. Both support every Serbian letter.</p>
+    <div class="grid g2">
+      <div class="specimen"><p class="name">Schibsted Grotesk · 400–800 · headings, buttons, labels</p><p class="glyphs">Ljubazni fenjerdžija čađavog lica hoće da mi pokaže štos.</p><p style="font:700 3.4rem/1 var(--am-font-sans);letter-spacing:-.045em;margin-top:18px">Saturn returns.</p></div>
+      <div class="specimen"><p class="name">Newsreader · 300–600, italic · reading text, quotes</p><p class="glyphs serif">Ljubazni fenjerdžija čađavog lica hoće da mi pokaže štos.</p><p style="font:italic 300 2.2rem/1.2 var(--am-font-serif);margin-top:18px">A slow planet asks for patience, and repays it.</p></div>
+    </div>
+    <h3>Scale</h3>
+    <table class="scale">
+      <thead><tr><th>Token</th><th>Use</th><th>Font</th><th>Size / line height</th></tr></thead>
+      <tbody>
+        <tr><td><code>--am-text-display</code></td><td>H1, one per page</td><td>Schibsted 700, tracking −0.045em</td><td>48–86 px (fluid) / 0.95</td></tr>
+        <tr><td><code>--am-text-h2</code></td><td>Section headings</td><td>Schibsted 700, tracking −0.035em</td><td>35–54 px (fluid) / 1</td></tr>
+        <tr><td><code>--am-text-h3</code></td><td>Card and subsection headings</td><td>Schibsted 700</td><td>26 px / 1.05</td></tr>
+        <tr><td><code>--am-text-h4</code></td><td>Small headings</td><td>Schibsted 600</td><td>21 px / 1.2</td></tr>
+        <tr><td><code>--am-text-lede</code></td><td>Intro paragraph</td><td>Newsreader 400</td><td>21 px / 1.5</td></tr>
+        <tr><td><code>--am-text-body</code></td><td>Reading text</td><td>Newsreader 400</td><td>19 px / 1.6</td></tr>
+        <tr><td><code>--am-text-ui</code></td><td>Buttons, navigation</td><td>Schibsted 600</td><td>16 px / 1</td></tr>
+        <tr><td><code>--am-text-small</code></td><td>Captions, meta, tables</td><td>Schibsted 400</td><td>14.4 px / 1.4</td></tr>
+      </tbody>
+    </table>
+    <h3>Rules</h3>
+    <ul class="rules">
+      <li>Sentence case everywhere. Capitals only in YouTube thumbnail titles, which follow Gorica's existing thumbnail style.</li>
+      <li>Reading text at most 62 characters per line.</li>
+      <li>One H1 per page; headings never skip a level.</li>
+      <li>No italic for emphasis inside headings; italic is for quotes and the second line of a pull quote.</li>
+      <li>Fonts are self-hosted from <code>brand/fonts</code>; never load them from a third-party server.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="elements">
+  <div class="wrap">
+    <h2>Graphic elements</h2>
+    <p class="lead">A small set of recurring shapes, all taken from the logo and the idea of a close look at the sky.</p>
+    <div class="grid g3">
+      <div><div class="el on-dark"><svg width="70" height="70" fill="url(#gold)" aria-hidden="true"><use href="#spark"/></svg></div><h3 style="margin-top:14px">Four-point star</h3><p style="font:var(--am-text-small)">From the logo. Use as a bullet, a divider or a scatter on Midnight. Gold or ice blue only.</p></div>
+      <div><div class="el on-dark" style="background:var(--am-sky)"><svg width="200" height="140" viewBox="0 0 200 140" aria-hidden="true"><g fill="#EAF0F8">
+        <circle cx="20" cy="20" r="1.2" opacity=".5"/><circle cx="48" cy="20" r="1" opacity=".4"/><circle cx="76" cy="20" r="1.2" opacity=".5"/><circle cx="104" cy="20" r="1" opacity=".35"/><circle cx="132" cy="20" r="1.2" opacity=".5"/><circle cx="160" cy="20" r="1" opacity=".4"/><circle cx="188" cy="20" r="1.2" opacity=".5"/>
+        <circle cx="20" cy="48" r="1" opacity=".4"/><circle cx="48" cy="48" r="1.2" opacity=".5"/><circle cx="160" cy="48" r="1.2" opacity=".5"/><circle cx="188" cy="48" r="1" opacity=".4"/>
+        <circle cx="20" cy="76" r="1.2" opacity=".5"/><circle cx="188" cy="76" r="1.2" opacity=".5"/><circle cx="20" cy="104" r="1" opacity=".4"/><circle cx="48" cy="104" r="1.2" opacity=".5"/><circle cx="160" cy="104" r="1" opacity=".4"/><circle cx="188" cy="104" r="1.2" opacity=".5"/></g>
+        <g fill="#D4AF5C"><use href="#spark" x="88" y="54" width="16" height="16"/><use href="#spark" x="112" y="44" width="26" height="26"/><use href="#spark" x="70" y="78" width="12" height="12"/><use href="#spark" x="122" y="82" width="14" height="14"/></g></svg></div><h3 style="margin-top:14px">Star field</h3><p style="font:var(--am-text-small)">A grid of faint stars that open into sparkles near the cursor. Only in the night-sky hero (see Motion).</p></div>
+      <div><div class="el" style="background:var(--am-ice)"><svg width="150" height="150" viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="58" fill="#F2F7FC" stroke="#D4AF5C" stroke-width="3"/><circle cx="75" cy="75" r="64" fill="none" stroke="#2E5BA6" stroke-width="1"/><path d="M17 75h40M93 75h40M75 17v40M75 93v40" stroke="#D4AF5C" stroke-width="1"/></svg></div><h3 style="margin-top:14px">The lens</h3><p style="font:var(--am-text-small)">A magnifying circle with a gold ring and crosshair. Used over charts and as a frame for details.</p></div>
+      <div><div class="el" style="background:var(--am-beige)"><div class="slide-demo"><div class="lab"><span>Live with Gorica</span><i></i></div><div class="bd"><span class="stain"></span>Educational programs</div></div></div><h3 style="margin-top:14px">Microscope slide</h3><p style="font:var(--am-text-small)">The card shape for courses and products: a beige label strip with a gold hairline, and a round “stain” in brand colours.</p></div>
+      <div><div class="el" style="background:var(--am-white);border:var(--am-border)"><div style="width:120px;height:150px;border-radius:var(--am-radius-arch);background:var(--am-ice);position:relative"><div style="position:absolute;inset:8px;border-radius:50% 50% 2px 2px;border:1px solid var(--am-gold)"></div></div></div><h3 style="margin-top:14px">Arch</h3><p style="font:var(--am-text-small)">The portrait frame: an arch with a gold hairline inside. Only for photos of Gorica.</p></div>
+      <div><div class="el on-dark"><div style="width:70%;height:60%;border:var(--am-hairline-gold);border-radius:3px"></div></div><h3 style="margin-top:14px">Gold hairline</h3><p style="font:var(--am-text-small)">A 1 px gold frame inset from the edge, for premium elements such as private analyses.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="components">
+  <div class="wrap">
+    <h2>Components</h2>
+    <p class="lead">The basic interface parts. The live home page reference shows them in context.</p>
+    <div class="grid g2">
+      <div class="demo on-light"><a class="btn" href="#components">Explore courses</a><a class="btn ghost" href="#components">Private analyses</a><a href="#components">Text link</a></div>
+      <div class="demo on-dark"><a class="btn" href="#components">Explore courses</a><a class="btn ghost" href="#components">Private analyses</a></div>
+      <div class="demo on-light"><form class="field" onsubmit="event.preventDefault()"><label class="sr" for="kit-email">Email address</label><input id="kit-email" type="email" placeholder="Your email"><button class="btn">Subscribe</button></form></div>
+      <div class="demo on-light"><span class="btn focusdemo">Focus ring</span><span style="font:var(--am-text-small);max-width:28ch">Every interactive element shows a 2 px ring when reached with the keyboard: Uranus blue on light, gold on Midnight.</span></div>
+    </div>
+    <ul class="rules" style="margin-top:28px;font:var(--am-text-small)">
+      <li>One primary button per screen; the second action is the outlined button.</li>
+      <li>Button labels say what happens: “Explore courses”, not “Learn more”.</li>
+      <li>Targets at least 44 px tall; the language switch at least 24 × 24 px.</li>
+      <li>Cards use one radius (6 px) and a beige or line border; no drop shadows on cards.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="motion">
+  <div class="wrap">
+    <h2>Motion</h2>
+    <p class="lead">One signature effect, the star field, and calm transitions everywhere else.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Star field (hero only)</h4><p>Stars twinkle slowly; near the cursor they brighten, drift toward it and open into four-point sparkles; moving the cursor leaves a short glitter trail.</p><p>It starts after the page is ready, pauses when the hero is out of view, is simplified on phones and switches off completely when the visitor asks for reduced motion.</p></div>
+      <div class="card"><h4>Everything else</h4><p>Transitions of 150–250 ms with a soft ease. Things respond to the visitor (opening, expanding, confirming); nothing moves on its own, and nothing slides in while scrolling.</p><p>The chart lens follows the pointer and also moves with the arrow keys.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="photo">
+  <div class="wrap">
+    <h2>Photography</h2>
+    <p class="lead">Real, warm and calm. Gorica teaching, working with charts, or in a simple portrait.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Use</h4><ul class="rules"><li>Soft daylight; white, beige or blue walls.</li><li>Gorica at work: printed charts, notes, a laptop, a whiteboard.</li><li>Calm colours that sit with the palette.</li><li>The arch crop for portraits.</li></ul></div>
+      <div class="card"><h4>Avoid</h4><ul class="rules"><li>Mystical stock clichés: crystal balls, smoke, purple nebulae, tarot props.</li><li>Heavy filters and strong colour casts.</li><li>Busy backgrounds behind the logo.</li><li>Text baked into photos on the website (it cannot be read by search engines or screen readers).</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="social">
+  <div class="wrap">
+    <h2>Social media</h2>
+    <p class="lead">Ready-made templates in <code>brand/social</code>. Open a template in the browser, click the text to change it, and export it at the size shown. Alternate light and dark posts in the Instagram grid.</p>
+    <div class="grid g4 keep2 social">
+      <figure><img src="social/png/instagram-post-lesson.png" alt="Instagram post template on beige: lesson title and swipe prompt"><figcaption><b>Lesson post</b> · 1080 × 1350<br><a href="social/instagram-post-lesson.html">Open template</a></figcaption></figure>
+      <figure><img src="social/png/instagram-post-announcement.png" alt="Instagram post template on the night sky: course announcement"><figcaption><b>Announcement</b> · 1080 × 1350<br><a href="social/instagram-post-announcement.html">Open template</a></figcaption></figure>
+      <figure><img src="social/png/instagram-story.png" alt="Instagram story template on the night sky: transit of the month"><figcaption><b>Story</b> · 1080 × 1920<br><a href="social/instagram-story.html">Open template</a></figcaption></figure>
+      <figure><img src="social/png/youtube-thumbnail.png" alt="YouTube thumbnail template: gold capital title on the night sky with the logo"><figcaption><b>YouTube thumbnail</b> · 1280 × 720<br><a href="social/youtube-thumbnail.html">Open template</a></figcaption></figure>
+    </div>
+    <p style="margin-top:24px;font:var(--am-text-small)">Profile picture for Instagram and YouTube: <a href="logo/png/instagram-avatar-1080.png">logo/png/instagram-avatar-1080.png</a>.</p>
+  </div>
+</section>
+
+<section class="block alt" id="voice">
+  <div class="wrap">
+    <h2>Voice</h2>
+    <p class="lead">Gorica speaks like a good teacher: clear, warm and exact. She addresses the reader informally and explains how she reached each conclusion.</p>
+    <table class="voice">
+      <thead><tr><th>Principle</th><th class="say">Say</th><th class="avoid">Avoid</th></tr></thead>
+      <tbody>
+        <tr><td>Answer first</td><td>“The eighth house describes shared resources and deep change. Here is how to read it.”</td><td>“The mysterious eighth house hides many secrets…”</td></tr>
+        <tr><td>Show the method</td><td>“Your Moon is in the eighth house, square Saturn. That is why…”</td><td>“The stars say that…”</td></tr>
+        <tr><td>No fatalism</td><td>“This period asks for patience.”</td><td>“This transit will ruin your relationships.”</td></tr>
+        <tr><td>Precise dates</td><td>“Saturn in Aries: 14 Feb 2026 – 13 Apr 2028.”</td><td>“Soon, Saturn changes everything.”</td></tr>
+        <tr><td>Plain actions</td><td>“Explore courses”, “Request an analysis”</td><td>“Discover your destiny”, “Click here”</td></tr>
+      </tbody>
+    </table>
+    <ul class="rules" style="margin-top:24px">
+      <li>Serbian first (Latin script, ekavian), English adapted, both proofread.</li>
+      <li>No medical, financial or legal promises.</li>
+      <li>Emoji rarely, and never in headings.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="files">
+  <div class="wrap">
+    <h2>Files</h2>
+    <p class="lead">Everything lives in the <code>brand</code> folder of the repository. The website imports the tokens and fonts from here; nothing is copied by hand.</p>
+    <table>
+      <thead><tr><th>File</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><code>tokens/tokens.css</code>, <code>tokens/tokens.json</code></td><td>Design tokens: colours, type, spacing, shapes, motion. The website uses <code>tokens.css</code>.</td></tr>
+        <tr><td><code>fonts/</code></td><td>Schibsted Grotesk and Newsreader, woff2, Latin and Latin Extended, with <code>fonts.css</code> and the SIL Open Font License files.</td></tr>
+        <tr><td><code>logo/mark-gold.svg</code>, <code>mark-midnight.svg</code>, <code>mark-white.svg</code>, <code>mark-ink.svg</code></td><td>The mark in each colour, transparent background.</td></tr>
+        <tr><td><code>logo/avatar.svg</code>, <code>logo/app-icon.svg</code></td><td>The mark on the Midnight disc (favicon, avatar) and square (app icon).</td></tr>
+        <tr><td><code>logo/lockup-on-midnight.svg</code>, <code>lockup-on-light.svg</code></td><td>Mark with the name. The text uses the brand fonts; convert to outlines before print.</td></tr>
+        <tr><td><code>logo/png/</code></td><td>Favicons (32, 48), apple-touch-icon (180), icons (192, 512), Instagram avatar (1080), marks (850 × 1050) and lockups (1520).</td></tr>
+        <tr><td><code>social/</code></td><td>Instagram post, announcement, story and YouTube thumbnail templates, with PNG previews.</td></tr>
+        <tr><td><code>home-reference.html</code></td><td>The approved home page design, as the reference for building the website.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:12px"><svg width="25" height="31" fill="url(#gold)" style="--mark-stroke:url(#gold)" aria-hidden="true"><use href="#mark"/></svg>Astromicroscope, Gorica Vićentijević</span>
+    <span>astromicroscope@gmail.com, Instagram and YouTube @astromicroscope</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- star field behind the hero ----------
+   Same idea as the Kit "dot-field": a grid of points that twinkle and lift toward the cursor.
+   Here the points are stars; near the cursor they brighten and open into four-point sparkles,
+   and moving the cursor leaves a short trail of glitter. */
+(() => {
+  const cv = document.getElementById('stars');
+  const sky = cv.parentElement;
+  const cx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const GAP = 28, RADIUS = 210;
+  const TINTS = { w: '234,240,248', g: '232,200,120', p: '157,188,230' };
+  let W = 0, H = 0, pts = [], sparks = [], raf = 0, visible = true;
+  let mouse = { x: -999, y: -999 }, last = null;
+  const t0 = performance.now();
+
+  function size() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = sky.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pts = [];
+    for (let y = GAP / 2; y < H; y += GAP)
+      for (let x = GAP / 2; x < W; x += GAP) {
+        const r = Math.random();
+        pts.push({
+          x: x + (Math.random() - .5) * 8, y: y + (Math.random() - .5) * 8,
+          o: Math.random() * 6.28, s: .6 + Math.random() * .9,
+          c: r < .07 ? 'g' : r < .11 ? 'p' : 'w'
+        });
+      }
+    if (reduce) draw(t0);
+  }
+
+  // four-point star, like the sparkles in the logo
+  function sparkle(x, y, s, rgb, a) {
+    cx.fillStyle = `rgba(${rgb},${a})`;
+    cx.beginPath();
+    cx.moveTo(x, y - s);
+    cx.quadraticCurveTo(x, y, x + s, y);
+    cx.quadraticCurveTo(x, y, x, y + s);
+    cx.quadraticCurveTo(x, y, x - s, y);
+    cx.quadraticCurveTo(x, y, x, y - s);
+    cx.fill();
+  }
+
+  function draw(now) {
+    const t = (now - t0) / 1000;
+    cx.clearRect(0, 0, W, H);
+    for (const p of pts) {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const near = Math.max(0, 1 - Math.hypot(dx, dy) / RADIUS);
+      const ease = near * near;
+      const tw = .55 + .45 * Math.sin(t * 1.1 + p.o);
+      const a = Math.min(1, (.12 + .22 * tw) * p.s + ease * .85);
+      const x = p.x + dx * ease * .12, y = p.y + dy * ease * .12 - ease * 6;
+      if (ease > .18) sparkle(x, y, 1.4 + ease * 7 * p.s, TINTS[p.c === 'w' && ease > .5 ? 'g' : p.c], a.toFixed(3));
+      else { cx.fillStyle = `rgba(${TINTS[p.c]},${a.toFixed(3)})`; const z = 1.1 * p.s + ease * 2; cx.fillRect(x - z / 2, y - z / 2, z, z); }
+    }
+    // glitter trail
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.life -= 1 / 60; if (s.life <= 0) { sparks.splice(i, 1); continue; }
+      s.x += s.vx; s.y += s.vy; s.vy += .02; s.vx *= .98;
+      const k = s.life / s.max;
+      sparkle(s.x, s.y, s.size * (0.4 + k * .6), TINTS[s.c], (k * .95).toFixed(3));
+    }
+    if (!reduce && visible) raf = requestAnimationFrame(draw);
+  }
+
+  function move(e) {
+    const r = sky.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const inside = x >= 0 && y >= 0 && x <= r.width && y <= r.height;
+    mouse = inside ? { x, y } : { x: -999, y: -999 };
+    if (!inside || reduce) { last = null; return; }
+    const dist = last ? Math.hypot(x - last.x, y - last.y) : 0;
+    const n = Math.min(3, 1 + Math.floor(dist / 18));
+    for (let i = 0; i < n && sparks.length < 90; i++) {
+      const c = Math.random();
+      sparks.push({ x: x + (Math.random() - .5) * 10, y: y + (Math.random() - .5) * 10,
+        vx: (Math.random() - .5) * .9, vy: (Math.random() - .5) * .9 - .2,
+        size: 2 + Math.random() * 4, life: 0, max: .6 + Math.random() * .6,
+        c: c < .55 ? 'g' : c < .8 ? 'w' : 'p' });
+      sparks[sparks.length - 1].life = sparks[sparks.length - 1].max;
+    }
+    last = { x, y };
+  }
+
+  size();
+  addEventListener('resize', size);
+  addEventListener('pointermove', move, { passive: true });
+  document.addEventListener('pointerleave', () => { mouse = { x: -999, y: -999 }; last = null; });
+  if (!reduce) {
+    new IntersectionObserver(([en]) => {
+      const was = visible; visible = en.isIntersecting;
+      if (visible && !was) raf = requestAnimationFrame(draw);
+    }).observe(sky);
+    raf = requestAnimationFrame(draw);
+  }
+})();
+
+</script>
+<script src="i18n/sr.js"></script>
+<script src="i18n/i18n.js"></script>
+</body>
+</html>

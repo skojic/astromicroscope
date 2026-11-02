@@ -1,10 +1,10 @@
 # Gates
 
-A module moves to the next stage only when it passes the gate. Each gate pass is recorded in `status/log.md` with the evidence (the command run and the result line), and the module's `gate:` field is updated.
+A module moves to the next stage only when it passes the gate. Each gate pass is recorded in `status/log.md` with the evidence (the command run and the result line), and the module's `REPORT.md` (stage and last gate) is updated.
 
 | Gate | Moves to | Passes when | Evidence |
 |---|---|---|---|
-| **G0 Spec approved** | approved | Module file complete (content in both languages, structure, budget, accessibility, tasks, tests); the owner approves | approval noted in the log |
+| **G0 Spec approved** | approved | `PLAN.md` complete (goal, scope, deliverables, tasks, acceptance criteria) and content available in both languages; the owner approves | approval noted in the log |
 | **G1 Built** | testing | Builds without errors or warnings; renders in sr and en; no placeholder text except entries listed in `specs/04` | build output |
 | **G2 Automated checks** | review | All pass: HTML validation, lint, axe (0 violations), Lighthouse mobile within budgets (`specs/07`), structured data valid, links OK, hreflang pairs complete | tool output, quoted |
 | **G3 Manual review** | review | `checklists/accessibility.md` (keyboard + screen reader), `checklists/visual-review.md` at 360/768/1440 px in both languages, `checklists/seo.md` per template | completed checklist with date |

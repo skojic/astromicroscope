@@ -33,7 +33,7 @@ Astromicroscope becomes a recognised **education brand** for astrology. The site
 ## Brand
 - Modern, elegant, professional and high quality. Simple and practical.
 - Mostly white and soft beige; blue from light to deep (Uranus: originality, innovation); small gold details.
-- Design direction: to be chosen from `branding-directions/`. See `status/decisions.md`, item P01.
+- Design direction: **D, Midnight Lens**, chosen by Gorica (decision D08). The brand kit is `brand/`; see `specs/02`.
 
 ## Known facts
 - Domain: astromicroscope.com, registered at Hostinger. HTTPS failed on 2026-11-02 (`curl`: tlsv1 alert internal error).
@@ -42,4 +42,4 @@ Astromicroscope becomes a recognised **education brand** for astrology. The site
 ## Open questions
 - Which course, program and product exist at launch? Names, prices, dates.
 - How payments and enrolment work (platform, invoices, VAT).
-- Which university Gorica graduated from (shown as a credential).
+- Credential confirmed: research astrologer, Johannes Kepler Astrological Institute, 2025 (keplerunited.org; `docs/sadrzaj/stari-sajt/README.md`).

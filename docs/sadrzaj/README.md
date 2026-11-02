@@ -31,4 +31,4 @@ Stari WordPress sajt je sačuvan iz Hostinger backupa (2026-10-08): 28 strana te
 ## Sledeći korak
 1. Gorica odgovori na upitnik.
 2. Odgovori se upišu u fajlove 01–07 umesto placeholdera.
-3. Tekstovi se prenose u module (`modules/*.md`, odeljak „Content (sr and en)") da bi moduli prošli gate G0.
+3. Tekstovi se prenose u module (`plan/modules/*/PLAN.md` i fajlove sadržaja po `plan/contracts.md`) da bi moduli prošli gate G0.

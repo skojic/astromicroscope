@@ -1,0 +1,107 @@
+# Integration contract
+
+This is what lets two developers build separately and still end up with one website. **Change it only through a pull request that both developers approve**, and record the change in `status/decisions.md`.
+
+Astro APIs named here (content collections, i18n routing, image component) must be checked against the documentation of the Astro version installed in M00. If the installed version works differently, M00 updates this file first.
+
+## 1. Repository layout and ownership
+
+The website lives in `site/` (an Astro project). A module changes only the paths it owns. Everything else is read-only for it.
+
+| Path | Owner | Notes |
+|---|---|---|
+| `site/package.json`, `astro.config.*`, lock file, `tsconfig.json` | M00 | dependencies are added only through M00's owner (Srdjan); ask in your report |
+| `site/src/styles/` | M00 | imports `brand/tokens/tokens.css` and `brand/fonts/fonts.css`; no colour or font values anywhere else |
+| `site/src/layouts/Base.astro`, `Page.astro` | M00 (structure), M03 (header/footer slots) | |
+| `site/src/content.config.*` (collection schemas) | M00, from section 3 below | |
+| `site/src/i18n/core.ts` (language helpers) | M00 | |
+| `site/src/i18n/<module>.json` | each module | its own interface strings, both languages |
+| `site/src/components/shell/` | M03 | header, navigation, language switch, footer, skip link |
+| `site/src/components/seo/` | M04 | `<Seo>` component, JSON-LD helpers |
+| `site/src/components/home/` | M05 | hero, star field, chart lens |
+| `site/src/components/sections/articles/` | M06 | |
+| `site/src/components/sections/horoscope/` | M07 | zodiac wheel |
+| `site/src/components/sections/learn/` | M08 | |
+| `site/src/components/sections/analyses/` | M09 | |
+| `site/src/components/sections/about/` | M10 | author box too |
+| `site/src/components/sections/videos/` | M11 | |
+| `site/src/components/sections/newsletter/` | M12 | |
+| `site/src/components/ui/` | M00 | shared buttons, links, cards from the brand kit; others request additions |
+| `site/src/content/articles/`, `horoscope/`, `pages/` | M02 (import), then M06 / M07 / M10 | |
+| `site/src/content/**/en/` | M14 | English files mirror the Serbian ones |
+| `site/src/data/courses.*`, `products.*` | M08 | |
+| `site/src/data/analyses.*` | M09 | |
+| `site/src/data/videos.*` | M11 | generated at build time |
+| `site/src/pages/` | per route, see section 4 | one file per route group, owned by its module |
+| `site/functions/` (Cloudflare) | M12 | form endpoints |
+| `site/public/` | M00 (icons from `brand/logo/png`) | |
+| `.github/workflows/` | M00 (site CI), M13 | |
+| `brand/` | M01 | frozen while building; changes only through M01 |
+
+## 2. Languages
+- Serbian (Latin, ekavian) at `/`, English at `/en/` (`specs/05`).
+- Every content entry has a `translationKey`. The Serbian and English files of the same text share it; M04 builds hreflang from it, and M03's language switch uses it to find the paired page.
+- Interface strings live in `site/src/i18n/<module>.json` as `{ "key": { "sr": "…", "en": "…" } }`. A missing language fails the build (M00 adds the check).
+- Slugs are translated (`/tekstovi/podznak/` ↔ `/en/articles/rising-sign/`).
+
+## 3. Content schemas (front matter)
+Fields marked * are required. M02 writes files in this format even before M00 exists.
+
+**Article** (`content/articles/{sr|en}/<slug>.md`)
+```yaml
+title*: string            # ≤ 70 characters, the question people search for where natural
+description*: string      # ≤ 155 characters, for search results
+lang*: sr | en
+translationKey*: string   # same in both languages
+published*: YYYY-MM-DD
+updated: YYYY-MM-DD
+topics*: [transits | signs | rising-sign | children | finances | eclipses | karmic | method]
+answer*: string           # 40–60 words, shown first on the page
+quote: { text: string, author: string }
+transits: [{ planet, sign, from: YYYY-MM-DD, to: YYYY-MM-DD }]   # for the timeline
+ephemerisChecked*: boolean   # every date checked against an ephemeris
+oldUrl: string            # address on the old site, for redirects (M13)
+draft: boolean
+```
+
+**Horoscope sign** (`content/horoscope/{sr|en}/<year>/<sign>.md`)
+```yaml
+sign*: aries | taurus | gemini | cancer | leo | virgo | libra | scorpio | sagittarius | capricorn | aquarius | pisces
+year*: number
+title*, description*, lang*, translationKey*, answer*, ephemerisChecked*
+transits: [{ planet, sign, from, to }]
+oldUrl: string
+```
+
+**Page** (`content/pages/{sr|en}/<slug>.md`, about, contact intro, legal): `title*, description*, lang*, translationKey*, updated*`.
+
+**Analysis** (`data/analyses`): `id*, name {sr,en}*, summary {sr,en}*, includes {sr[],en[]}*, needs {sr,en}*, duration, format {sr,en}, price: number | null, currency: EUR | RSD, order*`.
+
+**Course / product** (`data/courses`, `data/products`): `id*, name {sr,en}*, audience {sr,en}*, outcome {sr,en}*, format: live | recorded | download*, lessons, startDate, price, status: open | soon | closed*`.
+
+**Video** (`data/videos`, generated by M11): `id*, title*, published*, thumbnail* (local file), duration, lang: sr | en, transcript: path | null`.
+
+Placeholders are written as `[placeholder]`; the content gate fails while any remain (`testing/checklists/content.md`).
+
+## 4. Routes and their owners
+| Routes (sr / en) | Module |
+|---|---|
+| `/`, `/en/` | M05 |
+| `/tekstovi/**`, `/en/articles/**` | M06 |
+| `/horoskop/**`, `/en/horoscope/**` | M07 |
+| `/edukacija/**`, `/en/learn/**` | M08 |
+| `/analize/**`, `/en/analyses/**` | M09 |
+| `/o-meni/`, `/kontakt/`, `/privatnost/`, `/uslovi/`, `/kolacici/` and English pairs | M10 |
+| `/video/**`, `/en/videos/**` | M11 |
+| `404` (both languages) | M03 |
+| `sitemap.xml`, `robots.txt`, redirects file | M04 (redirects from old URLs: M13) |
+
+## 5. Shared components
+- **Layout:** every page uses `Page.astro` with props `lang`, `title`, `description`, `translationKey`, `breadcrumbs`, `jsonLd`. M04's `<Seo>` reads them; nobody writes `<head>` tags by hand.
+- **Home sections:** each section module exports `components/sections/<name>/HomeSection.astro` with one prop, `lang`. M05 imports them in the order of `concept.md`. Until a section exists, M05 shows `ui/Pending.astro` (visible in preview builds only).
+- **Author box:** `components/sections/about/AuthorBox.astro` (M10), used by M06 and M07.
+- **Transit timeline:** `components/sections/articles/TransitTimeline.astro` (M06), props `transits`, `lang`; also used by M07.
+- **Interactive parts** (star field, lens, zodiac wheel, mobile menu) are small client scripts or islands. React only if a component really needs it (decision D09); the first React component needs a note in `status/decisions.md`.
+
+## 6. Quality bar for every module
+Before asking for review: the build passes, both languages render, the module's checks in `testing/test-plan.md` pass, budgets from `specs/07` hold, and `REPORT.md` is updated with the evidence.

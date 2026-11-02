@@ -3,17 +3,17 @@
 Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
-- **Current focus:** choosing the design direction (P01). Four directions in `branding-directions/`, bilingual SR/EN.
-- **Last step:** content preparation proposed in `docs/sadrzaj/` (SR/EN copy per section, questionnaire for Gorica). Before that: contributor workflow for Filip is live (D07): protected `main`, pull requests from `feature/`, `fix/`, `docs/`, owner approval, bilingual branch-name check. Before that: designs and harness pushed to `main`.
-- **Next step:** Gorica chooses a direction (P01); Srdjan makes changes; then one final branding kit from that direction, `specs/02` filled in, and the tech stack decided (`specs/03`).
-- **Blocked by:** P01 (design direction), P02 (tech stack).
+- **Current focus:** Phase 0 of the build plan (`plan/challenge.md`): renew the domain, clean up after the hacked old site, Gorica's answers, launch scope. No development yet.
+- **Last step:** site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
+- **Next step:** Phase 0 checklist in `plan/challenge.md`; then M00 (Srdjan) and M02 + M14 (Filip) start in parallel.
+- **Blocked by:** Phase 0: domain (A1), Gorica's answers (A4), launch scope (B1), course platform and forms (P02b).
 
 ## Specs
 | ID | File | Status |
 |---|---|---|
 | SPEC-00 | specs/00-product.md | draft |
 | SPEC-01 | specs/01-sitemap.md | draft |
-| SPEC-02 | specs/02-design-system.md | blocked (P01) |
+| SPEC-02 | specs/02-design-system.md | approved (direction D, `brand/`) |
 | SPEC-03 | specs/03-tech-stack.md | draft (P02 open) |
 | SPEC-04 | specs/04-content.md | draft |
 | SPEC-05 | specs/05-languages.md | draft |
@@ -22,20 +22,27 @@ Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved �
 | SPEC-08 | specs/08-accessibility.md | draft |
 
 ## Modules
-| Module | Stage | Gate | Tasks done / total | Blocker | Updated |
-|---|---|---|---|---|---|
-| header-nav | idea | none | 0 / 4 | P01 | 2026-11-02 |
-| language-switch | idea | none | 0 / 2 | P02 | 2026-11-02 |
-| seo-head | idea | none | 0 / 7 | P02 | 2026-11-02 |
-| hero | idea | none | 0 / 3 | P01 | 2026-11-02 |
-| learn-formats | idea | none | 0 / 3 | P01 | 2026-11-02 |
-| youtube-feed | idea | none | 0 / 4 | P02 | 2026-11-02 |
-| private-analyses | idea | none | 0 / 3 | P01 | 2026-11-02 |
-| about | idea | none | 0 / 3 | P01 | 2026-11-02 |
-| newsletter | idea | none | 0 / 3 | P02 | 2026-11-02 |
-| footer | idea | none | 0 / 2 | P01 | 2026-11-02 |
+Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: `plan/README.md`.
 
-## Design showcase
+| Module | Owner | Stage | Waiting for | Report |
+|---|---|---|---|---|
+| M00 Foundation | Srdjan | idea | Phase 0, P02b | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
+| M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
+| M02 Content migration | Filip | idea | tone decision (B2) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M03 Site shell | Srdjan | idea | M00 | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
+| M04 SEO | Srdjan | idea | M00 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
+| M05 Home page | Srdjan | idea | M03, sections | [REPORT](../plan/modules/M05-home/REPORT.md) |
+| M06 Articles | Filip | idea | M00, M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
+| M07 Yearly horoscope | Srdjan | idea | M00, M02, 2027 texts | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
+| M08 Education | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M08-education/REPORT.md) |
+| M09 Private analyses | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
+| M10 About, contact, legal | Filip | idea | M00 | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
+| M11 Videos | Srdjan | idea | M00 | [REPORT](../plan/modules/M11-videos/REPORT.md) |
+| M12 Forms | Srdjan | idea | P02b | [REPORT](../plan/modules/M12-forms/REPORT.md) |
+| M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
+| M14 English translation | Filip | idea | M02 | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+
+## Brand
 | Item | Stage | Notes |
 |---|---|---|
-| branding-directions (A, B, C, D) | done (reference) | approved 2026-11-02; on `main` as the reference for Gorica's choice |
+| brand kit (`brand/`, direction D) | review | full kit built 2026-11-02: rules page SR/EN, tokens, fonts, logo SVG/PNG, social templates, home reference; directions A, B, C removed |

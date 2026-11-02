@@ -2,7 +2,7 @@
 <!-- Kratko: šta ovaj PR menja. -->
 
 ## Zašto
-<!-- Koji zadatak ili problem rešava. Zadatak iz modules/ ili specs/, na primer HERO-01. -->
+<!-- Koji zadatak ili problem rešava. Modul i zadatak iz plan/modules/, na primer M05-01. -->
 
 ## Kako je testirano
 <!-- Šta si proverio i kako: otvorio stranu, oba jezika (SR/EN), mobilni i desktop, komande koje si pokrenuo i njihov rezultat. -->
@@ -12,5 +12,5 @@
 - [ ] PR radi jednu stvar
 - [ ] Tekst postoji na srpskom i engleskom (ako ima teksta za korisnike)
 - [ ] Prošao sam odgovarajuće stavke iz `testing/gates.md` i `testing/checklists/`
-- [ ] Ažurirao sam `status/STATUS.md` i `status/log.md`
+- [ ] Ažurirao sam `REPORT.md` modula, `status/STATUS.md` i `status/log.md`
 - [ ] Nema privremenog teksta (`[cena]`, `[datum]` …) osim onog koji je naveden u `specs/04-content.md`

@@ -28,7 +28,7 @@ Content is the main lever for ranking in Google and for being cited in AI answer
 - **Answer first.** The first one or two sentences answer the page's question in plain words. AI answers and featured snippets quote such passages.
 - One H1 per page; H2 and H3 in a logical order, worded as the questions people search for where natural.
 - Dates and facts precise: for example “Saturn in Aries: 14 Feb 2026 – 13 Apr 2028”, as in her video thumbnail. Check every ephemeris date against an ephemeris before publishing.
-- Every article shows the author (Gorica, graduated astrologer), the publication date and the date of the last update.
+- Every article shows the author (Gorica, research astrologer, Johannes Kepler Institute), the publication date and the date of the last update.
 - No fatalistic or medical, financial or legal promises. Astrology is described as interpretation.
 - Serbian is primary and English is adapted, not machine-literal. Both are proofread by a native speaker.
 - Every image has meaningful alt text in both languages (empty alt only for decoration).
@@ -39,7 +39,6 @@ Anything not yet known is written as `[placeholder]` and listed here. `testing/c
 |---|---|---|
 | [price] for every course and analysis | course and analysis pages | Gorica |
 | [date] of the next cohort | education | Gorica |
-| [institution], the degree | about | Gorica |
 | number of private analyses per month | analyses | Gorica |
 
 ## Seed topics (keyword research still to do; do not invent search volumes)

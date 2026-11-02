@@ -99,4 +99,6 @@ git branch -d feature/hero-sekcija
 **Nikada** ne koristi `git push --force` na `main` (GitHub to ionako blokira). Na svojoj grani samo ako znaš zašto, i najbolje posle dogovora.
 
 ## Projekat i dokumentacija
-Pre rada pročitaj [`AGENTS.md`](AGENTS.md) i [`status/STATUS.md`](status/STATUS.md). Svaki zadatak ima svoj fajl u `modules/` ili `specs/`, a na kraju zadatka ažuriraš `status/STATUS.md` i `status/log.md`.
+Pre rada pročitaj [`AGENTS.md`](AGENTS.md) i [`status/STATUS.md`](status/STATUS.md). Svaki zadatak je u planu modula (`plan/modules/MNN-*/PLAN.md`) ili `specs/`, a na kraju zadatka ažuriraš `status/STATUS.md` i `status/log.md`.
+
+Na kraju svake radne sesije ažuriraj izveštaj modula (`plan/modules/MNN-*/REPORT.md`): šta je urađeno, šta nije, problemi i **tačan sledeći korak**, da bi se rad mogao nastaviti sa bilo kog računara.

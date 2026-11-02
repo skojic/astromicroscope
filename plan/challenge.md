@@ -1,0 +1,53 @@
+# Challenge: holes, dilemmas and weaknesses
+
+A critical look at this plan (2026-11-02). Each item says why it matters and what to do. Items marked **Phase 0** must be settled before or while M00 starts.
+
+## A. Holes: things the plan cannot solve by itself
+
+| # | Hole | Why it matters | What to do | Owner |
+|---|---|---|---|---|
+| A1 | **Domain astromicroscope.com is in an expired state** (`whois` 2026-11-02: name servers `NS1.DNS-EXPIRED.COM`, updated 2026-10-16; registry date 2027-10-15 is the registry's automatic renewal, not a renewal by Gorica) | If the grace period ends, the domain goes to a costly redemption phase or is lost, and with it the brand and email addresses | **Phase 0, today:** renew in Hostinger; check the grace-period end date there | Srdjan / Gorica |
+| A2 | **The old site was hacked**: about 140 spam posts about casinos since June 2026, possibly indexed by Google under the domain | Google may have marked the domain as compromised; spam URLs can stay in results for months and damage rankings for the new site | **Phase 0:** change WordPress, Hostinger and email passwords; after the domain is back, add it to Search Console, check “Security issues”, and answer spam URLs with 410 Gone; ask Filip for the list of spam URLs from the backup | Srdjan, Filip |
+| A3 | **There is no course offer yet** | The brief makes education the main focus, but no course, program or product exists with a name, content or price. An education-first home page with nothing to buy looks empty | Decide the launch scope (dilemma B1) | Gorica, Srdjan |
+| A4 | **Gorica's 26 answers are missing** (`docs/sadrzaj/upitnik-za-goricu.md`) | Prices, services, process, tone (ti/vi), contact rules. The bottleneck is not the developers | **Phase 0:** one call with Gorica to go through the questionnaire; answers into `docs/sadrzaj/` | Srdjan, Gorica |
+| A5 | **The yearly horoscope is for 2026** and it is already November 2026 | The most searched content will be out of date at launch | Ask Gorica whether she writes 2027 (12 texts, about 7,000 words, before the end of the year); the 2026 texts become an archive | Gorica |
+| A6 | **About 20,000 words to translate into English** (D10) | Large effort; astrology terms need care; a poor English version hurts trust and SEO | M14: machine-assisted draft, then a careful edit, then review by a fluent reader; core pages first. Budget time or money for it | Filip, reviewer |
+| A7 | **How courses are sold and delivered** (logins, payments, video hosting) is undecided (P02b) | Astro is a static site; logins and payments need a server part or an outside platform. In Serbia, card payments, invoices and VAT depend on Gorica's business form (questionnaire 25) | Decide before M08/M12: an outside course platform linked from the site, or our own; not part of the launch if courses are not ready | Srdjan, Gorica |
+| A8 | **No portrait yet** | Hero and About depend on a photo; text in the brand kit asks for soft daylight on a light or blue wall | Gorica chooses or makes a photo; until then the arch frame stays empty in previews only | Gorica |
+| A9 | **Legal texts**: privacy, terms, cookies, selling digital products (right of withdrawal) | Needed before collecting emails or payments; nobody on the team writes legal texts | Use a reviewed template or a lawyer; the plan only reserves the pages (M10) | Gorica, Srdjan |
+| A10 | **Who publishes after launch?** Articles in Markdown inside git mean Gorica cannot publish without a developer | The brief wants regular articles and an education platform | Dilemma B4 | Srdjan |
+
+## B. Dilemmas: choices to make, with a recommendation
+
+| # | Dilemma | Options | Recommendation |
+|---|---|---|---|
+| B1 | **Launch scope** | (a) launch everything at once, including courses; (b) **launch in two steps**: first articles, horoscope, videos, private analyses with a request form, About, and education as “coming soon” with a waitlist; courses and products when Gorica has them | **(b).** It puts the existing 20,000 words online sooner, starts SEO earlier, and does not wait for the course offer. It goes against “education first” on day one, so the education section must still be first in the navigation and show the waitlist clearly |
+| B2 | **Tone: ti or vi** | Old site mixes: services in “ti”, About and Contact in “vi”, horoscope texts in “vi” | Pick one in Phase 0 (questionnaire 1). If “ti”, the old texts need editing (more M02/M06 work) |
+| B3 | **Old texts as they are or edited** | Publish as written, or restructure for search (answer first, question headings, split the 4,095-word article) | Edit lightly: answer first, headings, verified dates; keep Gorica's voice; she approves every edited text |
+| B4 | **Editing for Gorica** | (a) she sends texts and a developer publishes; (b) a git-based CMS on top of the Markdown files, added after launch | (a) for launch, (b) as a follow-up module once publishing frequency is known (questionnaire 11). Do not choose a CMS product now; check current options then |
+| B5 | **Children's astrology** | Only a topic, or also a service (“child's chart”) | Topic at launch (one article exists); service if Gorica confirms (questionnaire 7) |
+| B6 | **Repository stays public?** | Public: free branch rules (rulesets) work, but drafts, the questionnaire and Gorica's details are visible. Private: privacy, but rulesets may need a paid GitHub plan (GitHub docs say rulesets are for Team and Enterprise; on our free public repo they work) | Decide before Gorica's answers (prices, business data) go in. Option: keep public, put private answers outside the repo |
+| B7 | **Old service list vs brief** | Old site: natal, solar/yearly, comparative (synastry), current situation, 12-month period, returning-client session. Brief: natal, solar, karmic, life-area consultation | Gorica decides (questionnaire 12). The plan's M09 works with any list (data file) |
+
+## C. Weaknesses of this plan
+
+| # | Weakness | Mitigation |
+|---|---|---|
+| C1 | **Fourteen modules is a lot for a content site** and for a team of one senior and one junior part-time | Launch scope B1 removes most of M08 and M12 from the first release; modules stay, the order changes |
+| C2 | **Critical path through Srdjan**: M00, M03, M04, M05 and all reviews | Filip's first work (M02, M14) does not need code; Srdjan does M00 first and keeps pull requests small; Filip reviews Srdjan's pull requests (non-blocking) so Srdjan's code also gets a second pair of eyes |
+| C3 | **The contract is written before any code exists** | M00's first task is to check `contracts.md` against the installed Astro version and correct it before Filip starts on templates |
+| C4 | **Translation is the biggest hidden effort** and sits with the junior developer | Machine draft plus human edit; English for core pages first; a fluent reviewer for anything public; track word counts in the M14 report |
+| C5 | **Performance risk from the brand itself**: Newsreader fonts (≈ 285 KB for four files), the star field on phones, YouTube thumbnails | Font instancing or subsetting in M00; star field off or static on touch devices (M05); thumbnails self-hosted and resized (M11); Lighthouse budgets in CI from M00 |
+| C6 | **Estimates are rough** (S/M/L), no dates | Reports record real effort; Srdjan sets dates after M00 when the speed is known |
+| C7 | **Logo detail is limited** by the 667 px original | Fine for screens; for large print, ask for the designer's vector original |
+| C8 | **Ephemeris dates** in old texts are unchecked | `ephemerisChecked` is a required field; nothing publishes with `false` |
+| C9 | **Two plan systems could drift** (`plan/` reports and `status/STATUS.md`) | `STATUS.md` keeps only a one-line row per module that points to the report; the report is the detail |
+
+## Phase 0 checklist
+- [ ] Domain renewed (A1)
+- [ ] Passwords changed; spam-URL list prepared (A2)
+- [ ] Call with Gorica: questionnaire answered, tone chosen, launch scope agreed (A3, A4, B1, B2)
+- [ ] 2027 horoscope: yes/no and deadline (A5)
+- [ ] Portrait plan (A8)
+- [ ] Repository visibility decided (B6)
+- [ ] Course platform and payments: decided or explicitly postponed (A7)

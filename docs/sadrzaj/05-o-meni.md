@@ -50,7 +50,7 @@ Engleska verzija se piše kao prilagođen prevod, ne doslovan, i proverava je iz
 | Fajl | **nova fotografija, Gorica je bira** (2026-11-02); dodaje se kad stigne | |
 | Alt tekst | Gorica Vićentijević, astrolog istraživač | Gorica Vićentijević, research astrologer |
 
-Za sajt se pravi AVIF/WebP u više veličina (`srcset`), po `modules/about.md`. Ako postoji fotografija veće rezolucije, bolje je krenuti od nje.
+Za sajt se pravi AVIF/WebP u više veličina (`srcset`), po planu modula M10 (`plan/modules/M10-about-contact-legal/PLAN.md`). Ako postoji fotografija veće rezolucije, bolje je krenuti od nje.
 
 ## SEO
 

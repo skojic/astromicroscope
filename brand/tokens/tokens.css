@@ -1,0 +1,79 @@
+/* Astromicroscope design tokens — direction D "Midnight Lens".
+   Source of truth for the website. Do not hard-code these values elsewhere.
+   Contrast ratios (WCAG 2.x) are listed in brand/index.html → Colour. */
+@import url('../fonts/fonts.css');
+
+:root {
+  /* Colour: base */
+  --am-white: #FFFFFF;       /* main page background */
+  --am-beige: #F3ECE2;       /* soft beige, alternate sections */
+  --am-ice: #DCE7F4;         /* light blue: actions on midnight, tints */
+  --am-uranus: #2E5BA6;      /* Uranus blue: actions and links on light */
+  --am-midnight: #0E1450;    /* deep blue: night-sky hero, footer, logo ground */
+  --am-gold: #D4AF5C;        /* logo, stars, hairlines; on midnight only for text */
+  --am-gold-text: #8A6A2A;   /* gold for small text on white (5.03:1); large text only on beige */
+  --am-ink: #141A33;         /* body text */
+  --am-muted: #5D6478;       /* secondary text */
+  --am-line: #E3DACB;        /* borders and dividers (decorative) */
+  --am-sky-text: #EAF0F8;    /* text on midnight */
+
+  /* Colour: gradients */
+  --am-gold-foil: linear-gradient(135deg, #F6E3A1 0%, #D4AF5C 45%, #A47E33 100%);
+  --am-sky: radial-gradient(70% 90% at 78% 40%, #1F3384 0, transparent 60%),
+            radial-gradient(50% 60% at 8% 100%, rgba(46, 91, 166, .45) 0, transparent 70%),
+            #0E1450;
+
+  /* Colour: roles */
+  --am-bg: var(--am-white);
+  --am-bg-alt: var(--am-beige);
+  --am-text: var(--am-ink);
+  --am-text-muted: var(--am-muted);
+  --am-action: var(--am-uranus);          /* buttons and links on light */
+  --am-action-hover: #244B8B;
+  --am-action-on-dark: var(--am-ice);     /* buttons on midnight */
+  --am-focus: var(--am-uranus);
+  --am-focus-on-dark: var(--am-gold);
+
+  /* Type */
+  --am-font-sans: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --am-font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --am-text-display: 700 clamp(3rem, 6.2vw, 5.4rem)/.95 var(--am-font-sans);   /* H1 */
+  --am-text-h2: 700 clamp(2.2rem, 4vw, 3.4rem)/1 var(--am-font-sans);
+  --am-text-h3: 700 1.6rem/1.05 var(--am-font-sans);
+  --am-text-h4: 600 1.3rem/1.2 var(--am-font-sans);
+  --am-text-lede: 400 1.3rem/1.5 var(--am-font-serif);
+  --am-text-body: 400 1.1875rem/1.6 var(--am-font-serif);                    /* 19 px */
+  --am-text-ui: 600 1rem/1 var(--am-font-sans);
+  --am-text-small: 400 .9rem/1.4 var(--am-font-sans);
+  --am-text-label: 500 .85rem/1 var(--am-font-sans);
+  --am-tracking-display: -.045em;
+  --am-tracking-heading: -.035em;
+  --am-measure: 62ch;                      /* max line length for reading text */
+
+  /* Space (4 px base) */
+  --am-space-1: 4px;  --am-space-2: 8px;  --am-space-3: 12px; --am-space-4: 16px;
+  --am-space-5: 24px; --am-space-6: 32px; --am-space-7: 48px; --am-space-8: 64px;
+  --am-space-9: 104px;                     /* section padding */
+  --am-container: 1240px;
+  --am-gutter: 32px;
+
+  /* Shape */
+  --am-radius-card: 6px;
+  --am-radius-pill: 999px;
+  --am-radius-arch: 50% 50% 6px 6px;       /* portrait arch */
+  --am-border: 1px solid var(--am-line);
+  --am-hairline-gold: 1px solid rgba(212, 175, 92, .5);
+  --am-shadow-float: 0 6px 24px rgba(14, 20, 80, .2);
+
+  /* Motion */
+  --am-ease: cubic-bezier(.2, .7, .2, 1);
+  --am-duration-fast: 150ms;
+  --am-duration: 250ms;
+
+  /* Breakpoints (for reference; CSS custom properties cannot be used in media queries) */
+  --am-bp-sm: 360px; --am-bp-md: 768px; --am-bp-lg: 1024px; --am-bp-xl: 1440px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --am-duration-fast: 0ms; --am-duration: 0ms; }
+}

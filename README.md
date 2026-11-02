@@ -31,36 +31,25 @@ Da Astromicroscope postane prepoznatljiv edukativni brend. Glavni fokus su eduka
 
 ---
 
-## Predlozi dizajna: kako da ih pogledaš (za Goricu)
+## Brend kit (pravac D, Midnight Lens)
 
-U folderu [`branding-directions/`](branding-directions/) su četiri predloga izgleda sajta i brenda (A, B, C i D), na **srpskom i engleskom**. Svaki predlog je cela početna strana sajta, a na dnu je prikaz brenda: logo, boje, slova i primeri Instagram objava. Ovo je referenca za izbor; kada izabereš pravac, od njega se pravi jedan konačan brending kit.
+Gorica je izabrala **pravac D, Midnight Lens**. Ceo brend je u folderu [`brand/`](brand/): pravila (logo, boje, slova, elementi, ton komunikacije), fajlovi loga, fontovi, tokeni dizajna, šabloni za Instagram i YouTube i odobrena početna strana. Sve je na **srpskom i engleskom**.
 
-### Korak po korak (bez instaliranja bilo čega)
+### Kako da ga pogledaš, korak po korak
 
-1. **Preuzmi projekat.** Otvori ovaj link u pregledaču; ZIP fajl se odmah preuzima:
-   https://github.com/skojic/astromicroscope/archive/refs/heads/main.zip
-2. **Raspakuj ga.** Dupli klik na preuzeti fajl `astromicroscope-main.zip` (Mac ga raspakuje sam; na Windows-u: desni klik → „Extract All” / „Izdvoj sve”).
-3. **Otvori pregled.** U folderu `astromicroscope-main` otvori `branding-directions`, pa dupli klik na **`index.html`**. Otvoriće se u pregledaču (Chrome, Safari ili Edge).
-4. **Pogledaj sva četiri predloga.** Na pregledu su A, B, C i D jedan pored drugog, sa kratkim opisom i tabelom poređenja. Klikni „Otvori predlog …” za ceo predlog.
-5. **Isprobaj ih mišem.**
-   - A i D: pomeraj kursor preko natalne karte, videćeš lupu.
-   - D: pomeraj kursor po tamnom zaglavlju, zvezde prate kursor.
-   - B: klikni na nazive analiza da se otvore.
-   - C: pređi mišem preko znakova zodijaka.
-6. **Promeni jezik** dugmićima **SR / EN** u zaglavlju ili u meniju na dnu strane.
-7. **Skroluj do kraja svake strane**: tamo je prikaz brenda.
-8. **Javi izbor Srđanu**: slovo predloga koji ti se najviše dopada, i šta bi volela da se preuzme iz ostalih (na primer „boje iz C, logo iz D”).
+1. **Preuzmi projekat:** https://github.com/skojic/astromicroscope/archive/refs/heads/main.zip
+2. **Raspakuj** fajl `astromicroscope-main.zip` (dupli klik; na Windows-u desni klik → „Extract All” / „Izdvoj sve”).
+3. U folderu `astromicroscope-main/brand` dupli klik na **`index.html`**: to je brend kit.
+4. Odozgo je meni sa poglavljima (Suština, Logo, Boje, Tipografija …); dole je dugme **„Početna strana (referenca)”** za odobreni izgled sajta.
+5. Jezik menjaš dugmićima **SR / EN**.
+6. Šabloni za objave su u `brand/social` (otvori, klikni na tekst da ga promeniš). Profilna slika je `brand/logo/png/instagram-avatar-1080.png`.
 
-Saveti: gledaj na laptopu ili računaru, preko celog ekrana i sa uključenim internetom (fontovi i sličice YouTube videa se učitavaju sa interneta). Detaljnije uputstvo, uključujući preuzimanje preko Git-a i pitanja koja pomažu pri izboru: [`branding-directions/README.md`](branding-directions/README.md).
-
-### Ako koristiš Git
-
+Sa Git-om:
 ```bash
 git clone https://github.com/skojic/astromicroscope.git
 cd astromicroscope
-git pull                                  # kasnije, za najnoviju verziju
-open branding-directions/index.html       # Mac
-start branding-directions\index.html      # Windows
+open brand/index.html        # Mac
+start brand\index.html       # Windows
 ```
 
 ---
@@ -70,10 +59,10 @@ start branding-directions\index.html      # Windows
 | Folder / fajl | Sadržaj |
 |---|---|
 | `docs/` | Originalni brief klijenta |
-| `branding-directions/` | Četiri predloga dizajna, srpski i engleski (referenca za izbor; ne menja se tokom izrade sajta) |
+| `brand/` | **Brend kit** (pravac D): pravila, logo, fontovi, tokeni dizajna, šabloni za društvene mreže, odobrena početna strana. Izvor istine za izgled sajta |
 | `AGENTS.md` | Kratka pravila za rad (i za AI alate) |
 | `specs/` | **Šta** se pravi: proizvod, mapa sajta, dizajn sistem, tehnologija, sadržaj, jezici, SEO i AI pretraga, performanse i Core Web Vitals, pristupačnost |
-| `modules/` | **Kako** se pravi svaki deo sajta, sa zadacima |
+| `plan/` | **Kako** se pravi sajt: koncept, ugovor za spajanje, kritički osvrt, 15 modula; svaki ima plan (`PLAN.md`) i izveštaj (`REPORT.md`) |
 | `testing/` | **Kada je gotovo**: kapije kvaliteta (G0–G5), plan testiranja, kontrolne liste |
 | `CONTRIBUTING.md` | **Kako radimo**: grane `feature/`, `fix/`, `docs/`, pull request, pregled i spajanje (uputstvo za saradnike) |
 | `.github/` | Pravila za GitHub: ko pregleda (CODEOWNERS), provera naziva grane, šablon za pull request |

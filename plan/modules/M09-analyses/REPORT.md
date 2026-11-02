@@ -1,0 +1,35 @@
+# Report: M09 Private analyses
+
+| | |
+|---|---|
+| Stage | idea |
+| Last gate passed | none |
+| Owner | Filip |
+| Branch | `feature/m09-analyses` (not created yet) |
+| Last commit | — |
+| Last updated | 2026-11-02, plan created |
+
+## Next step
+Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M09-01.
+
+## Done
+- Item, with evidence: the command run and the result line, or a PR link.
+
+## Not done
+- Item (task ID from PLAN.md).
+
+## Problems and blockers
+- What, since when, who can unblock it.
+
+## Decisions taken in this module
+- Date, decision, why (move project-wide ones to `status/decisions.md`).
+
+## Requests to other modules
+- To MNN: what is needed and why.
+
+## Test evidence
+| Check | Result | Date |
+|---|---|---|
+
+## History
+- 2026-11-02: plan created.

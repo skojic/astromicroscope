@@ -24,7 +24,7 @@ INP replaced FID as a Core Web Vital in 2024.
 | HTML | ≤ 50 KB |
 | CSS | ≤ 50 KB, critical CSS inline for the first screen |
 | JavaScript | ≤ 70 KB in total; 0 KB on pages with no interactive parts |
-| Fonts | at most 2 families and 4 files, woff2, subset to Latin plus Latin Extended, self-hosted |
+| Fonts | at most 2 families and 4 files, woff2, subset to Latin plus Latin Extended, self-hosted from `brand/fonts/`. Current files total ≈ 285 KB for 4 files (Newsreader is heavy); reduce at build time, see `specs/02` open items |
 | Hero image | ≤ 120 KB on mobile |
 | Third-party requests before interaction | 0 |
 These numbers are our proposal; adjust them in `status/decisions.md` with a reason.
@@ -34,7 +34,7 @@ These numbers are our proposal; adjust them in `status/decisions.md` with a reas
 - **Fonts**: `font-display: swap` (or `optional` for display fonts), preload only the font used above the fold, and match fallback metrics to limit layout shift.
 - **Images**: AVIF or WebP with fallback, `srcset` and `sizes`, explicit `width` and `height`, `loading="lazy"` below the fold, `decoding="async"`.
 - **YouTube**: use a facade (thumbnail plus play button) and load the player only on click. The real player is heavy and should never load on page view.
-- **Canvas effects** (for example D's star field): start after the page is idle, run only while visible, stop under `prefers-reduced-motion`, and simplify or disable on low-power or touch devices.
+- **Canvas effects** (the star field in the hero): start after the page is idle, run only while visible, stop under `prefers-reduced-motion`, and simplify or disable on low-power or touch devices.
 - **No layout shift**: reserve space for images, embeds, banners and the language switch; nothing appears above existing content after load.
 - **Caching**: hashed file names with long cache life; HTML revalidated; serve through a CDN with HTTP/2 or HTTP/3 and Brotli or gzip.
 - **Third parties**: analytics is light and deferred; no chat widgets or tag managers without a decision entry.
