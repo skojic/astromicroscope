@@ -2,7 +2,7 @@
 
 The Astro project for astromicroscope.com: Gorica Vićentijević's bilingual, education-first astrology site. Serbian (Latin) is the default at `/`, English at `/en/` (`specs/05-languages.md`).
 
-Status: module **M00 Foundation** is in progress. Only the Astro starter page exists so far. Where the work stands: `plan/modules/M00-foundation/REPORT.md`.
+Status: module **M00 Foundation** is in progress (foundation built, hosting pending). Where the work stands: `plan/modules/M00-foundation/REPORT.md`.
 
 ## Before you change anything
 Read, in this order (paths from the repository root):
@@ -21,6 +21,11 @@ Dependencies are pinned to exact versions, and `package-lock.json` is committed 
 | Package | Version |
 |---|---|
 | astro | 7.4.5 |
+| yaml | 2.9.1 (content checks) |
+| html-validate | 11.17.0 (dev) |
+| @axe-core/playwright | 4.14.0 (dev) |
+| playwright | 1.64.1 (dev) |
+| @lhci/cli | 0.15.1 (dev) |
 
 ## Commands
 Run from `site/`.
@@ -29,7 +34,11 @@ Run from `site/`.
 |---|---|
 | `npm ci` | Install exactly what `package-lock.json` lists. Use this after cloning or pulling |
 | `npm run dev` | Local dev server (Astro's default address is `http://localhost:4321`) |
-| `npm run build` | Build the static site into `dist/` |
+| `npm run build` | Run the content checks, then build the static site into `dist/` |
+| `npm test` | Unit tests for the language helpers and the content checks |
+| `npm run check` | Brand CSS in sync with `brand/`; every string and content file translated; with `SITE_ENV=production` also no `[placeholder]` and no unchecked ephemeris |
+| `npm run sync:brand` | Regenerate `src/styles/tokens.css` and `fonts.css` from `brand/` |
+| `npm run test:html`, `test:axe`, `test:lighthouse` | HTML validation, axe (WCAG 2.2 A/AA), Lighthouse budgets on the built `dist/`. For axe locally: `npx playwright install chromium`, or `PW_CHANNEL=chrome` to use installed Chrome |
 | `npm run preview` | Serve the built `dist/` locally to check it before a pull request |
 | `npm run astro -- --help` | Astro CLI help |
 
@@ -41,6 +50,9 @@ Run from `site/`.
 | `src/pages/` | Routes: one file per route group, each owned by its module (`plan/contracts.md` §4) |
 | `public/` | Files served as they are (icons come from `brand/logo/png/`) |
 | `astro.config.mjs` | Astro configuration (M00) |
+| `src/layouts/`, `src/components/ui/`, `src/styles/`, `src/i18n/core.ts` | M00: base layout, shared components, brand CSS (generated), language helpers |
+| `src/content.config.ts` | Collection schemas (articles, horoscope, pages) |
+| `scripts/`, `test/` | Checks and their tests |
 
 More folders (`src/layouts/`, `src/styles/`, `src/i18n/`, `src/components/`, `src/content/`, `src/data/`) are added during M00 as listed in `plan/contracts.md` §1.
 

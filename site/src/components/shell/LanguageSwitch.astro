@@ -1,0 +1,33 @@
+---
+// Plain links to the paired page (specs/05 rule 5): crawlers follow them, and no script is needed.
+import { LANGS, t, type Lang } from '../../i18n/core';
+import { switchTarget, type Paths } from '../../i18n/routes';
+import { shellStrings } from '../../i18n/shell';
+
+interface Props { lang: Lang; translationKey: string; paths?: Partial<Paths> }
+const { lang, translationKey, paths } = Astro.props;
+const names = { sr: 'langSr', en: 'langEn' } as const;
+---
+<ul class="langs" aria-label={t(shellStrings, 'langLabel', lang)}>
+  {LANGS.map((code) => (
+    <li>
+      <a
+        href={switchTarget(code, translationKey, paths)}
+        hreflang={code === 'sr' ? 'sr-Latn' : 'en'}
+        lang={code === 'sr' ? 'sr-Latn' : 'en'}
+        aria-label={`${code.toUpperCase()}, ${t(shellStrings, names[code], code)}`}
+        aria-current={code === lang ? 'true' : undefined}
+      >{code.toUpperCase()}</a>
+    </li>
+  ))}
+</ul>
+<style>
+  .langs { display: flex; gap: var(--am-space-1); list-style: none; margin: 0; padding: 0; }
+  a {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 36px; min-height: 36px;
+    font: var(--am-text-label); letter-spacing: .04em; text-decoration: none; color: var(--am-text-muted);
+    border-radius: var(--am-radius-pill);
+  }
+  a:hover { color: var(--am-action-hover); }
+  a[aria-current='true'] { color: var(--am-ink); box-shadow: inset 0 0 0 1.5px var(--am-ink); }
+</style>

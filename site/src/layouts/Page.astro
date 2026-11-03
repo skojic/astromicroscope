@@ -1,7 +1,11 @@
 ---
-// Every page uses this layout (plan/contracts.md section 5). M03 fills `header` and `footer`; M04 reads the props for <Seo>.
+// Every page uses this layout (plan/contracts.md section 5): skip link, header, main, footer. M04 reads the props for <Seo>.
 import Base from './Base.astro';
 import type { Lang } from '../i18n/core';
+import type { Paths } from '../i18n/routes';
+import SkipLink from '../components/shell/SkipLink.astro';
+import Header from '../components/shell/Header.astro';
+import Footer from '../components/shell/Footer.astro';
 
 export interface Breadcrumb { name: string; url: string }
 interface Props {
@@ -9,16 +13,19 @@ interface Props {
   title: string;
   description: string;
   translationKey: string;
+  /** The page in each language, for pages that are not in `ROUTES` (articles, horoscope). */
+  paths?: Partial<Paths>;
   breadcrumbs?: Breadcrumb[];
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { lang, title, description } = Astro.props;
+const { lang, title, description, translationKey, paths } = Astro.props;
 ---
 <Base lang={lang} title={title} description={description}>
   <slot name="head" slot="head" />
-  <slot name="header" />
+  <SkipLink lang={lang} />
+  <Header lang={lang} translationKey={translationKey} paths={paths} />
   <main id="main" tabindex="-1">
     <slot />
   </main>
-  <slot name="footer" />
+  <Footer lang={lang} translationKey={translationKey} paths={paths} />
 </Base>

@@ -1,0 +1,114 @@
+{
+  "skip": {
+    "sr": "Preskoči na sadržaj",
+    "en": "Skip to content"
+  },
+  "subtitle": {
+    "sr": "Gorica Vićentijević",
+    "en": "Gorica Vićentijević"
+  },
+  "navLabel": {
+    "sr": "Glavni meni",
+    "en": "Main menu"
+  },
+  "menuOpen": {
+    "sr": "Meni",
+    "en": "Menu"
+  },
+  "menuClose": {
+    "sr": "Zatvori meni",
+    "en": "Close menu"
+  },
+  "learn": {
+    "sr": "Edukacija",
+    "en": "Learn"
+  },
+  "articles": {
+    "sr": "Tekstovi",
+    "en": "Articles"
+  },
+  "videos": {
+    "sr": "Video",
+    "en": "Videos"
+  },
+  "analyses": {
+    "sr": "Individualne analize",
+    "en": "Private analyses"
+  },
+  "about": {
+    "sr": "O meni",
+    "en": "About"
+  },
+  "cta": {
+    "sr": "Počni da učiš",
+    "en": "Start learning"
+  },
+  "langLabel": {
+    "sr": "Jezik",
+    "en": "Language"
+  },
+  "langSr": {
+    "sr": "Srpski",
+    "en": "Srpski"
+  },
+  "langEn": {
+    "sr": "English",
+    "en": "English"
+  },
+  "footerExplore": {
+    "sr": "Sajt",
+    "en": "Site"
+  },
+  "footerInfo": {
+    "sr": "Informacije",
+    "en": "Information"
+  },
+  "footerFollow": {
+    "sr": "Kontakt i mreže",
+    "en": "Contact and social"
+  },
+  "contact": {
+    "sr": "Kontakt",
+    "en": "Contact"
+  },
+  "privacy": {
+    "sr": "Privatnost",
+    "en": "Privacy"
+  },
+  "terms": {
+    "sr": "Uslovi korišćenja",
+    "en": "Terms"
+  },
+  "cookies": {
+    "sr": "Kolačići",
+    "en": "Cookies"
+  },
+  "email": {
+    "sr": "Mejl: astromicroscope@gmail.com",
+    "en": "Email: astromicroscope@gmail.com"
+  },
+  "instagram": {
+    "sr": "Instagram @astromicroscope",
+    "en": "Instagram @astromicroscope"
+  },
+  "youtube": {
+    "sr": "YouTube @astromicroscope",
+    "en": "YouTube @astromicroscope"
+  },
+  "rights": {
+    "sr": "Astromicroscope. Sva prava zadržana.",
+    "en": "Astromicroscope. All rights reserved."
+  },
+  "notFoundTitle": {
+    "sr": "Strana nije pronađena",
+    "en": "Page not found"
+  },
+  "notFoundText": {
+    "sr": "Ova adresa ne postoji ili je premeštena. Probaj neku od ovih strana:",
+    "en": "This address does not exist or has moved. Try one of these pages:"
+  },
+  "notFoundHome": {
+    "sr": "Početna strana",
+    "en": "Home page"
+  }
+}

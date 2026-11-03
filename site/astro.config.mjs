@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import headers from './src/integrations/headers.mjs';
+import notFound from './src/integrations/not-found.mjs';
 
 // SITE_ENV=production only on the production deploy; everything else (dev, CI, previews) is non-production.
 const isProduction = process.env.SITE_ENV === 'production';
@@ -17,5 +18,5 @@ export default defineConfig({
   // Hashes for inline scripts and styles go into a <meta> CSP; frame-ancestors, object-src and the rest are sent as headers (src/integrations/headers.mjs).
   security: { csp: true },
   markdown: { syntaxHighlight: false }, // no code samples on the site; Shiki's inline styles do not work with CSP
-  integrations: [headers({ isProduction })],
+  integrations: [headers({ isProduction }), notFound()],
 });

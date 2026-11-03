@@ -1,0 +1,15 @@
+---
+import { t, type Lang } from '../../i18n/core';
+import { shellStrings } from '../../i18n/shell';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<a class="skip" href="#main">{t(shellStrings, 'skip', lang)}</a>
+<style>
+  .skip {
+    position: absolute; left: var(--am-space-4); top: -100px; z-index: 100;
+    background: var(--am-midnight); color: var(--am-sky-text); padding: var(--am-space-3) var(--am-space-4);
+    border-radius: var(--am-radius-card); font: var(--am-text-ui); text-decoration: none;
+  }
+  .skip:focus { top: var(--am-space-4); outline: 2px solid var(--am-gold); outline-offset: 2px; }
+</style>

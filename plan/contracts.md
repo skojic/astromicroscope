@@ -13,7 +13,7 @@ The website lives in `site/` (an Astro project). A module changes only the paths
 | Path | Owner | Notes |
 |---|---|---|
 | `site/package.json`, `astro.config.*`, lock file, `tsconfig.json` | M00 | dependencies are added only through M00's owner (Srdjan); ask in your report |
-| `site/src/styles/` | M00 | imports `brand/tokens/tokens.css` and `brand/fonts/fonts.css`; no colour or font values anywhere else |
+| `site/src/styles/` | M00 | `tokens.css` and `fonts.css` are generated from `brand/tokens/tokens.css` and `brand/fonts/fonts.css` (`npm run sync:brand`; fonts reduced by `scripts/reduce-fonts.py` into `src/assets/fonts/`); no colour or font values anywhere else |
 | `site/src/layouts/Base.astro`, `Page.astro` | M00 (structure), M03 (header/footer slots) | |
 | `site/src/content.config.ts` (collection schemas) | M00, from section 3 below | collections use `glob` from `astro/loaders` and `z` from `astro/zod`; `z` from `astro:content` is deprecated and removed in Astro 8 |
 | `site/src/i18n/core.ts` (language helpers) | M00 | |

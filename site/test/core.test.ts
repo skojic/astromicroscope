@@ -32,3 +32,16 @@ test('strings: missing language fails', () => {
   const ok = defineStrings('x', { a: { sr: 'a', en: 'b' } });
   assert.equal(t(ok, 'a', 'en'), 'b');
 });
+
+import { alternates, switchTarget, pathFor } from '../src/i18n/routes.ts';
+
+test('route pairs and the language switch target', () => {
+  assert.equal(pathFor('articles', 'en'), '/en/articles/');
+  assert.deepEqual(alternates('about'), { sr: '/o-meni/', en: '/en/about/' });
+  assert.equal(switchTarget('en', 'about'), '/en/about/');
+  // a content page passes its own paths
+  assert.equal(switchTarget('en', 'rising-sign', { sr: '/tekstovi/podznak/', en: '/en/articles/rising-sign/' }), '/en/articles/rising-sign/');
+  // no pair yet: falls back to the home page of that language, and hreflang gets no entry
+  assert.deepEqual(alternates('some-article', { sr: '/tekstovi/x/' }), { sr: '/tekstovi/x/' });
+  assert.equal(switchTarget('en', 'some-article', { sr: '/tekstovi/x/' }), '/en/');
+});
