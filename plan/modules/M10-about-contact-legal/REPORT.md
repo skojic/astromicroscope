@@ -19,7 +19,9 @@ Not started. Wait for: M00. Then read `PLAN.md` and `plan/contracts.md`, create 
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- What, since when, who can unblock it.
+- Resolved: portrait received (A8), `docs/sadrzaj/slike/gorica-portret.jpg`, 1066 × 1599.
+- Question (Gorica): About keeps the old text up to the Nikola Stojanović paragraph (D20). Interpreted as: drop that paragraph, keep the rest (diploma, her new text on interests). To confirm with her.
+- Blocker for M10-05: legal texts depend on P06 (prepayment, business form) and A9; the shells can be built, the wording cannot.
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
@@ -32,4 +34,5 @@ Not started. Wait for: M00. Then read `PLAN.md` and `plan/contracts.md`, create 
 |---|---|---|
 
 ## History
+- 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.

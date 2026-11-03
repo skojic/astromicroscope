@@ -19,7 +19,7 @@ Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/cont
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- What, since when, who can unblock it.
+- Question (Srdjan, M12): the course waitlist. Proposal: a separate group in Gorica's MailerLite account (D21), so waitlist and newsletter stay apart. Inputs still list questionnaire 8–10; those are postponed to 2027 (D14).
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
@@ -32,4 +32,5 @@ Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/cont
 |---|---|---|
 
 ## History
+- 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.

@@ -19,7 +19,7 @@ Not started. Wait for: M00, M02. Then read `PLAN.md` and `plan/contracts.md`, cr
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- What, since when, who can unblock it.
+- Question (Gorica): the 4,095-word article on the rising sign (B3). Split into two or three articles, or keep it as one long read with a table of contents?
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
@@ -32,4 +32,5 @@ Not started. Wait for: M00, M02. Then read `PLAN.md` and `plan/contracts.md`, cr
 |---|---|---|
 
 ## History
+- 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.

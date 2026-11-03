@@ -30,6 +30,9 @@ Answers in `docs/sadrzaj/upitnik-za-goricu.md`, carried into `docs/sadrzaj/01–
 | Articles | Twice a month (D21) | Publishing load for Filip until a CMS (D14) |
 | Videos | No subtitles for existing videos; new ones will have them; no English videos yet | M11 transcripts stay machine-made and marked unchecked |
 
+## Update 2026-11-03: domain
+A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Active until 2027-10-15, auto-renew on, lock on). Srdjan's plan: DNS to Filip's Cloudflare in M00; registrar transfer to Cloudflare not before about 2026-11-29 (45 days after expiry), about $11. Old Premium Web Hosting is not renewed. A Hostinger email trial exists on the domain; MX records to check before DNS moves (M13).
+
 ## A. Holes: things the plan cannot solve by itself
 
 | # | Hole | Why it matters | What to do | Owner |
@@ -72,7 +75,7 @@ Answers in `docs/sadrzaj/upitnik-za-goricu.md`, carried into `docs/sadrzaj/01–
 | C9 | **Two plan systems could drift** (`plan/` reports and `status/STATUS.md`) | `STATUS.md` keeps only a one-line row per module that points to the report; the report is the detail |
 
 ## Phase 0 checklist
-- [ ] Domain renewed, auto-renew and registrar lock on (A1)
+- [x] Domain renewed, auto-renew and registrar lock on (A1): 2026-11-03, until 2027-10-15; transfer to Cloudflare from about 2026-11-29
 - [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2) — spam list done: `docs/sadrzaj/stari-sajt/spam-adrese.md` (143 URLs); Filip's Cloudflare 2FA on
 - [ ] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16)
 - [x] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2); open: 14, 26

@@ -36,7 +36,7 @@ About page and home section, author box, contact page, legal pages.
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-No portrait yet (A8)
+Portrait received (A8 resolved); legal wording depends on P06
 
 
 ## Component specs (moved from `modules/`)
