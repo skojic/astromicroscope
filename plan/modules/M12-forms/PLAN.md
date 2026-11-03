@@ -16,7 +16,7 @@ Newsletter sign-up (also the waitlist for the 2027 courses), contact and analysi
 - Out: Payments (iteration 2)
 
 ## Inputs
-Decision P02b (newsletter provider, form handling); questionnaire 20–23
+Decision P02b (form handling); newsletter provider **MailerLite**, Gorica's existing account (D21); questionnaire 20–23
 
 ## Deliverables
 `site/functions/`, `site/src/components/sections/newsletter/`, `site/src/i18n/newsletter.json`

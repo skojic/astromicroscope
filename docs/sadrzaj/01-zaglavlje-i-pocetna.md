@@ -17,7 +17,7 @@ Za par sekundi posetilac mora da shvati: ovde se **uči astrologija** kod diplom
 | Meni 4 | Individualne analize | Private analyses |
 | Meni 5 | O meni | About |
 | Promena jezika | SR / EN | SR / EN |
-| Glavno dugme | Pogledaj kurseve | Explore courses |
+| Glavno dugme | Počni da učiš | Start learning |
 
 Napomena: redosled menija prati `specs/01-sitemap.md`. U dizajnu D meni ima i „Pristup"; predlog je da se to spoji sa „O meni".
 
@@ -25,9 +25,9 @@ Napomena: redosled menija prati `specs/01-sitemap.md`. U dizajnu D meni ima i �
 
 | Element | SR | EN | Max dužina |
 |---|---|---|---|
-| H1 | Astrologija, pod lupom. | Astrology, looked at closely. | 40 znakova |
-| Podnaslov | Nauči da čitaš kartu onako kako to radi astrolog istraživač. Kursevi, snimljene lekcije i vodiči Gorice Vićentijević. | Learn to read a chart the way a research astrologer does. Courses, recorded lessons and guides by Gorica Vićentijević. | 160 znakova |
-| Dugme 1 (glavno) | Pogledaj kurseve | Explore courses | |
+| H1 | Astrologija u službi evolucije svesti. | Astrology in service of the evolution of consciousness. | 45 znakova |
+| Podnaslov | Upoznaj sebe kroz svoju kartu: tekstovi, video lekcije i godišnji horoskop Gorice Vićentijević, profesionalnog astrologa. | Get to know yourself through your chart: articles, video lessons and the yearly horoscope by Gorica Vićentijević, professional astrologer. | 160 znakova |
+| Dugme 1 (glavno) | Počni da učiš | Start learning | |
 | Dugme 2 | Individualne analize | Private analyses | |
 | Natpis uz lupu | Pomeri lupu preko karte | Move the lens across the chart | |
 | Napomena ispod karte | Primer karte, ilustracija | Sample chart, for illustration | |
@@ -36,10 +36,11 @@ Napomena: redosled menija prati `specs/01-sitemap.md`. U dizajnu D meni ima i �
 
 | Polje | SR | EN |
 |---|---|---|
-| Title (≤ 60) | Astromicroscope · Kursevi astrologije, Gorica Vićentijević | Astromicroscope · Astrology courses by Gorica Vićentijević |
-| Meta description (≤ 155) | Nauči astrologiju kod astrologa istraživača: kursevi, snimljene lekcije, tekstovi i individualne analize natalne, solarne i karmičke karte. | Learn astrology from a research astrologer: courses, recorded lessons, articles and private natal, solar and karmic chart analyses. |
+| Title (≤ 60) | Astromicroscope · Gorica Vićentijević, astrolog | Astromicroscope · Gorica Vićentijević, astrologer |
+| Meta description (≤ 155) | Astrologija u službi evolucije svesti: tekstovi, video lekcije, godišnji horoskop i individualne analize kod profesionalnog astrologa Gorice Vićentijević. | Astrology in service of the evolution of consciousness: articles, video lessons, the yearly horoscope and private analyses by professional astrologer Gorica Vićentijević. |
 
-## Za Goricu
-- Zvanje je „astrolog istraživač" (Institut Johannes Kepler, 2025), ne „diplomirani astrolog" kako piše u dizajnu D.
-- Da li joj se sviđa naslov „Astrologija, pod lupom"? Alternativa: „Nauči da čitaš nebo." (iz pravca C).
-- Da li sajt ostaje u obraćanju na **ti** („nauči", „pogledaj") ili prelazi na **vi**? Odnosi se na ceo sajt.
+## Odluke Gorice (2026-11-02)
+- **Naslov**: „Astrologija u službi evolucije svesti." (umesto „Astrologija, pod lupom.").
+- **Zvanje**: profesionalni astrolog / Professional Astrologer.
+- **Ton celog sajta**: posetiocu se obraća sa **ti**.
+- Glavno dugme vodi na besplatno učenje, jer kursevi kreću 2027. (D14); tekst „Pogledaj kurseve" se vraća kad kursevi postoje.

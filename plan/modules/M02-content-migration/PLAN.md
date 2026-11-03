@@ -29,7 +29,7 @@ All 28 pages of the old site are in the agreed Markdown format, ready for the te
 | M02-03 | Convert 12 horoscope texts to the sign schema for 2026 |  |
 | M02-04 | Convert About, Why Astromicroscope, Contact, Consultations into pages and data |  |
 | M02-05 | List every astrological date per text; check against an ephemeris; set `ephemerisChecked` | C8 |
-| M02-06 | Apply the tone decision (ti/vi, B2) and light structure edits (B3) | after Phase 0 |
+| M02-06 | Apply the tone decision (ti/vi, B2) and light structure edits (B3) | tone: **ti**, first person (D18); About: drop the Nikola Stojanović paragraph (D20) |
 
 ## Acceptance criteria
 - [ ] Every old page has a target file or a written reason why not

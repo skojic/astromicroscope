@@ -24,7 +24,7 @@ The premium offer: hub, one page per analysis, request form interface.
 ## Tasks
 | ID | Task | Notes |
 |---|---|---|
-| M09-01 | Data file with the final service list (B7) |  |
+| M09-01 | Data file with the final service list (B7) | four services, durations, prices in RSD and EUR, by phone, prepayment (D19, `docs/sadrzaj/04`) |
 | M09-02 | Hub and analysis template |  |
 | M09-03 | Home section (Midnight panel, gold hairline) |  |
 | M09-04 | Request form fields and validation messages |  |
@@ -35,7 +35,7 @@ The premium offer: hub, one page per analysis, request form interface.
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-Service list undecided (B7)
+Service list decided (D19). Open: sessions per month (questionnaire 14) and how the prepayment is taken while Gorica is not a registered business (A9)
 
 
 ## Component specs (moved from `modules/`)

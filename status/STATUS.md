@@ -4,9 +4,9 @@ Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved �
 
 ## Now
 - **Current focus:** Phase 0 of the build plan (`plan/challenge.md`): renew the domain, secure accounts (`specs/09`), Gorica's answers, Filip's Cloudflare account. No development yet.
-- **Last step:** site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
+- **Last step:** Gorica's answers recorded (D18–D21, P06): tone ti, four analyses with prices, headline and credential, MailerLite; new portrait; spam-URL list (143); Filip's Cloudflare account with 2FA. Before that: site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
 - **Next step:** Phase 0 checklist in `plan/challenge.md`; then M00 (Srdjan) and M02 + M14 (Filip) start in parallel.
-- **Blocked by:** Phase 0: domain (A1), Gorica's answers (A4), Filip's Cloudflare account (D16).
+- **Blocked by:** Phase 0: domain (A1), Srdjan accepts the Cloudflare invitation (D16), prepayment and business form (P06).
 
 ## Specs
 | ID | File | Status |

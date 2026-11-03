@@ -9,10 +9,10 @@ The lens from direction D is not only decoration on the home page. It becomes th
 From the old site (`docs/sadrzaj/stari-sajt/`, about 20,000 words) and Filip's drafts (`docs/sadrzaj/01–07`):
 - **Yearly horoscope 2026** for all 12 signs (475–953 words each). Most likely the most searched content. It is for 2026 and needs a 2027 edition (see `challenge.md`).
 - **10 long articles** on transits, the rising sign (4,095 words), potential, finances, eclipses, children's horoscope.
-- **Children's astrology**: Gorica's strongest personal angle (“mother astrologer”, since 2000). A topic and possibly a service.
+- **Children's astrology**: Gorica's strongest personal angle (“mother astrologer”, since 2000). A topic of articles, not a separate service (D19). Her focus in her own words: family inheritance, genetic predispositions, unconscious patterns, early childhood, the child's development and the parent's role (`docs/sadrzaj/05-o-meni.md`).
 - **The name story**: Virgo with Scorpio rising, “micro” as precision and attention to detail.
-- **Credential**: research astrologer, Johannes Kepler Astrological Institute, 2025; more than 20 years of practice; trained with Nikola Stojanović from 2005.
-- **Quotes** she uses: Jung, Maslow.
+- **Credential**: on the site **professional astrologer / profesionalni astrolog** (D20); graduated from the Johannes Kepler Astrological Institute in 2025; more than 20 years of practice. Nikola Stojanović is **not** mentioned (no official confirmation of that training).
+- **Quotes** she uses: Jung, Maslow. For English she chose: “When an inner situation is not made conscious, it happens outside, as fate.” (C. G. Jung)
 
 ## Sitemap (adds to `specs/01-sitemap.md`)
 | Page | sr | en | Source |
@@ -32,7 +32,7 @@ From the old site (`docs/sadrzaj/stari-sajt/`, about 20,000 words) and Filip's d
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │ NIGHT SKY (stars follow the cursor)                          │
-│  Astrologija, pod lupom.            ( natal chart + lens )   │
+│  Astrologija u službi evolucije svesti.  ( chart + lens )    │
 │  lede · [Explore courses] [Private analyses]                 │
 ├──────────────────────────────────────────────────────────────┤
 │ EDUCATION: free learning now (articles, videos, horoscope)   │
@@ -55,7 +55,7 @@ Horoskop › 2027 › Ovan
 H1  Ovan 2027: [title of the year]                 (sign in the lens)
 [ Answer first: 2–3 sentences on the year ]
 [ Transit timeline: Saturn in Aries ━━━━━━━ 14.2.2026 → 13.4.2028 ]
-H2 sections worded as questions · author box (research astrologer)
+H2 sections worded as questions · author box (professional astrologer)
 ← Ribe     [ small wheel of 12 signs ]     Bik →
 ```
 

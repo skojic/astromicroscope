@@ -24,10 +24,10 @@ About page and home section, author box, contact page, legal pages.
 ## Tasks
 | ID | Task | Notes |
 |---|---|---|
-| M10-01 | About page in first person with credential, story, the name, quote |  |
+| M10-01 | About page in first person with credential, story, the name, quote | professional astrologer; no mention of Nikola Stojanović (D20); portrait `docs/sadrzaj/slike/gorica-portret.jpg`; Jung quote in English chosen by Gorica |
 | M10-02 | AuthorBox for articles and horoscope |  |
 | M10-03 | Home section |  |
-| M10-04 | Contact page UI |  |
+| M10-04 | Contact page UI | reply within three days; astromicroscope@gmail.com; no other social networks |
 | M10-05 | Legal page shells |  |
 
 ## Acceptance criteria

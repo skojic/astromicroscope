@@ -5,6 +5,10 @@ Modul: `learn-formats` · Sekcija na početnoj + hub `/edukacija/` i `/en/learn/
 ## Svrha
 Glavni deo sajta (brief: „glavni fokus su edukacije, snimljeni kursevi i digitalni proizvodi"). Pokazuje četiri načina učenja, od besplatnog do najdubljeg.
 
+## Odluke (2026-11-02)
+- **Kursevi, programi i digitalni proizvodi kreću 2027.** (D14). Na startu sajta ova sekcija nudi besplatno učenje (tekstovi, video, horoskop) i **listu čekanja** za kurseve (M08). Kartice 1–3 ispod ostaju kao predlog za 2027.
+- **Novi tekstovi: dva puta mesečno** (Gorica, odgovor 11).
+
 ## Uvod sekcije
 
 | Element | SR | EN |
@@ -22,8 +26,8 @@ Glavni deo sajta (brief: „glavni fokus su edukacije, snimljeni kursevi i digit
 | 2 EN | At your own pace | Recorded courses | Video lessons with chart examples and exercises. Watch them when it suits you and keep them for good. | From € [price] | Browse courses |
 | 3 SR | Za preuzimanje | Digitalni proizvodi | Radne sveske, radni listovi za karte i godišnji vodič kroz velike tranzite, spremni za štampu ili ekran. | Od [cena] € | Pogledaj ponudu |
 | 3 EN | To download | Digital products | Workbooks, chart worksheets and the yearly guide to the major transits, ready to print or use on screen. | From € [price] | See the shop |
-| 4 SR | Besplatno | Tekstovi | Goričini autorski tekstovi o planetama, tranzitima i tome kako se astrologija zaista radi. Dobro mesto za početak. | Novo svake [nedelje] | Čitaj tekstove |
-| 4 EN | Free | Articles | Gorica's own writing on planets, transits and how astrology is actually practised. A good place to start. | New every [week] | Read the articles |
+| 4 SR | Besplatno | Tekstovi | Goričini autorski tekstovi o planetama, tranzitima i tome kako se astrologija zaista radi. Dobro mesto za početak. | Novo dva puta mesečno | Čitaj tekstove |
+| 4 EN | Free | Articles | Gorica's own writing on planets, transits and how astrology is actually practised. A good place to start. | New twice a month | Read the articles |
 
 ## Strana jednog kursa (šablon, `specs/04`)
 Za svaki kurs treba: ishod (šta ćeš znati na kraju), za koga je, program po lekcijama, format, trajanje, cena, predavač, česta pitanja, dugme za upis.
@@ -59,7 +63,5 @@ Pre objave: proveriti da li su tranziti još aktuelni (neki su vezani za 2025), 
 ## Nove teme (predlog, bez izmišljenih podataka o pretrazi)
 Teme postoje u njenim videima, pa se brzo pretvaraju u tekst: Saturn u Ovnu (14. 2. 2026 – 13. 4. 2028, proveriti u efemeridi), Uran u Blizancima, retrogradni Merkur u Ribama, retrogradna Venera, karijera u natalnoj karti.
 
-## Za Goricu
-- Koje kurseve i programe ima **na startu** sajta (P05 u `status/decisions.md`)? Nazivi, cene, datumi.
-- Koje digitalne proizvode ima ili planira?
-- Koliko često može da objavljuje tekstove (svake nedelje, dve nedelje, mesečno)?
+## Za Goricu (2027)
+- Kursevi, programi i digitalni proizvodi: nazivi, cene, datumi (pitanja 8–10, odložena za 2027).

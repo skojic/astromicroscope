@@ -18,6 +18,6 @@ Skuplja mejlove ljudi koje zanimaju nove lekcije, tekstovi i otvaranje kurseva. 
 | Greška | Ta adresa ne izgleda ispravno. Proveri i pokušaj ponovo. | That address doesn't look right. Please check it and try again. |
 | Saglasnost | Prijavom prihvataš [politiku privatnosti]. | By subscribing you accept the [privacy policy]. |
 
-## Za Goricu
-- Da li već ima mejl listu ili nalog (Mailchimp, MailerLite…)? Odluka o alatu je deo P02.
-- Da li želi poklon za prijavu (na primer besplatan PDF vodič kroz tranzite 2026)?
+## Odgovori Gorice (2026-11-02)
+- **Ima aktivan nalog na MailerLite-u.** Forma za prijavu se povezuje sa njim (M12); API ključ nikad u repo (`specs/09`).
+- **Bez poklona** za prijavu.

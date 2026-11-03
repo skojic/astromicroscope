@@ -35,7 +35,7 @@ Channel @astromicroscope (UCv3_4mUPiMaAY-TftEUfdKA); questionnaire 18–19
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-Videos have no subtitles; transcripts need work
+Videos have no subtitles; transcripts need work. Gorica cannot subtitle the existing videos for now; new videos will have subtitles; no English videos yet
 
 
 ## Component specs (moved from `modules/`)

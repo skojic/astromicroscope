@@ -24,6 +24,6 @@ Besplatne lekcije sa YouTube kanala @astromicroscope grade poverenje i vode ka k
 ## Važno za SEO
 Video snimci **nemaju titlove**, pa Google i AI alati ne znaju šta se u njima govori. Za svaki video na sajtu treba: kratak pisani sažetak, ključni datumi i transkript. To je najbrži način da sadržaj koji već postoji počne da se pronalazi (`specs/04`, „quick win").
 
-## Za Goricu
-- Može li da doda titlove na YouTube-u, ili da napravimo transkript automatski pa da ga ona proveri?
-- Da li su video snimci samo na srpskom, i da li planira i engleske?
+## Odgovori Gorice (2026-11-02)
+- Za **postojeće** video snimke trenutno ne može da radi titlove; **novi** snimci će imati titlove. Za postojeće: transkript se pravi automatski (M11) i označava kao neproveren dok ga Gorica ne pregleda.
+- Video snimci na engleskom: **ne još**.

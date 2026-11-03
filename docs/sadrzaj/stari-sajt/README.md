@@ -21,12 +21,15 @@ Nije preuzeto namerno: podaci korisnika, porudžbine (WooCommerce), poruke iz ko
 Ukupno oko 20.000 reči autorskog teksta. Tekstovi su osnova za `/tekstovi/` na novom sajtu: pre objave proveriti datume tranzita u efemeridi i doraditi naslove po `specs/04-content.md` (pitanje u naslovu, odgovor u prvom pasusu).
 
 ## Šta smo saznali (uneto u fajlove 01–07)
-- Diplomirala 2025. na **Astrološkom institutu Johannes Kepler**, zvanje **astrolog istraživač** (potvrđeno i na keplerunited.org, lista diplomiranih astrologa).
-- Astrologijom se bavi od 2000, edukaciju počela 2005. kod astrologa Nikole Stojanovića; više od 20 godina rada.
+- Diplomirala 2025. na **Astrološkom institutu Johannes Kepler** (na keplerunited.org vodi se kao „astrolog istraživač"). Na sajtu se po njenoj odluci piše **profesionalni astrolog** (D20).
+- Astrologijom se bavi od 2000; više od 20 godina rada. Stari tekst pominje edukaciju kod Nikole Stojanovića od 2005; po Goričinoj odluci to se **ne prenosi** na novi sajt (D20).
 - Oblasti: natalna, prediktivna i karmička astrologija; posebno je inspiriše **dečja astrologija** i evolutivna astrologija.
 - Ime: Devica sa podznakom u Škorpiji, „mikro" kao preciznost i pažnja prema detalju.
 - Usluge na starom sajtu: natalna karta, godišnji horoskop (solarna karta), uporedni horoskop (emotivni ili poslovni), konsultacija o trenutnoj situaciji, astro analiza perioda za 12 meseci, astro seansa za stare klijente. Cene nisu bile objavljene.
 - Ton: usluge su pisane sa **ti**, a „O meni" i „Kontakt" sa **vi**.
+
+## Spam adrese
+[`spam-adrese.md`](spam-adrese.md): 143 adrese ubačenih članaka, za odgovor 410 u M13.
 
 ## Bezbednost: stari sajt je bio hakovan
 U bazi je, pored ovih strana, oko 140 spam članaka o kazinima na desetak jezika, ubačenih od juna 2026. Zato:

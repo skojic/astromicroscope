@@ -1,69 +1,67 @@
-# 05 · O meni (O Gorici)
+# 05 · O meni
 
-Modul: `about` · Sekcija na početnoj + `/o-meni/` i `/en/about/` · Isto služi i kao autorski okvir ispod svakog teksta
+Modul: M10 (`plan/modules/M10-about-contact-legal/`) · Sekcija na početnoj + `/o-meni/` i `/en/about/` · Isto služi i kao autorski okvir ispod svakog teksta
 
 ## Svrha
-Gradi poverenje: ko je Gorica, šta je završila, kako radi. Google i AI alati koriste ovu stranu da procene da li je autor stručan, zato su diploma, institucija i godine rada navedeni precizno.
+Gradi poverenje: ko je Gorica, šta je završila, kako radi. Google i AI alati koriste ovu stranu da procene da li je autor stručan.
 
-Izvor: stari sajt (`stari-sajt/tekstovi/o-meni.md`, `zasto-astromicroscope.md`) i lista diplomiranih astrologa na keplerunited.org.
+Izvor: Goričini odgovori na upitnik (2026-11-02) i njen tekst sa starog sajta (`stari-sajt/tekstovi/o-meni.md`). Piše se u **prvom licu („ja")**, a posetiocu se obraća sa **„ti"**.
+
+## Zvanje
+- Na sajtu: **profesionalni astrolog** / **Professional Astrologer** (odluka Gorice).
+- Diploma kao činjenica: Astrološki institut Johannes Kepler, 2025.
+- Ne pominje se Nikola Stojanović: Gorica nema zvaničnu potvrdu o toj edukaciji.
 
 ## Sekcija na početnoj
 
 | Element | SR | EN |
 |---|---|---|
-| H2 | Gorica Vićentijević, astrolog istraživač. | Gorica Vićentijević, research astrologer. |
-| Tekst 1 | Astrologijom se bavim više od dvadeset godina, a 2025. sam diplomirala na Astrološkom institutu Johannes Kepler i stekla zvanje astrologa istraživača. Bavim se natalnom, prediktivnom i karmičkom astrologijom, a najviše me inspiriše dečja astrologija. | I have worked with astrology for more than twenty years, and in 2025 I graduated from the Johannes Kepler Astrological Institute as a research astrologer. I work with natal, predictive and karmic astrology, and children's astrology inspires me most. |
-| Tekst 2 | Ovde predajem ono što sam naučila: pažljivo, sa objašnjenim svakim korakom i bez obećanja koja karta ne može da ispuni. | Here I teach what I have learned: carefully, with every step explained, and without promises a chart cannot keep. |
-| Činjenica 1 | Institut Johannes Kepler · Astrolog istraživač, 2025. | Johannes Kepler Institute · Research astrologer, 2025 |
+| H2 | Gorica Vićentijević, profesionalni astrolog. | Gorica Vićentijević, professional astrologer. |
+| Tekst 1 | Astrologijom se bavim više od dvadeset godina, a 2025. sam diplomirala na Astrološkom institutu Johannes Kepler. Posebno me zanimaju porodično nasleđe, nesvesni obrasci i uticaj ranog detinjstva na to ko postajemo. | I have worked with astrology for more than twenty years, and in 2025 I graduated from the Johannes Kepler Astrological Institute. I am especially drawn to family inheritance, unconscious patterns and how early childhood shapes who we become. |
+| Tekst 2 | Ovde delim ono što znam: pažljivo, sa objašnjenim svakim korakom i bez obećanja koja karta ne može da ispuni. | Here I share what I know: carefully, with every step explained, and without promises a chart cannot keep. |
+| Činjenica 1 | Institut Johannes Kepler · Diploma 2025. | Johannes Kepler Institute · Graduated 2025 |
 | Činjenica 2 | 20+ godina · Rada i istraživanja | 20+ years · Of practice and research |
-| Činjenica 3 | Onlajn · Srpski i engleski | Online · Serbian and English |
+| Činjenica 3 | Telefonom · Srpski | By phone · Serbian |
 | Dugme | Više o meni | More about me |
 
-Napomena: u dizajnu D piše „diplomirani astrolog"; pravo zvanje je **astrolog istraživač** i tako treba pisati svuda (hero, SEO, strukturirani podaci). Strana se piše u **prvom licu** („ja"), potvrdila Gorica 2026-11-02.
+Napomena za činjenicu 3: analize su telefonom; da li radi i na engleskom nije potvrđeno, pa je navedeno samo „srpski" dok Gorica ne kaže drugačije.
 
-## Kako radim (tri principa)
+## Citat
+- SR (sa starog sajta): „Sve dok nesvesno ne postane svesno, ono će upravljati tvojim životom, a ti ćeš to zvati sudbinom." (C. G. Jung)
+- EN (Goričin izbor): “When an inner situation is not made conscious, it happens outside, as fate.” (C. G. Jung)
 
-| SR | EN |
-|---|---|
-| **Pokazati metod.** Svaki zaključak dolazi sa detaljem iz karte na kom počiva, pa naučiš da ga vidiš i bez pomoći. | **Show the method.** Every conclusion comes with the chart detail behind it, so you learn to see it yourself. |
-| **Bez fatalizma.** Karta opisuje sklonosti i tajming, a ne presudu. Odlaziš sa mogućnostima, a ne sa strahom. | **No fatalism.** A chart describes tendencies and timing, not a verdict. You leave with options, not fear. |
-| **Pod mikroskopom.** Rođena sam u znaku Device sa podznakom u Škorpiji, i klijenti često kažu da primećujem svaku sitnicu. Odatle i ime Astromicroscope. | **Under the microscope.** I am a Virgo with Scorpio rising, and clients often say I notice every detail. That is where the name Astromicroscope comes from. |
+## Puna strana „O meni" (njen tekst, prvo lice)
 
-Treći princip zamenjuje „Jednostavno i praktično" iz dizajna D, jer objašnjava ime brenda njenim rečima. Brief ipak traži i jednostavnost; Gorica bira.
+1. **Citat** (gore).
+2. **Kako je počelo** (stari sajt, bez izmena smisla): zainteresovala se 2000, kad je prvi put postala majka; roditeljstvo kao najvažnija misija; knjiga koju joj je poklonila pedijatrica i planete kao „pravi priručnik"; Mesec u natalnoj karti i odnos majke i deteta; 2003. drugo dete, sa Mesecom u Vodoliji („Majka astrolog").
+3. ~~Edukacija kod Nikole Stojanovića~~: **izbačeno** po Goričinoj odluci. Tekst sa starog sajta se zadržava **do tog dela**.
+4. **Diploma**: 2025. diplomirala na Astrološkom institutu Johannes Kepler.
+5. **Šta me posebno zanima** (Goričin nov tekst):
+   > Posebno interesovanje u mom astrološkom radu usmereno je na istraživanje porodičnog nasleđa, genetskih predispozicija, nesvesnih obrazaca i uticaja ranog detinjstva na formiranje ličnosti i kasnije životne izbore.
+   >
+   > Posebnu oblast mog interesovanja predstavljaju razvojni put deteta, različite faze odrastanja i uloga roditelja u prepoznavanju i podržavanju individualnih potencijala deteta.
+6. **Zašto Astromicroscope**: Devica sa podznakom u Škorpiji, preciznost i pažnja prema detalju (stari sajt).
+7. **Danas**: više od 20 godina rada; pomaže ti da bolje upoznaš sebe, svoje dete i odnose koji te oblikuju.
+8. Linkovi: Instagram @astromicroscope, YouTube @astromicroscope.
 
-## Puna strana „O meni" (predlog strukture, njen tekst sa starog sajta)
+Za proveru sa Goricom: odgovor „zadržati tekst do dela u kojem se pominje Stojanović" je protumačen kao „izbaciti taj pasus, a ostalo zadržati", jer je posle njega diploma i njen nov tekst o interesovanjima. Ako je mislila da se sve posle toga briše, ostaju samo tačke 1, 2 i 5.
 
-1. **Citat**: „Sve dok nesvesno ne postane svesno, ono će upravljati tvojim životom, a ti ćeš to zvati sudbinom." (C. G. Jung)
-2. **Kako je počelo** (prvo lice, njenim rečima): zainteresovala se 2000, kad je prvi put postala majka; astrologija kao vodič u razumevanju deteta; drugo dete 2003, sa Mesecom u Vodoliji („Majka astrolog").
-3. **Školovanje**: od oktobra 2005. edukacija kod astrologa Nikole Stojanovića; 2025. diploma na Astrološkom institutu Johannes Kepler, zvanje astrolog istraživač.
-4. **Šta je najviše zanima**: evolutivna i karmička astrologija, a pre svega dečja astrologija („ako dete ne usmerimo na početku njegovog puta, kasnije isceljujemo rane iz detinjstva").
-5. **Zašto Astromicroscope**: Devica, podznak u Škorpiji, preciznost i pažnja prema detalju.
-6. **Danas**: više od 20 godina rada; pomaže ljudima da upoznaju sebe, svoje dete i odnose; „vaš put, svrhu i misiju duše".
-7. Linkovi: Instagram @astromicroscope, YouTube @astromicroscope.
-
-Engleska verzija se piše kao prilagođen prevod, ne doslovan, i proverava je izvorni govornik (`specs/04`).
+Stari tekst je pisan sa „vi"; pri prenosu (M02) se prilagođava na „ti" (odluka o tonu), bez promene smisla.
 
 ## Slika
-
 | | SR | EN |
 |---|---|---|
-| Fajl | **nova fotografija, Gorica je bira** (2026-11-02); dodaje se kad stigne | |
-| Alt tekst | Gorica Vićentijević, astrolog istraživač | Gorica Vićentijević, research astrologer |
+| Fajl | `slike/gorica-portret.jpg` (1066 × 1599, svetla pozadina, bež sako), poslala Gorica 2026-11-02 | |
+| Alt tekst | Gorica Vićentijević, profesionalni astrolog | Gorica Vićentijević, professional astrologer |
 
-Za sajt se pravi AVIF/WebP u više veličina (`srcset`), po planu modula M10 (`plan/modules/M10-about-contact-legal/PLAN.md`). Ako postoji fotografija veće rezolucije, bolje je krenuti od nje.
+Za sajt se pravi AVIF/WebP u više veličina (`srcset`) u modulu M10.
 
 ## SEO
-
 | Polje | SR | EN |
 |---|---|---|
-| Title | O meni · Gorica Vićentijević, astrolog istraživač | About · Gorica Vićentijević, research astrologer |
-| Meta description | Gorica Vićentijević, astrolog istraživač (Institut Johannes Kepler, 2025). Više od 20 godina rada u natalnoj, prediktivnoj, karmičkoj i dečjoj astrologiji. | Gorica Vićentijević, research astrologer (Johannes Kepler Institute, 2025). Over 20 years in natal, predictive, karmic and children's astrology. |
-| Strukturirani podaci | `ProfilePage` + `Person` (`jobTitle`, `alumniOf`: Johannes Kepler institut, `knowsAbout`, `sameAs`: Instagram, YouTube) | |
-
-## Odgovori Gorice (2026-11-02)
-- Nikola Stojanović sme da se pomene po imenu.
-- Strana je u prvom licu („ja").
-- Portret se menja: Gorica bira novu fotografiju, dodaje se kad stigne.
+| Title | O meni · Gorica Vićentijević, profesionalni astrolog | About · Gorica Vićentijević, professional astrologer |
+| Meta description | Gorica Vićentijević, profesionalni astrolog (Institut Johannes Kepler, 2025). Porodično nasleđe, nesvesni obrasci, dečja astrologija; 20+ godina rada. | Gorica Vićentijević, professional astrologer (Johannes Kepler Institute, 2025). Family inheritance, unconscious patterns, children's astrology; 20+ years. |
+| Strukturirani podaci | `ProfilePage` + `Person` (`jobTitle`: Professional Astrologer, `alumniOf`: Johannes Kepler institut, `knowsAbout`, `sameAs`: Instagram, YouTube) | |
 
 ## Još otvoreno
-- Engleski naziv zvanja: „research astrologer" ili kako ga institut prevodi?
+- Da li radi analize i na engleskom (činjenica 3)?
