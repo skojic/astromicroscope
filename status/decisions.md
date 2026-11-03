@@ -27,6 +27,7 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D20 | 2026-11-02 | Headline “Astrologija u službi evolucije svesti”; credential on the site **profesionalni astrolog / Professional Astrologer** (Johannes Kepler Institute, 2025); Nikola Stojanović is not mentioned. Replaces “research astrologer” from M01-03 | Gorica's answers (3–5) |
 | D21 | 2026-11-02 | Newsletter on Gorica's existing **MailerLite** account, no sign-up gift; new articles **twice a month**; contact reply within three days; no other social networks | Gorica's answers (11, 20–24) |
 | D22 | 2026-11-03 | **2026 yearly horoscope depends on the edition current at launch.** The 12 texts are always converted to the sign schema (M02-03; needed for the old-URL map). If the 2027 edition is ready before launch: 2026 is not published at launch, gets no tone edit and no translation, and old 2026 URLs redirect to the 2027 sign pages. If 2027 is late: 2026 is the current edition and gets the full work (ti, D18; English, D17). No Serbian-only archive is published (`specs/05`). Until Gorica gives a date for 2027: no manual tone or translation work on 2026, machine translation only | Srdjan, PR #5 review; avoids editing about 7,000 words that may never be published |
+| D23 | 2026-11-03 | **G0 for M00 Foundation: go** (Srdjan). M00 moves from `idea` to `approved`. | Srdjan's instruction in session |
 
 ## Pending
 | ID | Question | Owner | Blocks |
