@@ -1,0 +1,105 @@
+---
+// Star field behind the hero (signature interaction 1). Decorative, aria-hidden.
+// Rules from specs/07: starts when the browser is idle, runs only while visible, is a still picture under
+// prefers-reduced-motion, and on touch screens (no cursor) is a still, sparser picture.
+---
+<canvas data-stars aria-hidden="true"></canvas>
+<style>
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+</style>
+<script>
+  const cv = document.querySelector<HTMLCanvasElement>('canvas[data-stars]');
+  const sky = cv?.parentElement;
+  const cx = cv?.getContext('2d');
+  if (cv && sky && cx) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const touch = matchMedia('(pointer: coarse)').matches;
+    const still = reduce || touch;
+    const GAP = touch ? 40 : 28, RADIUS = 210;
+    const TINTS: Record<string, string> = { w: '234,240,248', g: '232,200,120', p: '157,188,230' };
+    type Pt = { x: number; y: number; o: number; s: number; c: string };
+    type Spark = { x: number; y: number; vx: number; vy: number; size: number; life: number; max: number; c: string };
+    let W = 0, H = 0, pts: Pt[] = [], sparks: Spark[] = [], raf = 0, visible = true;
+    let mouse = { x: -999, y: -999 }, last: { x: number; y: number } | null = null;
+    const t0 = performance.now();
+
+    const size = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const r = sky.getBoundingClientRect();
+      W = r.width; H = r.height;
+      cv.width = W * dpr; cv.height = H * dpr;
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pts = [];
+      for (let y = GAP / 2; y < H; y += GAP) for (let x = GAP / 2; x < W; x += GAP) {
+        const k = Math.random();
+        pts.push({ x: x + (Math.random() - .5) * 8, y: y + (Math.random() - .5) * 8, o: Math.random() * 6.28, s: .6 + Math.random() * .9, c: k < .07 ? 'g' : k < .11 ? 'p' : 'w' });
+      }
+      if (still) draw(t0);
+    };
+
+    // four-point star, like the sparkles in the logo
+    const sparkle = (x: number, y: number, s: number, rgb: string, a: string) => {
+      cx.fillStyle = `rgba(${rgb},${a})`;
+      cx.beginPath();
+      cx.moveTo(x, y - s);
+      cx.quadraticCurveTo(x, y, x + s, y);
+      cx.quadraticCurveTo(x, y, x, y + s);
+      cx.quadraticCurveTo(x, y, x - s, y);
+      cx.quadraticCurveTo(x, y, x, y - s);
+      cx.fill();
+    };
+
+    function draw(now: number) {
+      const t = (now - t0) / 1000;
+      cx!.clearRect(0, 0, W, H);
+      for (const p of pts) {
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const near = Math.max(0, 1 - Math.hypot(dx, dy) / RADIUS), ease = near * near;
+        const tw = .55 + .45 * Math.sin(t * 1.1 + p.o);
+        const a = Math.min(1, (.12 + .22 * tw) * p.s + ease * .85);
+        const x = p.x + dx * ease * .12, y = p.y + dy * ease * .12 - ease * 6;
+        if (ease > .18) sparkle(x, y, 1.4 + ease * 7 * p.s, TINTS[p.c === 'w' && ease > .5 ? 'g' : p.c], a.toFixed(3));
+        else { cx!.fillStyle = `rgba(${TINTS[p.c]},${a.toFixed(3)})`; const z = 1.1 * p.s + ease * 2; cx!.fillRect(x - z / 2, y - z / 2, z, z); }
+      }
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.life -= 1 / 60;
+        if (s.life <= 0) { sparks.splice(i, 1); continue; }
+        s.x += s.vx; s.y += s.vy; s.vy += .02; s.vx *= .98;
+        const k = s.life / s.max;
+        sparkle(s.x, s.y, s.size * (.4 + k * .6), TINTS[s.c], (k * .95).toFixed(3));
+      }
+      if (!still && visible) raf = requestAnimationFrame(draw);
+    }
+
+    const move = (e: PointerEvent) => {
+      const r = sky.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const inside = x >= 0 && y >= 0 && x <= r.width && y <= r.height;
+      mouse = inside ? { x, y } : { x: -999, y: -999 };
+      if (!inside) { last = null; return; }
+      const dist = last ? Math.hypot(x - last.x, y - last.y) : 0;
+      const n = Math.min(3, 1 + Math.floor(dist / 18));
+      for (let i = 0; i < n && sparks.length < 90; i++) {
+        const k = Math.random(), max = .6 + Math.random() * .6;
+        sparks.push({ x: x + (Math.random() - .5) * 10, y: y + (Math.random() - .5) * 10, vx: (Math.random() - .5) * .9, vy: (Math.random() - .5) * .9 - .2, size: 2 + Math.random() * 4, life: max, max, c: k < .55 ? 'g' : k < .8 ? 'w' : 'p' });
+      }
+      last = { x, y };
+    };
+
+    // Start only when the browser is idle, so the hero text paints first.
+    const start = () => {
+      size();
+      addEventListener('resize', size);
+      if (still) return;
+      addEventListener('pointermove', move, { passive: true });
+      new IntersectionObserver(([en]) => {
+        const was = visible; visible = en.isIntersecting;
+        if (visible && !was) raf = requestAnimationFrame(draw);
+      }).observe(sky);
+      raf = requestAnimationFrame(draw);
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+    else setTimeout(start, 200);
+  }
+</script>

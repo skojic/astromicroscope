@@ -1,0 +1,103 @@
+---
+// The natal chart with a magnifying lens (signature interaction 2, plan/concept.md). The chart and the lens at its starting
+// place are drawn on the server, so the hero is complete without JavaScript; the script only moves the lens.
+// Geometry and colours follow brand/home-reference.html.
+import { t, type Lang } from '../../i18n/core';
+import { homeStrings } from '../../i18n/home';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const C = 300, R1 = 280, R2 = 235, R3 = 165, R4 = 60;
+const LINE = '#EAF0F8', DIM = 'rgba(234,240,248,.45)', SOFT = '#9DBCE6', GOLD = '#D4AF5C';
+const f = (n: number) => n.toFixed(2);
+const pt = (r: number, deg: number): [number, number] => { const a = (deg - 90) * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
+const out: string[] = [];
+out.push(`<circle cx="${C}" cy="${C}" r="${R1}" fill="#141C60" stroke="${LINE}" stroke-width="1.5"/>`);
+out.push(`<circle cx="${C}" cy="${C}" r="${R2}" fill="none" stroke="${LINE}" stroke-width="1"/>`);
+out.push(`<circle cx="${C}" cy="${C}" r="${R3}" fill="none" stroke="${DIM}" stroke-width=".75"/>`);
+out.push(`<circle cx="${C}" cy="${C}" r="${R4}" fill="none" stroke="${DIM}" stroke-width=".75"/>`);
+for (let d = 0; d < 360; d += 2) {
+  const [x1, y1] = pt(R2, d), [x2, y2] = pt(R2 + (d % 10 === 0 ? 10 : 5), d);
+  out.push(`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${LINE}" stroke-width=".5"/>`);
+}
+['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'].forEach((s, i) => {
+  const [x1, y1] = pt(R2, i * 30), [x2, y2] = pt(R1, i * 30);
+  out.push(`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${LINE}" stroke-width="1"/>`);
+  const [tx, ty] = pt((R1 + R2) / 2 + 4, i * 30 + 15);
+  out.push(`<text x="${f(tx)}" y="${f(ty)}" text-anchor="middle" dominant-baseline="central" font-size="22" fill="${i % 2 ? SOFT : LINE}">${s}&#xFE0E;</text>`);
+});
+const asc = 17;
+for (let h = 0; h < 12; h++) {
+  const d = asc + h * 30 + (h % 3) * 4;
+  const [x1, y1] = pt(R4, d), [x2, y2] = pt(R3, d);
+  out.push(`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${DIM}" stroke-width="${h % 3 === 0 ? 1.5 : .6}"/>`);
+  const [nx, ny] = pt(R4 + 14, d + 13);
+  out.push(`<text x="${f(nx)}" y="${f(ny)}" text-anchor="middle" dominant-baseline="central" font-size="9" fill="${DIM}" font-family="Schibsted Grotesk">${h + 1}</text>`);
+}
+const planets: [string, number, string][] = [['☉', 212, GOLD], ['☽', 78, LINE], ['☿', 226, LINE], ['♀', 188, SOFT], ['♂', 301, LINE], ['♃', 112, LINE], ['♄', 345, LINE], ['♅', 52, DIM], ['♆', 2, DIM], ['♇', 300.5, DIM]];
+const pos: [number, number][] = [];
+planets.forEach(([g, d, c], i) => {
+  const [x, y] = pt(R3 + 30 + (i % 2) * 18, d);
+  pos[i] = pt(R3, d);
+  out.push(`<text x="${f(x)}" y="${f(y)}" text-anchor="middle" dominant-baseline="central" font-size="20" fill="${c}">${g}&#xFE0E;</text>`);
+  const [a, b] = pt(R3, d), [e, g2] = pt(R3 + 8, d);
+  out.push(`<line x1="${f(a)}" y1="${f(b)}" x2="${f(e)}" y2="${f(g2)}" stroke="${c}" stroke-width="1.5"/>`);
+});
+([[0, 5, GOLD], [1, 3, SOFT], [2, 6, SOFT], [4, 7, GOLD], [0, 7, DIM], [3, 8, GOLD], [5, 9, SOFT]] as [number, number, string][]).forEach(([a, b, c]) => {
+  out.push(`<line x1="${f(pos[a][0])}" y1="${f(pos[a][1])}" x2="${f(pos[b][0])}" y2="${f(pos[b][1])}" stroke="${c}" stroke-width="1" opacity=".9"/>`);
+});
+const wheel = out.join('');
+const X = 410, Y = 230, S = 2.3, LR = 92;
+const cross = `M${X - LR} ${Y}h70M${X + 22} ${Y}h70M${X} ${Y - LR}v70M${X} ${Y + 22}v70`;
+---
+<figure class="scope">
+  <svg id="chart" viewBox="0 0 600 600" role="img" aria-label={t(homeStrings, 'chartLabel', lang)} data-scale={S} data-radius={LR}>
+    <defs>
+      <g id="wheel" set:html={wheel} />
+      <clipPath id="lensClip"><circle id="lensClipCircle" cx={X} cy={Y} r={LR} /></clipPath>
+    </defs>
+    <use href="#wheel" />
+    <g clip-path="url(#lensClip)">
+      <circle cx={C} cy={C} r="300" fill="#1B2570" />
+      <g id="lensZoom" transform={`translate(${X} ${Y}) scale(${S}) translate(${-X} ${-Y})`}><use href="#wheel" /></g>
+    </g>
+    <circle id="lensRing" cx={X} cy={Y} r={LR} fill="none" stroke={GOLD} stroke-width="3" />
+    <circle id="lensRing2" cx={X} cy={Y} r={LR + 6} fill="none" stroke={SOFT} stroke-width="1" />
+    <path id="lensCross" d={cross} stroke={GOLD} stroke-width="1" opacity=".8" fill="none" />
+  </svg>
+  <figcaption><span>{t(homeStrings, 'lensCaption', lang)}</span><span>{t(homeStrings, 'chartNote', lang)}</span></figcaption>
+</figure>
+<style>
+  .scope { margin: 0; }
+  svg { display: block; width: 100%; height: auto; aspect-ratio: 1; touch-action: none; border-radius: 50%; }
+  svg:focus-visible { outline: 2px solid var(--am-focus-on-dark); outline-offset: 6px; }
+  figcaption { display: flex; justify-content: space-between; gap: var(--am-space-4); margin-top: var(--am-space-3); font: var(--am-text-small); color: rgba(234, 240, 248, .75); }
+</style>
+<script>
+  // Moves the lens with the pointer and the arrow keys. Without JavaScript the lens stays where the server drew it.
+  const svg = document.querySelector<SVGSVGElement>('#chart');
+  if (svg) {
+    const S = Number(svg.dataset.scale), R = Number(svg.dataset.radius);
+    const q = (id: string) => svg.querySelector<SVGElement>(`#${id}`)!;
+    const clip = q('lensClipCircle'), ring = q('lensRing'), ring2 = q('lensRing2'), cross = q('lensCross'), zoom = q('lensZoom');
+    let cur: [number, number] = [Number(clip.getAttribute('cx')), Number(clip.getAttribute('cy'))];
+    const place = (x: number, y: number) => {
+      x = Math.max(20, Math.min(580, x)); y = Math.max(20, Math.min(580, y));
+      for (const c of [clip, ring, ring2]) { c.setAttribute('cx', String(x)); c.setAttribute('cy', String(y)); }
+      zoom.setAttribute('transform', `translate(${x} ${y}) scale(${S}) translate(${-x} ${-y})`);
+      cross.setAttribute('d', `M${x - R} ${y}h70M${x + 22} ${y}h70M${x} ${y - R}v70M${x} ${y + 22}v70`);
+      cur = [x, y];
+    };
+    svg.setAttribute('tabindex', '0');
+    svg.addEventListener('pointermove', (e) => {
+      const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY;
+      const m = svg.getScreenCTM();
+      if (m) { const r = p.matrixTransform(m.inverse()); place(r.x, r.y); }
+    });
+    svg.addEventListener('keydown', (e) => {
+      const move = ({ ArrowLeft: [-20, 0], ArrowRight: [20, 0], ArrowUp: [0, -20], ArrowDown: [0, 20] } as Record<string, [number, number]>)[e.key];
+      if (move) { e.preventDefault(); place(cur[0] + move[0], cur[1] + move[1]); }
+    });
+  }
+</script>

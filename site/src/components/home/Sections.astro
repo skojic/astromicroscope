@@ -1,0 +1,20 @@
+---
+// Assembles the home sections in the order of plan/concept.md. Each section module provides
+// components/sections/<name>/HomeSection.astro with one prop, `lang`; until it exists this shows Pending (non-production builds only).
+import type { Lang } from '../../i18n/core';
+import Pending from '../ui/Pending.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const order = ['learn', 'horoscope', 'articles', 'videos', 'analyses', 'about', 'newsletter'] as const;
+const found = import.meta.glob<{ default: any }>('../sections/*/HomeSection.astro', { eager: true });
+const sections = order.map((name) => ({ name, Component: found[`../sections/${name}/HomeSection.astro`]?.default }));
+---
+{sections.map(({ name, Component }) => (
+  Component
+    ? <Component lang={lang} />
+    : <div class="container pending"><Pending lang={lang} name={name} /></div>
+))}
+<style>
+  .pending { padding: var(--am-space-5) 0; }
+</style>

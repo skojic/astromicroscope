@@ -1,16 +1,13 @@
 ---
-// Demo page for M00; M05 replaces it with the real home page.
+// Home page (M05-04): hero, then the section modules in the order of plan/concept.md. A section that does not exist yet shows Pending.
 import Page from '../layouts/Page.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
-import Pending from '../components/ui/Pending.astro';
+import Hero from '../components/home/Hero.astro';
+import Sections from '../components/home/Sections.astro';
+import { t } from '../i18n/core';
+import { homeStrings } from '../i18n/home';
+const lang = 'sr';
 ---
-<Page lang="sr" title="Astromikroskop" description="Astrologija u službi evolucije svesti." translationKey="home">
-  <div class="container">
-    <h1>Astromikroskop</h1>
-    <p>Početna strana je u izradi.</p>
-    <Card title="Kartica"><p>Primer kartice iz brend kita.</p></Card>
-    <p><Button href="/en/">English</Button></p>
-    <Pending lang="sr" name="Obrazovanje" />
-  </div>
+<Page lang={lang} title={t(homeStrings, 'title', lang)} description={t(homeStrings, 'description', lang)} translationKey="home">
+  <Hero lang={lang} />
+  <Sections lang={lang} />
 </Page>
