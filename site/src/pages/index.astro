@@ -1,16 +1,16 @@
 ---
+// Demo page for M00; M05 replaces it with the real home page.
+import Page from '../layouts/Page.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Pending from '../components/ui/Pending.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Page lang="sr" title="Astromikroskop" description="Astrologija u službi evolucije svesti." translationKey="home">
+  <div class="container">
+    <h1>Astromikroskop</h1>
+    <p>Početna strana je u izradi.</p>
+    <Card title="Kartica"><p>Primer kartice iz brend kita.</p></Card>
+    <p><Button href="/en/">English</Button></p>
+    <Pending lang="sr" name="Obrazovanje" />
+  </div>
+</Page>

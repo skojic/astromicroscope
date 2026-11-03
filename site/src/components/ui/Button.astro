@@ -1,0 +1,33 @@
+---
+// Button or link styled as a button (brand/home-reference.html). `variant` ghost is the outlined one; `onDark` is for Midnight sections.
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost';
+  onDark?: boolean;
+  type?: 'button' | 'submit';
+}
+const { href, variant = 'primary', onDark = false, type = 'button' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class:list={['btn', variant, { 'on-dark': onDark }]}
+  {...(href ? { href } : { type })}
+>
+  <slot />
+</Tag>
+<style>
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font: var(--am-text-ui); text-decoration: none; cursor: pointer; border: 0;
+    padding: 15px 22px; border-radius: var(--am-radius-pill);
+    background: var(--am-action); color: var(--am-white);
+    transition: background var(--am-duration-fast) var(--am-ease);
+  }
+  .btn:hover { background: var(--am-action-hover); color: var(--am-white); }
+  .ghost { background: transparent; color: var(--am-ink); box-shadow: inset 0 0 0 1.5px var(--am-ink); }
+  .ghost:hover { background: transparent; color: var(--am-ink); box-shadow: inset 0 0 0 1.5px var(--am-action); }
+  .on-dark { background: var(--am-action-on-dark); color: var(--am-midnight); }
+  .on-dark:hover { background: var(--am-white); color: var(--am-midnight); }
+  .on-dark.ghost { background: transparent; color: var(--am-sky-text); box-shadow: inset 0 0 0 1.5px rgba(234, 240, 248, .7); }
+  .on-dark:focus-visible { outline-color: var(--am-focus-on-dark); }
+</style>

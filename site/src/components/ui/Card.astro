@@ -1,0 +1,14 @@
+---
+// Card from brand/index.html: white, hairline border, small radius. `as` sets the heading level of the title.
+interface Props { title?: string; as?: 'h2' | 'h3' | 'h4' }
+const { title, as: Heading = 'h3' } = Astro.props;
+---
+<div class="card">
+  {title && <Heading class="title">{title}</Heading>}
+  <slot />
+</div>
+<style>
+  .card { background: var(--am-white); border: var(--am-border); border-radius: var(--am-radius-card); padding: var(--am-space-5); }
+  .title { font: 700 1.3rem/1.15 var(--am-font-sans); letter-spacing: -.02em; margin-bottom: var(--am-space-2); }
+  .card :global(p:last-child) { margin-bottom: 0; }
+</style>

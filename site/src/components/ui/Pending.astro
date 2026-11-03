@@ -1,0 +1,17 @@
+---
+// Stands in for a section module that is not built yet (plan/contracts.md section 5). Rendered in non-production builds only.
+import { t, type Lang } from '../../i18n/core';
+import { commonStrings } from '../../i18n/strings';
+
+interface Props { lang: Lang; name?: string }
+const { lang, name } = Astro.props;
+const show = import.meta.env.SITE_ENV !== 'production';
+---
+{show && (
+  <div class="pending" role="note">
+    {name && <strong>{name}: </strong>}{t(commonStrings, 'pending', lang)}
+  </div>
+)}
+<style>
+  .pending { border: 1px dashed var(--am-muted); border-radius: var(--am-radius-card); padding: var(--am-space-5); color: var(--am-text-muted); font: var(--am-text-small); }
+</style>

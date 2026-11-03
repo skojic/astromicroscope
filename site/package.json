@@ -7,11 +7,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "check": "node scripts/sync-brand.mjs --check && node scripts/check-content.mjs",
+    "test": "node --test test/*.test.ts",
+    "build": "npm run check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync:brand": "node scripts/sync-brand.mjs"
   },
   "dependencies": {
-    "astro": "7.4.5"
+    "astro": "7.4.5",
+    "yaml": "2.9.1"
   }
 }

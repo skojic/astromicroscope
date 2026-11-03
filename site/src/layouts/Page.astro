@@ -1,0 +1,24 @@
+---
+// Every page uses this layout (plan/contracts.md section 5). M03 fills `header` and `footer`; M04 reads the props for <Seo>.
+import Base from './Base.astro';
+import type { Lang } from '../i18n/core';
+
+export interface Breadcrumb { name: string; url: string }
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  translationKey: string;
+  breadcrumbs?: Breadcrumb[];
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const { lang, title, description } = Astro.props;
+---
+<Base lang={lang} title={title} description={description}>
+  <slot name="head" slot="head" />
+  <slot name="header" />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <slot name="footer" />
+</Base>

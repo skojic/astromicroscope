@@ -1,0 +1,10 @@
+---
+// Text link in the brand colour. Use for links inside text and for "read more" links.
+interface Props { href: string; arrow?: boolean }
+const { href, arrow = false } = Astro.props;
+---
+<a class="link" href={href}><slot />{arrow && <span aria-hidden="true"> →</span>}</a>
+<style>
+  .link { color: var(--am-action); font-weight: 600; text-decoration-thickness: 1px; }
+  .link:hover { color: var(--am-action-hover); text-decoration-thickness: 2px; }
+</style>

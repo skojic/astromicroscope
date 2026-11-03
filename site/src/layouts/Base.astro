@@ -1,0 +1,32 @@
+---
+// Document skeleton (M00). Head tags other than these come from M04's <Seo> through the `head` slot.
+import '../styles/global.css';
+import { htmlLang, type Lang } from '../i18n/core';
+import sansLatin from '../assets/fonts/SchibstedGrotesk-normal-latin.woff2?url';
+import serifLatin from '../assets/fonts/Newsreader-normal-latin.woff2?url';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+const { lang, title, description } = Astro.props;
+const isProduction = import.meta.env.SITE_ENV === 'production';
+---
+<!doctype html>
+<html lang={htmlLang(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {!isProduction && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
