@@ -27,7 +27,7 @@ Not started. Wait for: M00. Then read `PLAN.md` and `plan/contracts.md`, create 
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
 
 ## Requests to other modules
-- To MNN: what is needed and why.
+- From M08 and M09 (Srdjan, PR #5): the privacy page names both MailerLite lists (newsletter, course waitlist) and the phone number in the analysis request form.
 
 ## Test evidence
 | Check | Result | Date |

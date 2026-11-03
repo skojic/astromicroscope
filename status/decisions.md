@@ -32,6 +32,6 @@ Decided items are not changed silently. To change one, add a new entry that repl
 |---|---|---|---|
 | P02b | Remaining iteration-1 choices: form handling, analytics (newsletter: MailerLite, D21) (course platform and CMS moved to iteration 2, D14) | Srdjan | M12 |
 | P03 | Allow AI training crawlers (for example GPTBot)? Search crawlers are allowed either way | Gorica, Srdjan | robots.txt |
-| P04 | Domain astromicroscope.com in expired state at Hostinger: renew, auto-renew, registrar lock; DNS to Filip's Cloudflare later | Srdjan, Gorica | launch |
+| ~~P04~~ | ~~Domain astromicroscope.com in expired state at Hostinger: renew, auto-renew, registrar lock; DNS to Filip's Cloudflare later~~ resolved 2026-11-03: renewed until 2027-10-15, see A1 in `plan/challenge.md` | Srdjan, Gorica | launch |
 | ~~P05~~ | ~~Launch offer: which private analyses and prices~~ resolved by D19 | Gorica | M09 |
 | P06 | Prepayment for analyses while Gorica is not a registered business: how it is taken, invoices, terms (A9) | Gorica, Srdjan | M09, M12, launch |

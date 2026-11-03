@@ -16,7 +16,7 @@ The education section and hub show what you can learn for free now (articles, vi
 - Out: course pages, products, checkout, logins (iteration 2, `plan/iteration-2.md`)
 
 ## Inputs
-`docs/sadrzaj/02`; questionnaire 8–10
+`docs/sadrzaj/02`; course questions (questionnaire 8–10) postponed to 2027 (D14)
 
 ## Deliverables
 `site/src/components/sections/learn/`, `site/src/data/courses.*`, `products.*`, `site/src/pages/edukacija/**`, `site/src/pages/en/learn/**`, `site/src/i18n/learn.json`
@@ -26,7 +26,7 @@ The education section and hub show what you can learn for free now (articles, vi
 |---|---|---|
 | M08-01 | Home section: free learning formats + “Courses in 2027” with waitlist | |
 | M08-02 | Education hub linking articles, videos and horoscope | |
-| M08-03 | Waitlist call to action (uses the M12 form) | |
+| M08-03 | Waitlist call to action (uses the M12 form) | separate group in Gorica's MailerLite, apart from the newsletter; form and double opt-in in M12; the text says exactly what the person signs up for |
 
 ## Acceptance criteria
 - [ ] Section and hub make clear that courses start in 2027 and how to join the waitlist

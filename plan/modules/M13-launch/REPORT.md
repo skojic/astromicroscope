@@ -19,7 +19,7 @@ Not started. Wait for: all modules. Then read `PLAN.md` and `plan/contracts.md`,
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- Domain renewed 2026-11-03 at Hostinger until 2027-10-15 (status Active, auto-renew on, lock on). Registrar transfer to Filip's Cloudflare not before about 2026-11-29 (45 days after expiry): remove lock, get the EPP code, about $11.
+- Domain renewed 2026-11-03 at Hostinger until 2027-10-15 (status Active, auto-renew on, lock on). Registrar transfer to Filip's Cloudflare not before about 2026-11-29 (45 days after expiry): remove lock, get the EPP code, about $11. Source: Cloudflare, “Transfer your domain to Cloudflare” (https://developers.cloudflare.com/registrar/domain-transfers/transfer-to-cloudflare/): “If your domain recently expired and you renewed it, wait at least 45 days after the original expiration date. Otherwise, the registry may not add the extra year.” Also: no change of registrant name, organization or email in the 60 days before the transfer (ICANN 60-day lock). Read 2026-11-03. Keep the owner email (filipvicentijevic03@gmail.com) unchanged until the transfer.
 - For M13-03: the Hostinger account also has a “Starter Business Email Trial” on astromicroscope.com (until 2027-08-25). If any mailbox on the domain is in use, its MX records must move with DNS, or mail stops. To check with Gorica.
 - Old Premium Web Hosting is not renewed (old WordPress, hacked); backup taken 2026-11-02, kept offline, not in the repo.
 

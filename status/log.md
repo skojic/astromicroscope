@@ -3,6 +3,7 @@
 Newest first. Each entry: date, what was done, evidence, what is next.
 
 ## 2026-11-03
+- **Answers on PR #5** (Srdjan): consultations stay with M09 (redirect `/konsultacije/` → `/analize/`); 2026 horoscope converted, tone and translation depend on the edition current at launch (D22, recorded by Srdjan); waitlist as a separate MailerLite group; M02 and M14-01 may start now. Recorded in the M02, M08, M09, M10, M13, M14 plans and reports; source for the 45-day transfer wait added (Cloudflare docs); P04 struck; AGENTS.md rule 5 now also requires the `Updated:` date in `STATUS.md`.
 - **Domain renewed** (A1): astromicroscope.com at Hostinger, one year, status Active until 2027-10-15, auto-renew on, lock on (Filip, after Srdjan's comment on PR #4). Transfer to Cloudflare not before about 2026-11-29. Old hosting not renewed. Hostinger email trial on the domain noted for M13 (MX records).
 - **Module plans read** (Filip, Phase 0 task 5): questions in the reports of M02, M06, M08, M09, M10, M13, M14 under Problems and blockers. Main ones: consultations data belongs to M09, not M02; tone and translation of the 2026 horoscope archive; phone number in the request form; splitting the 4,095-word article. M10 risk updated (portrait received).
 

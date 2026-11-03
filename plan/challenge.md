@@ -31,7 +31,7 @@ Answers in `docs/sadrzaj/upitnik-za-goricu.md`, carried into `docs/sadrzaj/01–
 | Videos | No subtitles for existing videos; new ones will have them; no English videos yet | M11 transcripts stay machine-made and marked unchecked |
 
 ## Update 2026-11-03: domain
-A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Active until 2027-10-15, auto-renew on, lock on). Srdjan's plan: DNS to Filip's Cloudflare in M00; registrar transfer to Cloudflare not before about 2026-11-29 (45 days after expiry), about $11. Old Premium Web Hosting is not renewed. A Hostinger email trial exists on the domain; MX records to check before DNS moves (M13).
+A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Active until 2027-10-15, auto-renew on, lock on). Srdjan's plan: DNS to Filip's Cloudflare in M00; registrar transfer to Cloudflare not before about 2026-11-29 (45 days after the original expiry 2026-10-15), about $11. Source: Cloudflare, “Transfer your domain to Cloudflare” (https://developers.cloudflare.com/registrar/domain-transfers/transfer-to-cloudflare/): “If your domain recently expired and you renewed it, wait at least 45 days after the original expiration date. Otherwise, the registry may not add the extra year.” Also: no change of registrant name, organization or email in the 60 days before the transfer (ICANN 60-day lock). Read 2026-11-03. Old Premium Web Hosting is not renewed. A Hostinger email trial exists on the domain; MX records to check before DNS moves (M13).
 
 ## A. Holes: things the plan cannot solve by itself
 

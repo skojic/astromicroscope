@@ -19,12 +19,12 @@ Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/cont
 - Item (task ID from PLAN.md).
 
 ## Problems and blockers
-- Question (Gorica, M12): sessions are by phone (D19), so the request form needs a phone number besides name, email, birth date, time and place. That is personal data; the privacy page (M10-05) must mention it.
+- **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: sessions are by phone (D19), so the request form needs a phone number besides name, email, birth date, time and place. That is personal data; the privacy page (M10-05) must mention it.
 - Blocker: prepayment while Gorica is not a registered business (P06). Until decided, the page says how to book without naming a payment method.
 - Open: sessions per month (questionnaire 14); the page shows no number until Gorica answers.
 
 ## Decisions taken in this module
-- Date, decision, why (move project-wide ones to `status/decisions.md`).
+- 2026-11-03 (Srdjan, PR #5): phone number in the request form is fine (sessions by phone); it must be named on the privacy page (M10-05).
 
 ## Requests to other modules
 - To MNN: what is needed and why.

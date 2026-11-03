@@ -9,7 +9,7 @@ Bilingual (sr default, en) education-first astrology site for Gorica Vićentijev
 2. SEO, Core Web Vitals, accessibility and performance are acceptance criteria, not polish: `specs/06`–`08`.
 3. A module changes stage only by passing its gate in `testing/gates.md`. Quote the check output; never mark done on the strength of code written.
 4. Every user-facing string exists in Serbian and English (`specs/05-languages.md`).
-5. End every work session by updating the module's `REPORT.md`, its row in `status/STATUS.md`, and `status/log.md`.
+5. End every work session by updating the module's `REPORT.md`, its row in `status/STATUS.md`, and `status/log.md`. Every change to `status/STATUS.md` also sets its `Updated:` date to the day of the change.
 6. Decisions go in `status/decisions.md`; never reverse one silently.
 7. **Brand kit = `brand/` = direction D, Midnight Lens** (chosen by Gorica). “Use the brand kit” / “koristi brending kit” means: tokens from `brand/tokens/tokens.css`, fonts from `brand/fonts/`, logo from `brand/logo/`, rules in `brand/index.html`, layout from `brand/home-reference.html` (`specs/02`). No other direction exists.
 8. Changes reach `main` only through a pull request from a `feature/`, `fix/` or `docs/` branch, approved by the owner (`CONTRIBUTING.md`). The owner may bypass.
