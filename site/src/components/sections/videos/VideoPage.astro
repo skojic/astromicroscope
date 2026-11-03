@@ -1,0 +1,63 @@
+---
+// One video: facade player, date, summary (the YouTube description until Gorica's own summary and transcript exist), VideoObject data (M11-02).
+import { getImage } from 'astro:assets';
+import Page from '../../../layouts/Page.astro';
+import Button from '../../ui/Button.astro';
+import Breadcrumbs from '../../ui/Breadcrumbs.astro';
+import { t, type Lang } from '../../../i18n/core';
+import { pathFor } from '../../../i18n/routes';
+import { videoStrings } from '../../../i18n/videos';
+import { videoObject } from '../../seo/jsonld';
+import VideoPlayer from './VideoPlayer.astro';
+import { formatDate, shortDescription, shortTitle, videoPaths, type Video } from './data';
+
+interface Props { lang: Lang; video: Video }
+const { lang, video } = Astro.props;
+const paths = videoPaths(video);
+const crumbs = [
+  { name: t(videoStrings, 'home', lang), url: pathFor('home', lang) },
+  { name: t(videoStrings, 'hubTitle', lang), url: pathFor('videos', lang) },
+  { name: video.title, url: paths[lang] },
+];
+const thumb = await getImage({ src: video.thumbnail, width: 1280, height: 720, format: 'webp' });
+const paragraphs = video.description.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+const jsonLd = videoObject({
+  name: video.title,
+  description: shortDescription(video.description, 300) || video.title,
+  thumbnail: thumb.src,
+  uploadDate: video.published,
+  embedUrl: video.embed,
+  lang: video.lang,
+});
+---
+<Page lang={lang} title={shortTitle(video.title)} description={shortDescription(video.description) || video.title} translationKey={`video-${video.id}`}
+  paths={paths} breadcrumbs={crumbs} jsonLd={jsonLd} image={thumb.src} imageAlt={shortTitle(video.title)}>
+  <div class="container">
+    <Breadcrumbs items={crumbs} label="Breadcrumb" />
+    <article>
+      <h1 lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{video.title}</h1>
+      <p class="meta">
+        {t(videoStrings, 'published', lang)}: <time datetime={video.published}>{formatDate(video.published, lang)}</time>
+        {video.lang !== lang && <> · {t(videoStrings, 'inSerbian', lang)}</>}
+      </p>
+      <VideoPlayer lang={lang} video={video} priority />
+      <p class="note">{t(videoStrings, 'playerNote', lang)}</p>
+      {paragraphs.length > 0 && (
+        <section aria-labelledby="about">
+          <h2 id="about">{t(videoStrings, 'about', lang)}</h2>
+          <div class="about-text" lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{paragraphs.map((p) => <p>{p}</p>)}</div>
+        </section>
+      )}
+      <p><Button href={video.url} variant="ghost">{t(videoStrings, 'watchOnYoutube', lang)}</Button></p>
+    </article>
+  </div>
+</Page>
+<style>
+  h1 { font: var(--am-text-h2); margin-bottom: var(--am-space-3); }
+  .meta { font: var(--am-text-small); color: var(--am-text-muted); margin-bottom: var(--am-space-5); }
+  .note { font: var(--am-text-small); color: var(--am-text-muted); margin-top: var(--am-space-2); }
+  section { margin: var(--am-space-7) 0 var(--am-space-5); }
+  h2 { margin-bottom: var(--am-space-4); }
+  article { max-width: 960px; }
+  .about-text p { white-space: pre-line; }
+</style>

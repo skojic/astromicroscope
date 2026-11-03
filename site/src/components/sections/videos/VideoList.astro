@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../../../i18n/core';
+import { formatDate, videoPaths, type Video } from './data';
+
+interface Props { lang: Lang; items: Video[]; headingLevel?: 'h2' | 'h3' }
+const { lang, items, headingLevel: H = 'h2' } = Astro.props;
+---
+<ul class="grid">
+  {items.map((v) => (
+    <li class="item">
+      <a class="thumb" href={videoPaths(v)[lang]} tabindex="-1" aria-hidden="true">
+        <Image src={v.thumbnail} alt="" width={480} height={270} widths={[320, 480]} sizes="(min-width: 768px) 360px, 100vw" />
+      </a>
+      <H class="title"><a href={videoPaths(v)[lang]} lang={v.lang === 'sr' ? 'sr-Latn' : 'en'}>{v.title}</a></H>
+      <time datetime={v.published}>{formatDate(v.published, lang)}</time>
+    </li>
+  ))}
+</ul>
+<style>
+  .grid { display: grid; gap: var(--am-space-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); list-style: none; margin: 0; padding: 0; }
+  .thumb { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--am-radius-card); background: var(--am-midnight); margin-bottom: var(--am-space-3); }
+  .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .title { font: 700 1.15rem/1.25 var(--am-font-sans); letter-spacing: -.02em; margin-bottom: var(--am-space-1); }
+  .title a { color: var(--am-ink); text-decoration: none; }
+  .title a:hover { color: var(--am-action-hover); text-decoration: underline; }
+  time { font: var(--am-text-small); color: var(--am-text-muted); }
+</style>

@@ -1,0 +1,48 @@
+---
+// Facade (M11-03): a thumbnail link. Nothing from YouTube loads until the visitor plays it; without JavaScript it is a plain link to YouTube.
+import { Image } from 'astro:assets';
+import { t, type Lang } from '../../../i18n/core';
+import { videoStrings } from '../../../i18n/videos';
+import type { Video } from './data';
+
+interface Props { lang: Lang; video: Video; priority?: boolean }
+const { lang, video, priority = false } = Astro.props;
+---
+<div class="player" data-player data-embed={video.embed} data-title={video.title}>
+  <a class="facade" href={video.url} rel="noopener">
+    <Image src={video.thumbnail} alt="" width={960} height={540} widths={[480, 768, 960]} sizes="(min-width: 1024px) 960px, 100vw"
+      loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'auto'} />
+    <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+    <span class="visually-hidden">{t(videoStrings, 'watch', lang)}: <span lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{video.title}</span></span>
+  </a>
+</div>
+
+<style>
+  .player { position: relative; aspect-ratio: 16 / 9; background: var(--am-midnight); border-radius: var(--am-radius-card); overflow: hidden; }
+  .facade { display: block; width: 100%; height: 100%; }
+  .player :global(img), .player :global(iframe) { width: 100%; height: 100%; object-fit: cover; display: block; border: 0; }
+  .play {
+    position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--am-midnight); color: var(--am-gold); box-shadow: var(--am-shadow-float);
+    transition: transform var(--am-duration) var(--am-ease);
+  }
+  .facade:hover .play { transform: scale(1.06); }
+  .facade:focus-visible { outline: 3px solid var(--am-focus); outline-offset: -3px; }
+</style>
+
+<script>
+  // On click, swap the thumbnail for the YouTube player (privacy-enhanced domain). Everything else stays a normal link.
+  document.querySelectorAll<HTMLElement>('[data-player]').forEach((player) => {
+    const link = player.querySelector<HTMLAnchorElement>('.facade');
+    link?.addEventListener('click', (event) => {
+      event.preventDefault();
+      const frame = document.createElement('iframe');
+      frame.src = `${player.dataset.embed}?autoplay=1&rel=0`;
+      frame.title = player.dataset.title ?? '';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      player.replaceChildren(frame);
+      frame.focus();
+    });
+  });
+</script>

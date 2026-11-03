@@ -1,0 +1,28 @@
+---
+import Page from '../../../layouts/Page.astro';
+import Breadcrumbs from '../../ui/Breadcrumbs.astro';
+import { t, type Lang } from '../../../i18n/core';
+import { pathFor } from '../../../i18n/routes';
+import { videoStrings } from '../../../i18n/videos';
+import VideoList from './VideoList.astro';
+import { videos } from './data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const crumbs = [
+  { name: t(videoStrings, 'home', lang), url: pathFor('home', lang) },
+  { name: t(videoStrings, 'hubTitle', lang), url: pathFor('videos', lang) },
+];
+---
+<Page lang={lang} title={t(videoStrings, 'hubTitle', lang)} description={t(videoStrings, 'hubDescription', lang)} translationKey="videos" breadcrumbs={crumbs}>
+  <div class="container">
+    <Breadcrumbs items={crumbs} />
+    <h1>{t(videoStrings, 'hubTitle', lang)}</h1>
+    <p>{t(videoStrings, 'hubIntro', lang)}</p>
+    <VideoList lang={lang} items={videos} />
+  </div>
+</Page>
+<style>
+  h1 { font: var(--am-text-h2); margin-bottom: var(--am-space-3); }
+  p { margin-bottom: var(--am-space-6); }
+</style>

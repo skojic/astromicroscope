@@ -35,5 +35,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Accessibility (axe, WCAG 2.2 A and AA)
         run: npm run test:axe
+      - name: Browser checks (no YouTube request before play, language switch, skip link)
+        run: npm run test:e2e
       - name: Lighthouse budgets (median of 3, mobile)
         run: npm run test:lighthouse

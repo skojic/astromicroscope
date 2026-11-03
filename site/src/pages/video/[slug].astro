@@ -1,0 +1,9 @@
+---
+import VideoPage from '../../components/sections/videos/VideoPage.astro';
+import { videos } from '../../components/sections/videos/data';
+export function getStaticPaths() {
+  return videos.map((video) => ({ params: { slug: video.slug }, props: { video } }));
+}
+const { video } = Astro.props;
+---
+<VideoPage lang="sr" video={video} />

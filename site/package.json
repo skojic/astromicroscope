@@ -15,7 +15,9 @@
     "sync:brand": "node scripts/sync-brand.mjs",
     "test:html": "html-validate dist",
     "test:axe": "node scripts/axe.mjs",
-    "test:lighthouse": "lhci autorun"
+    "test:lighthouse": "lhci autorun",
+    "import:videos": "node scripts/import-videos.mjs",
+    "test:e2e": "node scripts/e2e.mjs"
   },
   "dependencies": {
     "astro": "7.4.5",

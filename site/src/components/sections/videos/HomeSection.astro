@@ -1,0 +1,29 @@
+---
+// Home section (M11-04): the three newest videos. M05 imports this with one prop, `lang` (plan/contracts.md section 5).
+import { t, type Lang } from '../../../i18n/core';
+import { videoStrings } from '../../../i18n/videos';
+import { pathFor } from '../../../i18n/routes';
+import Button from '../../ui/Button.astro';
+import VideoList from './VideoList.astro';
+import { videos, CHANNEL_URL } from './data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section class="videos" aria-labelledby="videos-title">
+  <div class="container">
+    <h2 id="videos-title">{t(videoStrings, 'homeTitle', lang)}</h2>
+    <p>{t(videoStrings, 'homeIntro', lang)}</p>
+    <VideoList lang={lang} items={videos.slice(0, 3)} headingLevel="h3" />
+    <p class="actions">
+      <Button href={pathFor('videos', lang)} variant="ghost">{t(videoStrings, 'allVideos', lang)}</Button>
+      <Button href={CHANNEL_URL}>{t(videoStrings, 'allOnYoutube', lang)}</Button>
+    </p>
+  </div>
+</section>
+<style>
+  .videos { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--am-space-3); margin-top: var(--am-space-6); max-width: none; }
+  h2 { margin-bottom: var(--am-space-3); }
+  p { margin-bottom: var(--am-space-6); }
+</style>

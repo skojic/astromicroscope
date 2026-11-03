@@ -12,6 +12,7 @@ export function buildHeaders({ isProduction }) {
     "img-src 'self' data:",
     "font-src 'self'",
     "connect-src 'self'",
+    "frame-src https://www.youtube-nocookie.com", // video player, created only after a click (M11)
   ].join('; ');
   // Scripts and styles are limited by the hash-based CSP that Astro puts in each page (security.csp in astro.config.mjs).
   const all = [
