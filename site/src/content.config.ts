@@ -1,7 +1,15 @@
 // Collection schemas from plan/contracts.md section 3 (M00-05). Files live in src/content/<collection>/{sr|en}/...
+import { readdirSync, existsSync } from 'node:fs';
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+
+/** glob() warns when a folder has no Markdown yet; until the first file arrives (M02) use an empty loader so the build stays free of warnings. */
+function markdown(base: string) {
+  const dir = new URL(`./content/${base}/`, import.meta.url);
+  const has = existsSync(dir) && readdirSync(dir, { recursive: true }).some((f) => String(f).endsWith('.md'));
+  return has ? glob({ pattern: '**/*.md', base: `./src/content/${base}` }) : { name: `empty-${base}`, load: async () => {} };
+}
 
 const lang = z.enum(['sr', 'en']);
 const date = z.coerce.date(); // YAML dates (2026-11-03) arrive as dates; strings are accepted too
@@ -10,7 +18,7 @@ const signs = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', '
 const topics = ['transits', 'signs', 'rising-sign', 'children', 'finances', 'eclipses', 'karmic', 'method'] as const;
 
 const articles = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+  loader: markdown('articles'),
   schema: z.object({
     title: z.string().max(70),
     description: z.string().max(155),
@@ -29,7 +37,7 @@ const articles = defineCollection({
 });
 
 const horoscope = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/horoscope' }),
+  loader: markdown('horoscope'),
   schema: z.object({
     sign: z.enum(signs),
     year: z.number().int(),
@@ -45,7 +53,7 @@ const horoscope = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  loader: markdown('pages'),
   schema: z.object({
     title: z.string().max(70),
     description: z.string().max(155),
