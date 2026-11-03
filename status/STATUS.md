@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-03 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-03 · Branch: `main`, `feature/m02-content-migration` (Filip) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** closing Phase 0 (`plan/challenge.md`): domain, Gorica's answers and Filip's Cloudflare account are done; open: Cloudflare invitation and repository visibility (Srdjan), passwords and 2FA on Gorica's accounts. Content migration (M02) starts; M00 has begun (Astro project in `site/`, PR #6).
@@ -28,7 +28,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | building | M00-08: Cloudflare API token (Filip); M00-10 Dependabot security updates | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | idea | — (approved to start, PR #5) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M02 Content migration | Filip | idea | G0 record (Srdjan); Gorica's approval of batch 1; `check-content.mjs` pair and placeholder rules (M00). Done: M02-01 map, M02-02 batch 1 (5/10) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | validators, G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
