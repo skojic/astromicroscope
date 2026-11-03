@@ -1,0 +1,39 @@
+name: site-ci
+
+on:
+  pull_request:
+    paths: ['site/**', '.github/workflows/site-ci.yml', 'brand/tokens/**', 'brand/fonts/**']
+  push:
+    branches: [main]
+    paths: ['site/**', '.github/workflows/site-ci.yml', 'brand/tokens/**', 'brand/fonts/**']
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Build (content checks run first)
+        run: npm run build
+      - name: HTML validation
+        run: npm run test:html
+      - name: Install Chromium for axe
+        run: npx playwright install --with-deps chromium
+      - name: Accessibility (axe, WCAG 2.2 A and AA)
+        run: npm run test:axe
+      - name: Lighthouse budgets (median of 3, mobile)
+        run: npm run test:lighthouse
