@@ -6,7 +6,7 @@ import { pathFor } from '../../i18n/routes';
 import { shellStrings } from '../../i18n/shell';
 const lang = 'en';
 ---
-<Page lang={lang} title={t(shellStrings, 'notFoundTitle', lang)} description={t(shellStrings, 'notFoundText', lang)} translationKey="404">
+<Page lang={lang} title={t(shellStrings, 'notFoundTitle', lang)} description={t(shellStrings, 'notFoundText', lang)} translationKey="404" noindex>
   <div class="container">
     <h1>{t(shellStrings, 'notFoundTitle', lang)}</h1>
     <p>{t(shellStrings, 'notFoundText', lang)}</p>

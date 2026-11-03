@@ -6,6 +6,7 @@ import type { Paths } from '../i18n/routes';
 import SkipLink from '../components/shell/SkipLink.astro';
 import Header from '../components/shell/Header.astro';
 import Footer from '../components/shell/Footer.astro';
+import Seo from '../components/seo/Seo.astro';
 
 export interface Breadcrumb { name: string; url: string }
 interface Props {
@@ -17,10 +18,15 @@ interface Props {
   paths?: Partial<Paths>;
   breadcrumbs?: Breadcrumb[];
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
 }
-const { lang, title, description, translationKey, paths } = Astro.props;
+const { lang, title, description, translationKey, paths, breadcrumbs, jsonLd, image, imageAlt, type, noindex } = Astro.props;
 ---
 <Base lang={lang} title={title} description={description}>
+  <Seo slot="head" lang={lang} title={title} description={description} translationKey={translationKey} paths={paths} breadcrumbs={breadcrumbs} jsonLd={jsonLd} image={image} imageAlt={imageAlt} type={type} noindex={noindex} />
   <slot name="head" slot="head" />
   <SkipLink lang={lang} />
   <Header lang={lang} translationKey={translationKey} paths={paths} />

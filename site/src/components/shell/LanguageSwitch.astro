@@ -13,7 +13,7 @@ const names = { sr: 'langSr', en: 'langEn' } as const;
     <li>
       <a
         href={switchTarget(code, translationKey, paths)}
-        hreflang={code === 'sr' ? 'sr-Latn' : 'en'}
+        hreflang={code}
         lang={code === 'sr' ? 'sr-Latn' : 'en'}
         aria-label={`${code.toUpperCase()}, ${t(shellStrings, names[code], code)}`}
         aria-current={code === lang ? 'true' : undefined}

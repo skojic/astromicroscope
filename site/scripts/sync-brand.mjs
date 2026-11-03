@@ -3,7 +3,7 @@
 //   node scripts/sync-brand.mjs --check  fails if they are out of date (used in CI)
 // brand/tokens/tokens.css @imports brand/fonts/fonts.css (the heavy full fonts); the site uses the reduced fonts from
 // src/assets/fonts/ (scripts/reduce-fonts.py), so the @import line is dropped and the @font-face paths are changed.
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
@@ -18,6 +18,9 @@ const fonts = (await read('brand/fonts/fonts.css')).replaceAll("url('./", "url('
 const logos = ['mark-midnight.svg', 'mark-white.svg'];
 await mkdir(new URL('site/src/assets/logo/', `file://${root}/`), { recursive: true });
 
+// Icons served from the site root (favicons, touch icon, the logo for structured data and social cards).
+const icons = ['icon-192.png', 'icon-512.png', 'apple-touch-icon-180.png', 'favicon-32.png', 'favicon-48.png', 'mark-gold-850.png'];
+
 const outputs = {
   'site/src/styles/tokens.css': banner('brand/tokens/tokens.css') + tokens,
   'site/src/styles/fonts.css': banner('brand/fonts/fonts.css') + fonts,
@@ -25,6 +28,17 @@ const outputs = {
 };
 
 let stale = false;
+for (const f of icons) {
+  const from = new URL(`brand/logo/png/${f}`, `file://${root}/`);
+  const to = new URL(`site/public/${f.replace('apple-touch-icon-180', 'apple-touch-icon')}`, `file://${root}/`);
+  if (process.argv.includes('--check')) {
+    const [a, b] = await Promise.all([readFile(from), readFile(to).catch(() => Buffer.alloc(0))]);
+    if (!a.equals(b)) { console.error(`${to.pathname} is out of date; run: node scripts/sync-brand.mjs`); stale = true; }
+  } else {
+    await copyFile(from, to);
+    console.log(`copied ${f}`);
+  }
+}
 for (const [path, text] of Object.entries(outputs)) {
   const file = new URL(path, `file://${root}/`);
   if (process.argv.includes('--check')) {
