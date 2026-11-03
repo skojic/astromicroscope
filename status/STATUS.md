@@ -1,12 +1,12 @@
 # Status
 
-Updated: 2026-11-02 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-03 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
-- **Current focus:** Phase 0 of the build plan (`plan/challenge.md`): renew the domain, secure accounts (`specs/09`), Gorica's answers, Filip's Cloudflare account. No development yet.
-- **Last step:** Gorica's answers recorded (D18–D21, P06): tone ti, four analyses with prices, headline and credential, MailerLite; new portrait; spam-URL list (143); Filip's Cloudflare account with 2FA. Before that: site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
-- **Next step:** Phase 0 checklist in `plan/challenge.md`; then M00 (Srdjan) and M02 + M14 (Filip) start in parallel.
-- **Blocked by:** Phase 0: domain (A1), Srdjan accepts the Cloudflare invitation (D16), prepayment and business form (P06).
+- **Current focus:** closing Phase 0 (`plan/challenge.md`): domain, Gorica's answers and Filip's Cloudflare account are done; open: Cloudflare invitation and repository visibility (Srdjan), passwords and 2FA on Gorica's accounts. Content migration (M02) starts; no site code yet.
+- **Last step:** domain renewed until 2027-10-15 (A1); Filip read his module plans and recorded questions in their reports. Before that: Gorica's answers recorded (D18–D21, P06): tone ti, four analyses with prices, headline and credential, MailerLite; new portrait; spam-URL list (143); Filip's Cloudflare account with 2FA. Before that: site concept and build plan approved and written to `plan/` (15 modules, contract, challenge); original logo traced into the brand kit; credential corrected. Before that: brand kit D (D08) and Filip's content preparation (PR #3).
+- **Next step:** Filip starts M02 (content migration) and M14-01 (glossary) now (Srdjan, PR #5); Srdjan finishes Phase 0 on his side and starts M00.
+- **Blocked by:** Phase 0: Srdjan accepts the Cloudflare invitation (D16); passwords and 2FA on Gorica's accounts (A2); repository visibility (B6); prepayment and business form (P06).
 
 ## Specs
 | ID | File | Status |
@@ -28,7 +28,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | idea | Phase 0, P02b | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | idea | tone decision (B2) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M02 Content migration | Filip | idea | — (approved to start, PR #5) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | idea | M00 | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | idea | M00 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | idea | M03, sections | [REPORT](../plan/modules/M05-home/REPORT.md) |
@@ -40,7 +40,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M11 Videos | Srdjan | idea | M00 | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | idea | P02b | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
-| M14 English translation | Filip | idea | M02 | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+| M14 English translation | Filip | idea | M02 (glossary M14-01 may start) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
 ## Brand
 | Item | Stage | Notes |

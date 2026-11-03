@@ -28,7 +28,7 @@ About page and home section, author box, contact page, legal pages.
 | M10-02 | AuthorBox for articles and horoscope |  |
 | M10-03 | Home section |  |
 | M10-04 | Contact page UI | reply within three days; astromicroscope@gmail.com; no other social networks |
-| M10-05 | Legal page shells |  |
+| M10-05 | Legal page shells | privacy page names both MailerLite lists (newsletter, waitlist) and the phone number from the analysis form |
 
 ## Acceptance criteria
 - [ ] Person/ProfilePage data correct (with M04)
@@ -36,7 +36,7 @@ About page and home section, author box, contact page, legal pages.
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-No portrait yet (A8)
+Portrait received (A8 resolved); legal wording depends on P06
 
 
 ## Component specs (moved from `modules/`)

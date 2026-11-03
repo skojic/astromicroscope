@@ -26,8 +26,8 @@ All 28 pages of the old site are in the agreed Markdown format, ready for the te
 |---|---|---|
 | M02-01 | Map every old page to a new URL (table in the report), including the old URL | needed for redirects in M13 |
 | M02-02 | Convert 10 articles to the article schema | answer 40–60 words each; Gorica approves edits |
-| M02-03 | Convert 12 horoscope texts to the sign schema for 2026 |  |
-| M02-04 | Convert About, Why Astromicroscope, Contact, Consultations into pages and data |  |
+| M02-03 | Convert 12 horoscope texts to the sign schema for 2026 | always converted (needed for the old-URL map). Tone and English depend on the edition current at launch (Srdjan, PR #5, D22): if 2027 is ready, 2026 is not published and old 2026 URLs go to the 2027 signs; if 2027 is late, 2026 is the current edition (ti + English). Until Gorica gives a date, no manual tone work; machine translation only |
+| M02-04 | Convert About, Why Astromicroscope, Contact into pages | **not** Consultations: replaced by D19; the analyses data is M09's (`site/src/data/analyses.*`, source `docs/sadrzaj/04`). `konsultacije.md` goes into the M02-01 map with the reason “replaced by D19”, redirect `/konsultacije/` → `/analize/`. `blog.md` and `godisnji-horoskop.md`: no target file, redirect to the new hubs |
 | M02-05 | List every astrological date per text; check against an ephemeris; set `ephemerisChecked` | C8 |
 | M02-06 | Apply the tone decision (ti/vi, B2) and light structure edits (B3) | tone: **ti**, first person (D18); About: drop the Nikola Stojanović paragraph (D20) |
 
