@@ -81,5 +81,5 @@ A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Activ
 - [x] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2); open: 14, 26
 - [x] 2027 horoscope: new edition coming soon (A5)
 - [x] Portrait plan (A8): new photo in `docs/sadrzaj/slike/`
-- [ ] Repository visibility decided (B6)
+- [x] Repository visibility decided (B6): public for now (D29)
 - [x] Course platform and payments: postponed to iteration 2 (A7, D14)

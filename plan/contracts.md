@@ -17,7 +17,8 @@ The website lives in `site/` (an Astro project). A module changes only the paths
 | `site/src/layouts/Base.astro`, `Page.astro` | M00 (structure), M03 (header/footer slots) | |
 | `site/src/content.config.ts` (collection schemas) | M00, from section 3 below | collections use `glob` from `astro/loaders` and `z` from `astro/zod`; `z` from `astro:content` is deprecated and removed in Astro 8 |
 | `site/src/i18n/core.ts` (language helpers) | M00 | |
-| `site/src/i18n/<module>.json` | each module | its own interface strings, both languages |
+| `site/src/i18n/<module>.json` | each module | its own interface strings, both languages; validate with `defineStrings` in a `<module>.ts` next to it |
+| `site/src/i18n/routes.ts` | M00 (shared routes), M03 (language switch) | `ROUTES` pairs for the main pages; pages not listed pass `paths` to `Page.astro` |
 | `site/src/components/shell/` | M03 | header, navigation, language switch, footer, skip link |
 | `site/src/components/seo/` | M04 | `<Seo>` component, JSON-LD helpers |
 | `site/src/components/home/` | M05 | hero, star field, chart lens |
@@ -100,7 +101,7 @@ Placeholders are written as `[placeholder]`; the content gate fails while any re
 | `sitemap.xml`, `robots.txt`, redirects file | M04 (redirects from old URLs: M13) |
 
 ## 5. Shared components
-- **Layout:** every page uses `Page.astro` with props `lang`, `title`, `description`, `translationKey`, `breadcrumbs`, `jsonLd`. M04's `<Seo>` reads them; nobody writes `<head>` tags by hand.
+- **Layout:** every page uses `Page.astro` with props `lang`, `title`, `description`, `translationKey`, `breadcrumbs`, `jsonLd`, and optionally `paths` (`{ sr, en }` URLs for pages not in `i18n/routes.ts`), `image`, `type`, `noindex`. M04's `<Seo>` reads them; nobody writes `<head>` tags by hand.
 - **Home sections:** each section module exports `components/sections/<name>/HomeSection.astro` with one prop, `lang`. M05 imports them in the order of `concept.md`. Until a section exists, M05 shows `ui/Pending.astro` (visible in preview builds only).
 - **Author box:** `components/sections/about/AuthorBox.astro` (M10), used by M06 and M07.
 - **Transit timeline:** `components/sections/articles/TransitTimeline.astro` (M06), props `transits`, `lang`; also used by M07.
