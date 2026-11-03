@@ -4,6 +4,8 @@ This is what lets two developers build separately and still end up with one webs
 
 Astro APIs named here (content collections, i18n routing, image component) must be checked against the documentation of the Astro version installed in M00. If the installed version works differently, M00 updates this file first.
 
+**Checked against Astro 7.4.5 (M00-01, 2026-11-03)** in a scratch project: a glob content collection with a Zod schema, i18n routing (`sr` unprefixed, `en` under `/en/`), `getRelativeLocaleUrl`, `Astro.currentLocale`, the `Image` component and `public/_headers` all build as this file assumes. Two corrections are in section 1 (config file name and imports) and section 2 (entry ids). Not checked: form endpoints and the Cloudflare adapter (M12, M00-08).
+
 ## 1. Repository layout and ownership
 
 The website lives in `site/` (an Astro project). A module changes only the paths it owns. Everything else is read-only for it.
@@ -13,7 +15,7 @@ The website lives in `site/` (an Astro project). A module changes only the paths
 | `site/package.json`, `astro.config.*`, lock file, `tsconfig.json` | M00 | dependencies are added only through M00's owner (Srdjan); ask in your report |
 | `site/src/styles/` | M00 | imports `brand/tokens/tokens.css` and `brand/fonts/fonts.css`; no colour or font values anywhere else |
 | `site/src/layouts/Base.astro`, `Page.astro` | M00 (structure), M03 (header/footer slots) | |
-| `site/src/content.config.*` (collection schemas) | M00, from section 3 below | |
+| `site/src/content.config.ts` (collection schemas) | M00, from section 3 below | collections use `glob` from `astro/loaders` and `z` from `astro/zod`; `z` from `astro:content` is deprecated and removed in Astro 8 |
 | `site/src/i18n/core.ts` (language helpers) | M00 | |
 | `site/src/i18n/<module>.json` | each module | its own interface strings, both languages |
 | `site/src/components/shell/` | M03 | header, navigation, language switch, footer, skip link |
@@ -40,6 +42,7 @@ The website lives in `site/` (an Astro project). A module changes only the paths
 
 ## 2. Languages
 - Serbian (Latin, ekavian) at `/`, English at `/en/` (`specs/05`).
+- With the glob loader an entry's id includes its language folder (`sr/podznak`, `en/rising-sign`); `lang` in the front matter must match that folder (M00-05 checks it).
 - Every content entry has a `translationKey`. The Serbian and English files of the same text share it; M04 builds hreflang from it, and M03's language switch uses it to find the paired page.
 - Interface strings live in `site/src/i18n/<module>.json` as `{ "key": { "sr": "…", "en": "…" } }`. A missing language fails the build (M00 adds the check).
 - Slugs are translated (`/tekstovi/podznak/` ↔ `/en/articles/rising-sign/`).
