@@ -1,0 +1,12 @@
+{
+  "title": { "sr": "Bilten", "en": "Newsletter" },
+  "intro": { "sr": "Nove lekcije i članci, dva puta mesečno, pravo u inbox.", "en": "New lessons and articles, twice a month, straight to your inbox." },
+  "emailLabel": { "sr": "E-adresa", "en": "Email address" },
+  "emailPlaceholder": { "sr": "ime@primer.rs", "en": "name@example.com" },
+  "submit": { "sr": "Prijavi se", "en": "Subscribe" },
+  "consent": { "sr": "Slažem se da Astromicroscope koristi moju adresu za slanje biltena. Mogu da se odjavim u svakom trenutku.", "en": "I agree to Astromicroscope using my address for the newsletter. I can unsubscribe at any time." },
+  "success": { "sr": "Hvala! Proveri inbox za potvrdu prijave.", "en": "Thanks! Check your inbox to confirm your subscription." },
+  "error": { "sr": "Nešto nije u redu. Pokušaj ponovo za trenutak.", "en": "Something went wrong. Try again in a moment." },
+  "errorEmpty": { "sr": "Unesi e-adresu.", "en": "Enter an email address." },
+  "errorInvalid": { "sr": "Ta e-adresa ne izgleda ispravno.", "en": "That email address does not look right." }
+}

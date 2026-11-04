@@ -1,0 +1,76 @@
+---
+// Home section (M12): newsletter and course-waitlist sign-up. M05 imports this with one prop, `lang`
+// (plan/contracts.md section 5). The form posts JSON to /api/newsletter without JavaScript; a small client
+// script only adds the honeypot/timestamp/signature fields (D44) and inlines success/error text. Consent copy
+// is provisional until Gorica approves it (M12 acceptance criterion).
+import { t, type Lang } from '../../../i18n/core';
+import { localizedPath } from '../../../i18n/core';
+import { newsletterStrings } from '../../../i18n/newsletter';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const action = localizedPath(lang, '/api/newsletter');
+const list = 'newsletter';
+---
+<section class="newsletter" aria-labelledby="newsletter-title">
+  <div class="container">
+    <h2 id="newsletter-title">{t(newsletterStrings, 'title', lang)}</h2>
+    <p>{t(newsletterStrings, 'intro', lang)}</p>
+    <form
+      class="newsletter-form"
+      method="post"
+      action={action}
+      data-lang={lang}
+      data-list={list}
+      data-messages='{"success":"true"}'
+    >
+      <label class="visually-hidden" for="newsletter-email">{t(newsletterStrings, 'emailLabel', lang)}</label>
+      <input
+        id="newsletter-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        placeholder={t(newsletterStrings, 'emailPlaceholder', lang)}
+        required
+      />
+      <input type="hidden" name="hp" value="" />
+      <input type="hidden" name="ts" value="" />
+      <input type="hidden" name="sig" value="" />
+      <input type="hidden" name="list" value={list} />
+      <input type="hidden" name="lang" value={lang} />
+      <button type="submit" class="btn">{t(newsletterStrings, 'submit', lang)}</button>
+      <p class="consent">{t(newsletterStrings, 'consent', lang)}</p>
+      <p class="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Implemented later (M12-04): stamp ts with Date.now(), compute the HMAC signature server-side via a paired
+  // endpoint, hide the hp field visually, and post as JSON so the Worker reads request.json(). Without this the
+  // form still posts (graceful degradation), but the server rejects unsigned submissions until M12-04 lands.
+</script>
+
+<style>
+  .newsletter { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  h2 { margin-bottom: var(--am-space-3); }
+  p { margin-bottom: var(--am-space-5); }
+  .newsletter-form { display: flex; flex-wrap: wrap; gap: var(--am-space-3); align-items: center; }
+  input[type='email'] {
+    flex: 1 1 220px; font: var(--am-text-body); padding: 13px 18px;
+    border-radius: var(--am-radius-pill); border: 1px solid var(--am-line, #cfd4dc); background: var(--am-white);
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font: var(--am-text-ui); cursor: pointer; border: 0; padding: 15px 22px;
+    border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white);
+  }
+  .btn:hover { background: var(--am-action-hover); }
+  .consent { font: var(--am-text-small, var(--am-text-body)); color: var(--am-muted, #5b6270); flex-basis: 100%; margin: 0; }
+  .status { min-height: 1.5em; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+</style>
