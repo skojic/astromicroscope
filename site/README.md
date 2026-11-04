@@ -42,7 +42,13 @@ Run from `site/`.
 | `npm run preview` | Serve the built `dist/` locally to check it before a pull request |
 | `npm run astro -- --help` | Astro CLI help |
 | `npm run deploy:dry-run` | `wrangler deploy --dry-run`: reads `dist/` and `wrangler.jsonc`, uploads nothing, needs no token |
-| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the temporary address `https://astromicroscope.filipvicentijevic99.workers.dev`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. Not for production: the custom domain is attached at launch (M13) |
+| `npm run test:visual` | Every built page in Chromium (360, 768, 1024, 1440 px), Firefox and WebKit (360, 1440 px): no horizontal overflow, one `<h1>`, no console or request errors. `SHOTS_DIR=folder` saves screenshots; needs `npx playwright install chromium firefox webkit` |
+| `npm run check:docs` / `npm run status:sync` | Stages, gates, D-numbers and the `Updated:` date of `status/` and `plan/` agree; `status:sync` rewrites what can be derived |
+| `npm run smoke -- <url> [--mode production]` | Headers, languages, 404 pages, robots and sitemap of a deployed address |
+| `npm run crawl -- <url> [--mode production] [--strict]` | Crawl of a deployed address: status codes, canonicals, hreflang pairs, orphans (launch check M13-01) |
+| `npm run check:redirects -- <url> [--gone]` | The redirects file and, with `--gone`, 410 for the 143 spam URLs of the old site (M13-02) |
+| `npm run test:links` | External links of the built site (after `npm run build`) |
+| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the temporary address `https://astromicroscope.filipvicentijevic99.workers.dev`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. Not for production: the custom domain is attached at launch (M13). **Normally nobody runs this:** the `site-deploy` workflow deploys every green push to `main` (D46) |
 
 `npm install` changes `package-lock.json`; use it only when M00 changes dependencies.
 

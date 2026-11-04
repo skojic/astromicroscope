@@ -13,3 +13,4 @@ Bilingual (sr default, en) education-first astrology site for Gorica Vićentijev
 6. Decisions go in `status/decisions.md`; never reverse one silently.
 7. **Brand kit = `brand/` = direction D, Midnight Lens** (chosen by Gorica). “Use the brand kit” / “koristi brending kit” means: tokens from `brand/tokens/tokens.css`, fonts from `brand/fonts/`, logo from `brand/logo/`, rules in `brand/index.html`, layout from `brand/home-reference.html` (`specs/02`). No other direction exists.
 8. Changes reach `main` only through a pull request from a `feature/`, `fix/` or `docs/` branch, approved by the owner (`CONTRIBUTING.md`). The owner may bypass.
+9. **Automation first (D45, D46).** Deploys, checks, imports and dependency updates run in `.github/workflows/`: do not do by hand what a workflow does. A new check goes into `site-ci` and so under `ci-gate`; a new document rule goes into `site/scripts/check-docs.mjs`.
