@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: M00. Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M10-01.
+Not started. Wait for: nothing (the M00 foundation is on `main`; only M00-08 hosting is open). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M10-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.
@@ -21,7 +21,7 @@ Not started. Wait for: M00. Then read `PLAN.md` and `plan/contracts.md`, create 
 ## Problems and blockers
 - Resolved: portrait received (A8), `docs/sadrzaj/slike/gorica-portret.jpg`, 1066 × 1599.
 - Question (Gorica): About keeps the old text up to the Nikola Stojanović paragraph (D20). Interpreted as: drop that paragraph, keep the rest (diploma, her new text on interests). To confirm with her.
-- Blocker for M10-05: legal texts depend on P06 (prepayment, business form) and A9; the shells can be built, the wording cannot.
+- M10-05 (legal page shells): out of scope for now by D33 (2026-11-04, no legal texts on the site). The footer links, routes and strings for `/privatnost/`, `/uslovi/` and `/kolacici/` were removed on 2026-11-04 (Srdjan). Still open: M08/M09 expect a privacy notice for the phone number and the MailerLite lists.
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).

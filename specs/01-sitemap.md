@@ -22,7 +22,7 @@ Serbian lives at the root and English under `/en/`. Slugs are translated, lowerc
 | Private analyses | `/analize/` + one page per analysis | `/en/analyses/` … | Natal, solar, karmic, life-area consultation |
 | About Gorica | `/o-meni/` | `/en/about/` | Credentials, approach, education |
 | Contact | `/kontakt/` | `/en/contact/` | Form plus email |
-| Legal | `/privatnost/`, `/uslovi/` | `/en/privacy/`, `/en/terms/` | Privacy, terms, cookies |
+| ~~Legal~~ | ~~`/privatnost/`, `/uslovi/`~~ | ~~`/en/privacy/`, `/en/terms/`~~ | not built for now (D33) |
 | 404 | in both languages | | Helpful links, search |
 
 ## Navigation

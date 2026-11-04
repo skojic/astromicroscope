@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M09-01.
+Not started. Wait for: Gorica's answers (the M00 foundation is on `main`; only M00-08 hosting is open). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M09-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.
@@ -20,7 +20,7 @@ Not started. Wait for: M00, Gorica's answers. Then read `PLAN.md` and `plan/cont
 
 ## Problems and blockers
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: sessions are by phone (D19), so the request form needs a phone number besides name, email, birth date, time and place. That is personal data; the privacy page (M10-05) must mention it.
-- Blocker: prepayment while Gorica is not a registered business (P06). Until decided, the page says how to book without naming a payment method.
+- ~~Blocker: prepayment (P06)~~ closed by D33 (2026-11-04): no prepayment on the site; the page says how to book without naming a payment method.
 - Open: sessions per month (questionnaire 14); the page shows no number until Gorica answers.
 
 ## Decisions taken in this module

@@ -12,9 +12,6 @@ export const ROUTES = {
   analyses: { sr: '/analize/', en: '/en/analyses/' },
   about: { sr: '/o-meni/', en: '/en/about/' },
   contact: { sr: '/kontakt/', en: '/en/contact/' },
-  privacy: { sr: '/privatnost/', en: '/en/privacy/' },
-  terms: { sr: '/uslovi/', en: '/en/terms/' },
-  cookies: { sr: '/kolacici/', en: '/en/cookies/' },
 } as const satisfies Record<string, Paths>;
 export type RouteKey = keyof typeof ROUTES;
 

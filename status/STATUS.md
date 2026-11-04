@@ -6,7 +6,7 @@ Updated: 2026-11-04 · Branch: `main` · Stages: idea → specced → approved �
 - **Current focus:** closing Phase 0 (`plan/challenge.md`): domain, Gorica's answers and Filip's Cloudflare account are done; open: Cloudflare invitation and repository visibility (Srdjan), passwords and 2FA on Gorica's accounts. Content migration (M02) starts; M00 has begun (Astro project in `site/`, PR #6).
 - **Last step:** Srdjan's modules built on `main` (owner bypass, CI green): M00 foundation (routing, layouts, tokens and reduced fonts, content schemas and checks, CI, headers), M03 shell, M04 SEO, M05 home hero, M11 videos. G0 for M00 (D23); M00-01 done (PR #8). Decisions D24–D30. Before that: domain renewed until 2027-10-15 (A1); Filip's module plans read; Gorica's answers (D18–D21).
 - **Next step:** Srdjan: get the Cloudflare token from Filip (M00-08, preview URLs); G2/G3 checks for M03, M04, M11. Filip: M02 content migration and the section modules (M06, M08, M09, M10) — the home page and M07 wait for them.
-- **Blocked by:** M00-08 hosting: no API token in Filip's Cloudflare account for Srdjan; M07 horoscope: M02 content and M06/M10 components; M12 forms: P02b; passwords and 2FA on Gorica's accounts (A2, deferred, D30); prepayment and business form (P06).
+- **Blocked by:** M00-08 hosting: no API token in Filip's Cloudflare account for Srdjan; M07 horoscope: M02 content and M06/M10 components; M12 forms: P02b; passwords and 2FA on Gorica's accounts (A2, deferred, D30).
 
 ## Specs
 | ID | File | Status |
@@ -32,11 +32,11 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M03 Site shell | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | validators, G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
-| M06 Articles | Filip | idea | M00, M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
+| M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | idea | M02 content, M06/M10 components, 2027 texts | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
-| M08 Education (free learning + waitlist) | Filip | idea | M00 | [REPORT](../plan/modules/M08-education/REPORT.md) |
+| M08 Education (free learning + waitlist) | Filip | idea | — | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
-| M10 About, contact, legal | Filip | idea | M00 | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
+| M10 About, contact, legal | Filip | idea | — | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | idea | P02b | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |

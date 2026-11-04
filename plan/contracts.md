@@ -95,7 +95,7 @@ Placeholders are written as `[placeholder]`; the content gate fails while any re
 | `/horoskop/**`, `/en/horoscope/**` | M07 |
 | `/edukacija/**`, `/en/learn/**` | M08 |
 | `/analize/**`, `/en/analyses/**` | M09 |
-| `/o-meni/`, `/kontakt/`, `/privatnost/`, `/uslovi/`, `/kolacici/` and English pairs | M10 |
+| `/o-meni/`, `/kontakt/` and English pairs (`/privatnost/`, `/uslovi/`, `/kolacici/` removed by D33) | M10 |
 | `/video/**`, `/en/videos/**` | M11 |
 | `404` (both languages) | M03 |
 | `sitemap.xml`, `robots.txt`, redirects file | M04 (redirects from old URLs: M13) |
