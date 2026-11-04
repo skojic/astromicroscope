@@ -24,7 +24,7 @@ The Worker script (path to be fixed with the `contracts.md` row, D44; not `site/
 ## Tasks
 | ID | Task | Notes |
 |---|---|---|
-| M12-01 | Choose and set up form handling on Cloudflare (check current options) | **Done as a decision: D44.** Build: Worker script, `wrangler.jsonc` `main` and `assets.run_worker_first: ["/api/*"]` |
+| M12-01 | Choose and set up form handling on Cloudflare (check current options) | **Done as a decision: D44.** Built 2026-11-04: Worker script `site/src/worker/index.ts`, `wrangler.jsonc` `main` + `assets.run_worker_first: ["/api/*"]`, `/api/newsletter` endpoint with validation, honeypot, signed timestamp, signature and rate-limit stubs |
 | M12-02 | Newsletter with double opt-in | MailerLite API from the Worker; the waitlist in its own group; double opt-in mechanism proven with the real account (D44) |
 | M12-03 | Contact and analysis-request sending | Email Service binding to astromicroscope@gmail.com; real sending only after DNS is on Cloudflare; dry run before (D44) |
 | M12-04 | Spam protection without blocking keyboard users | honeypot, signed timestamp, per-IP rate limit; Turnstile only if spam appears (D44) |

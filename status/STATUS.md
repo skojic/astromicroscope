@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-04 · Branch: `main` (ruleset change and videos-import rework applied; see D45, D46) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-04 · Branch: `main` (ruleset change and videos-import rework applied; M12-01 scaffold; see D45, D46) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** M00, M01, M03 and M11 are done (G4 approved by Srdjan 2026-11-04). The unfinished site is live only on the temporary address (D36). P02b is decided (D44), so M12 forms can be built. Filip starts M02 content migration, M10 and the M14 glossary, then M06, M08, M09.
@@ -38,7 +38,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M09 Private analyses | Filip | idea | — | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Filip | idea | — | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
-| M12 Forms | Srdjan | specced | D44 decided; MailerLite API key for the live test; DNS on Cloudflare for contact mail | [REPORT](../plan/modules/M12-forms/REPORT.md) |
+| M12 Forms | Srdjan | building | MailerLite API key for the live test; DNS on Cloudflare for contact mail (M13) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
 | M14 English translation | Filip | idea | M02 (glossary M14-01 may start) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 

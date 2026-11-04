@@ -1,10 +1,13 @@
 {
-  // Static site served by Cloudflare Workers static assets (D16, M00-08). No Worker script: Astro's output in dist/ is the site.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "astromicroscope",
   "compatibility_date": "2026-11-04",
+  // M12-01 (D44): /api/* requests run this script; every other path stays on the static assets (dist/).
+  "main": "./src/worker/index.ts",
   "assets": {
     "directory": "./dist",
+    // Only the /api/ subtree runs the Worker; pages keep serving from the static assets (D44).
+    "run_worker_first": ["/api/*"],
     // dist/404.html (sr) and dist/en/404.html (en) are served for unknown paths; see src/integrations/not-found.mjs
     "not_found_handling": "404-page",
     // Astro builds with trailingSlash: 'always' (astro.config.mjs), so folder index files are served with a trailing slash
