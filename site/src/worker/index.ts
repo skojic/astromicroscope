@@ -1,6 +1,12 @@
-// M12-01 (D44): the Cloudflare Worker script that answers /api/* and leaves every other path to the static
+// M12-01/M12-04 (D44): the Cloudflare Worker script that answers /api/* and leaves every other path to the static
 // assets. Astro builds the site into dist/; wrangler sets `main` to this file and `assets.run_worker_first` to
 // ["/api/*"], so a form POST to /api/newsletter runs here, and every page keeps serving from the static assets.
+//
+// Endpoints:
+//   GET  /api/form-token  -> { ts, sig } : a short-lived, HMAC-signed challenge the page picks up (M12-04). The
+//                            signature is over `FORM_SALT|ts`, so it authenticates the page session without binding
+//                            the user's email and without shipping the secret to the browser.
+//   POST /api/newsletter   -> the newsletter / waitlist form (M12-02).
 //
 // This is the backend shell: endpoints validate their input, store nothing, and answer JSON. The providers
 // (MailerLite M12-02, Email Service M12-03) plug into the marked spots; no secret is stored here — they are
@@ -11,11 +17,11 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, '') || '/';
 
-    if (request.method !== 'POST') {
-      return json({ ok: false, error: 'method-not-allowed' }, 405);
+    if (request.method === 'GET' && path === '/api/form-token') {
+      return issueFormToken(env);
     }
 
-    if (path === '/api/newsletter') {
+    if (request.method === 'POST' && path === '/api/newsletter') {
       return handleNewsletter(request, env);
     }
 
@@ -31,9 +37,21 @@ function json(body, status = 200) {
   });
 }
 
+/** Mint a fresh challenge (M12-04): the current time and the HMAC of `FORM_SALT|ts`. Valid for one hour (see verify). */
+async function issueFormToken(env) {
+  const secret = env.FORM_SIGNING_SECRET;
+  if (typeof secret !== 'string' || secret === '') {
+    return json({ ok: false, error: 'unconfigured' }, 500);
+  }
+  const ts = Date.now();
+  const sig = await sign(`${FORM_SALT}|${ts}`, secret);
+  return json({ ok: true, ts, sig });
+}
+
 /**
- * Newsletter and course-waitlist sign-up (M12-02). The form posts JSON { email, lang, list, hp, ts, sig }.
- * Validation and spam defence are here; the reply is always generic so the endpoint does not leak which field failed.
+ * Newsletter and course-waitlist sign-up (M12-02). The form posts JSON { email, lang, list, hp, ts, sig }, where
+ * ts+sig are the challenge from /api/form-token. Validation and spam defence are here; the reply is always generic
+ * so the endpoint does not leak which field failed.
  */
 async function handleNewsletter(request, env) {
   let body;
@@ -50,12 +68,8 @@ async function handleNewsletter(request, env) {
     return json({ ok: false, error: 'invalid' }, 400);
   }
 
-  // 2. Signed timestamp: the form carries the time it was filled (set in a tiny client script) plus an HMAC
-  //    signature the server makes over `email:ts`. Too-young or too-old submissions are rejected.
-  if (!isFreshTimestamp(ts)) {
-    return json({ ok: false, error: 'invalid' }, 400);
-  }
-  if (!verifySignature(email, ts, sig, env)) {
+  // 2. Challenge: the page fetched /api/form-token and attached ts+sig. Verify it with the server secret.
+  if (!(await verifyChallenge(ts, sig, env))) {
     return json({ ok: false, error: 'invalid' }, 400);
   }
 
@@ -72,7 +86,7 @@ async function handleNewsletter(request, env) {
   // 5. Per-IP rate limit. The IP is in request.headers.get('cf-connecting-ip') on Cloudflare; a per-key cap is
   //    kept here against a lock-free counter. M12-04 replaces this stub with a bounded store (e.g. Workers KV,
   //    or a fixed-window count against a Durable Object if volume demands it).
-  if (!(await underRateLimit(request, env))) {
+  if (request.headers.get('cf-connecting-ip') && !(await underRateLimit(request, env))) {
     return json({ ok: false, error: 'rate-limited' }, 429);
   }
 
@@ -82,6 +96,17 @@ async function handleNewsletter(request, env) {
   return json({ ok: true });
 }
 
+/** A challenge is valid if its timestamp is fresh (max 1 h old) and the signature matches `FORM_SALT|ts`. */
+async function verifyChallenge(ts, sig, env) {
+  if (typeof sig !== 'string' || !isFreshTimestamp(ts)) return false;
+  const secret = env.FORM_SIGNING_SECRET;
+  if (typeof secret !== 'string' || secret === '') return false;
+  const expected = await sign(`${FORM_SALT}|${ts}`, secret);
+  return timingSafeEqual(expected, sig);
+}
+
+const FORM_SALT = 'astromicroscope-form-v1';
+
 /** Submission must be at least 3 s old (a human fills a form) and at most 1 h old (no replay). */
 function isFreshTimestamp(ts) {
   if (typeof ts !== 'number' || !Number.isFinite(ts)) return false;
@@ -89,16 +114,8 @@ function isFreshTimestamp(ts) {
   return age >= 3_000 && age <= 60 * 60 * 1_000;
 }
 
-/**
- * HMAC-style signature over `${email}|${ts}` with the Worker secret `FORM_SIGNING_SECRET`. The same secret on the
- * server signs a token the client sends with the form; anything that cannot reproduce it did not come through the
- * page. Uses WebCrypto HMAC-SHA-256. M12-04 wires the client half; until then every unsigned submission is rejected.
- */
-async function verifySignature(email, ts, sig, env) {
-  if (typeof sig !== 'string' || typeof email !== 'string' || typeof ts !== 'number') return false;
-  const secret = env.FORM_SIGNING_SECRET;
-  if (typeof secret !== 'string' || secret === '') return false;
-
+/** HMAC-SHA-256 of `data` under `secret`, hex-encoded, via WebCrypto. */
+async function sign(data, secret) {
   const key = await crypto.subtle.importKey(
     'raw',
     new TextEncoder().encode(secret),
@@ -106,10 +123,8 @@ async function verifySignature(email, ts, sig, env) {
     false,
     ['sign'],
   );
-  const data = new TextEncoder().encode(`${email}|${ts}`);
-  const mac = new Uint8Array(await crypto.subtle.sign('HMAC', key, data));
-  const hex = [...mac].map((b) => b.toString(16).padStart(2, '0')).join('');
-  return timingSafeEqual(hex, sig);
+  const mac = new Uint8Array(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data)));
+  return [...mac].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function timingSafeEqual(a, b) {

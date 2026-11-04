@@ -10,7 +10,12 @@ import { newsletterStrings } from '../../../i18n/newsletter';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const action = localizedPath(lang, '/api/newsletter');
+const tokenUrl = localizedPath(lang, '/api/form-token');
 const list = 'newsletter';
+const messages = JSON.stringify({
+  success: t(newsletterStrings, 'success', lang),
+  error: t(newsletterStrings, 'error', lang),
+});
 ---
 <section class="newsletter" aria-labelledby="newsletter-title">
   <div class="container">
@@ -20,9 +25,10 @@ const list = 'newsletter';
       class="newsletter-form"
       method="post"
       action={action}
+      data-token-url={tokenUrl}
       data-lang={lang}
       data-list={list}
-      data-messages='{"success":"true"}'
+      data-messages={messages}
     >
       <label class="visually-hidden" for="newsletter-email">{t(newsletterStrings, 'emailLabel', lang)}</label>
       <input
@@ -47,9 +53,53 @@ const list = 'newsletter';
 </section>
 
 <script>
-  // Implemented later (M12-04): stamp ts with Date.now(), compute the HMAC signature server-side via a paired
-  // endpoint, hide the hp field visually, and post as JSON so the Worker reads request.json(). Without this the
-  // form still posts (graceful degradation), but the server rejects unsigned submissions until M12-04 lands.
+  // M12-04 (D44): without JavaScript the form posts normally and the server rejects it (no challenge attached).
+  // This script makes it work: fetch a fresh signed challenge from /api/form-token, put it in the hidden fields,
+  // then submit as JSON and render the success/error message inline. No third-party script ever loads.
+  const form = document.querySelector<HTMLFormElement>('.newsletter-form');
+  if (form) {
+    const tokenUrl = new URL(form.dataset.tokenUrl || '/api/form-token', window.location.origin);
+    const hpInput = form.querySelector<HTMLInputElement>('input[name="hp"]');
+    const tsInput = form.querySelector<HTMLInputElement>('input[name="ts"]');
+    const sigInput = form.querySelector<HTMLInputElement>('input[name="sig"]');
+    const status = form.querySelector<HTMLElement>('.status');
+    const messages = form.dataset.messages ? JSON.parse(form.dataset.messages) : {};
+    const successText = messages.success || '';
+    const errorText = messages.error || '';
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (status) status.textContent = '';
+      try {
+        const token = await fetch(tokenUrl).then((r) => r.json());
+        if (!token.ok) throw new Error('no token');
+        if (tsInput && sigInput) {
+          tsInput.value = String(token.ts);
+          sigInput.value = token.sig;
+        }
+        if (hpInput) hpInput.value = '';
+
+        const data = {
+          email: form.querySelector<HTMLInputElement>('input[name="email"]')?.value,
+          lang: form.dataset.lang,
+          list: form.dataset.list,
+          hp: hpInput?.value ?? '',
+          ts: Number(tsInput?.value),
+          sig: sigInput?.value ?? '',
+        };
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const out = await res.json();
+        if (out.ok && status) status.textContent = successText;
+        else if (status) status.textContent = errorText;
+      } catch {
+        if (status) status.textContent = errorText;
+      }
+    });
+  }
 </script>
 
 <style>
