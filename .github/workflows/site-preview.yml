@@ -1,0 +1,120 @@
+# Preview of every pull request that touches the site, on Filip's Cloudflare account (M00-08, D16, D36).
+# - Build is the non-production build: noindex, robots.txt Disallow (D24). The custom domain is never touched here.
+# - Uses `wrangler preview` (open beta in wrangler 4.157.0); URL: https://pr-<number>-astromicroscope.<account subdomain>.workers.dev
+# - Needs two repository secrets, CLOUDFLARE_API_TOKEN (its own Account API token, limited to this account and to Workers,
+#   not Srdjan's personal token) and CLOUDFLARE_ACCOUNT_ID. Without them (or on a pull request from a fork) the job
+#   skips with a notice and the check stays green.
+# - `pull_request`, not `pull_request_target`: a pull request from a fork never receives the secrets.
+# - The preview is deleted when the pull request is closed.
+name: site-preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths: ['site/**', '.github/workflows/site-preview.yml', 'brand/tokens/**', 'brand/fonts/**']
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: site-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Check that the Cloudflare secrets are available
+        id: gate
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No Cloudflare secrets (not set yet, or a pull request from a fork): preview skipped."
+          fi
+      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      - if: steps.gate.outputs.enabled == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - if: steps.gate.outputs.enabled == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - if: steps.gate.outputs.enabled == 'true'
+        run: npm ci
+      - name: Build (non-production, noindex)
+        if: steps.gate.outputs.enabled == 'true'
+        run: npm run build
+      - name: Create or update the preview
+        id: preview
+        if: steps.gate.outputs.enabled == 'true'
+        env:
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          out="$(npx --no-install wrangler preview --name "pr-${PR}" --json)"
+          # wrangler prints progress lines before the JSON object
+          url="$(printf '%s\n' "$out" | sed -n '/^{/,$p' | jq -er '.preview.urls[0]')"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+      - name: Comment the address on the pull request (one comment, updated)
+        if: steps.gate.outputs.enabled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          URL: ${{ steps.preview.outputs.url }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          marker='<!-- site-preview -->'
+          body="${marker}"$'\n'"**Pregled / Preview** (${SHA:0:7}): ${URL}/"$'\n\n'"Privremeni pregled, nije za pretraživače (noindex). / Temporary preview, not for search engines (noindex). Briše se kad se PR zatvori. / Deleted when the PR is closed."
+          id="$(gh api "repos/${REPO}/issues/${PR}/comments" --paginate --jq "[.[] | select(.body | contains(\"${marker}\"))][0].id // empty")"
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${REPO}/issues/comments/${id}" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/${REPO}/issues/${PR}/comments" -f body="$body" > /dev/null
+          fi
+
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PR: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Check that the Cloudflare secrets are available
+        id: gate
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No Cloudflare secrets: nothing to delete."
+          fi
+      - if: steps.gate.outputs.enabled == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - if: steps.gate.outputs.enabled == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - if: steps.gate.outputs.enabled == 'true'
+        run: npm ci
+      - name: Delete the preview of this pull request
+        if: steps.gate.outputs.enabled == 'true'
+        run: npx --no-install wrangler preview delete --name "pr-${PR}" --skip-confirmation

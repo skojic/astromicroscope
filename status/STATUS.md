@@ -5,8 +5,8 @@ Updated: 2026-11-04 · Branch: `main` · Stages: idea → specced → approved �
 ## Now
 - **Current focus:** closing Phase 0 (`plan/challenge.md`): domain, Gorica's answers and Filip's Cloudflare account are done; open: Cloudflare invitation and repository visibility (Srdjan), passwords and 2FA on Gorica's accounts. Content migration (M02) starts; M00 has begun (Astro project in `site/`, PR #6).
 - **Last step:** Srdjan's modules built on `main` (owner bypass, CI green): M00 foundation (routing, layouts, tokens and reduced fonts, content schemas and checks, CI, headers), M03 shell, M04 SEO, M05 home hero, M11 videos. G0 for M00 (D23); M00-01 done (PR #8). Decisions D24–D30. Before that: domain renewed until 2027-10-15 (A1); Filip's module plans read; Gorica's answers (D18–D21).
-- **Next step:** Srdjan: get the Cloudflare token from Filip (M00-08, preview URLs); G2/G3 checks for M03, M04, M11. Filip: M02 content migration and the section modules (M06, M08, M09, M10) — the home page and M07 wait for them.
-- **Blocked by:** M00-08 hosting: no API token in Filip's Cloudflare account for Srdjan; M07 horoscope: M02 content and M06/M10 components; M12 forms: P02b; passwords and 2FA on Gorica's accounts (A2, deferred, D30).
+- **Next step:** Srdjan or Filip: dedicated CI token as `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as GitHub secrets so the preview workflow (in the M00-08 pull request) runs; G2/G3 checks for M03, M04, M11. Filip: M02 content migration and the section modules (M06, M08, M09, M10) — the home page and M07 wait for them.
+- **Blocked by:** M00-08 CI previews: `CLOUDFLARE_ACCOUNT_ID` secret missing and the existing `CLOUDFLARE_API_TOKEN` secret unverified (Filip or Srdjan); M07 horoscope: M02 content and M06/M10 components; M12 forms: P02b; passwords and 2FA on Gorica's accounts (A2, deferred, D30).
 
 ## Specs
 | ID | File | Status |
@@ -26,7 +26,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 
 | Module | Owner | Stage | Waiting for | Report |
 |---|---|---|---|---|
-| M00 Foundation | Srdjan | building | M00-08: Cloudflare API token (Filip) | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
+| M00 Foundation | Srdjan | building | M00-08: CI secrets for per-PR previews (workflow written, manual deploy to workers.dev done) | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
 | M02 Content migration | Filip | approved | — (G0 passed 2026-11-04; Filip moves to building) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |

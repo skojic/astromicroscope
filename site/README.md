@@ -41,6 +41,8 @@ Run from `site/`.
 | `npm run test:html`, `test:axe`, `test:lighthouse` | HTML validation, axe (WCAG 2.2 A/AA), Lighthouse budgets on the built `dist/`. For axe locally: `npx playwright install chromium`, or `PW_CHANNEL=chrome` to use installed Chrome |
 | `npm run preview` | Serve the built `dist/` locally to check it before a pull request |
 | `npm run astro -- --help` | Astro CLI help |
+| `npm run deploy:dry-run` | `wrangler deploy --dry-run`: reads `dist/` and `wrangler.jsonc`, uploads nothing, needs no token |
+| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the temporary address `https://astromicroscope.filipvicentijevic99.workers.dev`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. Not for production: the custom domain is attached at launch (M13) |
 
 `npm install` changes `package-lock.json`; use it only when M00 changes dependencies.
 

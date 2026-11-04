@@ -10,9 +10,11 @@
 | Last updated | 2026-11-04 |
 
 ## Next step
-M00-08 and the preview URL once the Cloudflare token exists. Then gates G2 to G4 for M00.
+M00-08 remainder: the preview workflow (`.github/workflows/site-preview.yml`) is written and skips until `CLOUDFLARE_ACCOUNT_ID` exists and `CLOUDFLARE_API_TOKEN` is a dedicated CI token. The repo already holds a secret `CLOUDFLARE_API_TOKEN` (set 2026-11-03 20:15 UTC, origin and scope unknown, value unreadable). Srdjan or Filip: create an Account API token for this account only (template Edit Cloudflare Workers), set it as `CLOUDFLARE_API_TOKEN`, add `CLOUDFLARE_ACCOUNT_ID`, then check the first pull request run shows the `Pregled / Preview` comment. After that M00-08 can go through its gate; then G2 to G4 for M00.
 
 ## Done
+- M00-08 (part): Worker `astromicroscope` with static assets deployed to Filip's Cloudflare account by Srdjan with his account API token (kept in the macOS keychain, not in the repo): `site/wrangler.jsonc`, `wrangler@4.157.0` pinned, scripts `deploy:dry-run` and `deploy:preview`. Address: `https://astromicroscope.filipvicentijevic99.workers.dev`, non-production build, `noindex` (D36). Evidence in the test table below. Pull request from `feature/m00-08-cloudflare-hosting`.
+- M00-08 (part): `.github/workflows/site-preview.yml`: per-pull-request preview with `wrangler preview --name pr-<number>` (URL `https://pr-<number>-astromicroscope.filipvicentijevic99.workers.dev`), one updated comment on the pull request, preview deleted on close, skips without the two secrets and on fork pull requests (`pull_request`, not `pull_request_target`). `wrangler.jsonc` got an empty `previews` block, which `wrangler preview` requires. Not yet run in CI (no usable secrets).
 - M00-10 Dependabot security updates: turned on by Srdjan on 2026-11-04 (`gh api -X PUT repos/skojic/astromicroscope/automated-security-fixes`). Evidence: `gh api repos/skojic/astromicroscope --jq .security_and_analysis` → `"dependabot_security_updates":{"status":"enabled"}` (before: `disabled`). Actions are pinned to SHAs.
 - M00-01: `contracts.md` checked against Astro 7.4.5 and corrected (PR #8, merged).
 - M00-02: Astro 7.4.5 project, versions pinned, README (PR #6).
@@ -24,13 +26,15 @@ M00-08 and the preview URL once the Cloudflare token exists. Then gates G2 to G4
 - M00-09: `dist/_headers` written at build (`src/integrations/headers.mjs`): HSTS, nosniff, Referrer-Policy, Permissions-Policy, CSP (frame-ancestors, object-src, base-uri, form-action, img/font/connect/frame-src) plus Astro's hash-based script/style CSP in each page; `X-Robots-Tag: noindex` unless `SITE_ENV=production` (D24).
 
 ## Not done
-- M00-08 Hosting on Filip's Cloudflare account and the preview URL per pull request (blocked, see below).
+- M00-08 preview in CI has not run yet: it needs the CI token and account ID secrets (see Next step). The manual deploy to the temporary address is done.
 - Data schemas of contracts §3 (Analysis, Course, Video) are not in `content.config.ts`: their owners (M09, M08, M11) define them with their data. M11's is in `components/sections/videos/data.ts`.
 - Not demonstrated: that a failing Lighthouse assertion or a failing axe run turns CI red (axe did report `label-content-name-mismatch` locally before two fixes; html-validate rejected a deliberately bad file).
-- Headers were not tested on a live host: Cloudflare applying `_headers` is unchecked.
+- Headers on a live host: now checked on the temporary address (see test table). Custom domain, production build and DNS are not touched (launch, M13).
 
 ## Problems and blockers
-- M00-08: Srdjan cannot create API tokens in Filip's Cloudflare account (2026-11-03). Filip must create a token (Account API token, template Edit Cloudflare Workers, this account only) and add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as GitHub secrets, or give Srdjan a role that can.
+- M00-08 token: Srdjan now has an account API token for Filip's account (verified 2026-11-04: `This API Token is valid and active` on the account endpoint; `wrangler whoami`: Account API Token). The CI token for GitHub secrets is still open: it should be separate from Srdjan's, limited to this account. `gh secret list` shows `CLOUDFLARE_API_TOKEN` (2026-11-03) but no `CLOUDFLARE_ACCOUNT_ID`; I have not touched either.
+- First `wrangler deploy` failed at 10:00 UTC with `Could not automatically register "site" as your workers.dev subdomain` (wrangler's `GET .../workers/subdomain` got 404). The account subdomain `filipvicentijevic99` existed a few minutes later; cause (likely created when the dashboard page was opened) is inferred, not confirmed. The retry succeeded without changes.
+- npm blocks the `esbuild` and `workerd` install scripts of wrangler (`install-scripts` warning). Decision: leave them blocked (least privilege). Deploys and `wrangler preview` work without them (tested 2026-11-04); local `wrangler dev` needs `workerd` and is not used in this project.
 - `npm ci` prints an `install-scripts` warning for `fsevents@2.3.3` (macOS-only optional dependency); not investigated.
 - CI first failed Lighthouse on CLS 0.13 (Linux runner, font swap). Fixed with `font-display: optional` (D25); local CLS 0, CI green afterwards.
 
@@ -51,9 +55,16 @@ M00-08 and the preview URL once the Cloudflare token exists. Then gates G2 to G4
 | `npm run test:axe` | `axe: 18 pages x 2 viewports, 0 violations` | 2026-11-03 |
 | `npm run test:e2e` | `e2e: 18 pages, 0 failures` | 2026-11-03 |
 | GitHub Actions `site-ci` on `main` | success for the last push (all steps incl. Lighthouse median of 3) | 2026-11-03 |
+| `npm run deploy:dry-run` | `Read 87 files from the assets directory`, `--dry-run: exiting now.` | 2026-11-04 |
+| `npm run deploy:preview` (retry) | `Success! Uploaded 69 files`, `https://astromicroscope.filipvicentijevic99.workers.dev`, Version ID `80733f36-e53a-49f4-b87a-c4439ea7a7e9` | 2026-11-04 |
+| `wrangler preview --name m00-08-test --json` (throwaway, deleted after) | first run: `Your Wrangler configuration is missing a previews block`; after adding `"previews": {}`: preview URL `https://m00-08-test-astromicroscope.filipvicentijevic99.workers.dev` returned 200 with `x-robots-tag: noindex`, main address still 200; `wrangler preview delete` → `Preview "m00-08-test" deleted successfully.` Progress lines precede the JSON on stdout; the workflow cuts from the first `{` line | 2026-11-04 |
+| `npm test` (site/) after the changes | `ℹ pass 25`, `ℹ fail 0`; `npm run build` `18 page(s) built`; `deploy:dry-run` `Read 87 files` | 2026-11-04 |
+| `curl` on the live address | `/` and `/en/` 200; `/nepostoji/` and `/en/nepostoji/` 404 with titles `Strana nije pronađena` / `Page not found`; `/en` 307 to `/en/`; `x-robots-tag: noindex`, `strict-transport-security`, `content-security-policy`, `x-content-type-options` on all; `robots.txt` `Disallow: /`; `<meta name="robots" content="noindex">` and `<html lang="sr-Latn">` on `/` | 2026-11-04 |
+
 
 ## History
 - 2026-11-02: plan created.
 - 2026-11-03: M00-02 done (Astro 7.4.5 in `site/`, pinned, README); PR #6 opened.
 - 2026-11-03: M00-01 done, G0 go (D23).
 - 2026-11-03: M00-03 to M00-07 and M00-09 built and pushed to `main`; CI green.
+- 2026-11-04: M00-08 part done: Worker deployed to the temporary workers.dev address (D36); CI previews open.
