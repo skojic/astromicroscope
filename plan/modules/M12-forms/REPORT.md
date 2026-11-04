@@ -10,14 +10,15 @@
 | Last updated | 2026-11-04 |
 
 ## Next step
-M12-01 and M12-04 are scaffolded. Remaining: M12-02 (MailerLite) with a real API key as a Worker secret, then M12-03 (Email Service) once the domain's DNS is on Cloudflare (M13), then M12-05 (Web Analytics). Read `PLAN.md` and `plan/contracts.md` before extending.
+M12-01, M12-02 and M12-04 are built. Remaining: prove the live double opt-in (run the real form once M12-02 and the deploy are live), then M12-03 (Email Service) once the domain's DNS is on Cloudflare (M13), then M12-05 (Web Analytics). Read `PLAN.md` and `plan/contracts.md` before extending.
 
 ## Done
 - 2026-11-04, M12-01 scaffold (D44): `site/src/worker/index.ts` — a Worker `fetch` that answers only `/api/` paths (wrangler `main` and `assets.run_worker_first: ["/api/*"]`), with a `/api/newsletter` endpoint that validates JSON, rejects the honeypot, checks a signed timestamp and an HMAC-SHA-256 signature, validates the email and the list/lang, and rate-limits per IP (stub Map); provider calls left as marked TO DO. `site/wrangler.jsonc` now sets `main` to the script and `run_worker_first` to `["/api/*"]`. i18n strings in `site/src/i18n/newsletter.{json,ts}` and a `site/src/components/sections/newsletter/HomeSection.astro` form. Evidence: `npm run build` → 18 pages, exit 0; the worker bundles clean under esbuild; `wrangler deploy --dry-run` reads config without error.
 - 2026-11-04, M12-04 client half (D44): reworked the challenge to a **stateless signed form token** that keeps the form working without JavaScript and never ships the secret to the browser. `GET /api/form-token` now mints `{ ts, sig }` where `sig = HMAC-SHA-256('astromicroscope-form-v1' + '|' + ts)` under the Worker secret `FORM_SIGNING_SECRET`; the newsletter endpoint verifies that signature (no email binding), and the honeypot stays. `HomeSection.astro` now has the client script: fetch a fresh token, fill the hidden `ts`/`sig` fields, keep `hp` empty, submit as JSON, and show the translated success/error message (from `data-messages`). The rate-limit Map is still a stub (promoted to KV/DO before launch). Evidence: `npm run build` 18 pages exit 0; worker bundles clean (esbuild 3.5 KB); `npm test` 37 pass.
+- 2026-11-04, M12-02 MailerLite subscriber call (D44): `mailerLiteSubscribe` in the Worker POSTs to `https://connect.mailerlite.com/api/subscribers` with `Authorization: Bearer <MAILERLITE_API_KEY>`, `groups: [<group id>]`, `status: "unconfirmed"`. The account is on the newer Developer API (both `connect.mailerlite.com` v2 and the classic `api.mailerlite.com` v1 answered with `Authorization: Bearer` / `X-MailerLite-ApiKey` on 2026-11-04). Live groups found and stored as Worker secrets: `MAILERLITE_GROUP_NEWSLETTER` = `196782570813261481` ("Astro Microscope", 37 active), `MAILERLITE_GROUP_WAITLIST` = `203228920135288545` ("Lista čekanja – kursevi", 0 active). The token, group ids and signing secret are in the macOS keychain (`mailerlite-astromicroscope`, `mailerlite-group-*`, `cloudflare-astromicroscope`) and as Worker secrets — never in the repo. A missing secret or non-production build short-circuits without a network call; a provider failure answers generically so the visitor learns nothing. Evidence: `npm run build` 18 pages exit 0; worker bundles clean (esbuild 4.2 KB).
 
 ## Not done
-- M12-02: MailerLite subscriber call (needs `MAILERLITE_API_KEY` Worker secret; double opt-in unproven, D44).
+- M12-02 live proof: the double opt-in flow (confirmation mail) has not been observed — D44 left it to the first real test; `status: "unconfirmed"` is the current assumption.
 - M12-03: contact and analysis-request email (needs the domain on Cloudflare for real send; dry run before).
 - M12-04: real rate-limit store (KV/DO) instead of the Map stub.
 - M12-05: Cloudflare Web Analytics (production build only, CSP check).
@@ -25,8 +26,8 @@ M12-01 and M12-04 are scaffolded. Remaining: M12-02 (MailerLite) with a real API
 
 ## Problems and blockers
 - Real contact mail waits on DNS on Cloudflare (M13, from ~2026-11-29).
-- MailerLite double opt-in via API is unproven until the real key is used (D44).
-- `FORM_SIGNING_SECRET` and `MAILERLITE_API_KEY` do not exist yet (created in the Cloudflare dashboard, not in the repo).
+- MailerLite double opt-in via API is unproven until a real sign-up runs against the deployed Worker (D44).
+- `FORM_SIGNING_SECRET`, `MAILERLITE_API_KEY` and the two group-id secrets exist as Worker secrets (not in the repo): done.
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
