@@ -59,6 +59,7 @@ One English term per Serbian term, used the same way in every text. Standard Eng
 | Saturn, „učitelj i mučitelj” | Saturn, “teacher and tormentor” |
 
 ## Style
+- American spelling, as in the existing English strings of the site (color, center, recognize, pediatrician).
 - Address the reader as “you”; Gorica writes in the first person (D18).
 - No gendered forms are needed in English; Serbian „/la” forms become plain “you”.
 - Dates in English texts: 30 June 2026, 14 February (day month year, no ordinals).
