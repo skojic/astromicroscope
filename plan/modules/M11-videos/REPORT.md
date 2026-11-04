@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| Stage | review (G2 and G3 passed 2026-11-04; G4 waits for Srdjan's approval) |
-| Last gate passed | G3 |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 |
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
@@ -12,7 +12,7 @@
 ## Next step
 2026-11-04: `src/data/videos.json` has `publishedAt` (full timestamp with timezone) next to `published`; `npm run import:videos` writes both and `VideoPage.astro` uses `publishedAt` for `uploadDate` (M04, PR #12). The six existing entries were filled from the channel feed without a full import.
 
-G4: Srdjan's approval on the preview URL. G2 and G3 evidence is in the M00 report (video hub at 1440, sr video page at 768, en video page at 360, all three browsers measured for overflow; Rich Results Test valid after the `uploadDate` fix, M04 report). Gorica's own summaries, key dates and transcripts: not built, the YouTube description is shown as the summary until they exist. Run `npm run import:videos` when a new video is published.
+G4 approved by Srdjan 2026-11-04. G2 and G3 evidence is in the M00 report (video hub at 1440, sr video page at 768, en video page at 360, all three browsers measured for overflow; Rich Results Test valid after the `uploadDate` fix, M04 report). Gorica's own summaries, key dates and transcripts: not built, the YouTube description is shown as the summary until they exist. Run `npm run import:videos` when a new video is published.
 
 ## Done
 - 2026-11-04, G3 SEO pass: meta descriptions of three Serbian video pages were the YouTube contact block (`Instagram: … Sajt: … Mejl: …`) and every English video page repeated the Serbian title and description. Fixed: `videos/text.ts` strips boilerplate from summaries and meta descriptions; English pages get a language-labelled title and an English description (D32). Evidence: `npm test` 25 pass (6 new in `test/video-text.test.ts`); `SITE_ENV=production npm run build` 18 pages; titles and descriptions unique across all 12 video pages (checked in `dist/`); `html-validate dist` exit 0; `axe: 18 pages x 2 viewports, 0 violations`; `e2e: 18 pages, 0 failures`.

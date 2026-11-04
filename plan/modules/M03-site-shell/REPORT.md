@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| Stage | review (G2 and G3 passed 2026-11-04; G4 waits for Srdjan's approval) |
-| Last gate passed | G3 |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 |
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
 | Last updated | 2026-11-04 |
 
 ## Next step
-G4: Srdjan's approval on the preview URL. G2 and G3 evidence is in the M00 report (the shell is on every page of the visual review); the menu targets that do not exist yet stay pending until their modules are built (`SEO_STRICT=1` at the launch gate).
+Done: G4 approved by Srdjan 2026-11-04. G2 and G3 evidence is in the M00 report (the shell is on every page of the visual review); the menu targets that do not exist yet stay pending until their modules are built (`SEO_STRICT=1` at the launch gate).
 
 ## Done
 - 2026-11-04, link check (`npm run test:seo`): every internal link and anchor on the 18 built pages resolves, except links to routes whose modules are not built. **Open finding:** the header, footer and home page link to 10 pages that do not exist yet (`/edukacija/`, `/tekstovi/`, `/analize/`, `/o-meni/`, `/kontakt/` and the English pairs); a deploy today would show dead navigation. They are reported as pending and become failures with `SEO_STRICT=1` (M13).

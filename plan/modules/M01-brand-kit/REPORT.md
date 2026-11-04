@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| Stage | review |
-| Last gate passed | G1 (built) |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 (owner approval; G2 and G3 did not run: the kit is not part of the site build, its tokens, fonts and logo are consumed by M00, whose gates passed) |
 | Owner | Srdjan |
 | Branch | `main` (committed directly by the owner) |
 | Last commit | see `git log -- brand/` |
 | Last updated | 2026-11-02, Srdjan (prepared with the assistant) |
 
 ## Next step
-G4: Srdjan's approval on the preview URL (Gorica chose direction D, rule 7 in `AGENTS.md`). The traced logo in `brand/logo/` is final (D39); the re-export commands below stay for reference.
+None: approved by Srdjan on 2026-11-04 (Gorica chose direction D, rule 7 in `AGENTS.md`). The traced logo in `brand/logo/` is final (D39); the re-export commands below stay for reference.
 
 ## Done
 - Brand kit for direction D: rules page SR/EN (`brand/index.html`), home reference, tokens (`tokens.css`, `tokens.json`), fonts (6 woff2, SIL OFL 1.1), social templates with PNG previews.

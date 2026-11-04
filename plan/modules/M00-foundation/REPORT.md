@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| Stage | review (G1 to G3 passed 2026-11-04; G4 waits for Srdjan's approval) |
-| Last gate passed | G3 |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 |
 | Owner | Srdjan |
 | Branch | `main` (owner bypass, pushed directly) |
 | Last commit | see `git log` (site CI green) |
 | Last updated | 2026-11-04 |
 
 ## Next step
-Gates G2 to G4 for M00 (evidence per `testing/gates.md`). M00-08 works: CI secrets set 2026-11-04 (dedicated token), preview workflow seen in PR #12 (preview URL, one comment, deleted on close), fix of its first-run bug on `main`. Open for the first pull requests of Filip: check that the `Pregled / Preview` comment appears on his PR as well.
+None: M00 is done. When Filip opens his first pull request, check that the `Pregled / Preview` comment appears on it as well.
 
 ## Done
 - M00-08 (part): Worker `astromicroscope` with static assets deployed to Filip's Cloudflare account by Srdjan with his account API token (kept in the macOS keychain, not in the repo): `site/wrangler.jsonc`, `wrangler@4.157.0` pinned, scripts `deploy:dry-run` and `deploy:preview`. Address: `https://astromicroscope.filipvicentijevic99.workers.dev`, non-production build, `noindex` (D36). Evidence in the test table below. On `main` as commit `7069aff` (owner bypass, branch deleted); `site-ci` and CodeQL green on that push.
@@ -78,3 +78,4 @@ Gates G2 to G4 for M00 (evidence per `testing/gates.md`). M00-08 works: CI secre
 - 2026-11-03: M00-03 to M00-07 and M00-09 built and pushed to `main`; CI green.
 - 2026-11-04: M00-08 part done: Worker deployed to the temporary workers.dev address (D36); CI previews open.
 - 2026-11-04: G1, G2, G3 passed (evidence in the test table); 404 pages fixed; temporary address redeployed; G4 pending.
+- 2026-11-04: G4 approved by Srdjan (chat); M00 done.

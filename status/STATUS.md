@@ -3,10 +3,10 @@
 Updated: 2026-11-04 · Branch: `main` · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
-- **Current focus:** Srdjan's modules M00, M03 and M11 passed G1 to G3 on 2026-11-04 and wait for his approval (G4). The unfinished site is live only on the temporary address (D36). Filip starts M02 content migration, M10 and the M14 glossary, then M06, M08, M09.
+- **Current focus:** M00, M01, M03 and M11 are done (G4 approved by Srdjan 2026-11-04). The unfinished site is live only on the temporary address (D36). P02b is decided (D44), so M12 forms can be built. Filip starts M02 content migration, M10 and the M14 glossary, then M06, M08, M09.
 - **Last step:** Srdjan's modules built on `main` (owner bypass, CI green): M00 foundation (routing, layouts, tokens and reduced fonts, content schemas and checks, CI, headers), M03 shell, M04 SEO, M05 home hero, M11 videos. G0 for M00 (D23); M00-01 done (PR #8). M00-08: Worker deployed to `https://astromicroscope.filipvicentijevic99.workers.dev` (D36), preview workflow on `main`. M04 validators run on the preview (2026-11-04). Decisions D24–D36. Before that: domain renewed until 2027-10-15 (A1); Filip's module plans read; Gorica's answers (D18–D21).
-- **Next step:** Srdjan: approve M00, M01, M03 and M11 (G4) on the preview URL; decide P02b (form handling, analytics) to unblock M12; review Filip's pull requests. Filip: M02 content migration and the section modules (M06, M08, M09, M10); the home page (M05) and M07 wait for them.
-- **Blocked by:** M12 forms: P02b; M07 horoscope: M02 content and the M06/M10 components (the 2026 edition is used for now, D41); M05 home: sections of M06–M10 and M12.
+- **Next step:** Srdjan: review Filip's pull requests; give the MailerLite API key as a Worker secret when M12 is ready for its live test. M12 (Srdjan): build the Worker endpoints, forms and analytics per D44. Filip: M02 content migration and the section modules (M06, M08, M09, M10); the home page (M05) and M07 wait for them.
+- **Blocked by:** M07 horoscope: M02 content and the M06/M10 components (the 2026 edition is used for now, D41); M05 home: sections of M06–M10 and M12; real contact mail: the domain's DNS on Cloudflare (M13).
 
 ## Specs
 | ID | File | Status |
@@ -26,10 +26,10 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 
 | Module | Owner | Stage | Waiting for | Report |
 |---|---|---|---|---|
-| M00 Foundation | Srdjan | review | G4 approval | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
-| M01 Brand kit and logo | Srdjan | review | G4 approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
+| M00 Foundation | Srdjan | done | — | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
+| M01 Brand kit and logo | Srdjan | done | — | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
 | M02 Content migration | Filip | approved | — (G0 passed 2026-11-04; Filip moves to building) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
-| M03 Site shell | Srdjan | review | G4 approval | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
+| M03 Site shell | Srdjan | done | — | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
@@ -37,8 +37,8 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M08 Education (free learning + waitlist) | Filip | idea | — (waitlist button sends via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Filip | idea | — | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Filip | idea | — | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
-| M11 Videos | Srdjan | review | G4 approval | [REPORT](../plan/modules/M11-videos/REPORT.md) |
-| M12 Forms | Srdjan | idea | P02b | [REPORT](../plan/modules/M12-forms/REPORT.md) |
+| M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
+| M12 Forms | Srdjan | specced | D44 decided; MailerLite API key for the live test; DNS on Cloudflare for contact mail | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
 | M14 English translation | Filip | idea | M02 (glossary M14-01 may start) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
