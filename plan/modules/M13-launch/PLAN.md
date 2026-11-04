@@ -30,6 +30,7 @@ Redirects file, DNS records, `status/log.md` entries
 | M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked |  |
 | M13-05 | Launch checklist: content, performance, accessibility, security (`testing/checklists/security.md`) | live smoke test: `npm run smoke -- <url> --mode production` (D46) |
 | M13-06 | Search Console: Security issues, Manual actions, removal of spam URLs; monitoring set up (`specs/09` §6–7) | |
+| M13-07 | Set the repository variable `PRODUCTION_AUDIT=true` so `site-ci` runs the strict production audit again (D48) | stays set after launch |
 
 ## Acceptance criteria
 - [ ] All gates G2–G5 recorded
