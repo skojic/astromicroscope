@@ -1,16 +1,15 @@
-// M12-01/M12-04 (D44): the Cloudflare Worker script that answers /api/* and leaves every other path to the static
-// assets. Astro builds the site into dist/; wrangler sets `main` to this file and `assets.run_worker_first` to
+// M12-01/M12-04/M12-02 (D44): the Cloudflare Worker script that answers /api/* and leaves every other path to the
+// static assets. Astro builds the site into dist/; wrangler sets `main` to this file and `assets.run_worker_first` to
 // ["/api/*"], so a form POST to /api/newsletter runs here, and every page keeps serving from the static assets.
 //
 // Endpoints:
-//   GET  /api/form-token  -> { ts, sig } : a short-lived, HMAC-signed challenge the page picks up (M12-04). The
-//                            signature is over `FORM_SALT|ts`, so it authenticates the page session without binding
-//                            the user's email and without shipping the secret to the browser.
-//   POST /api/newsletter   -> the newsletter / waitlist form (M12-02).
+//   GET  /api/form-token  -> { ts, sig } : a short-lived, HMAC-signed challenge the page picks up (M12-04).
+//   POST /api/newsletter   -> the newsletter / waitlist form (M12-02): creates the subscriber as `unconfirmed`
+//                            and mints a confirmation token for the double-opt-in mail.
+//   GET  /api/confirm      -> the link in the double-opt-in mail: flips the subscriber to `active`.
 //
-// This is the backend shell: endpoints validate their input, store nothing, and answer JSON. The providers
-// (MailerLite M12-02, Email Service M12-03) plug into the marked spots; no secret is stored here — they are
-// Worker secrets in the Cloudflare dashboard, read through env bindings (specs/09 §2).
+// The providers (MailerLite M12-02, Email Service M12-03) plug into the marked spots; no secret is stored here — they
+// are Worker secrets in the Cloudflare dashboard, read through env bindings (specs/09 §2).
 
 export default {
   async fetch(request, env, _ctx) {
@@ -23,6 +22,10 @@ export default {
 
     if (request.method === 'POST' && path === '/api/newsletter') {
       return handleNewsletter(request, env);
+    }
+
+    if (request.method === 'GET' && path === '/api/confirm') {
+      return handleConfirm(url, env);
     }
 
     return json({ ok: false, error: 'not-found' }, 404);
@@ -83,36 +86,32 @@ async function handleNewsletter(request, env) {
     return json({ ok: false, error: 'invalid' }, 400);
   }
 
-  // 5. Per-IP rate limit. The IP is in request.headers.get('cf-connecting-ip') on Cloudflare; a per-key cap is
-  //    kept here against a lock-free counter. M12-04 replaces this stub with a bounded store (e.g. Workers KV,
-  //    or a fixed-window count against a Durable Object if volume demands it).
+  // 5. Per-IP rate limit (stub Map; promote to KV before launch, M12-04).
   if (request.headers.get('cf-connecting-ip') && !(await underRateLimit(request, env))) {
     return json({ ok: false, error: 'rate-limited' }, 429);
   }
 
-  // 6. M12-02: subscribe via MailerLite. The account is on the newer Developer API (connect.mailerlite.com), so the
-  //    token goes in `Authorization: Bearer` (verified live 2026-11-04: the token lists both groups). A provider
-  //    failure still answers generically — the visitor must not learn why, and a non-production Worker never sends.
-  const sent = await mailerLiteSubscribe(email, list, env);
-  if (!sent) {
+  // 6. M12-02: create the subscriber as `unconfirmed` in MailerLite and mint a confirmation token.
+  const subscriber = await mailerLiteSubscribe(email, list, env);
+  if (!subscriber) {
     return json({ ok: false, error: 'invalid' }, 400);
   }
+
+  // 7. M12-02 double opt-in: persist the confirm token and (M12-03) email the confirmation link.
+  await storeConfirmation(subscriber.id, email, lang, list, env);
+
   return json({ ok: true });
 }
 
 /**
- * M12-02: add the subscriber to MailerLite (D44). The group depends on the list — `newsletter` → the Astro Microscope
- * group, `waitlist` → the 2027 course waitlist group. Group ids come from Worker secrets (not the repo); a missing
- * secret or a non-production build (no `MAILERLITE_API_KEY`) short-circuits to `false` without a network call.
- *
- * Double opt-in: D44 left whether the API applies it to the account setting. We send `status: "unconfirmed"` here; if
- * the live test shows a confirmation mail already arrives (account-level double opt-in), flip to omit `status`.
+ * M12-02: add the subscriber to MailerLite and return its id, or `null` on failure. The old behaviour (return a
+ * boolean) is superseded because double opt-in needs the subscriber id to flip it to `active` later.
  */
 async function mailerLiteSubscribe(email, list, env) {
   const apiKey = env.MAILERLITE_API_KEY;
   const groupId = list === 'waitlist' ? env.MAILERLITE_GROUP_WAITLIST : env.MAILERLITE_GROUP_NEWSLETTER;
   if (typeof apiKey !== 'string' || apiKey === '' || typeof groupId !== 'string' || groupId === '') {
-    return false; // not configured (or non-production): nothing to send
+    return null; // not configured (or non-production): nothing to send
   }
 
   const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
@@ -128,9 +127,71 @@ async function mailerLiteSubscribe(email, list, env) {
     }),
   });
 
-  // 2xx (created/updated) counts as sent; 4xx/5xx (already-subscribed, invalid, auth) must not reveal details.
-  return res.ok;
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data?.data?.id ?? null;
 }
+
+/** The double-opt-in confirmation link (M12-02, sends in M12-03). */
+async function handleConfirm(url, env) {
+  const token = url.searchParams.get('token');
+  if (typeof token !== 'string' || token === '') {
+    return json({ ok: false, error: 'invalid' }, 400);
+  }
+
+  // The token is `subscriberId.expiry.sig`; verify sig and expiry before trusting the id.
+  const parts = token.split('.');
+  if (parts.length !== 3) return json({ ok: false, error: 'invalid' }, 400);
+  const [id, expiryStr, sig] = parts;
+  const secret = env.FORM_SIGNING_SECRET;
+  if (typeof secret !== 'string' || secret === '') {
+    return json({ ok: false, error: 'unconfigured' }, 500);
+  }
+  const expected = await sign(`${CONFIRM_SALT}|${id}.${expiryStr}`, secret);
+  if (!timingSafeEqual(expected, sig)) return json({ ok: false, error: 'invalid' }, 400);
+  const expiry = Number(expiryStr);
+  if (!Number.isFinite(expiry) || Date.now() > expiry) return json({ ok: false, error: 'expired' }, 400);
+
+  // The subscriber id must match what we stored at subscribe time (defends against forged ids).
+  const stored = await env.CONFIRM_STORE?.get(`confirm:${token}`);
+  if (stored !== id) return json({ ok: false, error: 'invalid' }, 400);
+
+  const apiKey = env.MAILERLITE_API_KEY;
+  if (typeof apiKey !== 'string' || apiKey === '') {
+    return json({ ok: false, error: 'unconfigured' }, 500);
+  }
+  const res = await fetch(`https://connect.mailerlite.com/api/subscribers/${id}`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({ status: 'active', opted_in_at: new Date().toISOString().slice(0, 19).replace('T', ' ') }),
+  });
+
+  if (!res.ok) return json({ ok: false, error: 'invalid' }, 400);
+  await env.CONFIRM_STORE?.delete(`confirm:${token}`);
+  return json({ ok: true });
+}
+
+const CONFIRM_SALT = 'astromicroscope-confirm-v1';
+
+/** Mint and store a confirmation token; the email (M12-03) is the marked TODO that activates after the DNS move. */
+async function storeConfirmation(subscriberId, email, lang, list, env) {
+  const store = env.CONFIRM_STORE;
+  if (!store) return; // no KV binding yet: confirmation is minted but not persistable (non-production)
+
+  const id = String(subscriberId);
+  const expiry = Date.now() + CONFIRM_TTL_MS;
+  const secret = env.FORM_SIGNING_SECRET;
+  const sig = await sign(`${CONFIRM_SALT}|${id}.${expiry}`, secret);
+  const token = `${id}.${expiry}.${sig}`;
+  await store.put(`confirm:${token}`, id, { expirationTtl: Math.floor(CONFIRM_TTL_MS / 1000) });
+
+  // M12-03 TO DO: send the double-opt-in email via Cloudflare Email Service (send_email binding) with a link
+  //   `${siteUrl}/api/confirm?token=${token}` and sr/en subject+body. Blocked on the domain DNS move (M13), so this
+  //   is a no-op until the sender domain is onboarded. Until then subscribers stay `unconfirmed` (they receive no
+  //   campaigns — safe but silent).
+}
+
+const CONFIRM_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days to click the confirmation link
 
 /** A challenge is valid if its timestamp is fresh (max 1 h old) and the signature matches `FORM_SALT|ts`. */
 async function verifyChallenge(ts, sig, env) {
@@ -178,8 +239,6 @@ async function underRateLimit(request, env) {
   const maxPerWindow = 5;
   const key = `${ip}`;
 
-  // A worker boot may handle several requests, but globalThis is per-isolate and short-lived; a Map keyed by IP
-  // with a timestamp is enough for the current stage. Replace with a real store before launch (M12-04).
   const store = env.RATE_STORE ?? globalThis.__am_rate ?? (globalThis.__am_rate = new Map());
   const entry = store.get(key);
   if (entry && now - entry.start < windowMs) {

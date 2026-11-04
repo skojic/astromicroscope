@@ -16,5 +16,9 @@
   // Temporary *.workers.dev address while the site is unfinished; the custom domain is attached at launch (M13), not here.
   "workers_dev": true,
   // Required by `wrangler preview` (per-pull-request previews in CI). Empty: a preview has the same settings as the Worker.
-  "previews": {}
+  "previews": {},
+  // M12-02 double opt-in: stores the confirmation token -> subscriber id mapping (7-day TTL).
+  "kv_namespaces": [
+    { "binding": "CONFIRM_STORE", "id": "cccb4f92a62d477d94f9e0df46f195aa" }
+  ]
 }

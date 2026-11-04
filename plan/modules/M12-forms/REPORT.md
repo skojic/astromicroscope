@@ -18,15 +18,14 @@ M12-01, M12-02 and M12-04 are built. Remaining: prove the live double opt-in (ru
 - 2026-11-04, M12-02 MailerLite subscriber call (D44): `mailerLiteSubscribe` in the Worker POSTs to `https://connect.mailerlite.com/api/subscribers` with `Authorization: Bearer <MAILERLITE_API_KEY>`, `groups: [<group id>]`, `status: "unconfirmed"`. The account is on the newer Developer API (both `connect.mailerlite.com` v2 and the classic `api.mailerlite.com` v1 answered with `Authorization: Bearer` / `X-MailerLite-ApiKey` on 2026-11-04). Live groups found and stored as Worker secrets: `MAILERLITE_GROUP_NEWSLETTER` = `196782570813261481` ("Astro Microscope", 37 active), `MAILERLITE_GROUP_WAITLIST` = `203228920135288545` ("Lista čekanja – kursevi", 0 active). The token, group ids and signing secret are in the macOS keychain (`mailerlite-astromicroscope`, `mailerlite-group-*`, `cloudflare-astromicroscope`) and as Worker secrets — never in the repo. A missing secret or non-production build short-circuits without a network call; a provider failure answers generically so the visitor learns nothing. Evidence: `npm run build` 18 pages exit 0; worker bundles clean (esbuild 4.2 KB).
 
 ## Not done
-- M12-02 live proof: the double opt-in flow (confirmation mail) has not been observed — D44 left it to the first real test; `status: "unconfirmed"` is the current assumption.
+- M12-02 double opt-in (D47): built — `/api/confirm` endpoint, signed token, and KV store (`CONFIRM_STORE`). The **email send is a marked TODO** that activates only after Email Service (M12-03) is live post-DNS; until then subscribers stay `unconfirmed` (silent but safe).
 - M12-03: contact and analysis-request email (needs the domain on Cloudflare for real send; dry run before).
 - M12-04: real rate-limit store (KV/DO) instead of the Map stub.
 - M12-05: Cloudflare Web Analytics (production build only, CSP check).
 - Consent copy not yet approved by Gorica (acceptance criterion).
 
 ## Problems and blockers
-- Real contact mail waits on DNS on Cloudflare (M13, from ~2026-11-29).
-- MailerLite double opt-in via API is unproven until a real sign-up runs against the deployed Worker (D44).
+- Real contact mail waits on DNS on Cloudflare (M13, from ~2026-11-29); the double-opt-in email depends on the same (M12-03).
 - `FORM_SIGNING_SECRET`, `MAILERLITE_API_KEY` and the two group-id secrets exist as Worker secrets (not in the repo): done.
 
 ## Decisions taken in this module
