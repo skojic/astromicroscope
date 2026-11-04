@@ -7,6 +7,7 @@ import SkipLink from '../components/shell/SkipLink.astro';
 import Header from '../components/shell/Header.astro';
 import Footer from '../components/shell/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
+import WebAnalytics from '../components/sections/newsletter/WebAnalytics.astro';
 
 export interface Breadcrumb { name: string; url: string }
 interface Props {
@@ -27,6 +28,7 @@ const { lang, title, description, translationKey, paths, breadcrumbs, jsonLd, im
 ---
 <Base lang={lang} title={title} description={description}>
   <Seo slot="head" lang={lang} title={title} description={description} translationKey={translationKey} paths={paths} breadcrumbs={breadcrumbs} jsonLd={jsonLd} image={image} imageAlt={imageAlt} type={type} noindex={noindex} />
+  <WebAnalytics slot="head" />
   <slot name="head" slot="head" />
   <SkipLink lang={lang} />
   <Header lang={lang} translationKey={translationKey} paths={paths} />

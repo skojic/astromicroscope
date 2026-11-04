@@ -17,7 +17,13 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   // Hashes for inline scripts and styles go into a <meta> CSP; frame-ancestors, object-src and the rest are sent as headers (src/integrations/headers.mjs).
-  security: { csp: true },
+  // Web Analytics (M12-05) loads an external script from static.cloudflareinsights.com, so that host is allowlisted in
+  // script-src here (together with 'self'; Astro's default resources are overridden, not extended, so 'self' is explicit).
+  security: {
+    csp: {
+      scriptDirective: { resources: ["'self'", 'https://static.cloudflareinsights.com'] },
+    },
+  },
   markdown: { syntaxHighlight: false }, // no code samples on the site; Shiki's inline styles do not work with CSP
   integrations: [headers({ isProduction }), notFound(), seoFiles({ isProduction, site: 'https://astromicroscope.com' })],
 });
