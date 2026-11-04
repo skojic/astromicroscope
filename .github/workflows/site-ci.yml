@@ -50,7 +50,9 @@ jobs:
   site:
     needs: changes
     if: needs.changes.outputs.site == 'true'
-    runs-on: ubuntu-latest
+    # ubuntu-24.04 pinned: the migrated ubuntu-26 image both hangs on `playwright install --with-deps` and lacks WebKit's
+    # native libraries, so the cross-browser layout check cannot launch browsers there (2026-11-04, status/log.md).
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: site
@@ -70,9 +72,8 @@ jobs:
       - name: HTML validation
         run: npm run test:html
       - name: Install browsers (Chromium for axe and Lighthouse, Firefox and WebKit for the layout check)
-        # No --with-deps: the runner (and setup-node) already carry the system libraries, and `--with-deps` runs apt-get,
-        # which hangs on the migrated Ubuntu 26 image (2026-11-04, see status/log.md).
-        run: npx playwright install chromium firefox webkit
+        # --with-deps is restored: it hangs on ubuntu-26, but this job is pinned to ubuntu-24.04 where it works (2026-11-04).
+        run: npx playwright install --with-deps chromium firefox webkit
       - name: Accessibility (axe, WCAG 2.2 A and AA)
         run: npm run test:axe
       - name: Browser checks (no YouTube request before play, language switch, skip link)
