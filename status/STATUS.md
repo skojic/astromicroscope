@@ -40,7 +40,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | building | DNS on Cloudflare for contact mail (M13); consent wording at the forms approved (D44) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
-| M14 English translation | Filip | idea | M02 (glossary M14-01 may start) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+| M14 English translation | Filip | building | Srdjan's answer on PR #13 (where the English goes). Done: glossary, 3 pages, 3 articles (6 of 22 files, local) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
 ## Brand
 | Item | Stage | Notes |
