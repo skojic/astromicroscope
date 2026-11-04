@@ -91,6 +91,6 @@ Kako godina odmiče, energija i vitalnost se vraćaju, posebno od sredine leta.
 ## Savet za Lava
 
 2026. je godina sudbinskih promena. Početak može biti izazovan, ali sredina i kraj godine donose sreću, nove prilike i ličnu ekspanziju.
-Budi oprezan/na u finansijama, preispitaj odluke i otvori se za nova iskustva u ljubavi, poslu i okruženju. Jupiter i Uran pomažu ti da izgradiš život koji je istinski tvoj: stabilan, autentičan i ispunjen.
+Pazi na finansije, preispitaj odluke i otvori se za nova iskustva u ljubavi, poslu i okruženju. Jupiter i Uran pomažu ti da izgradiš život koji je istinski tvoj: stabilan, autentičan i ispunjen.
 
 Za lični uvid u natalnu kartu i godišnje tranzite, možeš zakazati individualnu konsultaciju: astromicroscope@gmail.com

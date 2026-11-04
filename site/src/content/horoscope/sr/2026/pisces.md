@@ -40,7 +40,7 @@ Od 14. februara 2026. Saturn prelazi u tvoju drugu kuću i fokus se premešta na
 
 ## Posao i novac
 
-Prva polovina godine nosi oprez kada su u pitanju ugovori, dogovori i dokumenta. Do aprila je važno da budeš pažljiv/a šta potpisuješ i kakve obaveze preuzimaš, jer su mogući pravni zastoji, nesporazumi ili pritisci sa strane.
+Prva polovina godine nosi oprez kada su u pitanju ugovori, dogovori i dokumenta. Do aprila je važno da paziš šta potpisuješ i kakve obaveze preuzimaš, jer su mogući pravni zastoji, nesporazumi ili pritisci sa strane.
 
 Od jula meseca situacija se značajno menja. Jupiter donosi velike poslovne šanse, širenje, napredak i ulazak u veće sisteme, kolektive ili saradnje sa strancima. Ribe tada mogu ostvariti finansijski rast, više posla i stabilnije prihode. Mnogi će promeniti kolektiv, radno okruženje ili profesionalni pravac.
 
@@ -72,7 +72,7 @@ U 2026. godini nema velikih zdravstvenih upozorenja, ali se preporučuje pažnja
 
 ## Neptun u Ovnu
 
-Ulazak Neptuna u znak Ovna iz temelja menja tvoj unutrašnji doživljaj sveta. Ribe se bude, postaju odlučnije, direktnije i svesnije svojih potreba. Više ne pristaješ na ćutanje i odricanje. Počinješ da jasno izražavaš sebe, da se boriš za ono što ti pripada i da više nisi „nevidljiv/a“.
+Ulazak Neptuna u znak Ovna iz temelja menja tvoj unutrašnji doživljaj sveta. Ribe se bude, postaju odlučnije, direktnije i svesnije svojih potreba. Više ne pristaješ na ćutanje i odricanje. Počinješ da jasno izražavaš sebe, da se boriš za ono što ti pripada i da izađeš iz „nevidljivosti“.
 
 2026. godina te uči da vrednuješ sebe, da više ne živiš u tuđim potrebama, već u sopstvenoj istini. Finansijska zrelost, emotivna stabilnost i unutrašnja snaga postaju tvoj novi temelj. I što je najvažnije, počinješ da gradiš život koji tebi odgovara.
 

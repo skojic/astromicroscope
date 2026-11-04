@@ -24,7 +24,7 @@ draft: true
 
 Vage su u prethodne dve i po godine prolazile kroz ozbiljne izazove u oblasti posla i zdravlja. Mnoge su se suočavale sa iscrpljenošću, velikim pritiskom i gubitkom motivacije, ali 2026. donosi ogroman zaokret, naročito u polju odnosa.
 
-Od sredine februara međuljudski odnosi postaju centralna tema godine. Sve vrste veza prolaze test realnosti kako bi jasno sagledao/la ko je u tvom životu iz iskrenih pobuda, a ko iz navike, koristi ili straha.
+Od sredine februara međuljudski odnosi postaju centralna tema godine. Sve vrste veza prolaze test realnosti kako bi se jasno videlo ko je u tvom životu iz iskrenih pobuda, a ko iz navike, koristi ili straha.
 
 ## Ljubav, brak i partnerstva
 
@@ -40,7 +40,7 @@ Odnosi koji nemaju zdrave temelje mogu doživeti pucanje, dok će oni stabilni o
 
 Tokom godine Vage će imati više putovanja, kako poslovnih, tako i privatnih. Od jula se otvaraju vrata ka napredovanju, radu u većem kolektivu ili potvrdi tvog profesionalnog statusa.
 
-Druga polovina godine donosi stabilnost, ozbiljne dogovore i mogućnost unapređenja privatnog posla. Ono što si gradio/la ranije sada dolazi na naplatu kroz pohvale, priznanja i konkretnu finansijsku dobit.
+Druga polovina godine donosi stabilnost, ozbiljne dogovore i mogućnost unapređenja privatnog posla. Sve što je ranije izgrađeno sada dolazi na naplatu kroz pohvale, priznanja i konkretnu finansijsku dobit.
 
 ### Retrogradni Merkur: periodi opreza
 

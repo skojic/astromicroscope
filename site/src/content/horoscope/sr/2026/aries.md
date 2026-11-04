@@ -39,7 +39,7 @@ Završava se jedno veliko poglavlje, a pred tobom je period u kojem izgrađuješ
 
 #### Neptun u Ovnu od 26. januara
 
-Ulazak Neptuna u tvoj znak pokreće period u kojem će mnogo toga izgledati nejasno ili nedorečeno. Početak godine prati pad energije i potrebe za povlačenjem. Januar i februar mogu biti obeleženi umorom, osetljivošću i unutrašnjim dilemama. Ovo je faza koja te usporava kako bi napravio/la prostor za nešto novo. Neptun donosi pojačanu intuiciju, ali istovremeno stvara maglovite situacije i nejasne granice, pa je važno da slušaš telo i obratiš pažnju na emocionalne reakcije.
+Ulazak Neptuna u tvoj znak pokreće period u kojem će mnogo toga izgledati nejasno ili nedorečeno. Početak godine prati pad energije i potrebe za povlačenjem. Januar i februar mogu biti obeleženi umorom, osetljivošću i unutrašnjim dilemama. Ovo je faza koja te usporava kako bi se napravio prostor za nešto novo. Neptun donosi pojačanu intuiciju, ali istovremeno stvara maglovite situacije i nejasne granice, pa je važno da slušaš telo i obratiš pažnju na emocionalne reakcije.
 Ovo je period regeneracije, čišćenja i oslobađanja od tereta koji te je dugo pratio.
 
 #### Saturn u Ovnu od 14. februara
@@ -74,7 +74,7 @@ Avgust je jedan od najpovoljnijih meseci godine kada su važni dogovori, saradnj
 
 ### Retrogradni Merkur i izazovi
 
-Tokom retrogradnih faza Merkura potrebno je povećati pažnju na dokumente, rokove i komunikaciju. Periodi od 26. februara do 20. marta, od 29. juna do 24. jula i od 24. oktobra do 13. novembra mogu doneti greške, kašnjenja i tehničke probleme. Posebno budi oprezan/na u administrativnim poslovima i pri potpisivanju.
+Tokom retrogradnih faza Merkura potrebno je povećati pažnju na dokumente, rokove i komunikaciju. Periodi od 26. februara do 20. marta, od 29. juna do 24. jula i od 24. oktobra do 13. novembra mogu doneti greške, kašnjenja i tehničke probleme. Posebno pazi u administrativnim poslovima i pri potpisivanju.
 
 ## Dom i porodica
 
@@ -93,7 +93,7 @@ Početak godine donosi pad imuniteta, sklonost virusnim infekcijama, umoru i isc
 
 ## Godina koja te definitivno menja iz temelja
 
-Pred tobom je godina u kojoj se spajaju odgovornost, transformacija i širenje životnih perspektiva. Saturn i Neptun u tvom znaku pozivaju te da postaneš autentičan/na i stabilan/na, dok Jupiter i Uran donose radost, kreativnost, ljubav i mentalnu svežinu.
-Do kraja godine bićeš snažniji/a, jasniji/a u namerama i spreman/na da zakoračiš u život koji gradiš iz potpuno nove pozicije, zreo/la i pun/a snage.
+Pred tobom je godina u kojoj se spajaju odgovornost, transformacija i širenje životnih perspektiva. Saturn i Neptun u tvom znaku pozivaju te na autentičnost i stabilnost, dok Jupiter i Uran donose radost, kreativnost, ljubav i mentalnu svežinu.
+Do kraja godine imaćeš više snage, jasnije namere i spremnost da zakoračiš u život koji gradiš iz potpuno nove pozicije, sa zrelošću i punom snagom.
 
 Za lični uvid u tvoju natalnu kartu i godišnje tranzite, možeš zakazati individualnu konsultaciju: astromicroscope@gmail.com

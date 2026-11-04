@@ -26,7 +26,7 @@ Ovo je period kada se tvoje dugogodišnje dileme polako raspliću, a ti ulaziš 
 
 ## Glavne teme godine
 
-Veoma dinamična i izazovna energija obeležiće ovu godinu, ali će ona za mnoge Blizance biti upravo ono što su dugo čekali. Uran će konačno zakoračiti u tvoju prvu kuću i doneti jaku potrebu za promenom ličnog izgleda, stila, načina odevanja i načina na koji se predstavljaš svetu. Poželećeš da budeš autentičniji/a, hrabriji/a i slobodniji/a u svom izrazu.
+Veoma dinamična i izazovna energija obeležiće ovu godinu, ali će ona za mnoge Blizance biti upravo ono što su dugo čekali. Uran će konačno zakoračiti u tvoju prvu kuću i doneti jaku potrebu za promenom ličnog izgleda, stila, načina odevanja i načina na koji se predstavljaš svetu. Poželećeš više autentičnosti, hrabrosti i slobode u svom izrazu.
 
 U partnerskim i emotivnim odnosima pojaviće se jasna potreba za nezavisnošću i mnogi Blizanci će doneti važne odluke, raskrstiti sa prošlošću ili u postojeće odnose uneti novu dinamiku. Uran ulazi u tvoj znak **26. aprila**, i od tog trenutka kao da se budi potpuno nova verzija tebe. Do tada, Uran boravi u tvojoj 12. kući, tiho te pripremajući za unutrašnju revoluciju.
 
@@ -42,13 +42,13 @@ Od 30. juna otvara se povoljan period za potpisivanje ugovora, sklapanje dogovor
 
 Početak godine donosi dozu konfuzije, iscrpljenosti, pad koncentracije i mogućnost grešaka u proceni, pa je važno da se odmaraš i ne forsiraš sebe.
 
-**26. februar – 20. mart:** budi oprezan/na na poslu. Ne donosi važne odluke i pazi šta kome govoriš ili obećavaš.
+**26. februar – 20. mart:** pazi na poslu. Ne donosi važne odluke i pazi šta kome govoriš ili obećavaš.
 
 **29. jun – 24. jul:** oprez sa novcem. Mogući su gubici, loše investicije ili iznenadni troškovi.
 
 **24. oktobar – 13. novembar:** vraćaju se stari kontakti i poslovne priče. Ovo je šansa da popraviš nešto propušteno ili ispraviš ranije greške.
 
-Tokom retrogradne Venere od **3. oktobra do 14. novembra**, postoji mogućnost javljanja osoba iz prošlosti. Ovaj period može probuditi idealizovana sećanja, pa je važno da ostaneš prizeman/na i racionalan/na.
+Tokom retrogradne Venere od **3. oktobra do 14. novembra**, postoji mogućnost javljanja osoba iz prošlosti. Ovaj period može probuditi idealizovana sećanja, pa je važno zadržati prizemnost i racionalnost.
 
 ## Ljubav i prijateljstva
 

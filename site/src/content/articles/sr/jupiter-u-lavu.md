@@ -89,11 +89,11 @@ Vodolijama Jupiter prolazi kroz sedmu kuću i donosi važna partnerstva. Slobodn
 
 Ribama Jupiter prolazi kroz šestu kuću i donosi priliku da se istaknu kroz posao i svakodnevne aktivnosti. Mnoge Ribe mogu dobiti unapređenje, proširiti poslovanje ili započeti saradnju sa inostranstvom. Kreativnost i umetnost biće posebno naglašeni, a sreća će ih pratiti tokom cele godine.
 
-Kao što si primetio/la, opisala sam kako Jupiter može uticati na svaki znak Zodijaka, ali je veoma važno čitati i za podznak. Iako je Jupiter planeta sreće, prosperiteta i širenja, on ume da pokaže i svoju drugu stranu. Ponekad nas može navesti da pomislimo kako možemo sve, pa da se nakon preterivanja osećamo iscrpljeno i prazno.
+Kao što vidiš, opisala sam kako Jupiter može uticati na svaki znak Zodijaka, ali je veoma važno čitati i za podznak. Iako je Jupiter planeta sreće, prosperiteta i širenja, on ume da pokaže i svoju drugu stranu. Ponekad nas može navesti da pomislimo kako možemo sve, pa da se nakon preterivanja osećamo iscrpljeno i prazno.
 
-Zato je važno analizirati poziciju Jupitera u natalnoj karti i njegove aspekte, kako bi najbolje razumeo/la njegov uticaj tokom tranzita kroz znak Lava.
+Zato je važno analizirati poziciju Jupitera u natalnoj karti i njegove aspekte, kako bi se najbolje razumeo njegov uticaj tokom tranzita kroz znak Lava.
 
-Sigurno si čuo/la onu rečenicu: „Imao pa nemao.“
+Sigurno znaš onu rečenicu: „Imao pa nemao.“
 E, upravo je to simbolika Jupitera kada ne znamo meru – on daje, širi i umnožava, ali isto tako može i oduzeti ako ne znamo kako da upravljamo njegovom energijom.
 
 Za lične konsultacije i analize možeš mi pisati na astromicroscope@gmail.com.

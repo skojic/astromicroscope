@@ -25,19 +25,19 @@ draft: true
 ---
 
 2026. godina donosi Rakovima period u kom se ponovo grade mir, stabilnost i osećaj sigurnog tla pod nogama.
-Pod snažnim uticajem Jupitera i Saturna ulaziš u ciklus sazrevanja, učvršćivanja i postavljanja temelja za naredni dugi period. Šanse, prilike i nagrade dolaze onima koji su bili marljivi, dok oni koji su izbegavali odgovornost sada mogu osetiti posledice. Ovo je godina u kojoj se jasno vidi koliko si ulagao/la u sebe.
+Pod snažnim uticajem Jupitera i Saturna ulaziš u ciklus sazrevanja, učvršćivanja i postavljanja temelja za naredni dugi period. Šanse, prilike i nagrade dolaze onima koji su bili marljivi, dok oni koji su izbegavali odgovornost sada mogu osetiti posledice. Ovo je godina u kojoj se jasno vidi koliko se isplatilo ulaganje u sebe.
 
 ## Glavne teme godine
 
-Do **30. juna 2026.**, Jupiter boravi u tvojoj prvoj kući, donoseći optimizam, sreću, lakoću, podršku i talas novih mogućnosti. Bićeš vidljiviji/a, privlačniji/a ljudima, a mnoge želje se mogu brže ostvariti nego inače. Ovo je period ličnog rasta i širenja.
+Do **30. juna 2026.**, Jupiter boravi u tvojoj prvoj kući, donoseći optimizam, sreću, lakoću, podršku i talas novih mogućnosti. Više ćeš se isticati i privlačiti ljude, a mnoge želje se mogu brže ostvariti nego inače. Ovo je period ličnog rasta i širenja.
 
 Kada Jupiter pređe u Lava, od **30. juna**, otvaraju se vrata za povećanje lične i materijalne vrednosti kroz nove poslovne prilike, saradnju sa stranim kompanijama, unapređenja ili bolje plaćene pozicije.
 
 **Od 14. februara**, Saturn ulazi u tvoje polje karijere i jasno stavlja pred tebe pitanje: **Šta si radio/la do sada i koliko si se trudio/la?**
 
-Ako si bio/la uporan/na i vredan/na, Saturn ti donosi stabilizaciju, nagrade i viši status.
+Uz upornost i vrednoću, Saturn ti donosi stabilizaciju, nagrade i viši status.
 
-Ako si zanemarivao/la obaveze, može doći do otežanja, većih odgovornosti ili čak promena posla.
+Ako su obaveze bile zanemarene, može doći do otežanja, većih odgovornosti ili čak promena posla.
 
 Uran prolazi kroz tvoju 12. kuću i prelazi preko Meseca, donoseći unutrašnje oslobađanje, želju za promenom, pa čak i preseljenje. To je energija kidanja starih emotivnih obrazaca i rađanja nove unutrašnje snage.
 
@@ -49,7 +49,7 @@ Emotivni odnosi mogu biti zahtevni i opterećeni odgovornostima. Mnogi Rakovi os
 
 Slobodni Rakovi mogu upoznati zanimljive osobe preko posla, radnog okruženja ili kolega.
 
-U drugom delu godine moguća su emotivna razočaranja, ne zato što si pogrešio/la, već zato što ti Univerzum pokazuje ko zaista pripada tvom životu.
+U drugom delu godine moguća su emotivna razočaranja, ne zbog tvoje greške, već zato što ti Univerzum pokazuje ko zaista pripada tvom životu.
 
 Retrogradna Venera od **3. oktobra do 14. novembra** vraća osobe iz prošlosti, nekadašnje ljubavi, kao i one koji te nikada nisu sasvim zaboravili. Mogu se javiti i tajni obožavaoci.
 
@@ -63,8 +63,8 @@ Ovo je jedna od najboljih godina za postavljanje čvrstih temelja u karijeri. Ra
 
 - **29. jun – 24. jul:** period nesigurnosti i grešaka. Ne donosi velike odluke.
 
-- **24. oktobar – 13. novembar:** javlja se osoba iz prošlosti ili tajni obožavalac, ali budi razborit/a.
+- **24. oktobar – 13. novembar:** javlja se osoba iz prošlosti ili tajni obožavalac, ali postupaj razborito.
 
-Godina pred tobom donosi stabilnost, napredak i mogućnost da konačno izgradiš sigurnu strukturu svog života. Što si hrabrije i odgovornije pristupao/la izazovima, to će nagrade biti veće. Ovo je godina sazrevanja, jačanja i učvršćivanja.
+Godina pred tobom donosi stabilnost, napredak i mogućnost da konačno izgradiš sigurnu strukturu svog života. Što hrabrije i odgovornije pristupaš izazovima, to će nagrade biti veće. Ovo je godina sazrevanja, jačanja i učvršćivanja.
 
 Ako želiš da saznaš kako će se ove energije konkretno odraziti na tvoj lični horoskop, možeš rezervisati termin za individualne konsultacije: astromicroscope@gmail.com

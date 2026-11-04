@@ -38,7 +38,7 @@ Tokom 2026. godine postoje tri perioda u kojima će retrogradni Merkur posebno s
 
 U periodu od **26. februara do 20. marta** emotivne teme iz prošlosti mogu isplivati na površinu. Stare priče, nekadašnji odnosi i nerešene situacije traže razjašnjenje. Ovo je vreme unutrašnjih uvida i emotivnih suočavanja.
 
-Od **29. juna do 24. jula** dolazi do obnove kontakata sa inostranstvom, starim saradnicima ili osobama koje odavno nisi video/la. Ukoliko putuješ, obrati posebnu pažnju na dokumentaciju, ugovore i dogovore. Ne donositi odluke na brzinu i izbegavati poteze bez temeljnih provera.
+Od **29. juna do 24. jula** dolazi do obnove kontakata sa inostranstvom, starim saradnicima ili osobama koje odavno nisu bile deo tvog života. Ukoliko putuješ, obrati posebnu pažnju na dokumentaciju, ugovore i dogovore. Ne donositi odluke na brzinu i izbegavati poteze bez temeljnih provera.
 
 U periodu od **24. oktobra do 13. novembra** ulaziš u fazu dubokog preispitivanja. Ovo nije vreme za donošenje važnih odluka u afektu. Potrebno je usporiti, sagledati širu sliku i biti oprezan u saobraćaju, ali i prilikom potpisivanja dokumenata.
 
