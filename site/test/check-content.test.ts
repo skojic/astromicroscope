@@ -56,3 +56,35 @@ test('ephemerisChecked false fails in production', async () => {
   });
   assert.match((await checkContent({ root, production: true }))[0], /ephemerisChecked/);
 });
+
+test('a draft without its pair passes outside production and fails in production', async () => {
+  const root = await site({ 'src/content/articles/sr/a.md': md('sr', 'a', 'draft: true\n') });
+  assert.deepEqual(await checkContent({ root, production: false }), []);
+  const prod = await checkContent({ root, production: true });
+  assert.ok(prod.some((p) => /draft is true/.test(p)));
+  assert.ok(prod.some((p) => /no en file/.test(p)));
+});
+
+test('a published file without its pair still fails outside production', async () => {
+  const root = await site({ 'src/content/articles/sr/a.md': md('sr', 'a', 'draft: false\n') });
+  assert.match((await checkContent({ root, production: false }))[0], /no en file/);
+});
+
+test('YAML list values in front matter are not placeholders', async () => {
+  const extra = 'topics: ["finances"]\nother: [children, karmic]\n';
+  const root = await site({
+    'src/content/articles/sr/a.md': md('sr', 'a', extra),
+    'src/content/articles/en/a.md': md('en', 'a', extra),
+  });
+  assert.deepEqual(await checkContent({ root, production: true }), []);
+});
+
+test('a placeholder inside a front matter string still fails in production', async () => {
+  const root = await site({
+    'src/content/articles/sr/a.md': md('sr', 'a', 'answer: "Cena je [cena]."\n'),
+    'src/content/articles/en/a.md': md('en', 'a'),
+  });
+  const prod = await checkContent({ root, production: true });
+  assert.equal(prod.length, 1);
+  assert.match(prod[0], /placeholder/);
+});

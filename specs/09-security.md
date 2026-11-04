@@ -15,7 +15,7 @@ The old WordPress site was compromised: about 140 casino spam posts were injecte
 - The old site is **never restored**, and its backup is never uploaded anywhere or added to the repository.
 
 ## 2. Accounts: the real attack surface now
-Whoever controls these accounts controls the site. Each one needs a strong unique password (password manager) and two-factor authentication.
+Whoever controls these accounts controls the site. Each one needs a strong unique password (password manager) and two-factor authentication. The project no longer tracks this (D43).
 
 | Account | Who | State on 2026-11-02 | Action |
 |---|---|---|---|

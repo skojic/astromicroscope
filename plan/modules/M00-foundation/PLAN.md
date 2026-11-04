@@ -36,11 +36,11 @@ A working Astro project in `site/` that every other module builds on: SR/EN rout
 | M00-10 | Turn on Dependabot security updates; pin third-party actions to commit SHAs | `specs/09` §3 |
 
 ## Acceptance criteria
-- [ ] `npm run build` passes; SR and EN demo pages render
-- [ ] CI runs on a pull request and reports axe and Lighthouse results
-- [ ] Preview URL per pull request
-- [ ] `contracts.md` confirmed or corrected; Filip notified
-- [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
+- [x] `npm run build` passes; SR and EN demo pages render
+- [x] CI runs on a pull request and reports axe and Lighthouse results (PR #12: `site` job green)
+- [x] Preview URL per pull request (PR #12: comment `Pregled / Preview`, 200, noindex, deleted on close)
+- [x] `contracts.md` confirmed or corrected (PR #8); Filip notified in the M00 report, "Requests to other modules" (his acknowledgement is not recorded)
+- [x] Gates passed as in `testing/gates.md`; evidence in `REPORT.md` (G1 to G3 2026-11-04, G4 approved by Srdjan the same day)
 
 ## Risks
 Astro major-version changes; Cloudflare account access on Filip's side; Astro adapter support for Workers static assets (check in M00-01); Lighthouse results vary between runs (use median of 3)

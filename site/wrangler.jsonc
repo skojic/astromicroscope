@@ -1,0 +1,17 @@
+{
+  // Static site served by Cloudflare Workers static assets (D16, M00-08). No Worker script: Astro's output in dist/ is the site.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "astromicroscope",
+  "compatibility_date": "2026-11-04",
+  "assets": {
+    "directory": "./dist",
+    // dist/404.html (sr) and dist/en/404.html (en) are served for unknown paths; see src/integrations/not-found.mjs
+    "not_found_handling": "404-page",
+    // Astro builds with trailingSlash: 'always' (astro.config.mjs), so folder index files are served with a trailing slash
+    "html_handling": "force-trailing-slash"
+  },
+  // Temporary *.workers.dev address while the site is unfinished; the custom domain is attached at launch (M13), not here.
+  "workers_dev": true,
+  // Required by `wrangler preview` (per-pull-request previews in CI). Empty: a preview has the same settings as the Worker.
+  "previews": {}
+}

@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| Stage | review |
-| Last gate passed | G1 (built) |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 (owner approval; G2 and G3 did not run: the kit is not part of the site build, its tokens, fonts and logo are consumed by M00, whose gates passed) |
 | Owner | Srdjan |
 | Branch | `main` (committed directly by the owner) |
 | Last commit | see `git log -- brand/` |
 | Last updated | 2026-11-02, Srdjan (prepared with the assistant) |
 
 ## Next step
-Srdjan and Gorica open `brand/index.html` and approve or list changes. If Gorica has the designer's vector logo, replace `brand/logo/` from it and re-export (commands below).
+None: approved by Srdjan on 2026-11-04 (Gorica chose direction D, rule 7 in `AGENTS.md`). The traced logo in `brand/logo/` is final (D39); the re-export commands below stay for reference.
 
 ## Done
 - Brand kit for direction D: rules page SR/EN (`brand/index.html`), home reference, tokens (`tokens.css`, `tokens.json`), fonts (6 woff2, SIL OFL 1.1), social templates with PNG previews.
@@ -19,7 +19,7 @@ Srdjan and Gorica open `brand/index.html` and approve or list changes. If Gorica
 - Contrast ratios computed with the WCAG formula; gold on white 2.08:1 → decoration only; `#8A6A2A` for gold text (5.03:1 on white).
 
 ## Not done
-- M01-04: designer's vector original (only if it exists).
+- M01-04 closed (D39): no designer's vector original exists or will exist; the traced SVGs are final.
 
 ## Problems and blockers
 - Newsreader fonts ≈ 285 KB for four files (handled in M00).

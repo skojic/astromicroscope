@@ -35,4 +35,4 @@ M02 horoscope files; A5 decision
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-2027 texts late (A5)
+2027 texts: not a dependency; the 2026 edition is used until they arrive (D41)

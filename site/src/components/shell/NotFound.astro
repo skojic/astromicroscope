@@ -1,0 +1,23 @@
+---
+// Body of the 404 pages (sr and en). Spacing and heading size follow the video page so the error state looks intended.
+import Link from '../ui/Link.astro';
+import { t, type Lang } from '../../i18n/core';
+import { pathFor } from '../../i18n/routes';
+import { shellStrings } from '../../i18n/shell';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<div class="container notfound">
+  <h1>{t(shellStrings, 'notFoundTitle', lang)}</h1>
+  <p>{t(shellStrings, 'notFoundText', lang)}</p>
+  <ul>
+    <li><Link href={pathFor('home', lang)}>{t(shellStrings, 'notFoundHome', lang)}</Link></li>
+    {(['learn', 'articles', 'videos', 'analyses', 'about'] as const).map((key) => <li><Link href={pathFor(key, lang)}>{t(shellStrings, key, lang)}</Link></li>)}
+  </ul>
+</div>
+<style>
+  .notfound { padding-block: var(--am-space-8) var(--am-space-9); }
+  h1 { font: var(--am-text-h2); margin-bottom: var(--am-space-4); }
+  p { margin-bottom: var(--am-space-5); }
+  ul { display: grid; gap: var(--am-space-3); padding-left: var(--am-space-5); }
+</style>

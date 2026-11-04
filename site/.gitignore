@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # Lighthouse CI output
 .lighthouseci/
+.lighthouseci-live/

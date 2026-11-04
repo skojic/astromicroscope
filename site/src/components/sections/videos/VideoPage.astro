@@ -21,16 +21,24 @@ const crumbs = [
 ];
 const thumb = await getImage({ src: video.thumbnail, width: 1280, height: 720, format: 'webp' });
 const paragraphs = video.description.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+// Meta title and description follow the page language. On a page whose language differs from the video's, the Serbian
+// title and summary would duplicate the other language's page, so the title gets a language label and the description is
+// written in the page language (no translation of Gorica's text is invented).
+const sameLang = video.lang === lang;
+const fill = (key: string) => t(videoStrings, key, lang).replace('{date}', formatDate(video.published, lang)).replace('{title}', shortTitle(video.title, 80));
+const suffix = t(videoStrings, 'titleSuffixOtherLang', lang);
+const metaTitle = sameLang ? shortTitle(video.title) : shortTitle(video.title, 60 - suffix.length) + suffix;
+const metaDescription = sameLang ? shortDescription(video.description) || fill('metaFallback') : fill('metaOtherLang');
 const jsonLd = videoObject({
   name: video.title,
-  description: shortDescription(video.description, 300) || video.title,
+  description: sameLang ? shortDescription(video.description, 300) || metaDescription : metaDescription,
   thumbnail: thumb.src,
-  uploadDate: video.published,
+  uploadDate: video.publishedAt,
   embedUrl: video.embed,
   lang: video.lang,
 });
 ---
-<Page lang={lang} title={shortTitle(video.title)} description={shortDescription(video.description) || video.title} translationKey={`video-${video.id}`}
+<Page lang={lang} title={metaTitle} description={metaDescription} translationKey={`video-${video.id}`}
   paths={paths} breadcrumbs={crumbs} jsonLd={jsonLd} image={thumb.src} imageAlt={shortTitle(video.title)}>
   <div class="container">
     <Breadcrumbs items={crumbs} label="Breadcrumb" />

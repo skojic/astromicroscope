@@ -24,7 +24,8 @@ export function parseFeed(xml) {
   return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(([, e]) => ({
     id: tag(e, 'yt:videoId'),
     title: tag(e, 'title').replace(/\s+/g, ' '),
-    published: tag(e, 'published').slice(0, 10),
+    published: tag(e, 'published').slice(0, 10), // the date shown on the page
+    publishedAt: tag(e, 'published'), // the full timestamp with its timezone, for structured data (uploadDate)
     description: tag(e, 'media:description'),
   }));
 }
@@ -53,7 +54,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     seen.add(slug);
     const file = new URL(`src/assets/videos/${v.id}.jpg`, root);
     if (!existsSync(file)) await writeFile(file, await download(v.id));
-    videos.push({ id: v.id, slug, title: v.title, published: v.published, description: v.description, lang: 'sr' });
+    videos.push({ id: v.id, slug, title: v.title, published: v.published, publishedAt: v.publishedAt, description: v.description, lang: 'sr' });
   }
   await writeFile(new URL('src/data/videos.json', root), JSON.stringify(videos, null, 2) + '\n');
   console.log(`wrote src/data/videos.json: ${videos.length} videos`);

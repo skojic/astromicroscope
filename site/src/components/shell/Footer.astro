@@ -9,7 +9,7 @@ import LanguageSwitch from './LanguageSwitch.astro';
 interface Props { lang: Lang; translationKey: string; paths?: Partial<Paths> }
 const { lang, translationKey, paths } = Astro.props;
 const explore: RouteKey[] = ['learn', 'articles', 'videos', 'analyses', 'about'];
-const info: RouteKey[] = ['contact', 'privacy', 'terms', 'cookies'];
+const info: RouteKey[] = ['contact'];
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer on-dark">

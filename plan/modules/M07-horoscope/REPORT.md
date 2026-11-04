@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: M00, M02. Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M07-01.
+Not started. Wait for: M02 content and the M06/M10 components (the M00 foundation is on `main`, hosting is done). The 2026 horoscope is the current edition until the 2027 one arrives (early 2027); that is not a dependency (D41). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M07-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.

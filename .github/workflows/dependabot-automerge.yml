@@ -1,0 +1,38 @@
+name: dependabot-automerge
+
+# Turns on auto-merge for Dependabot pull requests that are not a major version bump. GitHub then merges when the required
+# checks (ci-gate, branch-name) are green. Needs "Allow auto-merge" in the repository settings (D45).
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge minor and patch updates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+          ok=0
+          if printf '%s' "$TITLE" | grep -q -E '^Bump the .+ group'; then
+            ok=1 # a grouped update holds minor and patch bumps only (dependabot.yml)
+          else
+            versions="$(printf '%s' "$TITLE" | sed -n -E 's/.* from v?([0-9]+)[^ ]* to v?([0-9]+).*/\1 \2/p')"
+            if [ -n "$versions" ]; then
+              set -- $versions
+              [ "$1" = "$2" ] && ok=1
+            fi
+          fi
+          if [ "$ok" = 1 ]; then
+            gh pr merge --auto --squash "$PR_URL"
+            echo "Auto-merge enabled: $TITLE"
+          else
+            echo "Major or unrecognised update, left for a human: $TITLE"
+          fi

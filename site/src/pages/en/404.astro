@@ -1,18 +1,10 @@
 ---
 import Page from '../../layouts/Page.astro';
-import Link from '../../components/ui/Link.astro';
+import NotFound from '../../components/shell/NotFound.astro';
 import { t } from '../../i18n/core';
-import { pathFor } from '../../i18n/routes';
 import { shellStrings } from '../../i18n/shell';
 const lang = 'en';
 ---
 <Page lang={lang} title={t(shellStrings, 'notFoundTitle', lang)} description={t(shellStrings, 'notFoundText', lang)} translationKey="404" noindex>
-  <div class="container">
-    <h1>{t(shellStrings, 'notFoundTitle', lang)}</h1>
-    <p>{t(shellStrings, 'notFoundText', lang)}</p>
-    <ul>
-      <li><Link href={pathFor('home', lang)}>{t(shellStrings, 'notFoundHome', lang)}</Link></li>
-      {(['learn', 'articles', 'videos', 'analyses', 'about'] as const).map((key) => <li><Link href={pathFor(key, lang)}>{t(shellStrings, key, lang)}</Link></li>)}
-    </ul>
-  </div>
+  <NotFound lang={lang} />
 </Page>

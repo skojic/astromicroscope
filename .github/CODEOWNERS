@@ -1,2 +1,45 @@
-# Srdjan (owner) reviews every change.
+# Who must review what (D45). The ruleset on main requires a review from a code owner only for files that have one.
+#
+# A pull request that touches ONLY the unowned paths at the bottom (Filip's modules, the status files) needs no review: it merges
+# when the checks `ci-gate` and `branch-name` are green, and the author merges it. Any other file needs Srdjan, so shared code,
+# workflows, scripts, specs, the contracts, the brand kit, tests and decisions stay with the owner. Later lines win.
 * @skojic
+
+# --- no code owner from here on: Filip's modules (plan/contracts.md sections 1 and 4, deliverables of M02, M06, M08, M09, M10, M14)
+/site/src/content/
+/site/src/components/sections/articles/
+/site/src/components/sections/learn/
+/site/src/components/sections/analyses/
+/site/src/components/sections/about/
+/site/src/data/courses.*
+/site/src/data/products.*
+/site/src/data/analyses.*
+/site/src/pages/tekstovi/
+/site/src/pages/edukacija/
+/site/src/pages/analize/
+/site/src/pages/o-meni/
+/site/src/pages/o-meni.astro
+/site/src/pages/kontakt/
+/site/src/pages/kontakt.astro
+/site/src/pages/en/articles/
+/site/src/pages/en/learn/
+/site/src/pages/en/analyses/
+/site/src/pages/en/about/
+/site/src/pages/en/about.astro
+/site/src/pages/en/contact/
+/site/src/pages/en/contact.astro
+/site/src/i18n/articles.*
+/site/src/i18n/learn.*
+/site/src/i18n/analyses.*
+/site/src/i18n/about.*
+/plan/modules/M02-content-migration/REPORT.md
+/plan/modules/M06-articles/REPORT.md
+/plan/modules/M08-education/REPORT.md
+/plan/modules/M09-analyses/REPORT.md
+/plan/modules/M10-about-contact-legal/REPORT.md
+/plan/modules/M14-translation/REPORT.md
+/plan/modules/M14-translation/glossary.md
+/docs/sadrzaj/
+# Every work session updates these two (rule 5 of AGENTS.md); the docs check in site-ci keeps them consistent.
+/status/STATUS.md
+/status/log.md

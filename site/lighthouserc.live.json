@@ -1,0 +1,19 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["https://astromicroscope.filipvicentijevic99.workers.dev/", "https://astromicroscope.filipvicentijevic99.workers.dev/en/"],
+      "numberOfRuns": 3,
+      "settings": { "preset": "perf", "formFactor": "mobile", "chromeFlags": "--no-sandbox --headless=new" }
+    },
+    "assert": {
+      "aggregationMethod": "median",
+      "assertions": {
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05 }],
+        "total-byte-weight": ["error", { "maxNumericValue": 400000 }],
+        "largest-contentful-paint": ["warn", { "maxNumericValue": 2000 }],
+        "total-blocking-time": ["warn", { "maxNumericValue": 150 }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": "./.lighthouseci-live" }
+  }
+}

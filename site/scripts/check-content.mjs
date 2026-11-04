@@ -1,7 +1,8 @@
 // Content checks that run before every build (M00-05; specs/05, testing/checklists/content.md).
 //  - every key in src/i18n/*.json has sr and en text
 //  - every content file sits in its language folder, has the same-named front matter `lang`, and has a pair in the other language with the same translationKey
-//  - with SITE_ENV=production: no [placeholder] text and no `ephemerisChecked: false`
+//  - a file with `draft: true` may lack its pair outside production
+//  - with SITE_ENV=production: no [placeholder] text (in string values and the body, not in YAML list syntax), no `ephemerisChecked: false`, no `draft: true`
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
@@ -22,6 +23,13 @@ async function walk(dir) {
     else out.push(path);
   }
   return out;
+}
+
+/** Every string value in parsed front matter, so YAML lists like `topics: [finances]` are not read as placeholders. */
+function* stringValues(value) {
+  if (typeof value === 'string') yield value;
+  else if (Array.isArray(value)) for (const v of value) yield* stringValues(v);
+  else if (value && typeof value === 'object') for (const v of Object.values(value)) yield* stringValues(v);
 }
 
 function splitFrontMatter(text) {
@@ -59,17 +67,18 @@ export async function checkContent({ root, production }) {
       if (!LANGS.includes(folderLang)) { problems.push(`${name}: must be inside ${collection}/sr/ or ${collection}/en/`); continue; }
       if (data.lang !== folderLang) problems.push(`${name}: lang is "${data.lang}" but the file is in the ${folderLang} folder`);
       if (!data.translationKey) problems.push(`${name}: no translationKey`);
-      else keys[folderLang].set(data.translationKey, name);
+      else keys[folderLang].set(data.translationKey, { name, draft: data.draft === true });
       if (production) {
-        if (PLACEHOLDER.test(JSON.stringify(data)) || PLACEHOLDER.test(body)) problems.push(`${name}: contains a placeholder`);
-        PLACEHOLDER.lastIndex = 0;
+        const texts = [...stringValues(data), body];
+        if (texts.some((t) => t.match(PLACEHOLDER))) problems.push(`${name}: contains a placeholder`);
         if (data.ephemerisChecked === false) problems.push(`${name}: ephemerisChecked is false`);
         if (data.draft === true) problems.push(`${name}: draft is true`);
       }
     }
     for (const lang of LANGS) {
       const other = lang === 'sr' ? 'en' : 'sr';
-      for (const [key, name] of keys[lang]) {
+      for (const [key, { name, draft }] of keys[lang]) {
+        if (draft && !production) continue; // a draft may wait for its translation
         if (!keys[other].has(key)) problems.push(`${name}: no ${other} file with translationKey "${key}"`);
       }
     }

@@ -2,17 +2,20 @@
 
 | | |
 |---|---|
-| Stage | testing |
-| Last gate passed | G1 |
+| Stage | done (G4 approved 2026-11-04) |
+| Last gate passed | G4 |
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-04 |
 
 ## Next step
-Gates G2 and G3. Gorica's own summaries, key dates and transcripts: not built, the YouTube description is shown as the summary until they exist. Run `npm run import:videos` when a new video is published.
+2026-11-04: `src/data/videos.json` has `publishedAt` (full timestamp with timezone) next to `published`; `npm run import:videos` writes both and `VideoPage.astro` uses `publishedAt` for `uploadDate` (M04, PR #12). The six existing entries were filled from the channel feed without a full import.
+
+G4 approved by Srdjan 2026-11-04. G2 and G3 evidence is in the M00 report (video hub at 1440, sr video page at 768, en video page at 360, all three browsers measured for overflow; Rich Results Test valid after the `uploadDate` fix, M04 report). Gorica's own summaries, key dates and transcripts: not built, the YouTube description is shown as the summary until they exist. The `videos-import` workflow reads the feed every Monday and commits new videos to `main` (D46; it needs the ruleset change of D45 to push); `npm run import:videos` still works by hand.
 
 ## Done
+- 2026-11-04, G3 SEO pass: meta descriptions of three Serbian video pages were the YouTube contact block (`Instagram: … Sajt: … Mejl: …`) and every English video page repeated the Serbian title and description. Fixed: `videos/text.ts` strips boilerplate from summaries and meta descriptions; English pages get a language-labelled title and an English description (D32). Evidence: `npm test` 25 pass (6 new in `test/video-text.test.ts`); `SITE_ENV=production npm run build` 18 pages; titles and descriptions unique across all 12 video pages (checked in `dist/`); `html-validate dist` exit 0; `axe: 18 pages x 2 viewports, 0 violations`; `e2e: 18 pages, 0 failures`.
 - M11-01 `scripts/import-videos.mjs`: channel feed (6 videos on 2026-11-03), thumbnails to `src/assets/videos/`, `src/data/videos.json` (D26).
 - M11-02 video pages `/video/<slug>/` and `/en/videos/<slug>/`, hub `/video/`, `/en/videos/`: title, date, summary, link to YouTube, VideoObject JSON-LD, breadcrumbs; the same video on both routes, the video text marked `lang="sr-Latn"`.
 - M11-03 facade player: no request to YouTube before a click (`scripts/e2e.mjs` loads a video page and records requests to other hosts: none); a click inserts a `youtube-nocookie.com` iframe; without JavaScript it is a link.
