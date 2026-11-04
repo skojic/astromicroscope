@@ -7,12 +7,13 @@
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-04 |
 
 ## Next step
 Gate G2 needs what is not done yet: Rich Results Test and Schema Markup Validator on a page of each type (only home and video pages exist), and a hreflang return-link check once more pages exist. Then `testing/checklists/seo.md` per template. M06, M10, M07 call the JSON-LD builders for their types.
 
 ## Done
+- 2026-11-04, automated part of `checklists/seo.md` on the production build (one-off script, Chromium): one title and description per page, none duplicated; canonical is the page itself; hreflang sr, en and x-default with return links on all 16 indexable pages; Open Graph and Twitter tags; `sitemap.xml` 16 entries with alternates; robots allows crawling; no `noindex` except the 404 pages; content in the HTML without JavaScript. Two defects found and fixed in M11 (D32). Not done: Rich Results Test and Schema Markup Validator, which need the live or tunnelled URL.
 - M04-01 `components/seo/Seo.astro` (Page passes its props): canonical, hreflang `sr`, `en`, `x-default` only for languages that have a pair, robots `noindex` outside production, Open Graph and Twitter tags.
 - M04-02 `components/seo/jsonld.ts`: WebSite, Organization (logo, `sameAs` Instagram and YouTube), Person, BreadcrumbList, ProfilePage, Article, VideoObject, one `@graph` per page. Course, Product and Event builders are not written (courses moved to iteration 2, D14).
 - M04-03 default 1200×630 social cards `public/og/default-sr.png`, `default-en.png` (`scripts/make-og.mjs`); pages may pass their own `image` (video pages use their thumbnail).

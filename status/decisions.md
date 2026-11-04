@@ -36,6 +36,7 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D29 | 2026-11-03 | **Repository visibility (B6): public for now** (Srdjan). | Srdjan's instruction in session |
 | D30 | 2026-11-03 | **Prepayment for analyses: not for now** (Srdjan); passwords and 2FA (A2) deferred by Srdjan. P06 stays open for the business form. | Srdjan's instruction in session |
 | D31 | 2026-11-04 | **Horoscope files are named by the English sign key**: `site/src/content/horoscope/{sr\|en}/<year>/aries.md`, not `ovan.md`. The `sign` field already uses the English values (`plan/contracts.md` §3); the Serbian URL slug (`/ovan/`) comes from the route mapping, not the file name. The old-URL map (M02-01) keeps `ovan` as the old address. | Filip's question in issue #9; Srdjan's instruction in session |
+| D32 | 2026-11-04 | **Video pages in the other language** (an English page for a Serbian video): the `<title>` is the Serbian title plus a language label (` | Video in Serbian`), the meta and JSON-LD description are written in the page language from a template, and the on-page summary stays Serbian. No translation of Gorica's text is invented; real English titles and summaries come with M14. YouTube boilerplate (contact lines, hashtags, signature, `///`) is stripped from every summary and meta description (`videos/text.ts`). | G3 SEO pass: all six English video pages repeated the Serbian title and description, and three Serbian pages used the contact block as meta description; Srdjan: prioritise SEO |
 
 ## Pending
 | ID | Question | Owner | Blocks |

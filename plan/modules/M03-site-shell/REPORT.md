@@ -7,12 +7,13 @@
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-04 |
 
 ## Next step
 Gates G2 and G3: run the keyboard and screen-reader checklist (`testing/checklists/accessibility.md`) at 360/768/1440 px in both languages. Link check once the hub pages exist.
 
 ## Done
+- 2026-11-04, automated part of `checklists/accessibility.md` and `visual-review.md` on the production build (one-off script, Chromium, 18 pages): no horizontal scroll or overflow at 320, 360, 768, 1024 and 1440 px; no tap target under 24 px at 360 and 1440 px; one h1 and no skipped heading levels; landmarks present; every focusable element has a visible outline or shadow and there are no keyboard traps (29 to 33 stops per page); the header is not sticky; no infinite animation under reduced motion. Not done (manual): VoiceOver and NVDA, Safari and Firefox, a real phone, print view, brand-kit comparison, focus-ring contrast. G3 is therefore not passed.
 - M03-01 header: mark image plus live text, five menu items, primary button; fixed 72 px height (D28).
 - M03-02 mobile menu: button with `aria-expanded`, focus moves into the menu, Escape closes it and returns focus; no focus trap (disclosure pattern). axe also runs with the menu open (`scripts/axe.mjs`).
 - M03-03 language switch: plain links to the paired page via `i18n/routes.ts` (`switchTarget`); falls back to the other language's home page when no pair exists. Accessible names "SR, Srpski" / "EN, English" (axe `label-content-name-mismatch` forced this).

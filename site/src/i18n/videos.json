@@ -12,5 +12,8 @@
   "allVideos": { "sr": "Svi video snimci", "en": "All videos" },
   "playerNote": { "sr": "Video se učitava sa YouTube-a tek kada ga pustiš.", "en": "The video loads from YouTube only when you play it." },
   "homeTitle": { "sr": "Besplatne lekcije, na YouTube-u.", "en": "Free lessons, on YouTube." },
-  "homeIntro": { "sr": "Goričini najnoviji video snimci, na srpskom. Svaki objašnjava jedan tranzit i šta znači za svaki znak.", "en": "Gorica's latest videos, in Serbian. Each one explains a transit and what it means for every sign." }
+  "homeIntro": { "sr": "Goričini najnoviji video snimci, na srpskom. Svaki objašnjava jedan tranzit i šta znači za svaki znak.", "en": "Gorica's latest videos, in Serbian. Each one explains a transit and what it means for every sign." },
+  "titleSuffixOtherLang": { "sr": " | Video na engleskom", "en": " | Video in Serbian" },
+  "metaOtherLang": { "sr": "Video lekcija na engleskom „{title}“, objavljeno {date}", "en": "Video lesson in Serbian by Gorica Vićentijević, {date}: “{title}”." },
+  "metaFallback": { "sr": "Video lekcija Gorice Vićentijević „{title}“, objavljeno {date}", "en": "Video lesson by Gorica Vićentijević, {date}: “{title}”." }
 }
