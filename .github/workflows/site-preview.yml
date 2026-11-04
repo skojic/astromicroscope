@@ -34,6 +34,7 @@ jobs:
     steps:
       - name: Check that the Cloudflare secrets are available
         id: gate
+        working-directory: . # runs before checkout, when site/ does not exist yet
         run: |
           if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
@@ -98,6 +99,7 @@ jobs:
     steps:
       - name: Check that the Cloudflare secrets are available
         id: gate
+        working-directory: . # runs before checkout, when site/ does not exist yet
         run: |
           if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
