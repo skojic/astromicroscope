@@ -7,13 +7,13 @@
 | Owner | Filip |
 | Branch | `feature/m02-content-migration` (pushed 2026-11-03; `main` merged in 2026-11-04) |
 | Last commit | `78fec8c` M02-02: convert the five transit articles to the article schema |
-| Last updated | 2026-11-04, M02-02 done: 7 articles kept (Gorica removed three past transits) |
+| Last updated | 2026-11-04, batches 1–2 approved by Gorica; Jupiter to „ti”; Podznak charts checked |
 
 ## Next step
-1. Filip: `git push`. Batch 2 is with Gorica (document “Tekstovi za novi sajt – paket 2”): she kept Jupiter and Saturn; open for her: the corrected Jupiter dates and „vi” → „ti” in Jupiter. Batch 1 was sent on 2026-11-03.
+1. Filip: `git push`. Batches 1 and 2 are approved by Gorica (2026-11-04).
 2. M02-03: the 12 signs of the 2026 horoscope to the sign schema, files `site/src/content/horoscope/sr/2026/<english key>.md` (D31). 2026 is the edition at launch (D41), so M02-06 (tone **ti**, D18) applies to them too (D22).
 3. M02-04: pages O meni, Zašto Astromicroscope, Kontakt (without the Nikola Stojanović paragraph, D20).
-4. M02-05 for `podznak.md` (charts of Cardin, Kepler, Andersen) and for the 12 signs; M02-06 tone pass for `jupiter-u-lavu.md` (uses „vi”).
+4. M02-05 and M02-06 for the 12 signs (dates, tone „ti”).
 5. When Gorica approves a batch: remove `draft: true` from its files and open the pull request (D45: Filip merges it when `ci-gate` is green).
 
 ## Done
@@ -21,6 +21,8 @@
 - **M02-02 batch 1** (5 of 10 articles, the texts without transits): `potencijali.md`, `kako-da-vratis-sebe-sebi.md`, `podznak.md`, `astro-vodic-kroz-finansije.md`, `sta-otkriva-decji-horoskop.md` in `site/src/content/articles/sr/`. Commit `e4abd1c`. Answer word counts 50, 48, 51, 48, 48; titles 25–56 characters; descriptions 119–134 characters. Every text has `draft: true` (not yet approved by Gorica).
 - **M02-02 batch 2** (the five transit articles): `mars-u-strelcu.md`, `retrogradni-uran.md`, `eklipsa.md`, `jupiter-u-lavu.md`, `saturn.md`. Commit `78fec8c`. **Gorica, 2026-11-04: keep only `jupiter-u-lavu.md` and `saturn.md`**; Mars (Nov–Dec 2025), Uranus (until April 2026) and the eclipses (Feb–Mar 2026) are past and are removed; their old URLs redirect to `/tekstovi/` (map rows 6–8). Answers 53, 54, 50, 50, 48 words; titles 36–59 characters; descriptions 121–143 characters; `transits` filled for Mars, Uranus, Jupiter. All `draft: true`. M02-02 is complete: 7 articles go to the new site, 3 old pages have a written reason (map).
 - **M02-05 for batch 2:** every date checked (see Test evidence); four dates were off by one day and are corrected in the files for Gorica's confirmation (Batch 2 for Gorica). `ephemerisChecked: true` for all five.
+- **M02-06 for the articles:** only `jupiter-u-lavu.md` used „vi” (five places), now „ti”, gender as „/la” like Gorica's own „mogao/la” (`7593809`). The other six articles already use „ti” or first person.
+- **M02-05 for `podznak.md`:** the three example charts match [AstroTheme](https://www.astrotheme.com/astrology/Pierre_Cardin): Cardin 1922-07-02 14:00 San Biagio di Callalta (rating AA), Asc 27°56' Libra, Venus 15°14' Leo in the 10th; [Kepler](https://www.astrotheme.com/astrology/Johannes_Kepler) 1571-12-27 (Julian) 14:37 Weil der Stadt, Asc 24°32' Gemini, Mercury 5°34' Capricorn in the 7th; [Andersen](https://www.astrotheme.com/astrology/Hans_Christian_Andersen) 1805-04-02 01:00 Odense (AA), Asc 18°01' Sagittarius, Mercury 13°12' Aries in the 3rd. Sign positions and aspects in the text (Saturn in Libra and Mars trine Venus for Cardin; Sun conjunct Mercury in Capricorn and Saturn in Scorpio for Kepler; Jupiter in Sagittarius and Mercury trine Jupiter for Andersen) agree with own computation. `ephemerisChecked: true`; every kept article now has it.
 - **M02-05 for batch 1, partly:** four texts have no astrological dates or chart positions to check → `ephemerisChecked: true`; `podznak.md` has three named natal charts → `false` (see Next step 4).
 
 ## Not done
@@ -39,6 +41,7 @@
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: M02-02 says Gorica approves every edited text. Proposal: one batch of five articles per pull request, and I send her the batch as a PDF or document for comments before the PR.
 
 ## Decisions taken in this module
+- 2026-11-04 (Gorica, via Filip): batches 1 and 2 approved as sent, with the corrected dates; open points are decided by us and she reviews afterwards. Decided: „Primer 6” stays „Primer 4”; Jupiter in Leo uses „ti” (D18). `draft: true` stays until the English pair exists (`check-content` requires a pair for every non-draft file).
 - 2026-11-04 (Gorica, via Filip): of batch 2 only Jupiter in Leo and Saturn go to the new site; Mars in Sagittarius, Uranus retrograde and the 2026 eclipses are past transits and are not carried over. Old URLs `/mars-u-strelcu/`, `/retrogradni-uran/`, `/eklipsa/` → 301 to `/tekstovi/` (M13).
 - 2026-11-04 (Filip): `transits` in front matter use English lowercase keys (`planet: jupiter`, `sign: leo`), like the horoscope `sign` field, so both languages share them; `TransitTimeline` (M06-02) shows the names in the page language. Eclipses are events, not periods, so `eklipsa.md` has no `transits`.
 - 2026-11-04 (Srdjan, issue #9, D31): horoscope files are named by the English sign key (`aries.md`, …), in both languages.
@@ -118,6 +121,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 | `npm run build` | not run (npm registry blocked, HTTP 403) | 2026-11-03 |
 
 ## History
+- 2026-11-04: Gorica approved batches 1–2; Jupiter in Leo to „ti”; Podznak example charts checked; all kept articles `ephemerisChecked: true`.
 - 2026-11-04: Gorica removed three past-transit articles (Mars, Uranus, eclipses); map rows 6–8 redirect to `/tekstovi/`.
 - 2026-11-04: `main` merged into the branch (G0, `check-content` fix, D31); map switched to English horoscope file names; M02-02 batch 2 converted with ephemeris check; M02-02 complete.
 - 2026-11-03: branch created; M02-01 map; M02-02 batch 1 converted (5 articles); requests to M00 and M07 recorded.

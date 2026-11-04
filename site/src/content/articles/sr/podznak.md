@@ -10,7 +10,7 @@ answer: "Podznak, ili ascendent, je znak koji izlazi na istoku u trenutku rođen
 quote:
   text: "Ljudi su više od onoga što se vidi na prvi pogled; njihov pravi potencijal leži u tome šta su sposobni postati, a ne u onome šta trenutno jesu."
   author: "Abraham Maslow"
-ephemerisChecked: false
+ephemerisChecked: true
 oldUrl: "/ljudi-su-vise-od-onoga-sto-se-vidi-na-prvi-pogled-njihov-pravi-potencijal-lezi-u-tome-sta-su-sposobni-postati-a-ne-u-onome-sta-trenutno-jesu-abraham-maslow/"
 draft: true
 ---
