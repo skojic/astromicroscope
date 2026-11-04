@@ -19,7 +19,7 @@ Ti kanali su najizraženiji kroz drugu kuću, planete koje se u njoj nalaze ili 
 Druga kuća je kuća materije, govori o svemu što posedujemo, o našim talentima, sposobnostima, veštinama i materijalnim vrednostima. Ona predstavlja svu pokretnu imovinu, ali i unutrašnji osećaj vrednosti.
 Procena druge kuće podrazumeva analizu znaka u kojem ona počinje i nastavlja se, planeta koje se u njoj nalaze, kao i vladara druge kuće, njegove pozicije, aspekata i odnosa sa drugim kućama. Upravo taj vladar pokazuje gde i na koji način novac dolazi.
 
-Glavni signifikator za novac je Jupiter, dok Venera, kao prirodni vladar druge kuće, govori više o materijalnim dobrima, uživanju i osećaju vrednosti, nego o samom novcu. Osobe koje nasleđuju veći novac često imaju Veneru ili Jupitera povezane sa serijom dva, jer se kod njih novac stiče lako, bez velikih prepreka.
+Glavni signifikator za novac je Jupiter, dok Venera, kao prirodni vladar druge kuće, govori više o materijalnim dobrima, uživanju i osećaju vrednosti, nego o samom novcu. Osobe koje nasleđuju veći novac često imaju Veneru ili Jupitera povezane sa drugom kućom, jer se kod njih novac stiče lako, bez velikih prepreka.
 
  Ako je vladar podznaka egzaltiran, osoba često veruje da će sve ići lako i da će se stvari same od sebe rešiti. Ipak, takav položaj može doneti brzoplete odluke i oslanjanje na sreću. Kada je energija tog vladara usmerena na pravi način, govori o osobi koja brzo prepoznaje prave prilike i može da postigne uspeh uz malo truda.
 
