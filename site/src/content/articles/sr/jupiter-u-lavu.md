@@ -37,7 +37,7 @@ Vreme je da se zapitamo:
 - Šta nas čini srećnim?
 - Ko ili šta greje naše Sunce?
 
-Odgovor često nije u drugima, već u nama samima. Mi smo glavni kreatori svoje sudbine. Sunce nije stvoreno da se skriva u tami, već da sija. Ono prepoznaje ljubav, radost, lepotu, toplinu i optimizam. Zato se pripremite da širite pozitivnu energiju, jer sve što šaljete svetu – vraća vam se nazad.
+Odgovor često nije u drugima, već u nama samima. Mi smo glavni kreatori svoje sudbine. Sunce nije stvoreno da se skriva u tami, već da sija. Ono prepoznaje ljubav, radost, lepotu, toplinu i optimizam. Zato se pripremi da širiš pozitivnu energiju, jer sve što šalješ svetu – vraća ti se nazad.
 
 ## Jupiter u Lavu za svaki znak Zodijaka
 
@@ -89,11 +89,11 @@ Vodolijama Jupiter prolazi kroz sedmu kuću i donosi važna partnerstva. Slobodn
 
 Ribama Jupiter prolazi kroz šestu kuću i donosi priliku da se istaknu kroz posao i svakodnevne aktivnosti. Mnoge Ribe mogu dobiti unapređenje, proširiti poslovanje ili započeti saradnju sa inostranstvom. Kreativnost i umetnost biće posebno naglašeni, a sreća će ih pratiti tokom cele godine.
 
-Kao što ste primetili, opisala sam kako Jupiter može uticati na svaki znak Zodijaka, ali je veoma važno čitati i za podznak. Iako je Jupiter planeta sreće, prosperiteta i širenja, on ume da pokaže i svoju drugu stranu. Ponekad nas može navesti da pomislimo kako možemo sve, pa da se nakon preterivanja osećamo iscrpljeno i prazno.
+Kao što si primetio/la, opisala sam kako Jupiter može uticati na svaki znak Zodijaka, ali je veoma važno čitati i za podznak. Iako je Jupiter planeta sreće, prosperiteta i širenja, on ume da pokaže i svoju drugu stranu. Ponekad nas može navesti da pomislimo kako možemo sve, pa da se nakon preterivanja osećamo iscrpljeno i prazno.
 
-Zato je važno analizirati poziciju Jupitera u natalnoj karti i njegove aspekte, kako biste najbolje razumeli njegov uticaj tokom tranzita kroz znak Lava.
+Zato je važno analizirati poziciju Jupitera u natalnoj karti i njegove aspekte, kako bi najbolje razumeo/la njegov uticaj tokom tranzita kroz znak Lava.
 
-Sigurno ste čuli onu rečenicu: „Imao pa nemao.“
+Sigurno si čuo/la onu rečenicu: „Imao pa nemao.“
 E, upravo je to simbolika Jupitera kada ne znamo meru – on daje, širi i umnožava, ali isto tako može i oduzeti ako ne znamo kako da upravljamo njegovom energijom.
 
-Za lične konsultacije i analize možete mi pisati na astromicroscope@gmail.com.
+Za lične konsultacije i analize možeš mi pisati na astromicroscope@gmail.com.
