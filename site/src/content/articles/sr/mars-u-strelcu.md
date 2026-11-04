@@ -34,10 +34,8 @@ Mars je planeta akcije, naše energije i pokretačke snage. Po prirodi je malefi
 ## Mars u Strelcu i njegov uticaj na znakove zodijaka
 
 ### Ovan
-Mars, kao tvoj vladar, daje ti obilje energije, ali i nervozu i nestrpljivost.
-Možeš imati tendenciju da se rasplineš na više strana, pa je sada ključno
-da postaviš jasne granice i prioritete. Samo fokus i disciplina vode do
-rezultata.
+
+Mars, kao tvoj vladar, daje ti obilje energije, ali i nervozu i nestrpljivost. Možeš imati tendenciju da se rasplineš na više strana, pa je sada ključno da postaviš jasne granice i prioritete. Samo fokus i disciplina vode do rezultata.
 
 ### Bik
 
