@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Owner | Filip |
-| Needs first | M00, Gorica's answers |
+| Needs first | M00 (on `main`) |
 | Size | M |
 | Specs | specs/00, plan/concept.md |
 | Branch | `feature/m09-analyses` |
@@ -35,7 +35,7 @@ The premium offer: hub, one page per analysis, request form interface.
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-Service list decided (D19). Open: sessions per month (questionnaire 14) and how the prepayment is taken while Gorica is not a registered business (A9)
+Service list decided (D19). Open: sessions per month (questionnaire 14). The prepayment question is closed: no prepayment on the site (D33)
 
 
 ## Component specs (moved from `modules/`)

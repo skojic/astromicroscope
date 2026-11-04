@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: Gorica's answers (the M00 foundation is on `main`; only M00-08 hosting is open). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M08-01.
+Not started. Wait for: nothing to start (the M00 foundation is on `main`; questionnaire 8–10 are postponed to 2027, D14). M08-03, the waitlist button, needs the M12 form to send (P02b). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M08-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.

@@ -34,8 +34,8 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | idea | M02 content, M06/M10 components, 2027 texts | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
-| M08 Education (free learning + waitlist) | Filip | idea | — | [REPORT](../plan/modules/M08-education/REPORT.md) |
-| M09 Private analyses | Filip | idea | Gorica's answers | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
+| M08 Education (free learning + waitlist) | Filip | idea | — (waitlist button sends via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
+| M09 Private analyses | Filip | idea | — (questionnaire 14 open: page shows no number) | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Filip | idea | — | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | idea | P02b | [REPORT](../plan/modules/M12-forms/REPORT.md) |

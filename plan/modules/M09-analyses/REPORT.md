@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: Gorica's answers (the M00 foundation is on `main`; only M00-08 hosting is open). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M09-01.
+Not started. Wait for: nothing to start (the M00 foundation is on `main`; questionnaire 12, 13, 15 and 16 are answered in `docs/sadrzaj/upitnik-za-goricu.md`; 14, sessions per month, is still open and the page shows no number until Gorica answers; no prepayment on the site, D33). Sending the request form is M12 (out of M09's scope). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M09-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.
