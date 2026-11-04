@@ -26,7 +26,8 @@ concurrency:
 
 jobs:
   import:
-    runs-on: ubuntu-latest
+    # ubuntu-24.04 pinned: the ubuntu-26 image hangs on `playwright install --with-deps` and lacks Chromium's libraries (2026-11-04).
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: site
@@ -60,7 +61,7 @@ jobs:
           npm test
           npm run build
           npm run test:html
-          npx playwright install chromium
+          npx playwright install --with-deps chromium
           npm run test:seo
       - name: Open a pull request and enable auto-merge
         if: steps.diff.outputs.changed == 'true'
