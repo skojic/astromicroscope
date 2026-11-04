@@ -90,10 +90,46 @@ async function handleNewsletter(request, env) {
     return json({ ok: false, error: 'rate-limited' }, 429);
   }
 
-  // M12-02 TO DO: POST to MailerLite here — `connect.mailerlite.com/api/subscribers` with `env.MAILERLITE_API_KEY`,
-  // `status` per the proven double opt-in (D44), group id for `waitlist` vs `newsletter`. Until then the endpoint
-  // acknowledges but stores nothing, and the reply does not reveal whether it would have sent.
+  // 6. M12-02: subscribe via MailerLite. The account is on the newer Developer API (connect.mailerlite.com), so the
+  //    token goes in `Authorization: Bearer` (verified live 2026-11-04: the token lists both groups). A provider
+  //    failure still answers generically — the visitor must not learn why, and a non-production Worker never sends.
+  const sent = await mailerLiteSubscribe(email, list, env);
+  if (!sent) {
+    return json({ ok: false, error: 'invalid' }, 400);
+  }
   return json({ ok: true });
+}
+
+/**
+ * M12-02: add the subscriber to MailerLite (D44). The group depends on the list — `newsletter` → the Astro Microscope
+ * group, `waitlist` → the 2027 course waitlist group. Group ids come from Worker secrets (not the repo); a missing
+ * secret or a non-production build (no `MAILERLITE_API_KEY`) short-circuits to `false` without a network call.
+ *
+ * Double opt-in: D44 left whether the API applies it to the account setting. We send `status: "unconfirmed"` here; if
+ * the live test shows a confirmation mail already arrives (account-level double opt-in), flip to omit `status`.
+ */
+async function mailerLiteSubscribe(email, list, env) {
+  const apiKey = env.MAILERLITE_API_KEY;
+  const groupId = list === 'waitlist' ? env.MAILERLITE_GROUP_WAITLIST : env.MAILERLITE_GROUP_NEWSLETTER;
+  if (typeof apiKey !== 'string' || apiKey === '' || typeof groupId !== 'string' || groupId === '') {
+    return false; // not configured (or non-production): nothing to send
+  }
+
+  const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      email,
+      groups: [groupId],
+      status: 'unconfirmed',
+    }),
+  });
+
+  // 2xx (created/updated) counts as sent; 4xx/5xx (already-subscribed, invalid, auth) must not reveal details.
+  return res.ok;
 }
 
 /** A challenge is valid if its timestamp is fresh (max 1 h old) and the signature matches `FORM_SALT|ts`. */
