@@ -1,12 +1,12 @@
 # Status
 
-Updated: 2026-11-04 · Branch: `main`, `feature/m02-content-migration` (Filip) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-04 · Branch: `main` (ruleset change and videos-import rework applied; see D45, D46) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** M00, M01, M03 and M11 are done (G4 approved by Srdjan 2026-11-04). The unfinished site is live only on the temporary address (D36). P02b is decided (D44), so M12 forms can be built. Filip starts M02 content migration, M10 and the M14 glossary, then M06, M08, M09.
 - **Last step:** Srdjan's modules built on `main` (owner bypass, CI green): M00 foundation (routing, layouts, tokens and reduced fonts, content schemas and checks, CI, headers), M03 shell, M04 SEO, M05 home hero, M11 videos. G0 for M00 (D23); M00-01 done (PR #8). M00-08: Worker deployed to `https://astromicroscope.filipvicentijevic99.workers.dev` (D36), preview workflow on `main`. M04 validators run on the preview (2026-11-04). Decisions D24–D36. Before that: domain renewed until 2027-10-15 (A1); Filip's module plans read; Gorica's answers (D18–D21).
-- **Next step:** Srdjan: run the one command that applies the ruleset change of D45 (0 required approvals, `ci-gate` required, Actions app as bypass actor); without it Filip's pull requests still need your approval and the video import cannot push. Then the assistant checks it with two test pull requests. M12 (Srdjan): build per D44. Filip: M02 content migration and the section modules (M06, M08, M09, M10); the home page (M05) and M07 wait for them.
-- **Blocked by:** M07 horoscope: M02 content and the M06/M10 components (the 2026 edition is used for now, D41); M05 home: sections of M06–M10 and M12; real contact mail: the domain's DNS on Cloudflare (M13). Ruleset change of D45 (Srdjan's command): bot push to `main` (video import) and Dependabot auto-merge.
+- **Next step:** The D45 ruleset change is applied (0 approvals, `ci-gate` + `branch-name` required; the Actions-app bypass actor is not possible on a personal repo — see D45, D46). The assistant verifies it with two test pull requests. `videos-import` now opens a pull request with auto-merge instead of pushing to `main`. M12 (Srdjan): build per D44. Filip: M02 content migration and the section modules (M06, M08, M09, M10); the home page (M05) and M07 wait for them.
+- **Blocked by:** M07 horoscope: M02 content and the M06/M10 components (the 2026 edition is used for now, D41); M05 home: sections of M06–M10 and M12; real contact mail: the domain's DNS on Cloudflare (M13). Dependabot auto-merge and the videos-import pull request still need a real green `ci-gate`/`branch-name` merge run to be proven.
 
 ## Specs
 | ID | File | Status |
