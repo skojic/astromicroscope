@@ -30,7 +30,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
 | M02 Content migration | Filip | approved | — (G0 passed 2026-11-04; Filip moves to building) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
-| M04 SEO | Srdjan | testing | `uploadDate` fix (validators run 2026-11-04), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
+| M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | idea | M02 content, M06/M10 components, 2027 texts | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |

@@ -10,6 +10,8 @@
 | Last updated | 2026-11-04 |
 
 ## Next step
+2026-11-04: `src/data/videos.json` has `publishedAt` (full timestamp with timezone) next to `published`; `npm run import:videos` writes both and `VideoPage.astro` uses `publishedAt` for `uploadDate` (M04, PR #12). The six existing entries were filled from the channel feed without a full import.
+
 Gates G2 and G3. Gorica's own summaries, key dates and transcripts: not built, the YouTube description is shown as the summary until they exist. Run `npm run import:videos` when a new video is published.
 
 ## Done
