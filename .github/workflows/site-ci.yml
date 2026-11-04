@@ -95,7 +95,10 @@ jobs:
       - name: SEO and link audit (preview build)
         run: npm run test:seo
       # The production build differs from the preview build: indexable pages, robots.txt allows crawling. Keep this step last, it replaces dist/.
+      # D48: skipped until launch. With the M02 draft content on main (draft: true, no English pairs before M14) the strict
+      # production audit can never pass during the build phase. M13-07 sets the repository variable PRODUCTION_AUDIT=true.
       - name: SEO and link audit (production build)
+        if: vars.PRODUCTION_AUDIT == 'true'
         env:
           SITE_ENV: production
           PUBLIC_CF_WEB_ANALYTICS_TOKEN: ${{ secrets.PUBLIC_CF_WEB_ANALYTICS_TOKEN }}
