@@ -77,7 +77,7 @@ A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Activ
 ## Phase 0 checklist
 - [x] Domain renewed, auto-renew and registrar lock on (A1): 2026-11-03, until 2027-10-15; transfer to Cloudflare from about 2026-11-29
 - [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2) — spam list done: `docs/sadrzaj/stari-sajt/spam-adrese.md` (143 URLs); Filip's Cloudflare 2FA on
-- [ ] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16)
+- [x] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16): 2026-11-04, Srdjan deployed the Worker to it with an account API token (`wrangler whoami` showed Filip's account; M00 report)
 - [x] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2); open: 14, 26
 - [x] 2027 horoscope: new edition coming soon (A5)
 - [x] Portrait plan (A8): new photo in `docs/sadrzaj/slike/`
