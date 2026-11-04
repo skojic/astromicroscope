@@ -7,12 +7,13 @@
 | Owner | Srdjan |
 | Branch | `main` (owner bypass, pushed directly) |
 | Last commit | see `git log` (site CI green) |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-04 |
 
 ## Next step
-M00-08 and the preview URL once the Cloudflare token exists; M00-10 (Dependabot security updates, Srdjan in repository settings). Then gates G2 to G4 for M00.
+M00-08 and the preview URL once the Cloudflare token exists. Then gates G2 to G4 for M00.
 
 ## Done
+- M00-10 Dependabot security updates: turned on by Srdjan on 2026-11-04 (`gh api -X PUT repos/skojic/astromicroscope/automated-security-fixes`). Evidence: `gh api repos/skojic/astromicroscope --jq .security_and_analysis` → `"dependabot_security_updates":{"status":"enabled"}` (before: `disabled`). Actions are pinned to SHAs.
 - M00-01: `contracts.md` checked against Astro 7.4.5 and corrected (PR #8, merged).
 - M00-02: Astro 7.4.5 project, versions pinned, README (PR #6).
 - M00-03: `site/src/i18n/core.ts`, `routes.ts`: language helpers, route pairs; `src/pages/index.astro` and `en/index.astro` (sr at `/`, en at `/en/`, `<html lang>` `sr-Latn` / `en`).
@@ -24,7 +25,6 @@ M00-08 and the preview URL once the Cloudflare token exists; M00-10 (Dependabot 
 
 ## Not done
 - M00-08 Hosting on Filip's Cloudflare account and the preview URL per pull request (blocked, see below).
-- M00-10 Dependabot security updates: not turned on (the call `PUT repos/skojic/astromicroscope/automated-security-fixes` was blocked by a permission check in the session; Srdjan can turn it on in the repository settings). Actions are pinned to SHAs.
 - Data schemas of contracts §3 (Analysis, Course, Video) are not in `content.config.ts`: their owners (M09, M08, M11) define them with their data. M11's is in `components/sections/videos/data.ts`.
 - Not demonstrated: that a failing Lighthouse assertion or a failing axe run turns CI red (axe did report `label-content-name-mismatch` locally before two fixes; html-validate rejected a deliberately bad file).
 - Headers were not tested on a live host: Cloudflare applying `_headers` is unchecked.
