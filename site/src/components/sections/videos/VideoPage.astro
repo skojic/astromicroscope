@@ -33,7 +33,7 @@ const jsonLd = videoObject({
   name: video.title,
   description: sameLang ? shortDescription(video.description, 300) || metaDescription : metaDescription,
   thumbnail: thumb.src,
-  uploadDate: video.published,
+  uploadDate: video.publishedAt,
   embedUrl: video.embed,
   lang: video.lang,
 });

@@ -123,6 +123,8 @@ for (const url of urls) {
   for (const n of d.ld) {
     if (n['@type'] === 'INVALID') { fail(url, 'JSON-LD does not parse'); continue; }
     for (const field of requiredLd[n['@type']] ?? []) if (n[field] == null || n[field] === '') fail(url, `JSON-LD ${n['@type']} has no ${field}`);
+    // Google's Rich Results Test flags a bare date here ("Invalid datetime value", "missing a timezone"): need date, time and offset.
+    if (n['@type'] === 'VideoObject' && n.uploadDate && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/.test(n.uploadDate)) fail(url, `JSON-LD VideoObject uploadDate "${n.uploadDate}" has no time and timezone`);
   }
   if (url !== '/' && url !== '/en/' && !d.ld.some((n) => n['@type'] === 'BreadcrumbList')) fail(url, 'no BreadcrumbList JSON-LD on an inner page');
 

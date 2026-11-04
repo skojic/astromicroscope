@@ -10,9 +10,11 @@ const schema = z.array(z.object({
   slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
   title: z.string().min(1),
   published: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  // Full ISO 8601 timestamp with timezone: Google's Rich Results Test wants this for VideoObject uploadDate (a bare date is flagged).
+  publishedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/),
   description: z.string(),
   lang: z.enum(['sr', 'en']),
-}));
+}).refine((v) => v.publishedAt.startsWith(v.published), { message: 'published must be the date part of publishedAt' }));
 
 const thumbnails = import.meta.glob<{ default: ImageMetadata }>('../../../assets/videos/*.jpg', { eager: true });
 
