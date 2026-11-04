@@ -3,6 +3,7 @@
 Newest first. Each entry: date, what was done, evidence, what is next.
 
 ## 2026-11-04
+- **Issue #9 (Filip's three requests to Srdjan)**: (1) `site/scripts/check-content.mjs`: the sr/en pair check is skipped for `draft: true` outside production; the production placeholder check runs on string values of the front matter and on the body, not on `JSON.stringify(data)`, so `topics: ["finances"]` is no longer a placeholder. Evidence: `npm test` 19 pass (was 15); the two new bug tests fail on the old script (`ℹ pass 8 / fail 2`) and pass on the new one (`ℹ pass 10 / fail 0` in `check-content.test.ts`); `node scripts/check-content.mjs` and `SITE_ENV=production node scripts/check-content.mjs` both pass on `main`'s content. (2) **G0 passed for M02** (Srdjan's approval in session, 2026-11-04): `PLAN.md` has goal, scope, deliverables, tasks and acceptance criteria. Note: G0 asks for content in both languages; M02's scope is Serbian only and English is M14 (`PLAN.md` Scope: Out), so this approval accepts that. (3) **D31**: horoscope files `aries.md`, not `ovan.md`.
 - **M00-10 done** (Srdjan): Dependabot security updates turned on. Evidence: `gh api repos/skojic/astromicroscope --jq .security_and_analysis` → `dependabot_security_updates: enabled` (was `disabled`); secret scanning and push protection enabled. Next: M00-08 (Cloudflare token), then G2–G4 for M00.
 
 ## 2026-11-03

@@ -2,12 +2,12 @@
 
 | | |
 |---|---|
-| Stage | idea |
-| Last gate passed | none |
+| Stage | approved |
+| Last gate passed | G0 (2026-11-04) |
 | Owner | Filip |
 | Branch | `feature/m02-content-migration` (not created yet) |
 | Last commit | — |
-| Last updated | 2026-11-02, plan created |
+| Last updated | 2026-11-04, G0 recorded |
 
 ## Next step
 Approved to start (Srdjan, PR #5). `git switch main && git pull`, then `git switch -c feature/m02-content-migration`; start with M02-01 (old-URL map), then M02-02 in batches of five articles.
@@ -26,6 +26,8 @@ Approved to start (Srdjan, PR #5). `git switch main && git pull`, then `git swit
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: M02-02 says Gorica approves every edited text. Proposal: one batch of five articles per pull request, and I send her the batch as a PDF or document for comments before the PR.
 
 ## Decisions taken in this module
+- 2026-11-04 (Srdjan, issue #9, D31): horoscope files are named by the English sign key (`aries.md`, …), in both languages.
+- 2026-11-04 (Srdjan, issue #9): G0 passed, see the log. `check-content.mjs` now skips the sr/en pair check for `draft: true` outside production and tests placeholders on string values only; take it with `git merge main` into the module branch.
 - 2026-11-03 (Srdjan, PR #5): consultations are not converted (D19, M09 owns the data); `konsultacije.md` → map entry “replaced by D19”, `/konsultacije/` → `/analize/`. `blog.md` and `godisnji-horoskop.md` → redirects to the new hubs, no target file.
 - 2026-11-03 (Srdjan, PR #5, D22): 2026 horoscope converted to the schema in any case; tone and translation depend on which edition is current at launch; no manual tone work until Gorica gives the date for 2027.
 - 2026-11-03 (Srdjan, PR #5): edited texts go to Gorica in batches of five before each pull request. M02 may start before Phase 0 is fully closed.

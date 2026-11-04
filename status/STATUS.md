@@ -28,7 +28,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | building | M00-08: Cloudflare API token (Filip) | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | review | approval | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | idea | — (approved to start, PR #5) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M02 Content migration | Filip | approved | — (G0 passed 2026-11-04; Filip moves to building) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | testing | G2/G3 checks | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | validators, G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |

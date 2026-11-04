@@ -35,6 +35,7 @@ Decided items are not changed silently. To change one, add a new entry that repl
 | D28 | 2026-11-03 | **Header and footer logo = the mark as an image plus live text for the name**, not the inline lockup SVG (22 KB on every page, and text inside an SVG image cannot use the page fonts). The Instagram link `https://www.instagram.com/astromicroscope/` follows the handle in `docs/sadrzaj/07`; the URL itself was not verified. | specs/07 (HTML budget), brand fonts |
 | D29 | 2026-11-03 | **Repository visibility (B6): public for now** (Srdjan). | Srdjan's instruction in session |
 | D30 | 2026-11-03 | **Prepayment for analyses: not for now** (Srdjan); passwords and 2FA (A2) deferred by Srdjan. P06 stays open for the business form. | Srdjan's instruction in session |
+| D31 | 2026-11-04 | **Horoscope files are named by the English sign key**: `site/src/content/horoscope/{sr\|en}/<year>/aries.md`, not `ovan.md`. The `sign` field already uses the English values (`plan/contracts.md` §3); the Serbian URL slug (`/ovan/`) comes from the route mapping, not the file name. The old-URL map (M02-01) keeps `ovan` as the old address. | Filip's question in issue #9; Srdjan's instruction in session |
 
 ## Pending
 | ID | Question | Owner | Blocks |
