@@ -28,7 +28,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | done | — | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | done | — | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | building | Gorica's approval of batches 1–2. Done: M02-01 map, M02-02 (10/10 articles, dates checked); next M02-03 horoscope 2026 | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M02 Content migration | Filip | building | Gorica's approval of batches 1–2. Done: M02-01 map, M02-02 (7 articles kept, 3 past transits removed by Gorica); next M02-03 horoscope 2026 | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
 | M03 Site shell | Srdjan | done | — | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |

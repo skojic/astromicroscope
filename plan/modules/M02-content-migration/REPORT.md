@@ -7,10 +7,10 @@
 | Owner | Filip |
 | Branch | `feature/m02-content-migration` (pushed 2026-11-03; `main` merged in 2026-11-04) |
 | Last commit | `78fec8c` M02-02: convert the five transit articles to the article schema |
-| Last updated | 2026-11-04, M02-02 done (10 of 10 articles, batch 2 with ephemeris check) |
+| Last updated | 2026-11-04, M02-02 done: 7 articles kept (Gorica removed three past transits) |
 
 ## Next step
-1. Filip: `git push`; send batch 2 to Gorica (document “Tekstovi za novi sajt – paket 2”) with the list “Batch 2 for Gorica” below. Batch 1 was sent on 2026-11-03.
+1. Filip: `git push`. Batch 2 is with Gorica (document “Tekstovi za novi sajt – paket 2”): she kept Jupiter and Saturn; open for her: the corrected Jupiter dates and „vi” → „ti” in Jupiter. Batch 1 was sent on 2026-11-03.
 2. M02-03: the 12 signs of the 2026 horoscope to the sign schema, files `site/src/content/horoscope/sr/2026/<english key>.md` (D31). 2026 is the edition at launch (D41), so M02-06 (tone **ti**, D18) applies to them too (D22).
 3. M02-04: pages O meni, Zašto Astromicroscope, Kontakt (without the Nikola Stojanović paragraph, D20).
 4. M02-05 for `podznak.md` (charts of Cardin, Kepler, Andersen) and for the 12 signs; M02-06 tone pass for `jupiter-u-lavu.md` (uses „vi”).
@@ -19,7 +19,7 @@
 ## Done
 - **M02-01** old-URL map: all 28 pages have a new URL and a target file or a written reason (table “Old-URL map” below). Commit `47a2a64`.
 - **M02-02 batch 1** (5 of 10 articles, the texts without transits): `potencijali.md`, `kako-da-vratis-sebe-sebi.md`, `podznak.md`, `astro-vodic-kroz-finansije.md`, `sta-otkriva-decji-horoskop.md` in `site/src/content/articles/sr/`. Commit `e4abd1c`. Answer word counts 50, 48, 51, 48, 48; titles 25–56 characters; descriptions 119–134 characters. Every text has `draft: true` (not yet approved by Gorica).
-- **M02-02 batch 2** (the five transit articles): `mars-u-strelcu.md`, `retrogradni-uran.md`, `eklipsa.md`, `jupiter-u-lavu.md`, `saturn.md`. Commit `78fec8c`. Answers 53, 54, 50, 50, 48 words; titles 36–59 characters; descriptions 121–143 characters; `transits` filled for Mars, Uranus, Jupiter. All `draft: true`. M02-02 is complete: 10 of 10 articles.
+- **M02-02 batch 2** (the five transit articles): `mars-u-strelcu.md`, `retrogradni-uran.md`, `eklipsa.md`, `jupiter-u-lavu.md`, `saturn.md`. Commit `78fec8c`. **Gorica, 2026-11-04: keep only `jupiter-u-lavu.md` and `saturn.md`**; Mars (Nov–Dec 2025), Uranus (until April 2026) and the eclipses (Feb–Mar 2026) are past and are removed; their old URLs redirect to `/tekstovi/` (map rows 6–8). Answers 53, 54, 50, 50, 48 words; titles 36–59 characters; descriptions 121–143 characters; `transits` filled for Mars, Uranus, Jupiter. All `draft: true`. M02-02 is complete: 7 articles go to the new site, 3 old pages have a written reason (map).
 - **M02-05 for batch 2:** every date checked (see Test evidence); four dates were off by one day and are corrected in the files for Gorica's confirmation (Batch 2 for Gorica). `ephemerisChecked: true` for all five.
 - **M02-05 for batch 1, partly:** four texts have no astrological dates or chart positions to check → `ephemerisChecked: true`; `podznak.md` has three named natal charts → `false` (see Next step 4).
 
@@ -39,6 +39,7 @@
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: M02-02 says Gorica approves every edited text. Proposal: one batch of five articles per pull request, and I send her the batch as a PDF or document for comments before the PR.
 
 ## Decisions taken in this module
+- 2026-11-04 (Gorica, via Filip): of batch 2 only Jupiter in Leo and Saturn go to the new site; Mars in Sagittarius, Uranus retrograde and the 2026 eclipses are past transits and are not carried over. Old URLs `/mars-u-strelcu/`, `/retrogradni-uran/`, `/eklipsa/` → 301 to `/tekstovi/` (M13).
 - 2026-11-04 (Filip): `transits` in front matter use English lowercase keys (`planet: jupiter`, `sign: leo`), like the horoscope `sign` field, so both languages share them; `TransitTimeline` (M06-02) shows the names in the page language. Eclipses are events, not periods, so `eklipsa.md` has no `transits`.
 - 2026-11-04 (Srdjan, issue #9, D31): horoscope files are named by the English sign key (`aries.md`, …), in both languages.
 - 2026-11-04 (Srdjan, issue #9): G0 passed, see the log. `check-content.mjs` now skips the sr/en pair check for `draft: true` outside production and tests placeholders on string values only; take it with `git merge main` into the module branch.
@@ -73,11 +74,11 @@ Horoscope files are named by the English sign key (D31); the Serbian URL slug st
 | 3 | `/ljudi-su-vise-od-onoga-sto-se-vidi-na-prvi-pogled-njihov-pravi-potencijal-lezi-u-tome-sta-su-sposobni-postati-a-ne-u-onome-sta-trenutno-jesu-abraham-maslow/` | `/tekstovi/podznak/` | `articles/sr/podznak.md` | `rising-sign` | batch 1; old slug was the Maslow quote, new slug as in `contracts.md` §2 |
 | 4 | `/astro-vodic-kroz-finansije/` | `/tekstovi/astro-vodic-kroz-finansije/` | `articles/sr/astro-vodic-kroz-finansije.md` | `finances-guide` | batch 1 |
 | 5 | `/sta-otkriva-decji-horoskop/` | `/tekstovi/sta-otkriva-decji-horoskop/` | `articles/sr/sta-otkriva-decji-horoskop.md` | `childrens-horoscope` | batch 1 |
-| 6 | `/mars-u-strelcu/` | `/tekstovi/mars-u-strelcu/` | `articles/sr/mars-u-strelcu.md` | `mars-in-sagittarius` | batch 2 (planned) |
-| 7 | `/retrogradni-uran/` | `/tekstovi/retrogradni-uran/` | `articles/sr/retrogradni-uran.md` | `uranus-retrograde` | batch 2 (planned) |
-| 8 | `/eklipsa/` | `/tekstovi/eklipsa/` | `articles/sr/eklipsa.md` | `eclipses` | batch 2 (planned) |
-| 9 | `/jupiter-u-lavu/` | `/tekstovi/jupiter-u-lavu/` | `articles/sr/jupiter-u-lavu.md` | `jupiter-in-leo` | batch 2 (planned) |
-| 10 | `/saturn/` | `/tekstovi/saturn/` | `articles/sr/saturn.md` | `saturn-fourth-house` | batch 2 (planned) |
+| 6 | `/mars-u-strelcu/` | `/tekstovi/` | none (removed 2026-11-04) | — | Gorica: the transit is over, not carried over to the new site; redirect to the articles hub |
+| 7 | `/retrogradni-uran/` | `/tekstovi/` | none (removed 2026-11-04) | — | Gorica: the transit is over, not carried over to the new site; redirect to the articles hub |
+| 8 | `/eklipsa/` | `/tekstovi/` | none (removed 2026-11-04) | — | Gorica: the 2026 eclipse season is over, not carried over to the new site; redirect to the articles hub |
+| 9 | `/jupiter-u-lavu/` | `/tekstovi/jupiter-u-lavu/` | `articles/sr/jupiter-u-lavu.md` | `jupiter-in-leo` | batch 2 |
+| 10 | `/saturn/` | `/tekstovi/saturn/` | `articles/sr/saturn.md` | `saturn-fourth-house` | batch 2 |
 | 11 | `/ovan/` | `/horoskop/2026/ovan/` | `horoscope/sr/2026/aries.md` | `horoscope-2026-aries` | M02-03; file named by the English sign key (D31); 2026 is the edition at launch (D41) |
 | 12 | `/bik/` | `/horoskop/2026/bik/` | `horoscope/sr/2026/taurus.md` | `horoscope-2026-taurus` | as 11 |
 | 13 | `/blizanci/` | `/horoskop/2026/blizanci/` | `horoscope/sr/2026/gemini.md` | `horoscope-2026-gemini` | as 11 |
@@ -117,6 +118,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 | `npm run build` | not run (npm registry blocked, HTTP 403) | 2026-11-03 |
 
 ## History
+- 2026-11-04: Gorica removed three past-transit articles (Mars, Uranus, eclipses); map rows 6–8 redirect to `/tekstovi/`.
 - 2026-11-04: `main` merged into the branch (G0, `check-content` fix, D31); map switched to English horoscope file names; M02-02 batch 2 converted with ephemeris check; M02-02 complete.
 - 2026-11-03: branch created; M02-01 map; M02-02 batch 1 converted (5 articles); requests to M00 and M07 recorded.
 - 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
