@@ -70,7 +70,9 @@ jobs:
       - name: HTML validation
         run: npm run test:html
       - name: Install browsers (Chromium for axe and Lighthouse, Firefox and WebKit for the layout check)
-        run: npx playwright install --with-deps chromium firefox webkit
+        # No --with-deps: the runner (and setup-node) already carry the system libraries, and `--with-deps` runs apt-get,
+        # which hangs on the migrated Ubuntu 26 image (2026-11-04, see status/log.md).
+        run: npx playwright install chromium firefox webkit
       - name: Accessibility (axe, WCAG 2.2 A and AA)
         run: npm run test:axe
       - name: Browser checks (no YouTube request before play, language switch, skip link)
