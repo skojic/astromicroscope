@@ -11,7 +11,7 @@ export function buildHeaders({ isProduction }) {
     "form-action 'self'",
     "img-src 'self' data:",
     "font-src 'self'",
-    "connect-src 'self'",
+    "connect-src 'self' https://static.cloudflareinsights.com", // Web Analytics beacon POST (M12-05)
     "frame-src https://www.youtube-nocookie.com", // video player, created only after a click (M11)
   ].join('; ');
   // Scripts and styles are limited by the hash-based CSP that Astro puts in each page (security.csp in astro.config.mjs).

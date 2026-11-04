@@ -1,0 +1,18 @@
+---
+// M12-05 (D44): Cloudflare Web Analytics beacon. Loaded only in the production build, only when a token is configured,
+// and the beacon loads asynchronously so it does not delay the page. The token is not secret (D44) and comes from the
+// environment (PUBLIC_CF_WEB_ANALYTICS_TOKEN), never hardcoded in the repo.
+//
+// Cloudflare's beacon pattern: an inline script with a `data-cf-beacon` attribute; Cloudflare loads it async from
+// static.cloudflareinsights.com. No cookie and no local storage is set by this snippet (cookieless, D44).
+const token = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
+const isProduction = import.meta.env.SITE_ENV === 'production';
+const enabled = isProduction && typeof token === 'string' && token.trim() !== '';
+---
+{enabled && (
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={JSON.stringify({ token })}
+  ></script>
+)}
