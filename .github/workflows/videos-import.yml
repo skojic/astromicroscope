@@ -60,7 +60,7 @@ jobs:
           npm test
           npm run build
           npm run test:html
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
           npm run test:seo
       - name: Open a pull request and enable auto-merge
         if: steps.diff.outputs.changed == 'true'
