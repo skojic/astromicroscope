@@ -25,7 +25,7 @@
 - Data files and home sections (M14-02 rest): with M05/M08/M09/M10 when their strings exist.
 
 ## Problems and blockers
-- Question for Gorica: `astro-vodic-kroz-finansije.md` says Venus or Jupiter „povezane sa serijom dva”; translated as “connected with the second house”. Confirm or explain the term.
+- **Answered 2026-11-04 (Gorica, via Filip):** „povezane sa serijom dva” in `astro-vodic-kroz-finansije.md` is translated as “connected with the second house”; she confirmed.
 - Word count: 6 of 22 files, about 2,500 English words; Serbian source of all 22 files about 13,000 words.
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: D17 says everything in English at launch. Does that include the 2026 horoscope archive (12 texts, about 7,000 words), or only the current edition? Excluding the archive would cut the effort by about a third.
 - Word count to track: about 20,000 words from the old site plus `docs/sadrzaj/01–07`; counted per batch in this report.
