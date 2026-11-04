@@ -39,3 +39,8 @@ jobs:
         run: npm run test:e2e
       - name: Lighthouse budgets (median of 3, mobile)
         run: npm run test:lighthouse
+      - name: SEO and link audit (preview build)
+        run: npm run test:seo
+      # The production build differs from the preview build: indexable pages, robots.txt allows crawling. Keep this step last, it replaces dist/.
+      - name: SEO and link audit (production build)
+        run: SITE_ENV=production npm run build && npm run test:seo
