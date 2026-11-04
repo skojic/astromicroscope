@@ -22,6 +22,7 @@ Not started. Wait for: nothing to start (the M00 foundation is on `main`; questi
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: the course waitlist. Proposal: a separate group in Gorica's MailerLite account (D21), so waitlist and newsletter stay apart. Inputs still list questionnaire 8–10; those are postponed to 2027 (D14).
 
 ## Decisions taken in this module
+- 2026-11-04 (Filip): MailerLite groups on Gorica's account (D21, D44). Newsletter: existing group „Astro Microscope”, id `196782570813261481`. Course waitlist: new group „Lista čekanja – kursevi”, id `203228920135288545`. Group ids are not secret; the API key (`astromicroscope-sajt`, all IPs allowed) was created the same day and handed to Srdjan outside the repository, for the Worker secret `MAILERLITE_API_KEY` (D44).
 - 2026-11-03 (Srdjan, PR #5): waitlist is a separate MailerLite group; Srdjan builds the form and double opt-in in M12; M08 only the call to action, with a clear sign-up text; the privacy page (M10-05) mentions both lists.
 
 ## Requests to other modules
@@ -32,5 +33,6 @@ Not started. Wait for: nothing to start (the M00 foundation is on `main`; questi
 |---|---|---|
 
 ## History
+- 2026-11-04: MailerLite waitlist group created; group ids recorded.
 - 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.
