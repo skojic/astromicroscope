@@ -7,19 +7,19 @@
 | Owner | Filip |
 | Branch | `feature/m02-content-migration` (pushed 2026-11-03; `main` merged in 2026-11-04) |
 | Last commit | `78fec8c` M02-02: convert the five transit articles to the article schema |
-| Last updated | 2026-11-04, M02-03 done: 12 signs of 2026 with dates checked and tone „ti” |
+| Last updated | 2026-11-04, all M02 tasks done (01–06); waiting for the English pairs (M14) for G1 |
 
 ## Next step
-1. Filip: `git push`.
-2. M02-04: pages O meni, Zašto Astromicroscope, Kontakt in `site/src/content/pages/sr/` (without the Nikola Stojanović paragraph, D20; tone „ti” per D18, first person).
-3. Then M10 (About and Contact pages, AuthorBox), M06 (articles hub and template), so the content shows on the preview address; M14 English pairs, after which `draft: true` comes off.
-4. Gorica reviews the 12 signs afterwards (her instruction 2026-11-04); open points under “Horoscope 2026 for Gorica”.
+1. Filip: `git push`, then open the pull request `feature/m02-content-migration` → `main` (description prepared in the session; template `.github/pull_request_template.md`). CI (`ci-gate`) builds the site with the new files: that build is the first schema check by Astro itself. With D45 in force Filip merges it when `ci-gate` and `branch-name` are green.
+2. M14: English pairs for the 7 articles, 12 signs and 3 pages (`site/src/content/**/en/`), then remove `draft: true`; after that G1 for M02 (build without warnings, both languages).
+3. M10 and M06 can start on top of this content (About/Contact pages and AuthorBox; articles hub and template).
 
 ## Done
 - **M02-01** old-URL map: all 28 pages have a new URL and a target file or a written reason (table “Old-URL map” below). Commit `47a2a64`.
 - **M02-02 batch 1** (5 of 10 articles, the texts without transits): `potencijali.md`, `kako-da-vratis-sebe-sebi.md`, `podznak.md`, `astro-vodic-kroz-finansije.md`, `sta-otkriva-decji-horoskop.md` in `site/src/content/articles/sr/`. Commit `e4abd1c`. Answer word counts 50, 48, 51, 48, 48; titles 25–56 characters; descriptions 119–134 characters. Every text has `draft: true` (not yet approved by Gorica).
 - **M02-02 batch 2** (the five transit articles): `mars-u-strelcu.md`, `retrogradni-uran.md`, `eklipsa.md`, `jupiter-u-lavu.md`, `saturn.md`. Commit `78fec8c`. **Gorica, 2026-11-04: keep only `jupiter-u-lavu.md` and `saturn.md`**; Mars (Nov–Dec 2025), Uranus (until April 2026) and the eclipses (Feb–Mar 2026) are past and are removed; their old URLs redirect to `/tekstovi/` (map rows 6–8). Answers 53, 54, 50, 50, 48 words; titles 36–59 characters; descriptions 121–143 characters; `transits` filled for Mars, Uranus, Jupiter. All `draft: true`. M02-02 is complete: 7 articles go to the new site, 3 old pages have a written reason (map).
 - **M02-05 for batch 2:** every date checked (see Test evidence); four dates were off by one day and are corrected in the files for Gorica's confirmation (Batch 2 for Gorica). `ephemerisChecked: true` for all five.
+- **M02-04 pages:** `site/src/content/pages/sr/o-meni.md` (`about`), `zasto-astromicroscope.md` (`why-astromicroscope`), `kontakt.md` (`contact`); first person, „ti” (D18); Nikola Stojanović paragraph removed and „astrolog istraživač” replaced by „profesionalni astrolog” (D20); Gorica's new text on her interests from `docs/sadrzaj/05`; reply within three days (D21); emojis of the old contact text dropped. `draft: true` like the other collections. Konsultacije, Blog and Godišnji horoskop have no file (map rows 23–25).
 - **M02-03 horoscope 2026:** all 12 signs in `site/src/content/horoscope/sr/2026/<english key>.md` (D31), `sign`, `year: 2026`, title „<Znak> 2026: <naslov godine>” (`plan/concept.md`), answer 47–53 words, `transits` (Saturn and Neptune in Aries, Uranus in Gemini, Jupiter in Cancer/Leo as each text mentions), `oldUrl`, `draft: true`. Commit see History.
 - **M02-05 for the signs:** the dates repeated in all 12 texts checked (own computation plus [Almanac](https://www.almanac.com/content/mercury-retrograde-dates) and Cafe Astrology): Neptune into Aries **26 Jan** (texts: 27), Saturn into Aries **14 Feb** (texts: 15), Uranus into Gemini **26 Apr** (texts: 27), Jupiter into Leo **30 Jun** (Aries text: 1 Jul), Mercury retrograde **26 Feb – 20 Mar, 29 Jun – 24 Jul, 24 Oct – 13 Nov** (texts: 21 Mar, 30 Jun, 14 Nov), Venus retrograde 3 Oct – 14 Nov (correct). Corrected in every sign. House placements checked per sign (e.g. Venus retrograde in Scorpio/Libra = 7th/6th for Taurus, 12th for Sagittarius).
 - **M02-06 for the signs:** „vi” → „ti” in 11 texts (Taurus is written in the third person, kept); gender as „/la”; one duplicated sentence removed (Rak); one Cyrillic „а” in „zahteva” replaced (Ribe); list formatting for Mercury periods; signatures removed, the consultation line kept.
@@ -28,8 +28,8 @@
 - **M02-05 for batch 1, partly:** four texts have no astrological dates or chart positions to check → `ephemerisChecked: true`; `podznak.md` has three named natal charts → `false` (see Next step 4).
 
 ## Not done
-- M02-04 pages (About, Why Astromicroscope, Contact), M02-06 tone (ti) and structure edits.
-- Schema check with Astro itself (`npm run build`): not run. The npm registry was blocked in both environments used this session (HTTP 403 from the proxy), so `node_modules` could not be installed. Instead the front matter was checked against the rules of `content.config.ts` with a YAML parser (types, `topics` enum, title ≤ 70, description ≤ 155, answer 40–60 words, dates, `lang` = folder): 5 of 5 pass. To do on Filip's computer: `cd site && npm ci && npx astro sync`.
+- English pairs (M14) for all 22 files; until then every file is `draft: true` and G1 cannot pass (`testing/test-plan.md`: every sr file has an en pair).
+- Build by Astro not run in this environment (npm registry blocked); the pull request's CI run is the check.
 
 ## Problems and blockers
 - **Resolved 2026-11-04 (`e5a1fea`, merged into the branch):** ~~`npm run check` fails on this branch~~ (expected, M00 owns the script): `check-content.mjs` requires an English file with the same `translationKey` for every Serbian file, in every build, not only in production. The five articles have no English pairs yet (M14), so the check, the build and CI fail until they exist. See Requests to other modules.
@@ -118,7 +118,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 - **Done 2026-11-04 (Srdjan, `e5a1fea`):** ~~To M00 (Srdjan), `site/scripts/check-content.mjs`:~~ (1) skip the missing-pair check for entries with `draft: true` outside production (production already rejects drafts), so M02 can merge Serbian texts before M14; (2) run the placeholder check on the string values of the front matter, not on `JSON.stringify(data)`, so lists like `topics` are not reported as placeholders.
 - **Answered 2026-11-04 (D31):** ~~To M07 (Srdjan): horoscope file names.~~ The map uses the Serbian slug as the file name (`horoscope/sr/2026/ovan.md`, `sign: aries`), like articles, where the file name is the URL slug. If M07 prefers `aries.md` in both languages, tell me before M02-03.
 - **To M10 (Filip):** `pages/sr/zasto-astromicroscope.md` (`translationKey: why-astromicroscope`) has no route; it is the name story for the About page.
-- **To M00/contracts (Srdjan):** add `draft: boolean` to the horoscope schema in `plan/contracts.md` §3 and `content.config.ts`, as for articles (the files already use it).
+- **To M00/contracts (Srdjan):** add `draft: boolean` to the horoscope and page schemas in `plan/contracts.md` §3 and `content.config.ts`, as for articles (the files already use it).
 - **To M07 (Srdjan):** the 12 Serbian sign files of 2026 are in `site/src/content/horoscope/sr/2026/` (D31, D41), each with `transits`; English pairs come with M14.
 - **To M13:** the redirect list is the “Old-URL map” table in this report.
 
@@ -134,6 +134,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 | `npm run build` | not run (npm registry blocked, HTTP 403) | 2026-11-03 |
 
 ## History
+- 2026-11-04: M02-04 pages (O meni, Zašto Astromicroscope, Kontakt); all M02 tasks done.
 - 2026-11-04: M02-03: 12 signs of the 2026 horoscope converted, dates corrected, tone „ti”.
 - 2026-11-04: Gorica approved batches 1–2; Jupiter in Leo to „ti”; Podznak example charts checked; all kept articles `ephemerisChecked: true`.
 - 2026-11-04: Gorica removed three past-transit articles (Mars, Uranus, eclipses); map rows 6–8 redirect to `/tekstovi/`.

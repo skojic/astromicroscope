@@ -3,6 +3,7 @@
 Newest first. Each entry: date, what was done, evidence, what is next.
 
 ## 2026-11-04
+- **M02-04 and M02 tasks complete** (Filip): pages O meni, Zašto Astromicroscope, Kontakt in `site/src/content/pages/sr/` (D18, D20, D21). M02 has 22 Serbian files, all `draft: true` until the English pairs (M14); stage stays `building` until G1. Next: pull request to `main` so CI builds the content.
 - **M02-03: horoscope 2026, 12 signs** (Filip): `site/src/content/horoscope/sr/2026/<english key>.md` (D31), the edition at launch (D41). Dates corrected in every sign (Neptune 26 Jan, Saturn 14 Feb, Uranus 26 Apr, Jupiter 30 Jun, Mercury retrograde 20 Mar / 29 Jun / 13 Nov); tone „ti” (D18) in 11 texts; front matter checked, 12 of 12 OK. Three inconsistencies in the texts listed for Gorica. Request to Srdjan: `draft` in the horoscope schema.
 - **M02: batches 1–2 approved by Gorica** (Filip): open points decided by us, she reviews afterwards. Jupiter in Leo switched to „ti” (D18); the Podznak example charts match AstroTheme birth data (Cardin, Kepler, Andersen), so all 7 articles have `ephemerisChecked: true`. `draft: true` stays until the English pairs (M14).
 - **M02: Gorica keeps 7 of 10 articles** (Filip): Mars in Sagittarius, Uranus retrograde and the 2026 eclipses describe past transits and are removed from the branch; their old URLs redirect to `/tekstovi/` (M02 map rows 6–8, for M13). Jupiter in Leo and Saturn stay.
