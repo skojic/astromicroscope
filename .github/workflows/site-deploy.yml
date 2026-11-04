@@ -1,0 +1,73 @@
+name: site-deploy
+
+# Deploys the temporary address (D36) after site-ci passed on main, then runs the smoke test against it. No human, no personal token:
+# the dedicated CI token of the repository secrets does it. Production (the custom domain, SITE_ENV=production) comes with the launch (M13).
+on:
+  workflow_run:
+    workflows: [site-ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Only a push to main whose CI passed, never a pull request that happens to be named main.
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      SITE_URL: https://astromicroscope.filipvicentijevic99.workers.dev
+      COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Cloudflare secrets and newest commit
+        id: gate
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::notice::No Cloudflare secrets: deploy skipped."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          latest="$(gh api "repos/$REPO/commits/main" --jq .sha)"
+          if [ "$COMMIT" != "$latest" ]; then
+            echo "::notice::$COMMIT is not the newest commit of main ($latest): its successor deploys."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "run=true" >> "$GITHUB_OUTPUT"
+      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.COMMIT }}
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install
+        if: steps.gate.outputs.run == 'true'
+        working-directory: site
+        run: npm ci
+      - name: "Build (non-production, so noindex and robots Disallow)"
+        if: steps.gate.outputs.run == 'true'
+        working-directory: site
+        run: npm run build
+      - name: Deploy the Worker
+        if: steps.gate.outputs.run == 'true'
+        working-directory: site
+        run: npx --no-install wrangler deploy
+      - name: Smoke test of the deployed address
+        if: steps.gate.outputs.run == 'true'
+        working-directory: site
+        run: node scripts/smoke.mjs "$SITE_URL" --mode preview

@@ -20,7 +20,15 @@
     "test:e2e": "node scripts/e2e.mjs",
     "test:seo": "node scripts/seo-check.mjs",
     "deploy:dry-run": "wrangler deploy --dry-run",
-    "deploy:preview": "npm run build && wrangler deploy"
+    "deploy:preview": "npm run build && wrangler deploy",
+    "test:visual": "node scripts/visual.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "status:sync": "node scripts/check-docs.mjs --fix",
+    "test:links": "node scripts/check-external-links.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "crawl": "node scripts/crawl.mjs",
+    "check:redirects": "node scripts/check-redirects.mjs",
+    "test:lighthouse:live": "lhci autorun --config=./lighthouserc.live.json"
   },
   "dependencies": {
     "astro": "7.4.5",

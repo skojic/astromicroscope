@@ -1,17 +1,55 @@
 name: site-ci
 
+# Every pull request and every push to main. `ci-gate` is the one check that branch protection requires (D45): it is green when
+# every job that had to run passed. The site job is skipped when a change touches no site file, so docs-only changes are not blocked.
 on:
   pull_request:
-    paths: ['site/**', '.github/workflows/site-ci.yml', 'brand/tokens/**', 'brand/fonts/**']
   push:
     branches: [main]
-    paths: ['site/**', '.github/workflows/site-ci.yml', 'brand/tokens/**', 'brand/fonts/**']
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: site-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
+  changes:
+    # Which parts of the repository this change touches. No checkout: the GitHub API lists the changed files.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      site: ${{ steps.files.outputs.site }}
+    steps:
+      - id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+          files="site/" # default for a manual run, a new branch or a failed lookup: check everything
+          if [ "$EVENT" = "pull_request" ]; then
+            files="$(gh api "repos/$REPO/pulls/$PR/files" --paginate --jq '.[].filename')" || files="site/"
+          elif [ "$EVENT" = "push" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            files="$(gh api "repos/$REPO/compare/$BEFORE...$SHA" --jq '.files[].filename')" || files="site/"
+          fi
+          if printf '%s\n' "$files" | grep -E -q '^(site/|brand/tokens/|brand/fonts/|\.github/workflows/site-ci\.yml$)'; then
+            echo "site=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "site=false" >> "$GITHUB_OUTPUT"
+          fi
+
   site:
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -31,12 +69,24 @@ jobs:
         run: npm run build
       - name: HTML validation
         run: npm run test:html
-      - name: Install Chromium for axe
-        run: npx playwright install --with-deps chromium
+      - name: Install browsers (Chromium for axe and Lighthouse, Firefox and WebKit for the layout check)
+        run: npx playwright install --with-deps chromium firefox webkit
       - name: Accessibility (axe, WCAG 2.2 A and AA)
         run: npm run test:axe
       - name: Browser checks (no YouTube request before play, language switch, skip link)
         run: npm run test:e2e
+      - name: Cross-browser layout (Chromium, Firefox, WebKit; overflow, one h1, console and request errors)
+        run: npm run test:visual
+        env:
+          SHOTS_DIR: ${{ runner.temp }}/shots
+      - name: Upload the screenshots of the layout check
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: visual-screenshots
+          path: ${{ runner.temp }}/shots
+          retention-days: 7
+          if-no-files-found: ignore
       - name: Lighthouse budgets (median of 3, mobile)
         run: npm run test:lighthouse
       - name: SEO and link audit (preview build)
@@ -44,3 +94,31 @@ jobs:
       # The production build differs from the preview build: indexable pages, robots.txt allows crawling. Keep this step last, it replaces dist/.
       - name: SEO and link audit (production build)
         run: SITE_ENV=production npm run build && npm run test:seo
+
+  docs:
+    # Consistency of status/, plan/ and the decisions (rule 5 of AGENTS.md). Plain Node, no install.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Documents agree with each other
+        run: node site/scripts/check-docs.mjs
+
+  ci-gate:
+    if: always()
+    needs: [changes, site, docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every job that had to run passed
+        env:
+          RESULTS: ${{ needs.changes.result }} ${{ needs.site.result }} ${{ needs.docs.result }}
+        run: |
+          echo "changes site docs: $RESULTS"
+          for r in $RESULTS; do
+            case "$r" in
+              success|skipped) ;;
+              *) echo "::error::a required job did not pass ($r)"; exit 1 ;;
+            esac
+          done

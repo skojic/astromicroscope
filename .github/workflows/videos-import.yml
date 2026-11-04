@@ -1,0 +1,79 @@
+name: videos-import
+
+# Weekly: reads the channel feed (M11-01). When a new video appeared, the job builds and tests the site, commits the new data and
+# thumbnails to main as Srdjan Kojic and starts the deploy. The Actions app is a bypass actor of the main ruleset (D45), so no pull
+# request and no human is needed. Nothing new in the feed means nothing is committed.
+on:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      test_push:
+        description: 'Push an empty commit to main, to prove that the bot may push (ruleset bypass)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: videos-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Read the channel feed
+        run: npm run import:videos
+      - name: Did anything change?
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain -- src/data/videos.json src/assets/videos)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git status --short -- src/data/videos.json src/assets/videos
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new video in the feed."
+          fi
+      - name: Tests and build with the new data
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          npm test
+          npm run build
+          npm run test:html
+          npx playwright install --with-deps chromium
+          npm run test:seo
+      - name: Commit to main and start the deploy
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "Srdjan Kojic"
+          git config user.email "srdjan.m.kojic@gmail.com"
+          git add src/data/videos.json src/assets/videos
+          git commit -m "Videos: import the channel feed" -m "Weekly import of the channel feed (M11-01): new or changed videos and their thumbnails; tests, build, HTML validation and the SEO audit passed first."
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # A push made with the Actions token starts no other workflow, so the deploy is started explicitly.
+          gh workflow run site-deploy.yml --ref main
+      - name: Test push (manual run only)
+        if: github.event_name == 'workflow_dispatch' && inputs.test_push
+        run: |
+          git config user.name "Srdjan Kojic"
+          git config user.email "srdjan.m.kojic@gmail.com"
+          git commit --allow-empty -m "CI: test that the Actions bot may push to main"
+          git pull --rebase origin main
+          git push origin HEAD:main
