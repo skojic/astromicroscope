@@ -22,8 +22,7 @@ M12-01, M12-02 and M12-04 are built. Remaining: prove the live double opt-in (ru
 - M12-02 double opt-in (D47): built — `/api/confirm` endpoint, signed token, and KV store (`CONFIRM_STORE`). The **email send is a marked TODO** that activates only after Email Service (M12-03) is live post-DNS; until then subscribers stay `unconfirmed` (silent but safe).
 - M12-03: contact and analysis-request email (needs the domain on Cloudflare for real send; dry run before).
 - M12-04: real rate-limit store (KV/DO) instead of the Map stub.
-- M12-05: the **Web Analytics site token** (`PUBLIC_CF_WEB_ANALYTICS_TOKEN`) still needs to be created in Cloudflare's dashboard (Filip) and provided as an env var to the production deploy; the beacon code is ready and gated.
-- Consent copy not yet approved by Gorica (acceptance criterion).
+- M12-05: the Web Analytics **site was created in the dashboard and the token wired** — `PUBLIC_CF_WEB_ANALYTICS_TOKEN` set as a repo secret (`a04…822`, not secret, D44) and exported in the `site-ci` production SEO-audit step so the production build embeds the beacon. Note: the live preview deploy is non-production (D36) so the beacon will not fire there — it activates only when the production build runs at launch (M13); the launch deploy step must export the same secret. Consent copy not yet approved by Gorica (acceptance criterion).
 
 ## Problems and blockers
 - Real contact mail waits on DNS on Cloudflare (M13, from ~2026-11-29); the double-opt-in email depends on the same (M12-03).
