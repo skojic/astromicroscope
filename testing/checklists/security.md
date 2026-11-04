@@ -2,7 +2,7 @@
 
 From `specs/09-security.md`. Run before launch (M13) and then once a month.
 
-- [ ] 2FA confirmed on every account in `specs/09` §2 (GitHub ×2, Cloudflare, registrar, email, Instagram, YouTube)
+- [ ] ~~2FA confirmed on every account in `specs/09` §2 (GitHub ×2, Cloudflare, registrar, email, Instagram, YouTube)~~ waived by Srdjan (D43)
 - [ ] Domain: renewed, auto-renew on, registrar lock on, DNSSEC on
 - [ ] No secret in the repository (secret scanning shows no open alerts)
 - [ ] Dependabot: no open high or critical alerts

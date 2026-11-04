@@ -8,7 +8,7 @@ A critical look at this plan (2026-11-02). Each item says why it matters and wha
 | A2 hacked old site | “Protect me from all of this in the future” | `specs/09-security.md` and `testing/checklists/security.md` (D15); Dependabot alerts turned on; account and domain actions in Phase 0 |
 | A3, A7 courses | Courses come in 2027 as a separate React platform or part of the platform; videos not recorded yet | **Resolved for iteration 1**: M08 shows free learning + waitlist; course platform in `plan/iteration-2.md` (D14) |
 | A4 questionnaire | Where is it? | `docs/sadrzaj/upitnik-za-goricu.md`; course questions (8–10) moved to 2027 |
-| A5 horoscope | A new edition is coming soon; the 2026 texts stay current about one more month | M07 publishes the new edition; 2026 becomes the archive |
+| A5 horoscope | A new edition is coming soon; the 2026 texts stay current about one more month | M07 publishes the new edition; 2026 becomes the archive. **D41:** launch with 2026, the 2027 edition replaces it when it arrives (early 2027) |
 | A6 translation | Machine translation is fine; Srdjan checks the English; everything at launch | **Resolved** (D17). Risk stays: launch date depends on M14 finishing all 20,000 words |
 | A10, B4 publishing | Filip publishes, Srdjan helps; CMS for Gorica maybe in iteration 2 | **Resolved**: iteration 1 without CMS; evaluation in `plan/iteration-2.md` |
 | B1 launch scope | — | **Resolved**: launch without courses (follows from A3) |
@@ -41,7 +41,7 @@ A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Activ
 | A2 | **The old site was hacked**: about 140 spam posts about casinos since June 2026, possibly indexed by Google under the domain | Google may have marked the domain as compromised; spam URLs can stay in results for months and damage rankings for the new site | **Phase 0:** change WordPress, Hostinger and email passwords; after the domain is back, add it to Search Console, check “Security issues”, and answer spam URLs with 410 Gone; ask Filip for the list of spam URLs from the backup | Srdjan, Filip |
 | A3 | **There is no course offer yet** | The brief makes education the main focus, but no course, program or product exists with a name, content or price. An education-first home page with nothing to buy looks empty | Decide the launch scope (dilemma B1) | Gorica, Srdjan |
 | A4 | **Gorica's 26 answers are missing** (`docs/sadrzaj/upitnik-za-goricu.md`) | Prices, services, process, tone (ti/vi), contact rules. The bottleneck is not the developers | **Phase 0:** one call with Gorica to go through the questionnaire; answers into `docs/sadrzaj/` | Srdjan, Gorica |
-| A5 | **The yearly horoscope is for 2026** and it is already November 2026 | The most searched content will be out of date at launch | Ask Gorica whether she writes 2027 (12 texts, about 7,000 words, before the end of the year); the 2026 texts become an archive | Gorica |
+| A5 | **The yearly horoscope is for 2026** and it is already November 2026 | The most searched content will be out of date at launch | Ask Gorica whether she writes 2027 (12 texts, about 7,000 words, before the end of the year); the 2026 texts become an archive. **D41:** not a dependency; 2026 is used until 2027 arrives | Gorica |
 | A6 | **About 20,000 words to translate into English** (D10) | Large effort; astrology terms need care; a poor English version hurts trust and SEO | M14: machine-assisted draft, then a careful edit, then review by a fluent reader; core pages first. Budget time or money for it | Filip, reviewer |
 | A7 | **How courses are sold and delivered** (logins, payments, video hosting) is undecided (P02b) | Astro is a static site; logins and payments need a server part or an outside platform. In Serbia, card payments, invoices and VAT depend on Gorica's business form (questionnaire 25) | Decide before M08/M12: an outside course platform linked from the site, or our own; not part of the launch if courses are not ready | Srdjan, Gorica |
 | A8 | **No portrait yet** | Hero and About depend on a photo; text in the brand kit asks for soft daylight on a light or blue wall | Gorica chooses or makes a photo; until then the arch frame stays empty in previews only | Gorica |
@@ -70,13 +70,13 @@ A1 resolved: astromicroscope.com renewed at Hostinger for one year (status Activ
 | C4 | **Translation is the biggest hidden effort** and sits with the junior developer | Machine draft plus human edit; English for core pages first; a fluent reviewer for anything public; track word counts in the M14 report |
 | C5 | **Performance risk from the brand itself**: Newsreader fonts (≈ 285 KB for four files), the star field on phones, YouTube thumbnails | Font instancing or subsetting in M00; star field off or static on touch devices (M05); thumbnails self-hosted and resized (M11); Lighthouse budgets in CI from M00 |
 | C6 | **Estimates are rough** (S/M/L), no dates | Reports record real effort; Srdjan sets dates after M00 when the speed is known |
-| C7 | **Logo detail is limited** by the 667 px original | Fine for screens; for large print, ask for the designer's vector original |
+| C7 | **Logo detail is limited** by the 667 px original | Fine for screens; for large print, ask for the designer's vector original. **Accepted (D39):** no original exists or will exist; the traced SVG is final |
 | C8 | **Ephemeris dates** in old texts are unchecked | `ephemerisChecked` is a required field; nothing publishes with `false` |
 | C9 | **Two plan systems could drift** (`plan/` reports and `status/STATUS.md`) | `STATUS.md` keeps only a one-line row per module that points to the report; the report is the detail |
 
 ## Phase 0 checklist
 - [x] Domain renewed, auto-renew and registrar lock on (A1): 2026-11-03, until 2027-10-15; transfer to Cloudflare from about 2026-11-29
-- [ ] Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included; spam-URL list prepared (A2) — spam list done: `docs/sadrzaj/stari-sajt/spam-adrese.md` (143 URLs); Filip's Cloudflare 2FA on
+- [x] ~~Passwords changed and 2FA on every account in `specs/09` §2, Filip's GitHub included~~ (no longer tracked, D43); spam-URL list prepared (A2) — spam list done: `docs/sadrzaj/stari-sajt/spam-adrese.md` (143 URLs); Filip's Cloudflare 2FA on
 - [x] Filip creates the Cloudflare account (2FA) and adds Srdjan (D16): 2026-11-04, Srdjan deployed the Worker to it with an account API token (`wrangler whoami` showed Filip's account; M00 report)
 - [x] Call with Gorica: questionnaire answered (course questions skipped), tone chosen (A4, B2); open: 14, 26
 - [x] 2027 horoscope: new edition coming soon (A5)

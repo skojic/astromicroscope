@@ -24,11 +24,11 @@ The `uploadDate` finding of the validators is fixed (2026-11-04, PR #12, evidenc
 - Structured data validation: done for the types that exist (home sr/en, video hub, video pages) on 2026-11-04, see Test evidence; the `uploadDate` finding is fixed and re-checked; open: Article, ProfilePage and page-level Person once those pages exist (Article `datePublished` is also date-only in `jsonld.ts`: check it with the Rich Results Test when M06 builds the first article).
 - Per-page-type OG images beyond the default card.
 - Course, Product, Event JSON-LD.
-- Crawler policy for AI training bots (P03 is open).
+- Crawler policy for AI training bots: decided, allowed (D37); `robots.txt` already allows every crawler and names none.
 
 ## Problems and blockers
 - `robots.txt` names no crawler: `User-agent: *` allows Googlebot, Bingbot and OAI-SearchBot alike. The checklist asks for verified user-agent names; none are listed, so none can be wrong.
-- P03 (AI training crawlers) is undecided.
+- P03 closed by D37 (training crawlers allowed).
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).

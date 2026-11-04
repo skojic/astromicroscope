@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, plan created |
 
 ## Next step
-Not started. Wait for: M02 (the M00 foundation is on `main`; only M00-08 hosting is open). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M06-01.
+Not started. Wait for: M02 (the M00 foundation is on `main`; M00-08 hosting is done). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M06-01.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.

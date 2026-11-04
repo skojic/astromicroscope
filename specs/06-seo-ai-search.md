@@ -30,7 +30,7 @@ Re-check these sources before launch; they change.
 
 ## robots.txt policy
 - Allow: Googlebot, Bingbot, **OAI-SearchBot** (ChatGPT search).
-- **GPTBot** (training) and other AI training crawlers: owner decision P03 in `status/decisions.md`. Default proposal: allow search crawlers, decide training separately.
+- **GPTBot** (training) and other AI training crawlers: **decided (D37): allowed.** `robots.txt` allows every crawler and names none.
 - Before writing robots.txt, confirm each crawler's current user-agent name in its vendor's documentation. Do not copy lists from blogs.
 - An `llms.txt` file is optional. Google says it is not needed; add one only if the decision log records why.
 

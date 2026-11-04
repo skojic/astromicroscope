@@ -10,7 +10,7 @@
 | Last updated | 2026-11-02, Srdjan (prepared with the assistant) |
 
 ## Next step
-Srdjan and Gorica open `brand/index.html` and approve or list changes. If Gorica has the designer's vector logo, replace `brand/logo/` from it and re-export (commands below).
+G4: Srdjan's approval on the preview URL (Gorica chose direction D, rule 7 in `AGENTS.md`). The traced logo in `brand/logo/` is final (D39); the re-export commands below stay for reference.
 
 ## Done
 - Brand kit for direction D: rules page SR/EN (`brand/index.html`), home reference, tokens (`tokens.css`, `tokens.json`), fonts (6 woff2, SIL OFL 1.1), social templates with PNG previews.
@@ -19,7 +19,7 @@ Srdjan and Gorica open `brand/index.html` and approve or list changes. If Gorica
 - Contrast ratios computed with the WCAG formula; gold on white 2.08:1 → decoration only; `#8A6A2A` for gold text (5.03:1 on white).
 
 ## Not done
-- M01-04: designer's vector original (only if it exists).
+- M01-04 closed (D39): no designer's vector original exists or will exist; the traced SVGs are final.
 
 ## Problems and blockers
 - Newsreader fonts ≈ 285 KB for four files (handled in M00).

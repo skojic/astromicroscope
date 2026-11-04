@@ -35,7 +35,7 @@ The premium offer: hub, one page per analysis, request form interface.
 - [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
 
 ## Risks
-Service list decided (D19). Open: sessions per month (questionnaire 14). The prepayment question is closed: no prepayment on the site (D33)
+Service list decided (D19). Sessions per month (questionnaire 14) is dropped, D42. The prepayment question is closed: no prepayment on the site (D33)
 
 
 ## Component specs (moved from `modules/`)

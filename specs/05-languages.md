@@ -25,6 +25,6 @@ For this site: `hreflang="sr"`, `hreflang="en"` and `hreflang="x-default"` point
 
 ## Translation workflow
 - Strings are stored per language; no machine translation at runtime.
-- A native Serbian speaker (Gorica) approves the Serbian text. English is reviewed before release.
+- A native Serbian speaker (Gorica) approves the Serbian text. English is reviewed before release, by the assistant (D40).
 - Grammatical gender: the site addresses the reader with “ti” and avoids gendered forms where possible.
 - A missing translation fails the content gate (`testing/checklists/content.md`).

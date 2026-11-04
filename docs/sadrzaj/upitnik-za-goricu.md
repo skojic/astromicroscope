@@ -32,7 +32,7 @@ Odgovori Gorice od 2026-11-02 (razgovor sa Filipom). Odgovori su preneti u fajlo
 | Karmička analiza | 10.000 | 85 |
 | Astrološke konsultacije | 6.000 | 50 |
 
-14. **Broj analiza mesečno?** → **Otvoreno** (nema konačan odgovor).
+14. **Broj analiza mesečno?** → **Odbačeno** (Srđan, D42): stranica ne prikazuje broj.
 15. **Kako izgleda analiza?** → Natalna do 90 minuta; solarna, karmička i konsultacije do 60 minuta. Uglavnom **telefonom**.
 16. **Zakazivanje i plaćanje?** → Termin se rezerviše **uplatom unapred**.
 17. **Utisci klijenata sa Instagrama?** → **Ne.**
@@ -48,7 +48,7 @@ Odgovori Gorice od 2026-11-02 (razgovor sa Filipom). Odgovori su preneti u fajlo
 23. **Rok za odgovor** → **Tri dana.**
 24. **Druge mreže?** → **Ne.**
 25. **Preduzetnik (naziv, PIB)?** → **Ne još.** Uticaj: uplata unapred za analize, računi i uslovi korišćenja (`plan/challenge.md` A9).
-26. **AI alati smeju da uče iz tekstova (P03)?** → **Otvoreno.**
+26. **AI alati smeju da uče iz tekstova (P03)?** → **Da** (odluka Srđana, D37; Gorica nije pitana).
 
 ## Dodatno od Gorice
 - Citat za englesku verziju: “When an inner situation is not made conscious, it happens outside, as fate.” (C. G. Jung)

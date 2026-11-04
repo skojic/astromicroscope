@@ -14,5 +14,5 @@ Run per template, in both languages. Record the date and the result in `status/l
 - [ ] Forms: visible labels, errors in text and announced, no redundant entry (3.3.7)
 - [ ] Reduced motion: all animation stops; nothing flashes
 - [ ] Zoom to 200% and width 320 px: no loss of content, no horizontal scrolling
-- [ ] Screen reader pass: VoiceOver (macOS, iOS); NVDA if available
+- [ ] Screen reader pass: VoiceOver (macOS, iOS); NVDA if available (optional, not a gate: D38)
 - [ ] Help and contact in the same place on every page (3.2.6)
