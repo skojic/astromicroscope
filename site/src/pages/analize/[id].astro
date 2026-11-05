@@ -1,0 +1,54 @@
+---
+// M09-02: one page per analysis (`/analize/<id>/`): summary, includes, needs, duration, format, price, request CTA.
+import Page from '../../layouts/Page.astro';
+import { t } from '../../i18n/core';
+import { analysesStrings } from '../../i18n/analyses';
+import { analyses } from '../../data/analyses';
+
+export function getStaticPaths() {
+  const lang = 'sr';
+  return analyses.map((a) => ({ params: { id: a.id }, props: { id: a.id, lang } }));
+}
+const { id, lang } = Astro.props;
+const a = analyses.find((x) => x.id === id);
+if (!a) throw new Error(`Missing analysis: ${id}`);
+const title = a.name.sr;
+const description = a.summary.sr.slice(0, 120);
+const url = `/analize/${id}/`;
+const priceEur = a.priceEur ? `${a.priceEur} €` : '';
+const priceRsd = a.price !== null ? a.price.toLocaleString('sr-Latn') : '';
+---
+<Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }, { name: a.name.sr, url }]}>
+  <article class="analysis">
+    <div class="container">
+      <header>
+        <h1>{a.name.sr}</h1>
+        <p class="price">{t(analysesStrings, 'priceLabel', lang)}: {priceRsd} RSD · {priceEur}</p>
+        <p class="summary">{a.summary.sr}</p>
+      </header>
+
+      <dl class="facts">
+        <div class="fact"><dt>{t(analysesStrings, 'includesLabel', lang)}</dt><dd><ul>{a.includes.sr.map((i) => <li>{i}</li>)}</ul></dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'durationLabel', lang)}</dt><dd>{a.duration?.sr ?? '—'}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'needsLabel', lang)}</dt><dd>{a.needs.sr}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'formatLabel', lang)}</dt><dd>{a.format.sr}</dd></div>
+      </dl>
+
+      <p><a class="btn" href="mailto:astromicroscope@gmail.com">{t(analysesStrings, 'requestBtn', lang)}</a></p>
+      <p class="note">Forma za zahtev stiže u M12; do tada, e-pošta na astromicroscope@gmail.com.</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .analysis { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); }
+  .price { margin: 0 0 var(--am-space-4); font-weight: 700; }
+  .summary { margin: 0 0 var(--am-space-6); max-width: 64ch; line-height: 1.75; }
+  .facts { margin: 0 0 var(--am-space-6); display: grid; gap: var(--am-space-4); }
+  .fact dt { font-weight: 700; margin-bottom: var(--am-space-1); }
+  .fact dd { margin: 0; line-height: 1.6; }
+  .fact ul { margin: 0; padding-left: var(--am-space-4); }
+  .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
+  .btn:hover { background: var(--am-action-hover); }
+  .note { margin-top: var(--am-space-4); color: var(--am-muted); font-size: .9rem; }
+</style>
