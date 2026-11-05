@@ -2,37 +2,46 @@
 
 | | |
 |---|---|
-| Stage | idea |
+| Stage | building |
 | Last gate passed | none |
-| Owner | Filip |
-| Branch | `feature/m08-education` (not created yet) |
+| Owner | Srdjan (reallocated 2026-11-05; built to add content) |
+| Branch | (see log commit) |
 | Last commit | — |
-| Last updated | 2026-11-02, plan created |
+| Last updated | 2026-11-05 |
 
 ## Next step
-Not started. Wait for: nothing to start (the M00 foundation is on `main`; questionnaire 8–10 are postponed to 2027, D14). M08-03, the waitlist button, needs the M12 form to send (P02b). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M08-01.
+M08-01..M08-03 built for SR. Remaining: gates G1–G4, English mirrors (M14). M08-03 waitlist CTA currently links to email; wiring it to the M12 form is the real send once M12-03 (DNS) is live.
 
 ## Done
-- Item, with evidence: the command run and the result line, or a PR link.
+- 2026-11-05, M08-01 home section `sections/learn/HomeSection.astro` (free formats + 2027 waitlist CTA), auto-picked by M05.
+- 2026-11-05, M08-02 education hub `/edukacija/` (free learning cards → /tekstovi/, /video/, /horoskop/; waitlist section).
+- 2026-11-05, M08-03 waitlist CTA (clear "courses in 2027" text; mailto for now, M12 form later).
+- 2026-11-05, i18n `learn.{json,ts}`.
+- Evidence: `npm run build` 47 pages (was 41; + /edukacija/), content in dist; `npm test` 37 pass; `check-docs` 0 problems.
 
 ## Not done
-- Item (task ID from PLAN.md).
+- Tie waitlist CTA to the M12 form (M12-03 DNS-blocked).
+- English mirror (M14).
+- Gates G1–G4 not yet run.
 
 ## Problems and blockers
-- **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: the course waitlist. Proposal: a separate group in Gorica's MailerLite account (D21), so waitlist and newsletter stay apart. Inputs still list questionnaire 8–10; those are postponed to 2027 (D14).
+- Real waitlist send waits on M12 (DNS move).
 
 ## Decisions taken in this module
-- 2026-11-04 (Filip): MailerLite groups on Gorica's account (D21, D44). Newsletter: existing group „Astro Microscope”, id `196782570813261481`. Course waitlist: new group „Lista čekanja – kursevi”, id `203228920135288545`. Group ids are not secret; the API key (`astromicroscope-sajt`, all IPs allowed) was created the same day and handed to Srdjan outside the repository, for the Worker secret `MAILERLITE_API_KEY` (D44).
-- 2026-11-03 (Srdjan, PR #5): waitlist is a separate MailerLite group; Srdjan builds the form and double opt-in in M12; M08 only the call to action, with a clear sign-up text; the privacy page (M10-05) mentions both lists.
+- (kept from earlier) 2026-11-03/04 waitlist group + separate MailerLite group.
 
 ## Requests to other modules
-- To MNN: what is needed and why.
+- M12: the waitlist form send (currently mailto fallback).
 
 ## Test evidence
 | Check | Result | Date |
 |---|---|---|
+| `npm run build` | 47 page(s) built (+, /edukacija/) | 2026-11-05 |
+| `npm test` | pass 37, fail 0 | 2026-11-05 |
+| `check-docs` | 0 problems | 2026-11-05 |
 
 ## History
-- 2026-11-04: MailerLite waitlist group created; group ids recorded.
-- 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
+- 2026-11-05: M08-01..03 built (SR) by Srdjan.
+- 2026-11-04: MailerLite waitlist group created.
+- 2026-11-03: plan read by Filip.
 - 2026-11-02: plan created.

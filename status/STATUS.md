@@ -34,8 +34,8 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Srdjan (reallocated 2026-11-05) | building | — (SR article template + hub + home section built; en mirrors M14) | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | building | — (SR hub + wheel + sign pages built 2026-11-05; en mirrors M14) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
-| M08 Education (free learning + waitlist) | Filip | idea | — (waitlist button sends via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
-| M09 Private analyses | Filip | idea | — | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
+| M08 Education (free learning + waitlist) | Srdjan (reallocated 2026-11-05) | building | — (SR hub + home section built; waitlist send via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
+| M09 Private analyses | Srdjan (reallocated 2026-11-05) | building | — (SR hub + 4 analysis pages built; form send via M12) | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Srdjan (reallocated 2026-11-05) | building | — (M10-01..04 built; M10-05 out of scope by D33) | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | building | DNS on Cloudflare for contact mail (M13); consent wording at the forms approved (D44) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
