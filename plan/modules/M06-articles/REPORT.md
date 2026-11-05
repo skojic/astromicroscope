@@ -2,35 +2,49 @@
 
 | | |
 |---|---|
-| Stage | idea |
+| Stage | building |
 | Last gate passed | none |
-| Owner | Filip |
-| Branch | `feature/m06-articles` (not created yet) |
+| Owner | Srdjan (reallocated 2026-11-05; built to add content, not waiting on the original split) |
+| Branch | (see log commit) |
 | Last commit | — |
-| Last updated | 2026-11-02, plan created |
+| Last updated | 2026-11-05 |
 
 ## Next step
-Not started. Wait for: M02 (the M00 foundation is on `main`; M00-08 hosting is done). Then read `PLAN.md` and `plan/contracts.md`, create the branch, and start with task M06-01.
+M06-01 (article template), M06-03 (hub), M06-04 (home section), M06-05 (Article JSON-LD) built for SR. Remaining: M06-02 TransitTimeline (optional — transit data in frontmatter, body narrates it), English mirrors (M14), per-topic hub pages (part of M06-03; one combined hub now), and gates G1–G4.
 
 ## Done
-- Item, with evidence: the command run and the result line, or a PR link.
+- 2026-11-05, M06-01 article template `/tekstovi/<slug>/` (7 pages via `getStaticPaths`): answer-box first, published/updated dates, topics in data, reading column ~64 chars, body ~1.1875rem, reuses M10 `AuthorBox`.
+- 2026-11-05, M06-03 hub `/tekstovi/` listing all 7 articles newest first.
+- 2026-11-05, M06-04 home section `sections/articles/HomeSection.astro` (one featured + three), auto-picked by M05.
+- 2026-11-05, M06-05 Article JSON-LD (`article()`, + Person/ProfilePage) on each article page.
+- 2026-11-05, i18n `articles.{json,ts}`.
+- Evidence: `npm run build` 41 pages (was 33; 7 article routes + hub); real article content in dist; `npm test` 37 pass; `check-docs` 0 problems.
 
 ## Not done
-- Item (task ID from PLAN.md).
+- M06-02 TransitTimeline component (optional; data present in frontmatter).
+- Per-topic hub pages (part of M06-03) — one combined hub now; topic pages deferred.
+- English mirrors (M14).
+- Gates G1–G4 not yet run.
 
 ## Problems and blockers
-- Question (Gorica): the 4,095-word article on the rising sign (B3). Split into two or three articles, or keep it as one long read with a table of contents?
+- Long article may need splitting (B3, 4,095 words) — currently rendered whole.
+- Content `draft: true` (M02) + no en pairs → production build still gated.
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
 
 ## Requests to other modules
-- To MNN: what is needed and why.
+- To M14: English article + hub mirror.
+- M07: a shared TransitTimeline would service both — currently unused.
 
 ## Test evidence
 | Check | Result | Date |
 |---|---|---|
+| `npm run build` | 41 page(s) built (7 article routes + hub + rest) | 2026-11-05 |
+| `npm test` | pass 37, fail 0 | 2026-11-05 |
+| `check-docs` | 0 problems | 2026-11-05 |
 
 ## History
+- 2026-11-05: M06-01..05 built (SR) by Srdjan.
 - 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.

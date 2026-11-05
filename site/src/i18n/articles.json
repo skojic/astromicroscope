@@ -1,0 +1,18 @@
+{
+  "hubTitle": { "sr": "Astrološki tekstovi", "en": "Articles on astrology" },
+  "hubIntro": { "sr": "Članci Gorice Vićentijević o tranzitima, znakovima, podznacima, finansijama, porodici i dečjoj astrologiji.", "en": "Articles by Gorica Vićentijević on transits, signs, rising signs, finances, family and children's astrology." },
+  "publishedOn": { "sr": "Objavljeno", "en": "Published" },
+  "updatedOn": { "sr": "Ažurirano", "en": "Updated" },
+  "readArticle": { "sr": "Pročitaj članak", "en": "Read article" },
+  "latestTitle": { "sr": "Najnoviji tekstovi", "en": "Latest articles" },
+  "allArticles": { "sr": "Svi tekstovi", "en": "See all articles" },
+  "topicsLabel": { "sr": "Teme", "en": "Topics" },
+  "transits": { "sr": "Tranziti", "en": "Transits" },
+  "signs": { "sr": "Znaci", "en": "Signs" },
+  "rising-sign": { "sr": "Podznak", "en": "Rising sign" },
+  "finances": { "sr": "Finansije", "en": "Finances" },
+  "karmic": { "sr": "Karmičko", "en": "Karmic" },
+  "children": { "sr": "Dečja astrologija", "en": "Children's astrology" },
+  "eclipses": { "sr": "Pomračenja", "en": "Eclipses" },
+  "method": { "sr": "Metod", "en": "Method" }
+}
