@@ -2,12 +2,12 @@
 id: SPEC-03
 title: Tech stack
 status: partly decided
-updated: 2026-11-02
+updated: 2026-11-05
 ---
 
 # Tech stack
 
-No decisions yet. This file lists what must be decided and the criteria that follow from `specs/06`–`08`.
+Framework, hosting, CMS, newsletter and analytics are decided (D09, D14, D16, D44, D47); payments stay open for iteration 2 (D14). This file lists the decisions and the criteria that follow from `specs/06`–`08`.
 
 ## Criteria
 1. **HTML is ready on the server.** Pages are static or server-rendered, so search engines and AI crawlers read the full content without running JavaScript.
@@ -25,7 +25,7 @@ No decisions yet. This file lists what must be decided and the criteria that fol
 | Hosting / CDN | **Decided (D16): Filip's Cloudflare account, Workers with static assets** (Pages is now part of Workers) | DNS must move to Cloudflare for the custom domain |
 | Course delivery | **Iteration 2 (D14)**: separate React platform or part of the site | `plan/iteration-2.md` |
 | Payments | to be decided | Serbia: invoices, currency, VAT questions |
-| Newsletter | to be decided | double opt-in, GDPR/ZZPL consent |
-| Analytics | privacy-friendly, cookieless if possible | avoid a cookie banner if the law allows |
+| Newsletter | **Decided (D44): MailerLite** on Gorica's account; double opt-in implemented by the site (D47); the waitlist in its own group | GDPR/ZZPL consent wording at the forms still needs approval (D44) |
+| Analytics | **Decided (D44): Cloudflare Web Analytics** (free, cookieless, production build only) | no cookie banner needed; the build check must confirm no cookie and no local storage (D44) |
 
 Do not use any library API before confirming it exists in the installed version.

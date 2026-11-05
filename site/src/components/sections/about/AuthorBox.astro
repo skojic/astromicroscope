@@ -1,0 +1,43 @@
+---
+// AuthorBox (M10-02): the author card shared by articles (M06) and horoscope (M07) — plan/contracts.md section 5.
+// Uses the portrait, the D20 credential, and is keyed by `lang`. It renders no JSON-LD itself; the page owning it passes
+// the Person/ProfilePage via `jsonLd` (M04 builds from `person()` / `profilePage()`).
+import { Image } from 'astro:assets';
+import { t, type Lang } from '../../../i18n/core';
+import { aboutStrings } from '../../../i18n/about';
+import portrait from '../../../assets/gorica-portret.jpg';
+
+interface Props {
+  lang: Lang;
+  /** Heading level for the author name (h2 on a standalone page, h3 on an article). */
+  headingLevel?: 'h2' | 'h3';
+}
+const { lang, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+const name = lang === 'sr' ? 'Gorica Vićentijević' : 'Gorica Vićentijević';
+---
+<div class="author">
+  <div class="portrait">
+    <Image src={portrait} alt={t(aboutStrings, 'authorBoxAlt', lang)} width={360} aspectRatio="2/3" fit="cover" loading="lazy" />
+  </div>
+  <div class="meta">
+    <Heading class="name">{name}</Heading>
+    <p class="credential">{t(aboutStrings, 'credential', lang)}</p>
+    <p class="socials">
+      <a href="https://www.instagram.com/astromicroscope/" rel="noopener">Instagram</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://www.youtube.com/@astromicroscope" rel="noopener">YouTube</a>
+    </p>
+  </div>
+</div>
+<style>
+  .author { display: flex; gap: var(--am-space-5); align-items: flex-start; padding: var(--am-space-6) 0; }
+  .portrait { flex: 0 0 120px; }
+  .portrait :global(img) { width: 120px; height: 180px; object-fit: cover; border-radius: var(--am-radius); }
+  .meta { flex: 1; }
+  .name { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
+  .credential { margin: 0 0 var(--am-space-3); color: var(--am-muted); }
+  .socials { margin: 0; }
+  .socials a { color: var(--am-action); }
+  @media (max-width: 767px) { .author { flex-direction: column; } }
+</style>
