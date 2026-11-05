@@ -1,0 +1,14 @@
+{
+  "hubTitle": { "sr": "Individualne analize", "en": "Private analyses" },
+  "hubIntro": { "sr": "Radi sa mnom, jedan na jedan.", "en": "Work with me, one to one." },
+  "hubBody": { "sr": "Za tebe ako želiš ličnu analizu i odgovara ti moj pristup astrologiji. Razgovor se održava telefonom, a termin se rezerviše uplatom unapred.", "en": "For you if you want a personal analysis and my approach to astrology suits you. Sessions are held by phone and booked with payment in advance." },
+  "requestBtn": { "sr": "Zatraži analizu", "en": "Request an analysis" },
+  "durationLabel": { "sr": "Trajanje", "en": "Duration" },
+  "priceLabel": { "sr": "Cena", "en": "Price" },
+  "priceBoth": { "sr": "{rsd} RSD · {eur} €", "en": "{rsd} RSD · {eur} €" },
+  "includesLabel": { "sr": "Šta obuhvata", "en": "What it covers" },
+  "needsLabel": { "sr": "Šta je potrebno", "en": "What is needed" },
+  "formatLabel": { "sr": "Format", "en": "Format" },
+  "sleepReadAnalyze": { "sr": "Pročitaj više", "en": "Read more" },
+  "readAnalysis": { "sr": "Saznaj više o analizi", "en": "Learn more about the analysis" }
+}
