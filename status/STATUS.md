@@ -32,7 +32,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M03 Site shell | Srdjan | done | — | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
-| M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
+| M06 Articles | Srdjan (reallocated 2026-11-05) | building | — (SR article template + hub + home section built; en mirrors M14) | [REPORT](../plan/modules/M06-articles/REPORT.md) |
 | M07 Yearly horoscope | Srdjan | building | — (SR hub + wheel + sign pages built 2026-11-05; en mirrors M14) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
 | M08 Education (free learning + waitlist) | Filip | idea | — (waitlist button sends via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Filip | idea | — | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
