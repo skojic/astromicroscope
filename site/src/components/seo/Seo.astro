@@ -23,7 +23,9 @@ const { lang, title, description, translationKey, paths, breadcrumbs, jsonLd, im
 const site = (Astro.site ?? new URL('https://astromicroscope.com')).origin;
 const canonical = new URL(Astro.url.pathname, site).href;
 const pair = alternates(translationKey, paths);
-const hreflang = translationKey === '404' ? {} : pair;
+// A single-language page still declares its own language + x-default (both to itself) so it is a valid hreflang
+// target; the English pair appears only when it actually exists (M14). 404 pages carry no hreflang.
+const hreflang: Partial<Paths> = translationKey === '404' ? {} : { [lang]: Astro.url.pathname, 'x-default': Astro.url.pathname, ...pair };
 const ogImage = abs(image ?? `/og/default-${lang}.png`, site);
 const ogLocale = { sr: 'sr_RS', en: 'en_US' } as const;
 const other: Lang = lang === 'sr' ? 'en' : 'sr';
@@ -34,7 +36,6 @@ const data = graph(lang, extra, breadcrumbs, site);
 {hide && <meta name="robots" content="noindex" data-page-noindex={noindex ? "" : undefined} />}
 <link rel="canonical" href={canonical} />
 {Object.entries(hreflang).map(([code, path]) => <link rel="alternate" hreflang={code} href={abs(path, site)} />)}
-{hreflang.sr && <link rel="alternate" hreflang="x-default" href={abs(hreflang.sr, site)} />}
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content="Astromicroscope" />
 <meta property="og:title" content={title} />
