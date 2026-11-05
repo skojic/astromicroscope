@@ -1,0 +1,14 @@
+{
+  "title": { "sr": "O meni · Astromicroscope", "en": "About · Astromicroscope" },
+  "oMeniTitle": { "sr": "O meni", "en": "About" },
+  "contactTitle": { "sr": "Kontakt", "en": "Contact" },
+  "homeTitle": { "sr": "O meni — porodica, karmičko, dečja astrologija", "en": "About — natal, karmic, children's astrology" },
+  "homeIntro": { "sr": "Profesionalni astrolog (Institut Johannes Kepler, 2025): natalna, prediktivna i karmička astrologija, sa posebnim fokusom na porodicu i dečju astrologiju.", "en": "A professional astrologer (Johannes Kepler Institute, 2025): natal, predictive and karmic astrology, with a focus on family and children's astrology." },
+  "authorBoxAlt": { "sr": "Fotografija astrologa Gorice Vićentijević", "en": "Portrait of the astrologer Gorica Vićentijević" },
+  "credential": { "sr": "Profesionalni astrolog · Institut Johannes Kepler, 2025", "en": "Professional Astrologer · Johannes Kepler Institute, 2025" },
+  "contactEmail": { "sr": "astromicroscope@gmail.com", "en": "astromicroscope@gmail.com" },
+  "contactIntro": { "sr": "Piši mi na e-adresu, odgovoravam u roku od tri dana.", "en": "Write to me by email — I reply within three days." },
+  "contactEmailLabel": { "sr": "E-adresa", "en": "Email address" },
+  "contactNote": { "sr": "Ne koristim druge društvene mreže.", "en": "I use no other social networks." },
+  "updatedAt": { "sr": "Ažurirano", "en": "Updated" }
+}

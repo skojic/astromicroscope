@@ -1,0 +1,33 @@
+---
+// Home section (M10-03): a short about intro linking to the full About page. M05 imports this with one prop, `lang`
+// (plan/contracts.md section 5).
+import { t, type Lang } from '../../../i18n/core';
+import { aboutStrings } from '../../../i18n/about';
+import { pathFor } from '../../../i18n/routes';
+import AuthorBox from './AuthorBox.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section class="about-section" aria-labelledby="about-title">
+  <div class="container">
+    <h2 id="about-title">{t(aboutStrings, 'homeTitle', lang)}</h2>
+    <div class="grid">
+      <div class="text">
+        <p>{t(aboutStrings, 'homeIntro', lang)}</p>
+        <p><a href={pathFor('about', lang)}>{lang === 'sr' ? 'Više o meni →' : 'More about me →'}</a></p>
+      </div>
+      <div class="author">
+        <AuthorBox lang={lang} headingLevel="h3" />
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .about-section { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  h2 { margin-bottom: var(--am-space-3); }
+  .grid { display: grid; grid-template-columns: 1fr 260px; gap: var(--am-space-6); align-items: start; }
+  .text p { margin: 0 0 var(--am-space-4); line-height: 1.7; }
+  a { color: var(--am-action); }
+  @media (max-width: 767px) { .grid { grid-template-columns: 1fr; } }
+</style>
