@@ -103,12 +103,23 @@ for (const url of urls) {
   if (!d.canonical) fail(url, 'no canonical');
   else if (new URL(d.canonical).pathname !== url) fail(url, `canonical ${d.canonical} is not the page itself`);
 
-  for (const k of ['sr', 'en', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`);
+  // M14 pending: during the build phase a page in only Serbian (no en pair, or an en link to an unbuilt page) is a
+  // pending English work item, not a failure — the strict mode (launch gate, SEO_STRICT=1) still requires full pairs.
+  if (strict) { for (const k of ['sr', 'en', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`); }
+  else {
+    for (const k of ['sr', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`);
+    if (!d.hreflang['en'] && d.hreflang['sr']) pending.set(`en ${url}`, [...(pending.get(`en ${url}`) ?? []), url]);
+  }
   const self = url.startsWith('/en/') ? 'en' : 'sr';
   for (const lang of ['sr', 'en']) {
     if (!d.hreflang[lang]) continue;
     const target = new URL(d.hreflang[lang], origin).pathname;
-    if (!data[target]) { fail(url, `hreflang ${lang} points to ${target}, which is not built`); continue; }
+    if (!data[target]) {
+      // D48-consistent: during the build phase the English mirror exists only after M14. A preview build (not strict)
+      // treats a missing/unbuilt English pair as pending work, not a failure. The strict mode (launch gate) still fails.
+      if (!strict && lang === 'en') { pending.set(target, [...(pending.get(target) ?? []), url]); continue; }
+      fail(url, `hreflang ${lang} points to ${target}, which is not built`); continue;
+    }
     const back = data[target].hreflang[self];
     if (!back || new URL(back, origin).pathname !== url) fail(url, `${target} has no hreflang ${self} link back to this page`);
   }
