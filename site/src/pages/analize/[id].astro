@@ -15,15 +15,12 @@ if (!a) throw new Error(`Missing analysis: ${id}`);
 const title = a.name.sr;
 const description = a.summary.sr.slice(0, 120);
 const url = `/analize/${id}/`;
-const priceEur = a.priceEur ? `${a.priceEur} €` : '';
-const priceRsd = a.price !== null ? a.price.toLocaleString('sr-Latn') : '';
 ---
 <Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }, { name: a.name.sr, url }]}>
   <article class="analysis">
     <div class="container">
       <header>
         <h1>{a.name.sr}</h1>
-        <p class="price">{t(analysesStrings, 'priceLabel', lang)}: {priceRsd} RSD · {priceEur}</p>
         <p class="summary">{a.summary.sr}</p>
       </header>
 
@@ -42,7 +39,6 @@ const priceRsd = a.price !== null ? a.price.toLocaleString('sr-Latn') : '';
 <style>
   .analysis { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
   h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); }
-  .price { margin: 0 0 var(--am-space-4); font-weight: 700; }
   .summary { margin: 0 0 var(--am-space-6); max-width: 64ch; line-height: 1.75; }
   .facts { margin: 0 0 var(--am-space-6); display: grid; gap: var(--am-space-4); }
   .fact dt { font-weight: 700; margin-bottom: var(--am-space-1); }

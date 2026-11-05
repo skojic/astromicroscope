@@ -13,7 +13,7 @@ export interface Analysis {
   format: LocaleText;
   price: number | null;
   priceEur: number | null;
-  currency: 'RSD' | 'EUR';
+  currency: 'RSD' | 'EUR' | null;
 }
 
 export const analyses: Analysis[] = [
@@ -32,8 +32,8 @@ export const analyses: Analysis[] = [
     needs: { sr: 'Datum, tačno vreme i mesto rođenja.', en: 'Date, exact time and place of birth.' },
     duration: { sr: 'do 90 minuta', en: 'up to 90 minutes' },
     format: { sr: 'Razgovor telefonom; termin se rezerviše uplatom unapred.', en: 'Session by phone; booked with payment in advance.' },
-    price: 15000,
-    priceEur: 130,
+    price: null,
+    priceEur: null,
     currency: 'RSD',
   },
   {
@@ -51,8 +51,8 @@ export const analyses: Analysis[] = [
     needs: { sr: 'Datum, tačno vreme i mesto rođenja.', en: 'Date, exact time and place of birth.' },
     duration: { sr: 'do 60 minuta', en: 'up to 60 minutes' },
     format: { sr: 'Razgovor telefonom; termin se rezerviše uplatom unapred.', en: 'Session by phone; booked with payment in advance.' },
-    price: 8000,
-    priceEur: 70,
+    price: null,
+    priceEur: null,
     currency: 'RSD',
   },
   {
@@ -70,8 +70,8 @@ export const analyses: Analysis[] = [
     needs: { sr: 'Datum, tačno vreme i mesto rođenja.', en: 'Date, exact time and place of birth.' },
     duration: { sr: 'do 60 minuta', en: 'up to 60 minutes' },
     format: { sr: 'Razgovor telefonom; termin se rezerviše uplatom unapred.', en: 'Session by phone; booked with payment in advance.' },
-    price: 10000,
-    priceEur: 85,
+    price: null,
+    priceEur: null,
     currency: 'RSD',
   },
   {
@@ -89,8 +89,8 @@ export const analyses: Analysis[] = [
     needs: { sr: 'Datum, tačno vreme i mesto rođenja (za natalnu kartu).', en: 'Date, exact time and place of birth (for the natal chart).' },
     duration: { sr: 'do 60 minuta', en: 'up to 60 minutes' },
     format: { sr: 'Razgovor telefonom; termin se rezerviše uplatom unapred.', en: 'Session by phone; booked with payment in advance.' },
-    price: 6000,
-    priceEur: 50,
+    price: null,
+    priceEur: null,
     currency: 'RSD',
   },
 ].sort((a, b) => a.order - b.order);
