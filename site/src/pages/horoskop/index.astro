@@ -1,0 +1,27 @@
+---
+// M07-03: the horoscope hub (`/horoskop/`): a titled intro + the zodiac wheel linking all 12 signs.
+import Page from '../../layouts/Page.astro';
+import { t } from '../../i18n/core';
+import { horoscopeStrings } from '../../i18n/horoscope';
+import ZodiacWheel from '../../components/sections/horoscope/ZodiacWheel.astro';
+
+const lang = 'sr';
+const year = 2026;
+const title = t(horoscopeStrings, 'hubTitle', lang);
+const description = t(horoscopeStrings, 'hubIntro', lang);
+const url = '/horoskop/';
+---
+<Page lang={lang} title={title} description={description} translationKey="horoscope" breadcrumbs={[{ name: 'Godišnji horoskop', url }]}>
+  <div class="hub">
+    <div class="container">
+      <h1>{title}</h1>
+      <p class="intro">{t(horoscopeStrings, 'listIntro', lang)}</p>
+      <ZodiacWheel lang={lang} year={year} />
+    </div>
+  </div>
+</Page>
+<style>
+  .hub { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
+  .intro { margin: 0 0 var(--am-space-6); max-width: 64ch; }
+</style>

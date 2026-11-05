@@ -1,0 +1,23 @@
+{
+  "hubTitle": { "sr": "Godišnji horoskop 2026", "en": "Yearly Horoscope 2026" },
+  "hubIntro": { "sr": "Izaberi znak i pogledaj šta 2026. godina donosi — ljubav, posao, dom, karijeru.", "en": "Pick a sign and see what 2026 brings — love, work, home, career." },
+  "archiveLabel": { "sr": "Arhiva", "en": "Archive" },
+  "currentYearLabel": { "sr": "Godišnji horoskop", "en": "Yearly horoscope" },
+  "readHoroscope": { "sr": "Pročitaj horoskop", "en": "Read the horoscope" },
+  "ariaSignLinks": { "sr": "Znaci zodijaka", "en": "Zodiac signs" },
+  "listIntro": { "sr": "Godišnji horoskop 2026 za svih 12 znakova.", "en": "Yearly horoscope 2026 for all 12 signs." },
+  "authorBy": { "sr": "Gorica Vićentijević", "en": "Gorica Vićentijević" },
+  "updatedAgo": { "sr": "Horoskop važi za 2026. godinu", "en": "Horoscope for the year 2026" },
+  "aries": { "sr": "Ovan", "en": "Aries" },
+  "taurus": { "sr": "Bik", "en": "Taurus" },
+  "gemini": { "sr": "Blizanci", "en": "Gemini" },
+  "cancer": { "sr": "Rak", "en": "Cancer" },
+  "leo": { "sr": "Lav", "en": "Leo" },
+  "virgo": { "sr": "Devica", "en": "Virgo" },
+  "libra": { "sr": "Vaga", "en": "Libra" },
+  "scorpio": { "sr": "Škorpija", "en": "Scorpio" },
+  "sagittarius": { "sr": "Strelac", "en": "Sagittarius" },
+  "capricorn": { "sr": "Jarac", "en": "Capricorn" },
+  "aquarius": { "sr": "Vodolija", "en": "Aquarius" },
+  "pisces": { "sr": "Ribe", "en": "Pisces" }
+}

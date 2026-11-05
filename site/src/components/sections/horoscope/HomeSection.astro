@@ -1,0 +1,28 @@
+---
+// Home section (M07-04): the yearly horoscope — a link and the zodiac wheel. M05 imports this with one prop, `lang`
+// (plan/contracts.md section 5).
+import { t, type Lang } from '../../../i18n/core';
+import { horoscopeStrings } from '../../../i18n/horoscope';
+import ZodiacWheel from './ZodiacWheel.astro';
+import Button from '../../ui/Button.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const year = 2026;
+---
+<section class="horoscope" aria-labelledby="horoscope-title">
+  <div class="container">
+    <h2 id="horoscope-title">{t(horoscopeStrings, 'hubTitle', lang)}</h2>
+    <p>{t(horoscopeStrings, 'hubIntro', lang)}</p>
+    <ZodiacWheel lang={lang} year={year} headingLevel="h3" />
+    <p class="actions">
+      <Button href={lang === 'sr' ? '/horoskop/' : '/horoskop/'}>{t(horoscopeStrings, 'readHoroscope', lang)}</Button>
+    </p>
+  </div>
+</section>
+<style>
+  .horoscope { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  h2 { margin-bottom: var(--am-space-3); }
+  p { margin-bottom: var(--am-space-6); }
+  .actions { margin-top: var(--am-space-6); }
+</style>
