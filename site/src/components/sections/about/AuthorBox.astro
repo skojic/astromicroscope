@@ -34,9 +34,9 @@ const name = lang === 'sr' ? 'Gorica Vićentijević' : 'Gorica Vićentijević';
   .author { display: flex; gap: var(--am-space-5); align-items: flex-start; padding: var(--am-space-6) 0; }
   .portrait { flex: 0 0 120px; }
   .portrait :global(img) { width: 120px; height: 180px; object-fit: cover; border-radius: var(--am-radius); }
-  .meta { flex: 1; }
-  .name { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
-  .credential { margin: 0 0 var(--am-space-3); color: var(--am-muted); }
+  .meta { flex: 1; min-width: 0; }
+  .name { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); overflow-wrap: anywhere; }
+  .credential { margin: 0 0 var(--am-space-3); color: var(--am-muted); overflow-wrap: anywhere; }
   .socials { margin: 0; }
   .socials a { color: var(--am-action); }
   @media (max-width: 767px) { .author { flex-direction: column; } }
