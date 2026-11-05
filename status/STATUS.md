@@ -33,7 +33,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Filip | idea | M02 | [REPORT](../plan/modules/M06-articles/REPORT.md) |
-| M07 Yearly horoscope | Srdjan | idea | M02 content, M06/M10 components (2026 edition used for now, D41) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
+| M07 Yearly horoscope | Srdjan | building | — (SR hub + wheel + sign pages built 2026-11-05; en mirrors M14) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
 | M08 Education (free learning + waitlist) | Filip | idea | — (waitlist button sends via M12) | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Filip | idea | — | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Srdjan (reallocated 2026-11-05) | building | — (M10-01..04 built; M10-05 out of scope by D33) | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
