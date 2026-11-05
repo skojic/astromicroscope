@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-04 · Branch: `main` (ruleset change and videos-import rework applied; M12-01 scaffold; see D45, D46) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-05 · Branch: `main` (ruleset change and videos-import rework applied; M12-01 scaffold; see D45, D46) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** M00, M01, M03 and M11 are done (G4 approved by Srdjan 2026-11-04). The unfinished site is live only on the temporary address (D36). P02b is decided (D44), so M12 forms can be built. Filip starts M02 content migration, M10 and the M14 glossary, then M06, M08, M09.
