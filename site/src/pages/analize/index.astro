@@ -3,14 +3,11 @@
 import Page from '../../layouts/Page.astro';
 import { t } from '../../i18n/core';
 import { analysesStrings } from '../../i18n/analyses';
-import { analyses, type Analysis } from '../../data/analyses';
+import { analyses } from '../../data/analyses';
 
 const lang = 'sr';
 const title = t(analysesStrings, 'hubTitle', lang);
 const description = t(analysesStrings, 'hubIntro', lang);
-function fmt(a: Analysis): string {
-  return `${a.priceEur ?? ''} €`; // hub shows the EUR price for a clean comparison
-}
 ---
 <Page lang={lang} title={title} description={t(analysesStrings, 'hubBody', lang)} translationKey="analyses" breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }]}>
   <div class="analyses">
@@ -26,7 +23,6 @@ function fmt(a: Analysis): string {
                 <h2>{a.name.sr}</h2>
                 <p class="dur">{a.duration?.sr ?? ''}</p>
               </div>
-              <span class="price">{fmt(a)}</span>
               <span class="arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -45,6 +41,5 @@ function fmt(a: Analysis): string {
   .card:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .card h2 { margin: 0 0 var(--am-space-1); font: var(--am-text-ui); }
   .card .dur { margin: 0; font-size: .9rem; color: var(--am-muted); }
-  .card .price { font-weight: 700; white-space: nowrap; }
   .card .arrow { color: var(--am-action); }
 </style>
