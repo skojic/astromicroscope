@@ -28,7 +28,7 @@ About page and home section, author box, contact page, legal pages.
 | M10-02 | AuthorBox for articles and horoscope |  |
 | M10-03 | Home section |  |
 | M10-04 | Contact page UI | reply within three days; astromicroscope@gmail.com; no other social networks |
-| M10-05 | Legal page shells | privacy page names both MailerLite lists (newsletter, waitlist) and the phone number from the analysis form |
+| ~~M10-05~~ | ~~Legal page shells~~ | removed from scope by D33 (no legal pages on the site for now); the surviving piece — the light consent notice at the forms — belongs to M12 (D44) and waits for approval |
 
 ## Acceptance criteria
 - [ ] Person/ProfilePage data correct (with M04)

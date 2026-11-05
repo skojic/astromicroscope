@@ -1,0 +1,65 @@
+---
+// M06-01/M06-05: the article page (`/tekstovi/<slug>/`). Renders the M02 article markdown with the answer-box first,
+// published/updated dates, topic links, the M10 AuthorBox, and Article JSON-LD (M04). SR-only (en mirror is M14).
+import Page from '../../layouts/Page.astro';
+import { getCollection, render } from 'astro:content';
+import AuthorBox from '../../components/sections/about/AuthorBox.astro';
+import { article, person, profilePage, graph } from '../../components/seo/jsonld';
+import { t, type Lang } from '../../i18n/core';
+import { articleStrings } from '../../i18n/articles';
+
+export async function getStaticPaths() {
+  const items = await getCollection('articles');
+  return items
+    .filter((e) => e.id.startsWith('sr/'))
+    .map((e) => {
+      const slug = e.id.replace('sr/', '');
+      return { params: { slug }, props: { entry: e } };
+    });
+}
+const { entry } = Astro.props;
+const lang: Lang = 'sr';
+const { Content } = await render(entry);
+const { title, description, translationKey, answer, published, updated, topics } = entry.data;
+const slug = entry.id.replace('sr/', '');
+const url = `/tekstovi/${slug}/`;
+const pubStr = published instanceof Date ? published.toISOString().slice(0, 10) : String(published);
+const updStr = updated instanceof Date ? updated.toISOString().slice(0, 10) : String(updated);
+const jsonLd = graph(lang, [
+  article({ headline: title, url, published: pubStr, updated: updStr, lang, description }),
+  person(lang),
+  profilePage(lang, url),
+]);
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }, { name: title, url }]} jsonLd={jsonLd}>
+  <article class="article">
+    <div class="container">
+      <header class="meta">
+        <h1>{title}</h1>
+        <p class="byline">
+          <span>{t(articleStrings, 'publishedOn', lang)}: {pubStr}</span>
+          {updated && updStr !== pubStr && <><span> · {t(articleStrings, 'updatedOn', lang)}: {updStr}</span></>}
+        </p>
+        <p class="answer">{answer}</p>
+      </header>
+      <div class="body">
+        <Content />
+      </div>
+      <AuthorBox lang={lang} headingLevel="h3" />
+    </div>
+  </article>
+</Page>
+<style>
+  .article { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  .meta { margin-bottom: var(--am-space-7); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); }
+  .byline { margin: 0 0 var(--am-space-4); color: var(--am-muted); font-size: .95rem; }
+  .answer { font-size: 1.125rem; font-weight: 500; max-width: 64ch; padding: var(--am-space-4); background: var(--am-bg-subtle, #f4f1ea); border-left: 3px solid var(--am-action); }
+  .body { max-width: 64ch; }
+  .body :global(p) { line-height: 1.75; font-size: 1.1875rem; }
+  .body :global(h2) { margin-top: var(--am-space-7); }
+  .body :global(h3) { margin-top: var(--am-space-6); }
+  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
+  .body :global(a) { color: var(--am-action); }
+  .body :global(p), .body :global(li) { max-width: 64ch; }
+</style>

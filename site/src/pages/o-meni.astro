@@ -1,0 +1,38 @@
+---
+// M10-01: the About page (`/o-meni/`, `/en/about/`). Renders the `o-meni.md` page content and the AuthorBox,
+// with Person + ProfilePage JSON-LD (M04).
+import Page from '../layouts/Page.astro';
+import { getCollection, render } from 'astro:content';
+import AuthorBox from '../components/sections/about/AuthorBox.astro';
+import { person, profilePage, graph } from '../components/seo/jsonld';
+
+const lang = 'sr';
+const entry = (await getCollection('pages')).find((e) => e.id === 'sr/o-meni');
+if (!entry) throw new Error('Missing content page: pages/sr/o-meni.md (run M02)');
+const { Content } = await render(entry);
+const { title, description, translationKey } = entry.data;
+const url = '/o-meni/';
+const jsonLd = graph(lang, [person(lang), profilePage(lang, url)]);
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'O meni', url }]} jsonLd={jsonLd}>
+  <article class="about">
+    <header class="hero">
+      <div class="container">
+        <h1>{title.replace(/ · .*/, '')}</h1>
+        <AuthorBox lang={lang} />
+      </div>
+    </header>
+    <div class="container body">
+      <Content />
+    </div>
+  </article>
+</Page>
+<style>
+  .about { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  .hero { margin-bottom: var(--am-space-7); }
+  h1 { margin: 0 0 var(--am-space-6); font: var(--am-text-display); }
+  .body :global(h2) { margin-top: var(--am-space-7); }
+  .body :global(p) { max-width: 64ch; line-height: 1.7; }
+  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
+  .body :global(a) { color: var(--am-action); }
+</style>

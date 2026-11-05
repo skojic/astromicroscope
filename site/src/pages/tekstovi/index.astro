@@ -1,0 +1,52 @@
+---
+// M06-03: the articles hub (`/tekstovi/`) listing all articles, newest first.
+import Page from '../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang } from '../../i18n/core';
+import { articleStrings } from '../../i18n/articles';
+
+const lang: Lang = 'sr';
+const items = (await getCollection('articles'))
+  .filter((e) => e.id.startsWith('sr/'))
+  .sort((a, b) => {
+    const av = a.data.published instanceof Date ? a.data.published.getTime() : new Date(String(a.data.published)).getTime();
+    const bv = b.data.published instanceof Date ? b.data.published.getTime() : new Date(String(b.data.published)).getTime();
+    return bv - av;
+  });
+const title = t(articleStrings, 'hubTitle', lang);
+const description = t(articleStrings, 'hubIntro', lang);
+---
+<Page lang={lang} title={title} description={description} translationKey="articles" breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }]}>
+  <div class="hub">
+    <div class="container">
+      <h1>{title}</h1>
+      <p class="intro">{description}</p>
+      <ul class="list">
+        {items.map((item) => {
+          const slug = item.id.replace('sr/', '');
+          const pub = item.data.published instanceof Date ? item.data.published.toISOString().slice(0, 10) : String(item.data.published);
+          return (
+            <li>
+              <a class="card" href={`/tekstovi/${slug}/`}>
+                <h2>{item.data.title}</h2>
+                <p class="desc">{item.data.description}</p>
+                <p class="meta">{t(articleStrings, 'publishedOn', lang)}: {pub}</p>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </div>
+</Page>
+<style>
+  .hub { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
+  .intro { margin: 0 0 var(--am-space-6); max-width: 64ch; }
+  .list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--am-space-4); }
+  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius); border: 1px solid var(--am-line, #d3d8df); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
+  .card:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .card h2 { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
+  .card .desc { margin: 0 0 var(--am-space-2); line-height: 1.6; }
+  .card .meta { margin: 0; font-size: .9rem; color: var(--am-muted); }
+</style>

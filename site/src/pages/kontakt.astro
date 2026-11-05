@@ -1,0 +1,37 @@
+---
+// M10-04: the Contact page (`/kontakt/`, `/en/contact/`). Contact info per D21: astromicroscope@gmail.com, no other
+// social networks. The contact form itself is M12; this page is the static contact info + email link.
+import Page from '../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../i18n/core';
+import { aboutStrings } from '../i18n/about';
+
+const lang = 'sr';
+const entry = (await getCollection('pages')).find((e) => e.id === 'sr/kontakt');
+if (!entry) throw new Error('Missing content page: pages/sr/kontakt.md (run M02)');
+const { title, description, translationKey } = entry.data;
+const email = t(aboutStrings, 'contactEmail', lang);
+const url = '/kontakt/';
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Kontakt', url }]}>
+  <article class="contact">
+    <div class="container">
+      <h1>{title.replace(/ · .*/, '')}</h1>
+      <p class="intro">{t(aboutStrings, 'contactIntro', lang)}</p>
+      <p class="email-row">
+        <span class="label">{t(aboutStrings, 'contactEmailLabel', lang)}:</span>
+        <a class="email" href={`mailto:${email}`}>{email}</a>
+      </p>
+      <p class="note">{t(aboutStrings, 'contactNote', lang)}</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .contact { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
+  .intro { margin: 0 0 var(--am-space-6); font-size: 1.125rem; }
+  .email-row { margin: 0 0 var(--am-space-4); }
+  .label { font-weight: 600; }
+  .email { color: var(--am-action); text-decoration: underline; }
+  .note { color: var(--am-muted); }
+</style>
