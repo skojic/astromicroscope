@@ -28,11 +28,12 @@ const jsonLd = graph(lang, [person(lang), profilePage(lang, url)]);
   </article>
 </Page>
 <style>
-  .about { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  .about { padding: var(--am-space-8) 0 var(--am-space-8); }
   .hero { margin-bottom: var(--am-space-7); }
-  h1 { margin: 0 0 var(--am-space-6); font: var(--am-text-display); }
-  .body :global(h2) { margin-top: var(--am-space-7); }
-  .body :global(p) { max-width: 64ch; line-height: 1.7; }
-  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
+  .hero .container, .body { margin-inline: auto; } /* keep centered, content below caps width */
+  h1 { margin: 0 0 var(--am-space-5); font: var(--am-text-display); max-width: var(--am-measure); }
+  .body :global(h2) { margin-top: var(--am-space-6); }
+  .body :global(p) { max-width: var(--am-measure); line-height: 1.7; }
+  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; max-width: var(--am-measure); }
   .body :global(a) { color: var(--am-action); }
 </style>

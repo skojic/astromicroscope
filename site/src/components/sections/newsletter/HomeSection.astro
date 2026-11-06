@@ -103,21 +103,21 @@ const messages = JSON.stringify({
 </script>
 
 <style>
-  .newsletter { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  .newsletter { padding: var(--am-space-8) 0; background: var(--am-bg); }
   h2 { margin-bottom: var(--am-space-3); }
   p { margin-bottom: var(--am-space-5); }
   .newsletter-form { display: flex; flex-wrap: wrap; gap: var(--am-space-3); align-items: center; }
   input[type='email'] {
-    flex: 1 1 220px; font: var(--am-text-body); padding: 13px 18px;
+    flex: 1 1 220px; font: var(--am-text-body); padding: 14px 20px; height: 52px; box-sizing: border-box;
     border-radius: var(--am-radius-pill); border: 1px solid var(--am-line, #cfd4dc); background: var(--am-white);
   }
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
-    font: var(--am-text-ui); cursor: pointer; border: 0; padding: 15px 22px;
+    font: var(--am-text-ui); cursor: pointer; border: 0; height: 52px; padding: 0 26px;
     border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white);
   }
   .btn:hover { background: var(--am-action-hover); }
-  .consent { font: var(--am-text-small, var(--am-text-body)); color: var(--am-muted, #5b6270); flex-basis: 100%; margin: 0; }
+  .consent { font: var(--am-text-small, var(--am-text-body)); line-height: 1.45; color: var(--am-muted, #5b6270); flex-basis: 100%; margin: 0; padding-left: 2px; }
   .status { min-height: 1.5em; }
   .visually-hidden {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;

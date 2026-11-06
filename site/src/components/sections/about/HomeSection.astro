@@ -24,10 +24,12 @@ const { lang } = Astro.props;
   </div>
 </section>
 <style>
-  .about-section { padding: var(--am-space-9) 0; background: var(--am-bg); }
+  .about-section { padding: var(--am-space-8) 0; background: var(--am-bg); }
   h2 { margin-bottom: var(--am-space-3); }
-  .grid { display: grid; grid-template-columns: 1fr 260px; gap: var(--am-space-6); align-items: start; }
+  .grid { display: grid; grid-template-columns: 1fr 280px; gap: var(--am-space-7); align-items: start; }
   .text p { margin: 0 0 var(--am-space-4); line-height: 1.7; }
   a { color: var(--am-action); }
+  /* Align the author block's first line with the text column: drop its top padding in this context. */
+  .author :global(.author) { padding-top: 0; }
   @media (max-width: 767px) { .grid { grid-template-columns: 1fr; } }
 </style>

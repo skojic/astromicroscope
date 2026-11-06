@@ -31,13 +31,13 @@ const name = lang === 'sr' ? 'Gorica Vićentijević' : 'Gorica Vićentijević';
   </div>
 </div>
 <style>
-  .author { display: flex; gap: var(--am-space-5); align-items: flex-start; padding: var(--am-space-6) 0; }
-  .portrait { flex: 0 0 120px; }
-  .portrait :global(img) { width: 120px; height: 180px; object-fit: cover; border-radius: var(--am-radius); }
-  .meta { flex: 1; min-width: 0; }
-  .name { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); overflow-wrap: anywhere; }
-  .credential { margin: 0 0 var(--am-space-3); color: var(--am-muted); overflow-wrap: anywhere; }
-  .socials { margin: 0; }
+  .author { display: flex; gap: var(--am-space-5); align-items: center; padding: var(--am-space-5) 0; }
+  .portrait { flex: 0 0 110px; }
+  .portrait :global(img) { width: 110px; height: 165px; object-fit: cover; border-radius: var(--am-radius); display: block; }
+  .meta { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+  .name { margin: 0 0 var(--am-space-1); font: var(--am-text-h3); overflow-wrap: anywhere; }
+  .credential { margin: 0 0 var(--am-space-2); color: var(--am-muted); overflow-wrap: anywhere; }
+  .socials { margin: 0; display: flex; gap: var(--am-space-2); align-items: baseline; }
   .socials a { color: var(--am-action); }
-  @media (max-width: 767px) { .author { flex-direction: column; } }
+  @media (max-width: 767px) { .author { flex-direction: row; align-items: center; } }
 </style>
