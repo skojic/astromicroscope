@@ -12,7 +12,6 @@ transits:
     from: 2026-02-14
     to: 2028-04-13
 ephemerisChecked: true
-draft: true
 ---
 
 ## The energy of the year

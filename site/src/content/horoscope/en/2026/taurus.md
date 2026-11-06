@@ -24,7 +24,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 Since 2018, when Uranus entered Taurus, briefly went back into Aries and then re-entered Taurus in 2019, people born under this sign have been in a long process of inner and outer change. Uranus has set many Taurus natives in motion, moved them out of their comfort zone and confronted them with the need to be more independent, more honest with themselves and ready for life-changing change.

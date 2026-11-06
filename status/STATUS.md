@@ -28,7 +28,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | done | — | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | done | — | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | building | English pairs (M14) for G1; PR to `main`. Done: all tasks M02-01 to M02-06 (7 articles, 12 signs of 2026, 3 pages) | [REPORT](../plan/modules/M02-content-migration/REPORT.md) |
+| M02 Content migration | Filip | building | G1 after PR #39 (English pairs, drafts removed 2026-11-06, Gorica approved). Done: all tasks M02-01 to M02-06 (7 articles, 12 signs of 2026, 3 pages) |
 | M03 Site shell | Srdjan | done | — | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | Article/ProfilePage validation (pages not built), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | sections of M06–M10, M12 | [REPORT](../plan/modules/M05-home/REPORT.md) |
@@ -40,7 +40,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | building | DNS on Cloudflare for contact mail (M13); consent wording at the forms approved (D44) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | idea | all, domain (A1) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
-| M14 English translation | Filip | building | English `/en/` routes for M06–M10. Done: glossary, all 22 content files in English (draft until Gorica approves), local | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+| M14 English translation | Filip | building | English `/en/` routes for M06–M10. Done: glossary, all 22 content files in English published (no drafts), PR #39 | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
 ## Brand
 | Item | Stage | Notes |

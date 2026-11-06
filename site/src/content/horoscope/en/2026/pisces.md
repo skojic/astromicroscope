@@ -28,7 +28,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 ## The energy of the year

@@ -11,7 +11,6 @@ quote:
   text: "People are more than what is seen at first glance; their true potential lies in what they are capable of becoming, not in what they are now."
   author: "Abraham Maslow"
 ephemerisChecked: true
-draft: true
 ---
 
 The Sun is the central point of our sky and the heart of the solar system, around which all the planets move. In the deepest sense, it symbolizes the center of our self-awareness, our ego. The Sun brings light, separates day from night and is the source of life. Its position in the horoscope points to how important a particular area of life is for a person, whether through the sign it is in or the astrological house it occupies.

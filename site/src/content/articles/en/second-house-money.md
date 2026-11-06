@@ -8,7 +8,6 @@ updated: 2025-11-10
 topics: [finances]
 answer: "The path to money in the natal chart is shown above all by the second house: the sign on its cusp, the planets in it and its ruler, which reveals where and how money comes. Jupiter is the main indicator of money, Venus speaks of values and enjoyment, and the eighth house of money from partners, inheritance and investments."
 ephemerisChecked: true
-draft: true
 ---
 
 In every chart there are several channels and ways of earning money. It is important to recognize the primary channel, because it shows how a person most naturally achieves material security.

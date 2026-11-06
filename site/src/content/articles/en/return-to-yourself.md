@@ -8,7 +8,6 @@ updated: 2025-11-10
 topics: [karmic]
 answer: "Finding your way back to yourself begins when you stop waiting to be rescued and take responsibility for your life. The key is acceptance: of yourself, your family and the people around you, without judgment. When you forgive those who hurt you and thank your father and mother, your Sun and Moon, you discover your strength and boundaries."
 ephemerisChecked: true
-draft: true
 ---
 
 **The return to yourself begins the moment you stop waiting to be rescued from outside and decide to set your soul free.**

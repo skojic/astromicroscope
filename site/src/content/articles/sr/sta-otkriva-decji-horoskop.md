@@ -9,7 +9,6 @@ topics: [children]
 answer: "Dečji horoskop ne ograničava dete, već roditelju daje mapu za razumevanje. Pokazuje kako detetu da pristupiš, da li reaguje kroz emociju, razum ili pokret, koliko mu trebaju bliskost i sloboda, u čemu može da zablista i šta mu stvara pritisak. Tako ga podržavaš da bude ono što jeste."
 ephemerisChecked: true
 oldUrl: "/sta-otkriva-decji-horoskop/"
-draft: true
 ---
 
 ## Zašto roditelj treba da poznaje natalnu kartu svog deteta

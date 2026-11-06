@@ -8,7 +8,6 @@ updated: 2025-11-10
 topics: [children]
 answer: "A child's natal chart does not limit the child; it gives the parent a map for understanding. It shows how to approach your child, whether they react through emotion, reason or movement, how much closeness and freedom they need, where they can shine and what puts them under pressure. That way you support them in being who they are."
 ephemerisChecked: true
-draft: true
 ---
 
 ## Why a parent should know their child's natal chart

@@ -29,7 +29,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/riba/"
-draft: true
 ---
 
 ## Opšta energija godine

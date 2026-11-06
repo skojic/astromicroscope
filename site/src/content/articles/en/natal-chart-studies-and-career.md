@@ -11,7 +11,6 @@ quote:
   text: "In any given moment we have two options: to step forward into growth or to step back into safety."
   author: "Abraham Maslow"
 ephemerisChecked: true
-draft: true
 ---
 
 Choosing a university is one of the most important steps in a young person's life, because it shapes their future in a significant way. Parents often play a key role in this process, trying to steer their children toward the choices they consider best for them. Their influence, however, can sometimes lead young people to choose their studies not by their own interests and talents but by the wishes of the family. This is especially true when parents push their children toward "safe" or "traditional" professions. Such an approach can leave young people feeling obliged, which makes it harder for them to decide about their future on their own.

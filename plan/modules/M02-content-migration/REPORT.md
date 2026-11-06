@@ -5,14 +5,12 @@
 | Stage | building |
 | Last gate passed | G0 (2026-11-04) |
 | Owner | Filip |
-| Branch | `feature/m02-content-migration` (pushed 2026-11-03; `main` merged in 2026-11-04) |
+| Branch | `feature/m02-content-migration` merged in PR #13; English pairs and publication on `feature/m14-translation` (PR #39) |
 | Last commit | `78fec8c` M02-02: convert the five transit articles to the article schema |
-| Last updated | 2026-11-04, all M02 tasks done (01–06); waiting for the English pairs (M14) for G1 |
+| Last updated | 2026-11-06, Gorica approved publication; `draft: true` removed from all 22 Serbian files |
 
 ## Next step
-1. Filip: `git push`, then open the pull request `feature/m02-content-migration` → `main` (description prepared in the session; template `.github/pull_request_template.md`). CI (`ci-gate`) builds the site with the new files: that build is the first schema check by Astro itself. With D45 in force Filip merges it when `ci-gate` and `branch-name` are green.
-2. M14: English pairs for the 7 articles, 12 signs and 3 pages (`site/src/content/**/en/`), then remove `draft: true`; after that G1 for M02 (build without warnings, both languages).
-3. M10 and M06 can start on top of this content (About/Contact pages and AuthorBox; articles hub and template).
+1. PR #39 (M14) brings the English pairs and removes `draft: true`; when it is merged, G1 for M02 (build without warnings, both languages) can be run.
 
 ## Done
 - **M02-01** old-URL map: all 28 pages have a new URL and a target file or a written reason (table “Old-URL map” below). Commit `47a2a64`.
@@ -28,7 +26,7 @@
 - **M02-05 for batch 1, partly:** four texts have no astrological dates or chart positions to check → `ephemerisChecked: true`; `podznak.md` has three named natal charts → `false` (see Next step 4).
 
 ## Not done
-- English pairs (M14) for all 22 files; until then every file is `draft: true` and G1 cannot pass (`testing/test-plan.md`: every sr file has an en pair).
+- G1 for M02, after PR #39 (English pairs exist, no drafts left).
 - Build by Astro not run in this environment (npm registry blocked); the pull request's CI run is the check.
 
 ## Problems and blockers
@@ -43,6 +41,7 @@
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: M02-02 says Gorica approves every edited text. Proposal: one batch of five articles per pull request, and I send her the batch as a PDF or document for comments before the PR.
 
 ## Decisions taken in this module
+- 2026-11-06 (Gorica, via Filip): all texts, the 2026 horoscope and the pages may be published as they are („može da se objavi kako jeste”); `draft: true` removed from all 22 Serbian files (and their English pairs).
 - 2026-11-06 (Gorica, via Filip): the four open points in the 2026 horoscope (Aries Jupiter in the fourth house, Leo „jun i jul”, Leo Pluto in Aquarius, Taurus in the third person) stay as written, in both languages.
 - 2026-11-04 (Filip): horoscope files carry `draft: true` like the articles, although the horoscope schema in `contracts.md` §3 has no `draft` field: `check-content.mjs` reads it from the front matter (pair check skipped outside production, refused in production), and the collection schema strips unknown keys. Request to Srdjan below.
 - 2026-11-04 (Gorica, via Filip): batches 1 and 2 approved as sent, with the corrected dates; open points are decided by us and she reviews afterwards. Decided: „Primer 6” stays „Primer 4”; Jupiter in Leo uses „ti” (D18). `draft: true` stays until the English pair exists (`check-content` requires a pair for every non-draft file).
@@ -135,6 +134,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 | `npm run build` | not run (npm registry blocked, HTTP 403) | 2026-11-03 |
 
 ## History
+- 2026-11-06: Gorica approved publication; drafts removed; open horoscope points stay as written.
 - 2026-11-04: M02-04 pages (O meni, Zašto Astromicroscope, Kontakt); all M02 tasks done.
 - 2026-11-04: M02-03: 12 signs of the 2026 horoscope converted, dates corrected, tone „ti”.
 - 2026-11-04: Gorica approved batches 1–2; Jupiter in Leo to „ti”; Podznak example charts checked; all kept articles `ephemerisChecked: true`.

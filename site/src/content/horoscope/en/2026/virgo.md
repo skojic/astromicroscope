@@ -12,7 +12,6 @@ transits:
     from: 2026-02-14
     to: 2028-04-13
 ephemerisChecked: true
-draft: true
 ---
 
 The start of 2026 may bring a sense of heightened activity and scattered energy. Many Virgos will be pulled in several directions at once, spending energy and taking on too many obligations, which can lead to exhaustion, worry and mental tiredness. The most important thing in the first months of the year is to set clear boundaries with others and with yourself, to shift your focus from "I have to do everything" to "I choose what truly matters", and to learn to tell apart what drains your strength from what builds you up.

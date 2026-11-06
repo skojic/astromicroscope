@@ -20,7 +20,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 For Cancer, 2026 brings a period of rebuilding peace, stability and a sense of solid ground under your feet.

@@ -13,7 +13,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 On 30 June 2026 Jupiter enters Leo and stays there until 26 July 2027. The last time this benefic planet was in this sign was from 16 July 2014 to 11 August 2015, and back then it set off many important events in Leo's symbolism: successes in sport, culture, public life and big projects. In that period the World Trade Center in New York opened, Real Madrid won the FIFA Club World Cup in Marrakesh, and the prime ministers of Serbia and China opened the Pupin Bridge in Belgrade. It was a time of great achievements, bold moves and the need to leave a mark.

@@ -12,7 +12,6 @@ quote:
   author: "Abraham Maslow"
 ephemerisChecked: true
 oldUrl: "/potencijali/"
-draft: true
 ---
 
 Odluka o izboru fakulteta predstavlja jedan od najvažnijih koraka u životu mladih ljudi, jer značajno oblikuje njihovu budućnost. Roditelji često igraju ključnu ulogu u ovom procesu, nastojeći da usmere svoju decu ka izborima koje smatraju najboljima za njih. Međutim, njihov uticaj ponekad može dovesti do toga da mladi ne biraju studije prema sopstvenim interesovanjima i talentima, već prema željama porodice. Ovo se naročito odnosi na situacije u kojima roditelji podstiču decu da se odluče za "sigurne" ili "tradicionalne" profesije. Takav pristup može izazvati osećaj obaveze kod mladih, što otežava njihovu autonomiju u donošenju odluka o budućnosti.

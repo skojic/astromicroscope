@@ -14,7 +14,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/jupiter-u-lavu/"
-draft: true
 ---
 
 Tridesetog juna 2026. godine Jupiter ulazi u znak Lava i u njemu ostaje sve do 26. jula 2027. godine. Poslednji put ova benefična planeta boravila je u ovom znaku od 16. jula 2014. do 11. avgusta 2015. godine i tada je aktivirala mnoge važne događaje u simbolici Lava – uspehe u sportu, kulturi, javnom životu i velikim projektima. U tom periodu otvoren je Svetski trgovinski centar u Njujorku, fudbaleri Real Madrida osvojili su Svetsko klupsko prvenstvo u Marakešu, a premijeri Srbije i Kine otvorili su Pupinov most. Bio je to period velikih postignuća, hrabrih poteza i potrebe da se ostavi trag.

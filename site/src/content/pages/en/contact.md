@@ -4,7 +4,6 @@ description: "Write to Gorica Vićentijević with questions about private astrol
 lang: en
 translationKey: contact
 updated: 2026-11-04
-draft: true
 ---
 
 I am glad you are here! If you have a question, would like advice or want to know more about private astrological analyses, feel free to write to me at astromicroscope@gmail.com.

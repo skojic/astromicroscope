@@ -24,7 +24,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 ## Why is 2026 a turning point for Aries?

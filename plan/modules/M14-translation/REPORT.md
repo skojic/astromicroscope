@@ -7,12 +7,12 @@
 | Owner | Filip (+ review) |
 | Branch | `feature/m14-translation` (local, rebased on `main` 2026-11-06) |
 | Last commit | `39d92b8` M14-03: English yearly horoscope 2026, all 12 signs |
-| Last updated | 2026-11-06, all 22 content files have an English pair |
+| Last updated | 2026-11-06, all 22 content files in English, drafts removed (Gorica approved) |
 
 ## Next step
 1. Push `feature/m14-translation` and open the pull request with the 22 English content files (this batch).
 2. English routes under `/en/` that mirror Srdjan's Serbian pages (M06 articles, M07 horoscope, M08 learn, M09 analyses, M10 about and contact), plus the English values of their i18n strings and data files. Their reports list these as "English mirrors (M14)".
-3. `draft: true` stays on both languages until Gorica approves the Serbian (Srdjan's M10 note); the strict check waits for launch (D48, D49).
+3. Done 2026-11-06: Gorica approved publication, `draft: true` removed from all 44 files (sr and en).
 
 ## Done
 - **M14-01 glossary:** `plan/modules/M14-translation/glossary.md` (signs, planets, houses, dignities, aspects, techniques, titles, style, English file names). American spelling, as in the site's existing English strings. Commits `91e9c87` (glossary) and `e1b36e7` (spelling rule).
@@ -48,7 +48,7 @@
 | Check | Result | Date |
 |---|---|---|
 | `node scripts/check-content.mjs` | `Content check passed (non-production).` | 2026-11-06 |
-| `SITE_ENV=production node scripts/check-content.mjs` | only `draft is true` errors, no missing pairs | 2026-11-06 |
+| `SITE_ENV=production node scripts/check-content.mjs` | `Content check passed (production).` (after removing the drafts) | 2026-11-06 |
 
 ## History
 - 2026-11-06: rebased on `main` (Srdjan built M06–M10, reallocated 2026-11-05); remaining 4 articles and the 12 signs of 2026 translated. All 22 content files have an English pair; `check-content` passes, the production check fails only on `draft: true`.

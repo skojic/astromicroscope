@@ -8,7 +8,6 @@ updated: 2026-05-16
 topics: [transits, karmic]
 answer: "Saturn transiting the fourth house touches our roots, family, home and sense of security. It can bring losses, moves and changes we cannot influence, but it is also the time when we build new foundations. In this personal story I describe how the rule “Saturn first, then everything else” got me back on my feet."
 ephemerisChecked: true
-draft: true
 ---
 
 **Saturn first, then everything else**

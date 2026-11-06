@@ -4,7 +4,6 @@ description: "Gorica Vićentijević, professional astrologer (Johannes Kepler In
 lang: en
 translationKey: about
 updated: 2026-11-04
-draft: true
 ---
 
 > “When an inner situation is not made conscious, it happens outside, as fate.”

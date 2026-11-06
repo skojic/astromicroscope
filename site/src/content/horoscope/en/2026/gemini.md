@@ -16,7 +16,6 @@ transits:
     from: 2026-06-30
     to: 2027-07-26
 ephemerisChecked: true
-draft: true
 ---
 
 **For Gemini, 2026 brings a powerful inner and outer transformation.**
