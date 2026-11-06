@@ -1,12 +1,16 @@
 ---
-// Home section (M06-04): one featured article + three more, linking to /tekstovi/. M05 imports this with one prop, `lang`.
+// Home section (M06-04): one featured article + three more. M05 imports this with one prop, `lang`; the articles
+// and links follow the language.
 import { getCollection } from 'astro:content';
 import { t, type Lang } from '../../../i18n/core';
 import { articleStrings } from '../../../i18n/articles';
 
-const lang: Lang = 'sr';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const langPrefix = lang === 'sr' ? 'sr/' : 'en/';
+const listPath = lang === 'sr' ? '/tekstovi/' : '/en/articles/';
 const items = (await getCollection('articles'))
-  .filter((e) => e.id.startsWith('sr/'))
+  .filter((e) => e.id.startsWith(langPrefix))
   .sort((a, b) => {
     const av = a.data.published instanceof Date ? a.data.published.getTime() : new Date(String(a.data.published)).getTime();
     const bv = b.data.published instanceof Date ? b.data.published.getTime() : new Date(String(b.data.published)).getTime();
@@ -15,8 +19,8 @@ const items = (await getCollection('articles'))
 const featured = items[0];
 const rest = items.slice(1, 4);
 interface Shared { href: string; title: string; description: string }
-const featuredCard: Shared | null = featured ? { href: `/tekstovi/${featured.id.replace('sr/', '')}/`, title: featured.data.title, description: featured.data.description } : null;
-const restCards: Shared[] = rest.map((i) => ({ href: `/tekstovi/${i.id.replace('sr/', '')}/`, title: i.data.title, description: i.data.description }));
+const featuredCard: Shared | null = featured ? { href: `${listPath}${featured.id.replace(langPrefix, '')}/`, title: featured.data.title, description: featured.data.description } : null;
+const restCards: Shared[] = rest.map((i) => ({ href: `${listPath}${i.id.replace(langPrefix, '')}/`, title: i.data.title, description: i.data.description }));
 ---
 <section class="articles" aria-labelledby="articles-title">
   <div class="container">
@@ -32,7 +36,7 @@ const restCards: Shared[] = rest.map((i) => ({ href: `/tekstovi/${i.id.replace('
         <li><a class="card" href={c.href}><h3>{c.title}</h3><p>{c.description}</p></a></li>
       ))}
     </ul>
-    <p class="actions"><a href="/tekstovi/">{t(articleStrings, 'allArticles', lang)} →</a></p>
+    <p class="actions"><a href={listPath}>{t(articleStrings, 'allArticles', lang)} →</a></p>
   </div>
 </section>
 <style>

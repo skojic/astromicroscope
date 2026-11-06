@@ -14,7 +14,7 @@ const { title, description, translationKey } = entry.data;
 const url = '/o-meni/';
 const jsonLd = graph(lang, [person(lang), profilePage(lang, url)]);
 ---
-<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'O meni', url }]} jsonLd={jsonLd}>
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'O meni', url }]} jsonLd={jsonLd} paths={{ sr: '/o-meni/', en: '/en/about/' }}>
   <article class="about">
     <header class="hero">
       <div class="container">

@@ -1,0 +1,52 @@
+---
+// M08-02 EN: the education hub (`/en/learn/`): free learning + the 2027-course waitlist CTA.
+import Page from '../../../layouts/Page.astro';
+import { t } from '../../../i18n/core';
+import { learnStrings } from '../../../i18n/learn';
+
+const lang = 'en';
+const title = t(learnStrings, 'hubTitle', lang);
+const description = t(learnStrings, 'hubMeta', lang);
+---
+<Page lang={lang} title={title} description={description} translationKey="learn" breadcrumbs={[{ name: 'Learn', url: '/en/learn/' }]}>
+  <div class="hub">
+    <div class="container">
+      <h1>{t(learnStrings, 'hubTitle', lang)}</h1>
+      <p class="intro">{t(learnStrings, 'hubIntro', lang)}</p>
+
+      <section class="block free" aria-labelledby="free-title">
+        <h2 id="free-title">{t(learnStrings, 'freeTitle', lang)}</h2>
+        <p>{t(learnStrings, 'freeIntro', lang)}</p>
+        <ul class="cards">
+          <li><a class="card" href="/en/articles/"><h3>{t(learnStrings, 'articlesLink', lang)}</h3><p>{t(learnStrings, 'articlesDesc', lang)}</p></a></li>
+          <li><a class="card" href="/en/videos/"><h3>{t(learnStrings, 'videosLink', lang)}</h3><p>{t(learnStrings, 'videosDesc', lang)}</p></a></li>
+          <li><a class="card" href="/en/horoscope/"><h3>{t(learnStrings, 'horoscopeLink', lang)}</h3><p>{t(learnStrings, 'horoscopeDesc', lang)}</p></a></li>
+        </ul>
+      </section>
+
+      <section class="block waitlist" aria-labelledby="waitlist-title">
+        <h2 id="waitlist-title">{t(learnStrings, 'coursesTitle', lang)}</h2>
+        <p>{t(learnStrings, 'coursesIntro', lang)}</p>
+        <a class="btn" href="mailto:astromicroscope@gmail.com">{t(learnStrings, 'waitlistBtn', lang)}</a>
+        <p class="note">The waitlist uses the M12 form; until then, email astromicroscope@gmail.com.</p>
+      </section>
+    </div>
+  </div>
+</Page>
+<style>
+  .hub { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); max-width: var(--am-measure); }
+  .intro { margin: 0 0 var(--am-space-7); max-width: var(--am-measure); line-height: 1.7; }
+  .block { margin-bottom: var(--am-space-7); }
+  .block h2 { margin: 0 0 var(--am-space-3); }
+  .block > p { margin: 0 0 var(--am-space-5); max-width: var(--am-measure); line-height: 1.7; }
+  .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--am-space-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius); border: 1px solid var(--am-line, #d3d8df); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
+  .card:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .card h3 { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
+  .card p { margin: 0; line-height: 1.6; font-size: .95rem; }
+  .waitlist { padding: var(--am-space-5); border-radius: var(--am-radius); background: var(--am-bg-alt); border: 1px solid var(--am-line, #d3d8df); max-width: var(--am-measure); }
+  .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
+  .btn:hover { background: var(--am-action-hover); }
+  .note { margin-top: var(--am-space-3); color: var(--am-muted); font-size: .9rem; }
+</style>

@@ -5,19 +5,20 @@ import { learnStrings } from '../../../i18n/learn';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const p = (s: string, en: string) => (lang === 'sr' ? s : en);
 ---
 <section class="learn-section" aria-labelledby="learn-title">
   <div class="container">
     <h2 id="learn-title">{t(learnStrings, 'hubTitle', lang)}</h2>
     <p class="intro">{t(learnStrings, 'hubIntro', lang)}</p>
     <ul class="links">
-      <li><a href="/tekstovi/">{t(learnStrings, 'articlesLink', lang)}</a></li>
-      <li><a href="/video/">{t(learnStrings, 'videosLink', lang)}</a></li>
-      <li><a href="/horoskop/">{t(learnStrings, 'horoscopeLink', lang)}</a></li>
+      <li><a href={p('/tekstovi/', '/en/articles/')}>{t(learnStrings, 'articlesLink', lang)}</a></li>
+      <li><a href={p('/video/', '/en/videos/')}>{t(learnStrings, 'videosLink', lang)}</a></li>
+      <li><a href={p('/horoskop/', '/en/horoscope/')}>{t(learnStrings, 'horoscopeLink', lang)}</a></li>
     </ul>
     <p class="waitlist">
       <strong>{t(learnStrings, 'coursesTitle', lang)}</strong> · {t(learnStrings, 'coursesIntro', lang)}
-      <a class="btn" href="/edukacija/">{t(learnStrings, 'waitlistBtn', lang)}</a>
+      <a class="btn" href={p('/edukacija/', '/en/learn/')}>{t(learnStrings, 'waitlistBtn', lang)}</a>
     </p>
   </div>
 </section>

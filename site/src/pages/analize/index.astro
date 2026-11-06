@@ -9,7 +9,7 @@ const lang = 'sr';
 const title = t(analysesStrings, 'hubTitle', lang);
 const description = t(analysesStrings, 'hubIntro', lang);
 ---
-<Page lang={lang} title={title} description={t(analysesStrings, 'hubBody', lang)} translationKey="analyses" breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }]}>
+<Page lang={lang} title={title} description={t(analysesStrings, 'hubBody', lang)} translationKey="analyses" breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }]} paths={{ sr: '/analize/', en: '/en/analyses/' }}>
   <div class="analyses">
     <div class="container">
       <h1>{title}</h1>

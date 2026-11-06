@@ -6,9 +6,9 @@ import { learnStrings } from '../../i18n/learn';
 
 const lang = 'sr';
 const title = t(learnStrings, 'hubTitle', lang);
-const description = t(learnStrings, 'hubIntro', lang);
+const description = t(learnStrings, 'hubMeta', lang);
 ---
-<Page lang={lang} title={title} description={description} translationKey="learn" breadcrumbs={[{ name: 'Edukacija', url: '/edukacija/' }]}>
+<Page lang={lang} title={title} description={description} translationKey="learn" breadcrumbs={[{ name: 'Edukacija', url: '/edukacija/' }]} paths={{ sr: '/edukacija/', en: '/en/learn/' }}>
   <div class="hub">
     <div class="container">
       <h1>{t(learnStrings, 'hubTitle', lang)}</h1>
