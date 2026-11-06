@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { Lang } from '../../../i18n/core';
-import { formatDate, videoPaths, type Video } from './data';
+import { formatDate, videoTitle, videoPaths, type Video } from './data';
 
 interface Props { lang: Lang; items: Video[]; headingLevel?: 'h2' | 'h3' }
 const { lang, items, headingLevel: H = 'h2' } = Astro.props;
@@ -12,7 +12,7 @@ const { lang, items, headingLevel: H = 'h2' } = Astro.props;
       <a class="thumb" href={videoPaths(v)[lang]} tabindex="-1" aria-hidden="true">
         <Image src={v.thumbnail} alt="" width={480} height={270} widths={[320, 480]} sizes="(min-width: 768px) 360px, 100vw" />
       </a>
-      <H class="title"><a href={videoPaths(v)[lang]} lang={v.lang === 'sr' ? 'sr-Latn' : 'en'}>{v.title}</a></H>
+      <H class="title"><a href={videoPaths(v)[lang]} lang={v.lang === 'sr' ? 'sr-Latn' : 'en'}>{videoTitle(v, lang)}</a></H>
       <time datetime={v.published}>{formatDate(v.published, lang)}</time>
     </li>
   ))}
