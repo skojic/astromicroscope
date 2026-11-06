@@ -30,7 +30,7 @@
 ## Problems and blockers
 - **Answered 2026-11-04 (Gorica, via Filip):** „povezane sa serijom dva” in `astro-vodic-kroz-finansije.md` is translated as “connected with the second house”; she confirmed.
 - Word count: 22 of 22 content files, about 21,700 English words (with front matter).
-- **Kept as in the Serbian, for Gorica (open points in the M02 report):** Aries mentions Jupiter in the fourth house in the second half of the year; Leo mentions Pluto in Aquarius for home; Taurus is in the third person. Translated as written, to change together with the Serbian if she does.
+- **Kept as in the Serbian, for Gorica (open points in the M02 report):** Aries mentions Jupiter in the fourth house in the second half of the year; Leo mentions Pluto in Aquarius for home; Taurus is in the third person. Translated as written; **Gorica, 2026-11-06: they stay as they are.**
 - **Fixed in the English only:** in `podznak.md` the Virgo heading says "Jupiter u padu" while the text says "u izgonu"; Jupiter in Virgo is in detriment, so both read "detriment" in English.
 - Maslow quotes: the `potencijali` quote uses his standard English wording ("step forward into growth or step back into safety"); the `podznak` quote has no known English original and is translated from the Serbian.
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: D17 says everything in English at launch. Does that include the 2026 horoscope archive (12 texts, about 7,000 words), or only the current edition? Excluding the archive would cut the effort by about a third.

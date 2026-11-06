@@ -3,6 +3,7 @@
 Newest first. Each entry: date, what was done, evidence, what is next.
 
 ## 2026-11-06
+- **Gorica: horoscope 2026 open points stay** (via Filip): Aries Jupiter in the fourth house, Leo „jun i jul” and Pluto in Aquarius, Taurus in the third person are kept as written, in Serbian and English. Recorded in the M02 and M14 reports.
 - **M14: all content in English** (Filip): branch `feature/m14-translation` rebased on `main`; English pairs for the remaining 4 articles (`0862197`) and the 12 signs of the 2026 horoscope (`39d92b8`), so all 22 M02 files have an English pair. `check-content` passes; the production check fails only on `draft: true`. Next: pull request, then the English `/en/` routes that mirror M06–M10.
 
 ## 2026-11-05

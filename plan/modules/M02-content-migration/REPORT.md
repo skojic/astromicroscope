@@ -43,6 +43,7 @@
 - **Answered 2026-11-03 (Srdjan, PR #5), see Decisions below.** Was: M02-02 says Gorica approves every edited text. Proposal: one batch of five articles per pull request, and I send her the batch as a PDF or document for comments before the PR.
 
 ## Decisions taken in this module
+- 2026-11-06 (Gorica, via Filip): the four open points in the 2026 horoscope (Aries Jupiter in the fourth house, Leo „jun i jul”, Leo Pluto in Aquarius, Taurus in the third person) stay as written, in both languages.
 - 2026-11-04 (Filip): horoscope files carry `draft: true` like the articles, although the horoscope schema in `contracts.md` §3 has no `draft` field: `check-content.mjs` reads it from the front matter (pair check skipped outside production, refused in production), and the collection schema strips unknown keys. Request to Srdjan below.
 - 2026-11-04 (Gorica, via Filip): batches 1 and 2 approved as sent, with the corrected dates; open points are decided by us and she reviews afterwards. Decided: „Primer 6” stays „Primer 4”; Jupiter in Leo uses „ti” (D18). `draft: true` stays until the English pair exists (`check-content` requires a pair for every non-draft file).
 - 2026-11-04 (Gorica, via Filip): of batch 2 only Jupiter in Leo and Saturn go to the new site; Mars in Sagittarius, Uranus retrograde and the 2026 eclipses are past transits and are not carried over. Old URLs `/mars-u-strelcu/`, `/retrogradni-uran/`, `/eklipsa/` → 301 to `/tekstovi/` (M13).
@@ -71,7 +72,7 @@ What changed in her texts, for her approval (nothing else in the body was touche
 - **Note:** Mars (Nov–Dec 2025), Uranus (until April 2026) and the eclipses (Feb–Mar 2026) describe past periods; they are published with their original dates. Jupiter in Leo uses „vi” (M02-06 tone pass to „ti” pending).
 
 ## Horoscope 2026 for Gorica
-Open points in her texts, not changed (she reviews afterwards):
+Open points in her texts, not changed. **Answered 2026-11-06 (Gorica, via Filip): keep them as they are** („Neka ostane… to nisu neke strašne greške”; the 2026 edition is near its end):
 - **Ovan, „Dom i porodica”:** “Drugi deo godine … Jupiter u četvrtoj kući”, but Jupiter is in Cancer (4th house for Aries) only until 30 June; from July it is in Leo (5th).
 - **Lav, ljubav:** “Od jula se otvara … posebno u junu i julu”.
 - **Lav, dom:** „Pluton u Vodoliji” under home and family; for Leo, Aquarius is the 7th house.
