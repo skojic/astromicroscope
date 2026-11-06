@@ -25,7 +25,7 @@ M09-01..M09-03 built for SR. Remaining: M09-04 request form (M12 sends; currentl
 - Gates G1–G4 not yet run.
 
 ## Problems and blockers
-- Request form send waits on M12 (DNS move).
+- Request form send waits on M12 (DNS move, D54: no fixed date — not the 2026-11-29 registrar transfer).
 - Privacy page must name the phone number (M10-05, D33 scope note).
 
 ## Decisions taken in this module

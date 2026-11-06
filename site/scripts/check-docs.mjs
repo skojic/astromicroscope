@@ -127,7 +127,10 @@ export async function checkDocs(root, { fix = false } = {}) {
     if (fix) status = status.replace(/^Updated:\s*\d{4}-\d{2}-\d{2}/m, `Updated: ${newest}`);
     else fail('status/STATUS.md', `Updated: ${updated} but the newest entry of status/log.md is ${newest}`);
   }
-  if (updated && updated > new Date().toISOString().slice(0, 10)) fail('status/STATUS.md', `Updated: ${updated} is in the future`);
+  // Compare in the local calendar day, not UTC: after 23:00 UTC the local date is already tomorrow.
+  const today = new Date();
+  const todayLocal = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  if (updated && updated > todayLocal) fail('status/STATUS.md', `Updated: ${updated} is in the future`);
 
   // 5. relative links in STATUS.md
   for (const m of status.matchAll(/\]\((?!https?:|#|mailto:)([^)\s]+)\)/g)) {
