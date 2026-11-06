@@ -13,7 +13,7 @@ const { title, description, translationKey } = entry.data;
 const email = t(aboutStrings, 'contactEmail', lang);
 const url = '/kontakt/';
 ---
-<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Kontakt', url }]}>
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Kontakt', url }]} paths={{ sr: '/kontakt/', en: '/en/contact/' }}>
   <article class="contact">
     <div class="container">
       <h1>{title.replace(/ · .*/, '')}</h1>

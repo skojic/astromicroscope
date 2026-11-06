@@ -30,8 +30,12 @@ const jsonLd = graph(lang, [
   person(lang),
   profilePage(lang, url),
 ]);
+// Find the EN pair by translationKey for the language switch / hreflang.
+const enEntry = (await getCollection('articles')).find((e) => e.id.startsWith('en/') && e.data.translationKey === translationKey);
+const enPath = enEntry ? `/en/articles/${enEntry.id.replace('en/', '')}/` : undefined;
+const paths = { sr: url, en: enPath };
 ---
-<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }, { name: title, url }]} jsonLd={jsonLd}>
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }, { name: title, url }]} jsonLd={jsonLd} paths={paths}>
   <article class="article">
     <div class="container">
       <header class="meta">

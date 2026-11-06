@@ -11,7 +11,7 @@ const title = t(horoscopeStrings, 'hubTitle', lang);
 const description = t(horoscopeStrings, 'hubIntro', lang);
 const url = '/horoskop/';
 ---
-<Page lang={lang} title={title} description={description} translationKey="horoscope" breadcrumbs={[{ name: 'Godišnji horoskop', url }]}>
+<Page lang={lang} title={title} description={description} translationKey="horoscope" breadcrumbs={[{ name: 'Godišnji horoskop', url }]} paths={{ sr: '/horoskop/', en: '/en/horoscope/' }}>
   <div class="hub">
     <div class="container">
       <h1>{title}</h1>

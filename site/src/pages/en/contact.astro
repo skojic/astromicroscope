@@ -1,0 +1,37 @@
+---
+// M10-04 EN: the Contact page (`/en/contact/`). Contact info per D21: astromicroscope@gmail.com, no other socials.
+import Page from '../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n/core';
+import { aboutStrings } from '../../i18n/about';
+
+const lang = 'en';
+const entry = (await getCollection('pages')).find((e) => e.id === 'en/contact');
+if (!entry) throw new Error('Missing content page: pages/en/contact.md (run M14)');
+const { title, description, translationKey } = entry.data;
+const email = t(aboutStrings, 'contactEmail', lang);
+const url = '/en/contact/';
+const paths = { sr: '/kontakt/', en: url };
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Contact', url }]} paths={paths}>
+  <article class="contact">
+    <div class="container">
+      <h1>{title.replace(/ · .*/, '')}</h1>
+      <p class="intro">{t(aboutStrings, 'contactIntro', lang)}</p>
+      <p class="email-row">
+        <span class="label">{t(aboutStrings, 'contactEmailLabel', lang)}:</span>
+        <a class="email" href={`mailto:${email}`}>{email}</a>
+      </p>
+      <p class="note">{t(aboutStrings, 'contactNote', lang)}</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .contact { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); max-width: var(--am-measure); }
+  .intro { margin: 0 0 var(--am-space-5); font-size: 1.125rem; max-width: var(--am-measure); }
+  .email-row { margin: 0 0 var(--am-space-4); max-width: var(--am-measure); }
+  .label { font-weight: 600; margin-right: var(--am-space-1); }
+  .email { color: var(--am-action); text-decoration: underline; overflow-wrap: anywhere; }
+  .note { color: var(--am-muted); max-width: var(--am-measure); }
+</style>

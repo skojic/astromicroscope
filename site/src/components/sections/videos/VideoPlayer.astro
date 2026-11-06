@@ -3,7 +3,7 @@
 import { Image } from 'astro:assets';
 import { t, type Lang } from '../../../i18n/core';
 import { videoStrings } from '../../../i18n/videos';
-import type { Video } from './data';
+import { videoTitle, type Video } from './data';
 
 interface Props { lang: Lang; video: Video; priority?: boolean }
 const { lang, video, priority = false } = Astro.props;
@@ -13,7 +13,7 @@ const { lang, video, priority = false } = Astro.props;
     <Image src={video.thumbnail} alt="" width={960} height={540} widths={[480, 768, 960]} sizes="(min-width: 1024px) 960px, 100vw"
       loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'auto'} />
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
-    <span class="visually-hidden">{t(videoStrings, 'watch', lang)}: <span lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{video.title}</span></span>
+    <span class="visually-hidden">{t(videoStrings, 'watch', lang)}: <span lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{videoTitle(video, lang)}</span></span>
   </a>
 </div>
 

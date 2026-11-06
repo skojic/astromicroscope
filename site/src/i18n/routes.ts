@@ -9,6 +9,7 @@ export const ROUTES = {
   learn: { sr: '/edukacija/', en: '/en/learn/' },
   articles: { sr: '/tekstovi/', en: '/en/articles/' },
   videos: { sr: '/video/', en: '/en/videos/' },
+  horoscope: { sr: '/horoskop/', en: '/en/horoscope/' },
   analyses: { sr: '/analize/', en: '/en/analyses/' },
   about: { sr: '/o-meni/', en: '/en/about/' },
   contact: { sr: '/kontakt/', en: '/en/contact/' },

@@ -1,0 +1,51 @@
+---
+// M09-02 EN: one page per analysis (`/en/analyses/<id>/`): summary, includes, needs, duration, format, request CTA.
+import Page from '../../../layouts/Page.astro';
+import { t } from '../../../i18n/core';
+import { analysesStrings } from '../../../i18n/analyses';
+import { analyses } from '../../../data/analyses';
+
+export function getStaticPaths() {
+  return analyses.map((a) => ({ params: { id: a.id }, props: { id: a.id } }));
+}
+const { id } = Astro.props;
+const lang = 'en' as const;
+const a = analyses.find((x) => x.id === id);
+if (!a) throw new Error(`Missing analysis: ${id}`);
+const title = a.name.en;
+const description = a.summary.en.slice(0, 120);
+const url = `/en/analyses/${id}/`;
+const paths = { sr: `/analize/${id}/`, en: url };
+---
+<Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: 'Private analyses', url: '/en/analyses/' }, { name: a.name.en, url }]} paths={paths}>
+  <article class="analysis">
+    <div class="container">
+      <header>
+        <h1>{a.name.en}</h1>
+        <p class="summary">{a.summary.en}</p>
+      </header>
+
+      <dl class="facts">
+        <div class="fact"><dt>{t(analysesStrings, 'includesLabel', lang)}</dt><dd><ul>{a.includes.en.map((i) => <li>{i}</li>)}</ul></dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'durationLabel', lang)}</dt><dd>{a.duration?.en ?? '—'}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'needsLabel', lang)}</dt><dd>{a.needs.en}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'formatLabel', lang)}</dt><dd>{a.format.en}</dd></div>
+      </dl>
+
+      <p><a class="btn" href="mailto:astromicroscope@gmail.com">{t(analysesStrings, 'requestBtn', lang)}</a></p>
+      <p class="note">The request form arrives with M12; until then email astromicroscope@gmail.com.</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .analysis { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); max-width: var(--am-measure); }
+  .summary { margin: 0 0 var(--am-space-6); max-width: var(--am-measure); line-height: 1.75; }
+  .facts { margin: 0 0 var(--am-space-6); display: grid; gap: var(--am-space-4); max-width: var(--am-measure); }
+  .fact dt { font-weight: 700; margin-bottom: var(--am-space-1); }
+  .fact dd { margin: 0; line-height: 1.6; }
+  .fact ul { margin: 0; padding-left: var(--am-space-4); }
+  .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
+  .btn:hover { background: var(--am-action-hover); }
+  .note { margin-top: var(--am-space-4); color: var(--am-muted); font-size: .9rem; }
+</style>

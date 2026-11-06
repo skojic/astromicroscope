@@ -10,9 +10,7 @@
 | Last updated | 2026-11-06, all 22 content files in English, drafts removed (Gorica approved) |
 
 ## Next step
-1. Push `feature/m14-translation` and open the pull request with the 22 English content files (this batch).
-2. English routes under `/en/` that mirror Srdjan's Serbian pages (M06 articles, M07 horoscope, M08 learn, M09 analyses, M10 about and contact), plus the English values of their i18n strings and data files. Their reports list these as "English mirrors (M14)".
-3. Done 2026-11-06: Gorica approved publication, `draft: true` removed from all 44 files (sr and en).
+- Done 2026-11-06: **English `/en/` routes built** (the batch below). Remaining (optional polish): English i18n strings on any home-section/hero keys that still lack an `en` value; review the new `/en/` pages on the preview. Done 2026-11-06: Gorica approved publication, `draft: true` removed from all 44 files (sr and en).
 
 ## Done
 - **M14-01 glossary:** `plan/modules/M14-translation/glossary.md` (signs, planets, houses, dignities, aspects, techniques, titles, style, English file names). American spelling, as in the site's existing English strings. Commits `91e9c87` (glossary) and `e1b36e7` (spelling rule).
@@ -23,9 +21,11 @@
 - Every answer 54–59 words, title ≤ 70, description ≤ 155 (checked by the writing script per file).
 - Translation by the assistant directly (no separate machine draft), reviewed in the same pass (D40).
 
+## Done — English routes (2026-11-06)
+Built the English mirrors at `site/src/pages/en/`: articles (`/en/articles/` hub + 7), horoscope (`/en/horoscope/` hub + 12), learn (`/en/learn/`), analyses (`/en/analyses/` hub + 4), about (`/en/about/`), contact (`/en/contact/`). Added a `horoscope` entry to `routes.ts`; made the home sections and `ZodiacWheel` language-aware (English home links only to `/en/...`); wired `paths={{sr,en}}` on the Serbian pages and `en/` pages so hreflang + the language switch point at the real pair; added a short `hubMeta` description to `learn.json` (the `hubIntro` was 174 chars and broke the ≤160 SEO description rule). Build 47 → **76 pages**; `test:seo` 0 failures / 0 pending; `test:html` 0; `test:axe` 0.
+
 ## Not done
-- English `/en/` routes and the English strings and data of the pages Srdjan built (M06–M10): see Next step.
-- Data files and home sections (M14-02 rest): with M05/M08/M09/M10 when their strings exist.
+- (none of the M06–M10 English mirrors remain)
 
 ## Problems and blockers
 - **Answered 2026-11-04 (Gorica, via Filip):** „povezane sa serijom dva” in `astro-vodic-kroz-finansije.md` is translated as “connected with the second house”; she confirmed.

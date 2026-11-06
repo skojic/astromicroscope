@@ -9,15 +9,17 @@ import { pathFor } from '../../../i18n/routes';
 import { videoStrings } from '../../../i18n/videos';
 import { videoObject } from '../../seo/jsonld';
 import VideoPlayer from './VideoPlayer.astro';
-import { formatDate, shortDescription, shortTitle, videoPaths, type Video } from './data';
+import { formatDate, shortDescription, shortTitle, videoPaths, videoTitle, videoSummary, type Video } from './data';
 
 interface Props { lang: Lang; video: Video }
 const { lang, video } = Astro.props;
 const paths = videoPaths(video);
+const pageTitle = videoTitle(video, lang);
+const pageSummary = videoSummary(video, lang) || t(videoStrings, 'metaFallback', lang).replace('{date}', formatDate(video.published, lang));
 const crumbs = [
   { name: t(videoStrings, 'home', lang), url: pathFor('home', lang) },
   { name: t(videoStrings, 'hubTitle', lang), url: pathFor('videos', lang) },
-  { name: video.title, url: paths[lang] },
+  { name: pageTitle, url: paths[lang] },
 ];
 const thumb = await getImage({ src: video.thumbnail, width: 1280, height: 720, format: 'webp' });
 const paragraphs = video.description.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
@@ -25,13 +27,14 @@ const paragraphs = video.description.split(/\n\s*\n/).map((p) => p.trim()).filte
 // title and summary would duplicate the other language's page, so the title gets a language label and the description is
 // written in the page language (no translation of Gorica's text is invented).
 const sameLang = video.lang === lang;
-const fill = (key: string) => t(videoStrings, key, lang).replace('{date}', formatDate(video.published, lang)).replace('{title}', shortTitle(video.title, 80));
+const fill = (key: string) => t(videoStrings, key, lang).replace('{date}', formatDate(video.published, lang)).replace('{title}', shortTitle(pageTitle, 80));
 const suffix = t(videoStrings, 'titleSuffixOtherLang', lang);
-const metaTitle = sameLang ? shortTitle(video.title) : shortTitle(video.title, 60 - suffix.length) + suffix;
-const metaDescription = sameLang ? shortDescription(video.description) || fill('metaFallback') : fill('metaOtherLang');
+const maxMetaTitle = 70;
+const metaTitle = sameLang ? shortTitle(pageTitle, maxMetaTitle) : shortTitle(pageTitle, maxMetaTitle - suffix.length) + suffix;
+const metaDescription = sameLang ? pageSummary : fill('metaOtherLang');
 const jsonLd = videoObject({
-  name: video.title,
-  description: sameLang ? shortDescription(video.description, 300) || metaDescription : metaDescription,
+  name: video.lang === lang ? video.title : pageTitle,
+  description: video.lang === lang ? (shortDescription(video.description, 300) || metaDescription) : metaDescription,
   thumbnail: thumb.src,
   uploadDate: video.publishedAt,
   embedUrl: video.embed,
@@ -39,11 +42,11 @@ const jsonLd = videoObject({
 });
 ---
 <Page lang={lang} title={metaTitle} description={metaDescription} translationKey={`video-${video.id}`}
-  paths={paths} breadcrumbs={crumbs} jsonLd={jsonLd} image={thumb.src} imageAlt={shortTitle(video.title)}>
+  paths={paths} breadcrumbs={crumbs} jsonLd={jsonLd} image={thumb.src} imageAlt={shortTitle(pageTitle)}>
   <div class="container">
     <Breadcrumbs items={crumbs} label="Breadcrumb" />
     <article>
-      <h1 lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{video.title}</h1>
+      <h1 lang={video.lang === 'sr' ? 'sr-Latn' : 'en'}>{pageTitle}</h1>
       <p class="meta">
         {t(videoStrings, 'published', lang)}: <time datetime={video.published}>{formatDate(video.published, lang)}</time>
         {video.lang !== lang && <> · {t(videoStrings, 'inSerbian', lang)}</>}

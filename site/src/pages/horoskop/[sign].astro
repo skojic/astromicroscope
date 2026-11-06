@@ -8,7 +8,7 @@ import { article, person, profilePage, graph } from '../../components/seo/jsonld
 import { horoscopeStrings } from '../../i18n/horoscope';
 import { SIGN_SLUG_SR, SLUG_TO_SIGN } from '../../i18n/horoscope';
 
-// SR only for now; the English /en/horoscope/** mirror is M14 (content is SR-only).
+// SR only; the English /en/horoscope/** mirror is a separate file under pages/en/horoscope/.
 export function getStaticPaths() {
   return Object.entries(SIGN_SLUG_SR).map(([sign, slug]) => ({
     params: { sign: slug },
@@ -30,7 +30,7 @@ const jsonLd = graph(lang, [
 ]);
 const crumbName = horoscopeStrings[sign as keyof typeof horoscopeStrings]?.[lang] ?? sign;
 ---
-<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Godišnji horoskop', url: '/horoskop/' }, { name: crumbName, url }]} jsonLd={jsonLd}>
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Godišnji horoskop', url: '/horoskop/' }, { name: crumbName, url }]} jsonLd={jsonLd} paths={{ sr: url, en: `/en/horoscope/${sign}/` }}>
   <article class="sign-page">
     <div class="container">
       <header class="hero">

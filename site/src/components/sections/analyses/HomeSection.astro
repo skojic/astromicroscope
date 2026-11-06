@@ -6,6 +6,7 @@ import { analyses } from '../../../data/analyses';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const hubPath = lang === 'sr' ? '/analize/' : '/en/analyses/';
 ---
 <section class="analyses-section" aria-labelledby="analyses-title">
   <div class="container">
@@ -13,10 +14,10 @@ const { lang } = Astro.props;
     <p class="intro">{t(analysesStrings, 'hubIntro', lang)}</p>
     <ul class="list">
       {analyses.map((a) => (
-        <li><a href={`/analize/${a.id}/`}>{a.name.sr}</a></li>
+        <li><a href={`${hubPath}${a.id}/`}>{lang === 'sr' ? a.name.sr : a.name.en}</a></li>
       ))}
     </ul>
-    <p class="cta"><a href="/analize/">{t(analysesStrings, 'readAnalysis', lang)} →</a></p>
+    <p class="cta"><a href={hubPath}>{t(analysesStrings, 'readAnalysis', lang)} →</a></p>
   </div>
 </section>
 <style>

@@ -1,0 +1,59 @@
+---
+// M07-02/M07-03 EN: the yearly-horoscope sign page (`/en/horoscope/<sign>/`). Mirrors the SR page with lang="en".
+import Page from '../../../layouts/Page.astro';
+import { getCollection, render } from 'astro:content';
+import AuthorBox from '../../../components/sections/about/AuthorBox.astro';
+import { article, person, profilePage, graph } from '../../../components/seo/jsonld';
+import { t } from '../../../i18n/core';
+import { horoscopeStrings } from '../../../i18n/horoscope';
+import { SIGN_SLUG_SR } from '../../../i18n/horoscope';
+
+export function getStaticPaths() {
+  return Object.keys(SIGN_SLUG_SR).map((sign) => ({ params: { sign }, props: { sign } }));
+}
+const { sign } = Astro.props;
+const lang = 'en' as const;
+const entries = await getCollection('horoscope');
+const entry = entries.find((e) => e.id === `en/2026/${sign}`);
+if (!entry) throw new Error(`Missing horoscope entry: en/2026/${sign}.md (run M14)`);
+const { Content } = await render(entry);
+const { title, description, translationKey, answer } = entry.data;
+const year = entry.data.year;
+const url = `/en/horoscope/${sign}/`;
+const jsonLd = graph(lang, [
+  article({ headline: title, url, published: `${year}-01-01`, lang, description }),
+  person(lang),
+  profilePage(lang, url),
+]);
+const crumbName = horoscopeStrings[sign as keyof typeof horoscopeStrings]?.[lang] ?? sign;
+const hubUrl = '/en/horoscope/';
+const crumbHub = t(horoscopeStrings, 'hubTitle', lang);
+const paths = { sr: `/horoskop/${SIGN_SLUG_SR[sign]}/`, en: url };
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: crumbHub, url: hubUrl }, { name: crumbName, url }]} jsonLd={jsonLd} paths={paths}>
+  <article class="sign-page">
+    <div class="container">
+      <header class="hero">
+        <h1>{title}</h1>
+        <p class="answer">{answer}</p>
+        <AuthorBox lang={lang} headingLevel="h3" />
+      </header>
+      <div class="body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Page>
+<style>
+  .sign-page { padding: var(--am-space-8) 0 var(--am-space-8); }
+  .hero { margin-bottom: var(--am-space-6); max-width: var(--am-measure); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
+  .answer { font-size: 1.125rem; font-weight: 500; margin-bottom: 0; max-width: var(--am-measure); padding: var(--am-space-4); background: var(--am-bg-alt); border-left: 3px solid var(--am-action); }
+  .body :global(h2) { margin: var(--am-space-7) 0 var(--am-space-4); font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .body :global(h3) { margin: var(--am-space-6) 0 var(--am-space-3); }
+  .body :global(p) { max-width: var(--am-measure); line-height: 1.75; }
+  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
+  .body :global(a) { color: var(--am-action); }
+  .body :global(ul), .body :global(ol) { padding-left: var(--am-space-4); }
+  .body :global(li) { line-height: 1.75; }
+</style>

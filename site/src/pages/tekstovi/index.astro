@@ -16,7 +16,7 @@ const items = (await getCollection('articles'))
 const title = t(articleStrings, 'hubTitle', lang);
 const description = t(articleStrings, 'hubIntro', lang);
 ---
-<Page lang={lang} title={title} description={description} translationKey="articles" breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }]}>
+<Page lang={lang} title={title} description={description} translationKey="articles" breadcrumbs={[{ name: 'Tekstovi', url: '/tekstovi/' }]} paths={{ sr: '/tekstovi/', en: '/en/articles/' }}>
   <div class="hub">
     <div class="container">
       <h1>{title}</h1>

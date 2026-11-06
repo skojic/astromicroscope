@@ -16,7 +16,7 @@ const title = a.name.sr;
 const description = a.summary.sr.slice(0, 120);
 const url = `/analize/${id}/`;
 ---
-<Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }, { name: a.name.sr, url }]}>
+<Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: 'Individualne analize', url: '/analize/' }, { name: a.name.sr, url }]} paths={{ sr: url, en: `/en/analyses/${id}/` }}>
   <article class="analysis">
     <div class="container">
       <header>
