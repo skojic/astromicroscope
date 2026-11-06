@@ -10,7 +10,7 @@
 | Last updated | 2026-11-04 |
 
 ## Next step
-M12-01, M12-02, M12-04 and M12-05 are built, and the **consent wording is approved (D53)** — one shared consent reused on the newsletter, course waitlist and analysis-request forms. Remaining: prove the live double opt-in (run a real form submission once M12-02 is deployed), then M12-03 (Email Service) once the domain's DNS is on Cloudflare (M13).
+M12-01, M12-02, M12-04 and M12-05 are built, and the **consent wording is approved (D53)** — one shared consent reused on the newsletter, course waitlist and analysis-request forms. Remaining: prove the live double opt-in (run a real form submission once M12-02 is deployed), then M12-03 (Email Service) once the **DNS move** is done (D54: no fixed date; the 2026-11-29 registrar transfer is separate and not a blocker).
 
 ## Done
 - 2026-11-04, M12-01 scaffold (D44): `site/src/worker/index.ts` — a Worker `fetch` that answers only `/api/` paths (wrangler `main` and `assets.run_worker_first: ["/api/*"]`), with a `/api/newsletter` endpoint that validates JSON, rejects the honeypot, checks a signed timestamp and an HMAC-SHA-256 signature, validates the email and the list/lang, and rate-limits per IP (stub Map); provider calls left as marked TO DO. `site/wrangler.jsonc` now sets `main` to the script and `run_worker_first` to `["/api/*"]`. i18n strings in `site/src/i18n/newsletter.{json,ts}` and a `site/src/components/sections/newsletter/HomeSection.astro` form. Evidence: `npm run build` → 18 pages, exit 0; the worker bundles clean under esbuild; `wrangler deploy --dry-run` reads config without error.
@@ -26,7 +26,7 @@ M12-01, M12-02, M12-04 and M12-05 are built, and the **consent wording is approv
 - M12-05: the Web Analytics **site was created in the dashboard and the token wired** — `PUBLIC_CF_WEB_ANALYTICS_TOKEN` set as a repo secret (`a04…822`, not secret, D44) and exported in the `site-ci` production SEO-audit step so the production build embeds the beacon. Note: the live preview deploy is non-production (D36) so the beacon will not fire there — it activates only when the production build runs at launch (M13); the launch deploy step must export the same secret. Consent copy not yet approved by Gorica (acceptance criterion).
 
 ## Problems and blockers
-- Real contact mail waits on DNS on Cloudflare (M13, from ~2026-11-29); the double-opt-in email depends on the same (M12-03).
+- Real contact mail waits on the **DNS move** (D54: no fixed date — as soon as a fresh Cloudflare token and the Hostinger nameserver paste exist; **not** the 2026-11-29 registrar transfer, which is a separate, optional step); the double-opt-in email depends on the same (M12-03).
 - `FORM_SIGNING_SECRET`, `MAILERLITE_API_KEY` and the two group-id secrets exist as Worker secrets (not in the repo): done.
 
 ## Decisions taken in this module
