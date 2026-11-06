@@ -12,7 +12,6 @@ quote:
   author: "Abraham Maslow"
 ephemerisChecked: true
 oldUrl: "/ljudi-su-vise-od-onoga-sto-se-vidi-na-prvi-pogled-njihov-pravi-potencijal-lezi-u-tome-sta-su-sposobni-postati-a-ne-u-onome-sta-trenutno-jesu-abraham-maslow/"
-draft: true
 ---
 
 Sunce je centralna tačka našeg neba i srce solarnog sistema oko kojeg se kreću sve planete. U najdubljem smislu, ono simbolizuje centar naše svesti o sebi, naš ego. Sunce donosi svetlost, razdvaja dan i noć i predstavlja izvor života. Njegov položaj u horoskopu ukazuje na značaj određene oblasti u životu osobe, bilo kroz znak u kojem se nalazi, bilo kroz astrološku kuću koju zauzima.

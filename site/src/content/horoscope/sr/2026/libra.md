@@ -17,7 +17,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/vaga/"
-draft: true
 ---
 
 ## Opšta slika godine

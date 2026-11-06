@@ -13,7 +13,6 @@ transits:
     to: 2028-04-13
 ephemerisChecked: true
 oldUrl: "/skorpija/"
-draft: true
 ---
 
 ## Opšta energija godine

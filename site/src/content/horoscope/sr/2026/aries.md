@@ -25,7 +25,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/ovan/"
-draft: true
 ---
 
 ## Zašto je 2026. prelomna godina za Ovna?
