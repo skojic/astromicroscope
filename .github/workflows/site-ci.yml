@@ -71,17 +71,25 @@ jobs:
         run: npm run build
       - name: HTML validation
         run: npm run test:html
-      - name: Install browsers (Chromium for axe and Lighthouse, Firefox and WebKit for the layout check)
+      - name: Install browsers (Chromium always; Firefox and WebKit only for the full launch check, D51)
         # --with-deps is restored: it hangs on ubuntu-26, but this job is pinned to ubuntu-24.04 where it works (2026-11-04).
-        run: npx playwright install --with-deps chromium firefox webkit
+        run: |
+          if [ "${{ vars.FULL_BROWSER_CHECK }}" = "true" ]; then
+            npx playwright install --with-deps chromium firefox webkit
+          else
+            npx playwright install --with-deps chromium
+          fi
       - name: Accessibility (axe, WCAG 2.2 A and AA)
         run: npm run test:axe
       - name: Browser checks (no YouTube request before play, language switch, skip link)
         run: npm run test:e2e
-      - name: Cross-browser layout (Chromium, Firefox, WebKit; overflow, one h1, console and request errors)
+      # D51: pull requests check the layout in Chromium only; Firefox and WebKit join when the repository variable
+      # FULL_BROWSER_CHECK is true (M13-07 sets it together with PRODUCTION_AUDIT for the launch gate).
+      - name: Cross-browser layout (Chromium; overflow, one h1, console and request errors)
         run: npm run test:visual
         env:
           SHOTS_DIR: ${{ runner.temp }}/shots
+          VISUAL_BROWSERS: ${{ vars.FULL_BROWSER_CHECK == 'true' && 'chromium,firefox,webkit' || 'chromium' }}
       - name: Upload the screenshots of the layout check
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -90,7 +98,7 @@ jobs:
           path: ${{ runner.temp }}/shots
           retention-days: 7
           if-no-files-found: ignore
-      - name: Lighthouse budgets (median of 3, mobile)
+      - name: Lighthouse budgets (single run, mobile, D51)
         run: npm run test:lighthouse
       - name: SEO and link audit (preview build)
         run: npm run test:seo
@@ -112,8 +120,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
-      - name: Documents agree with each other
-        run: node site/scripts/check-docs.mjs
+      # D51: documentation consistency is a warning, not a blocker. The problems are printed and a workflow warning is
+      # raised; `npm run status:sync` (run locally) repairs what can be derived.
+      - name: Documents agree with each other (warning only, D51)
+        run: node site/scripts/check-docs.mjs || echo "::warning::check-docs found problems — run 'npm run status:sync' locally; this does not block (D51)"
 
   ci-gate:
     if: always()

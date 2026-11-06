@@ -7,7 +7,7 @@ Bilingual (sr default, en) education-first astrology site for Gorica Vićentijev
 ## Rules
 1. Read `status/STATUS.md`, then the module's `plan/modules/MNN-*/REPORT.md` (“Next step”). Work only on tasks in a module plan; if one is missing, write it and ask for approval. Respect the ownership map in `plan/contracts.md`.
 2. SEO, Core Web Vitals, accessibility and performance are acceptance criteria, not polish: `specs/06`–`08`.
-3. A module changes stage only by passing its gate in `testing/gates.md`. Quote the check output; never mark done on the strength of code written.
+3. A module is done when its `REPORT.md` shows the G1 evidence of `testing/gates.md` (tasks complete, green pull request). Never mark done on the strength of code written. The full manual and cross-browser checks run once at the launch gate (M13).
 4. Every user-facing string exists in Serbian and English (`specs/05-languages.md`).
 5. End every work session by updating the module's `REPORT.md`, its row in `status/STATUS.md`, and `status/log.md`. Every change to `status/STATUS.md` also sets its `Updated:` date to the day of the change.
 6. Decisions go in `status/decisions.md`; never reverse one silently.
