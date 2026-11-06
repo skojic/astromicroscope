@@ -25,7 +25,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/bik/"
-draft: true
 ---
 
 Od 2018. godine, otkako je Uran ušao u znak Bika, pa se kratko vratio u Ovna i potom 2019. ponovo ušao u Bika, pripadnici ovog znaka nalaze se u dugotrajnom procesu unutrašnjih i spoljašnjih promena. Uran je mnoge Bikove pokrenuo, pomerio iz zone komfora i postavio pred njih potrebu da budu nezavisniji, iskreniji prema sebi i spremni na promene koje menjaju život.

@@ -9,7 +9,6 @@ topics: [transits, karmic]
 answer: "Saturn kroz četvrtu kuću dotiče naše korene, porodicu, dom i osećaj sigurnosti. Može doneti gubitke, selidbe i promene na koje ne možemo da utičemo, ali i vreme kada gradimo nove temelje. U ovoj ličnoj priči opisujem kako me je pravilo „prvo Saturn, pa sve ostalo” vratilo na noge."
 ephemerisChecked: true
 oldUrl: "/saturn/"
-draft: true
 ---
 
 **Prvo Saturn, pa sve ostalo**

@@ -13,7 +13,6 @@ transits:
     to: 2028-04-13
 ephemerisChecked: true
 oldUrl: "/devica/"
-draft: true
 ---
 
 Početak 2026. može doneti osećaj pojačane aktivnosti i rasplinutosti. Mnoge Device će biti usmerene na više strana istovremeno, trošeći energiju i preuzimajući previše obaveza, što može izazvati iscrpljenost, zabrinutost i psihički umor. Najvažnije je u prvim mesecima godine postaviti jasne granice prema drugima i prema sebi, pomeriti fokus sa „moram sve“ na „biram ono što je suštinski važno“ i naučiti da razlikuješ ono što troši tvoju snagu od onoga što te izgrađuje.

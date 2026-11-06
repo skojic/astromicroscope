@@ -4,7 +4,6 @@ description: "Gorica Vićentijević, profesionalni astrolog (Institut Johannes K
 lang: sr
 translationKey: about
 updated: 2026-11-04
-draft: true
 ---
 
 > „Sve dok nesvesno ne postane svesno, ono će upravljati tvojim životom, a ti ćeš to zvati sudbinom.“

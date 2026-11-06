@@ -9,7 +9,6 @@ topics: [finances]
 answer: "Put do novca u natalnoj karti najviše pokazuje druga kuća: znak na njenom početku, planete u njoj i njen vladar, koji otkriva gde i kako novac dolazi. Jupiter je glavni pokazatelj novca, Venera govori o vrednostima i uživanju, a osma kuća o novcu od partnera, nasledstva i ulaganja."
 ephemerisChecked: true
 oldUrl: "/astro-vodic-kroz-finansije/"
-draft: true
 ---
 
 U svakom horoskopu postoji više kanala i načina za sticanje novca. Važno je prepoznati koji je primarni kanal, jer upravo on pokazuje kako osoba najprirodnije ostvaruje materijalnu sigurnost.

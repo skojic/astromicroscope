@@ -21,7 +21,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/strelac/"
-draft: true
 ---
 
 ## Opšta energija godine

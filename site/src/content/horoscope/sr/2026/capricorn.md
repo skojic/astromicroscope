@@ -17,7 +17,6 @@ transits:
     to: 2032-08-03
 ephemerisChecked: true
 oldUrl: "/jarac/"
-draft: true
 ---
 
 ## Opšta energija godine

@@ -9,7 +9,6 @@ topics: [karmic]
 answer: "Povratak sebi počinje kada prestaneš da čekaš spoljni spas i preuzmeš odgovornost za svoj život. Ključ je prihvatanje: sebe, porodice i ljudi oko sebe, bez osuđivanja. Kada oprostiš onima koji su te povredili i zahvališ ocu i majci, svom Suncu i Mesecu, otkrivaš svoju snagu i svoje granice."
 ephemerisChecked: true
 oldUrl: "/kako-da-vratis-sebe-sebi/"
-draft: true
 ---
 
 **Povratak sebi počinje onog trenutka kada prestaneš da čekaš spoljni spas i odlučiš da oslobodiš svoju dušu.**

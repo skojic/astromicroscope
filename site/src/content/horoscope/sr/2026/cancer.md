@@ -21,7 +21,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/rak/"
-draft: true
 ---
 
 2026. godina donosi Rakovima period u kom se ponovo grade mir, stabilnost i osećaj sigurnog tla pod nogama.

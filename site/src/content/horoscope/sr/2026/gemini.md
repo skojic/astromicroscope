@@ -17,7 +17,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/blizanci/"
-draft: true
 ---
 
 **2026. godina za Blizance donosi snažnu unutrašnju i spoljašnju transformaciju.**

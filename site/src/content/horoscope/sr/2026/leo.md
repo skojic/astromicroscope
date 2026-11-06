@@ -21,7 +21,6 @@ transits:
     to: 2027-07-26
 ephemerisChecked: true
 oldUrl: "/lav/"
-draft: true
 ---
 
 ## Zašto je 2026. posebna za Lava?
