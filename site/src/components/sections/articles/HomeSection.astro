@@ -36,13 +36,13 @@ const restCards: Shared[] = rest.map((i) => ({ href: `/tekstovi/${i.id.replace('
   </div>
 </section>
 <style>
-  .articles { padding: var(--am-space-9) 0; background: var(--am-bg); }
-  h2 { margin-bottom: var(--am-space-5); }
-  .featured { display: block; padding: var(--am-space-5); border-radius: var(--am-radius); background: var(--am-bg-subtle, #f4f1ea); text-decoration: none; color: var(--am-ink); margin-bottom: var(--am-space-4); }
+  .articles { padding: var(--am-space-8) 0; background: var(--am-bg); }
+  h2 { margin: 0 0 var(--am-space-5); }
+  .featured { display: block; padding: var(--am-space-5); border-radius: var(--am-radius-card); background: var(--am-bg-alt); text-decoration: none; color: var(--am-ink); margin-bottom: var(--am-space-4); }
   .featured h3 { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
   .featured p { margin: 0; line-height: 1.6; }
   .list { list-style: none; padding: 0; margin: 0 0 var(--am-space-4); display: grid; gap: var(--am-space-3); }
-  .card { display: block; padding: var(--am-space-4); border-radius: var(--am-radius); border: 1px solid var(--am-line, #d3d8df); text-decoration: none; color: var(--am-ink); }
+  .card { display: block; padding: var(--am-space-4); border-radius: var(--am-radius-card); border: 1px solid var(--am-line); text-decoration: none; color: var(--am-ink); }
   .card h3 { margin: 0 0 var(--am-space-1); font: var(--am-text-ui); }
   .card p { margin: 0; line-height: 1.6; font-size: .95rem; }
   .actions a { color: var(--am-action); }

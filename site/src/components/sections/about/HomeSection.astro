@@ -1,33 +1,57 @@
 ---
 // Home section (M10-03): a short about intro linking to the full About page. M05 imports this with one prop, `lang`
-// (plan/contracts.md section 5).
+// (plan/contracts.md section 5). Own layout: arch portrait beside the text on a beige band; the shared AuthorBox
+// stays for articles and horoscope pages.
+import { Image } from 'astro:assets';
 import { t, type Lang } from '../../../i18n/core';
 import { aboutStrings } from '../../../i18n/about';
 import { pathFor } from '../../../i18n/routes';
-import AuthorBox from './AuthorBox.astro';
+import portrait from '../../../assets/gorica-portret.jpg';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
 <section class="about-section" aria-labelledby="about-title">
-  <div class="container">
-    <h2 id="about-title">{t(aboutStrings, 'homeTitle', lang)}</h2>
-    <div class="grid">
-      <div class="text">
-        <p>{t(aboutStrings, 'homeIntro', lang)}</p>
-        <p><a href={pathFor('about', lang)}>{lang === 'sr' ? 'Više o meni →' : 'More about me →'}</a></p>
-      </div>
-      <div class="author">
-        <AuthorBox lang={lang} headingLevel="h3" />
-      </div>
+  <div class="container grid">
+    <div class="portrait">
+      <Image src={portrait} alt={t(aboutStrings, 'authorBoxAlt', lang)} width={640} loading="lazy" />
+    </div>
+    <div class="text">
+      <h2 id="about-title">{t(aboutStrings, 'homeTitle', lang)}</h2>
+      <p class="intro">{t(aboutStrings, 'homeIntro', lang)}</p>
+      <p class="who">
+        <strong>Gorica Vićentijević</strong>
+        <span>{t(aboutStrings, 'credential', lang)}</span>
+      </p>
+      <p class="links">
+        <a class="more" href={pathFor('about', lang)}>{lang === 'sr' ? 'Više o meni →' : 'More about me →'}</a>
+        <span class="socials">
+          <a href="https://www.instagram.com/astromicroscope/" rel="noopener">Instagram</a>
+          <a href="https://www.youtube.com/@astromicroscope" rel="noopener">YouTube</a>
+        </span>
+      </p>
     </div>
   </div>
 </section>
 <style>
-  .about-section { padding: var(--am-space-9) 0; background: var(--am-bg); }
-  h2 { margin-bottom: var(--am-space-3); }
-  .grid { display: grid; grid-template-columns: 1fr 260px; gap: var(--am-space-6); align-items: start; }
-  .text p { margin: 0 0 var(--am-space-4); line-height: 1.7; }
+  .about-section { padding: var(--am-space-8) 0; background: var(--am-bg-alt); }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--am-space-6); align-items: center; }
+  .portrait { width: 200px; margin-left: 10px; position: relative; }
+  .portrait :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: var(--am-radius-arch); }
+  /* Gold hairline echoes the arch, offset so the portrait sits inside a second contour. */
+  .portrait::after { content: ''; position: absolute; inset: -10px; border: var(--am-hairline-gold); border-radius: var(--am-radius-arch); pointer-events: none; }
+  .text { max-width: var(--am-measure); }
+  h2 { margin: 0 0 var(--am-space-5); font-size: clamp(2rem, 3.4vw, 2.9rem); text-wrap: balance; }
+  .intro { margin: 0 0 var(--am-space-5); line-height: 1.7; }
+  .who { margin: 0 0 var(--am-space-5); display: flex; flex-direction: column; gap: var(--am-space-1); }
+  .who strong { font: var(--am-text-h4); letter-spacing: var(--am-tracking-heading); }
+  .who span { font: var(--am-text-small); color: var(--am-muted); }
+  .links { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--am-space-3) var(--am-space-6); }
+  .socials { display: flex; gap: var(--am-space-5); }
   a { color: var(--am-action); }
-  @media (max-width: 767px) { .grid { grid-template-columns: 1fr; } }
+  .more { font: var(--am-text-ui); }
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 300px minmax(0, 1fr); gap: var(--am-space-9); }
+    .portrait { width: 300px; }
+  }
 </style>

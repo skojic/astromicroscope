@@ -34,18 +34,18 @@ const description = t(learnStrings, 'hubIntro', lang);
   </div>
 </Page>
 <style>
-  .hub { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
-  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); }
-  .intro { margin: 0 0 var(--am-space-7); max-width: 64ch; line-height: 1.7; }
-  .block { margin-bottom: var(--am-space-8); }
+  .hub { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); max-width: var(--am-measure); }
+  .intro { margin: 0 0 var(--am-space-7); max-width: var(--am-measure); line-height: 1.7; }
+  .block { margin-bottom: var(--am-space-7); }
   .block h2 { margin: 0 0 var(--am-space-3); }
-  .block > p { margin: 0 0 var(--am-space-5); max-width: 64ch; line-height: 1.7; }
+  .block > p { margin: 0 0 var(--am-space-5); max-width: var(--am-measure); line-height: 1.7; }
   .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--am-space-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius); border: 1px solid var(--am-line, #d3d8df); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
+  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius-card); border: 1px solid var(--am-line); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
   .card:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .card h3 { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
   .card p { margin: 0; line-height: 1.6; font-size: .95rem; }
-  .waitlist { padding: var(--am-space-6); border-radius: var(--am-radius); background: var(--am-bg-subtle, #f4f1ea); border: 1px solid var(--am-line, #d3d8df); }
+  .waitlist { padding: var(--am-space-5); border-radius: var(--am-radius-card); background: var(--am-bg-alt); border: 1px solid var(--am-line); max-width: var(--am-measure); }
   .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
   .btn:hover { background: var(--am-action-hover); }
   .note { margin-top: var(--am-space-3); color: var(--am-muted); font-size: .9rem; }

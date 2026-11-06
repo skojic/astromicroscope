@@ -40,11 +40,11 @@ const description = t(articleStrings, 'hubIntro', lang);
   </div>
 </Page>
 <style>
-  .hub { padding: var(--am-space-8) 0 calc(var(--am-space-9) * 2); }
+  .hub { padding: var(--am-space-8) 0 var(--am-space-8); }
   h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
   .intro { margin: 0 0 var(--am-space-6); max-width: 64ch; }
   .list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--am-space-4); }
-  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius); border: 1px solid var(--am-line, #d3d8df); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
+  .card { display: block; padding: var(--am-space-5); border-radius: var(--am-radius-card); border: 1px solid var(--am-line); text-decoration: none; color: var(--am-ink); transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease); }
   .card:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .card h2 { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); }
   .card .desc { margin: 0 0 var(--am-space-2); line-height: 1.6; }

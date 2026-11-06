@@ -41,15 +41,20 @@ const year = new Date().getFullYear();
   <p class="container rights">© {year} {t(shellStrings, 'rights', lang)}</p>
 </footer>
 <style>
-  .site-footer { background: var(--am-midnight); color: var(--am-sky-text); padding: var(--am-space-8) 0 var(--am-space-6); margin-top: var(--am-space-9); font: var(--am-text-small); }
-  .grid { display: grid; gap: var(--am-space-6); grid-template-columns: 1fr; }
-  @media (min-width: 768px) { .grid { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; } }
+  .site-footer { background: var(--am-midnight); color: var(--am-sky-text); padding: var(--am-space-8) 0 var(--am-space-6); margin-top: var(--am-space-8); font: var(--am-text-small); }
+  .grid { display: grid; gap: var(--am-space-6) var(--am-space-7); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 768px) {
+    .grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); }
+  }
+  .who { min-width: 0; }
   .brand { display: inline-flex; align-items: center; gap: var(--am-space-3); color: var(--am-sky-text); text-decoration: none; margin-bottom: var(--am-space-4); }
   .name { font: 500 1.25rem/1.2 var(--am-font-serif); }
-  h2 { font: var(--am-text-label); letter-spacing: .08em; text-transform: uppercase; color: var(--am-gold); margin-bottom: var(--am-space-3); }
+  h2 { font: var(--am-text-label); letter-spacing: .08em; text-transform: uppercase; color: var(--am-gold); margin: 0 0 var(--am-space-3); }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--am-space-1); }
-  a { color: var(--am-sky-text); display: inline-block; padding: var(--am-space-1) 0; text-underline-offset: .18em; }
+  ul li:last-child a { padding-bottom: 0; }
+  a { color: var(--am-sky-text); display: inline-block; padding: var(--am-space-1) 0; line-height: 1.6; text-underline-offset: .18em; }
   a:hover { color: var(--am-white); }
+  .who :global(.langs) { margin-top: var(--am-space-3); }
   .rights { margin: var(--am-space-7) auto 0; padding-top: var(--am-space-5); border-top: var(--am-hairline-gold); color: var(--am-sky-text); max-width: none; }
   /* language switch on dark */
   .who :global(a) { color: var(--am-sky-text); }
