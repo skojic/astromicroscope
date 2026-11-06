@@ -19,6 +19,7 @@ const p = (s: string, en: string) => (lang === 'sr' ? s : en);
     <p class="waitlist">
       <strong>{t(learnStrings, 'coursesTitle', lang)}</strong> · {t(learnStrings, 'coursesIntro', lang)}
       <a class="btn" href={p('/edukacija/', '/en/learn/')}>{t(learnStrings, 'waitlistBtn', lang)}</a>
+      <span class="consent">{t(learnStrings, 'consent', lang)}</span>
     </p>
   </div>
 </section>
@@ -31,4 +32,5 @@ const p = (s: string, en: string) => (lang === 'sr' ? s : en);
   .links a:hover { border-color: var(--am-action); }
   .waitlist { margin: 0; padding: var(--am-space-4); border-radius: var(--am-radius-card); background: var(--am-bg-alt); max-width: 64ch; }
   .btn { display: table; margin-top: var(--am-space-3); padding: 12px 20px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
+  .consent { display: block; margin-top: var(--am-space-2); font: var(--am-text-small); color: var(--am-muted); }
 </style>
