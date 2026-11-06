@@ -45,5 +45,6 @@ M07-01..M07-04 effectively built (SR): hub, zodiac wheel, sign pages, home secti
 | `check-docs` | 0 problems | 2026-11-05 |
 
 ## History
+- 2026-11-06: gold zodiac glyphs instead of the blue dots in the sign grid (Gorica's request, via Filip); `ZodiacWheel.astro` + `zodiacGlyphs.ts` (Tabler Icons, MIT).
 - 2026-11-05: M07-01..04 built (SR) by Srdjan.
 - 2026-11-02: plan created.
