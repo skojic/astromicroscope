@@ -10,7 +10,7 @@
 | Last updated | 2026-11-04 |
 
 ## Next step
-M12-01, M12-02, M12-04 and M12-05 are built. Remaining: prove the live double opt-in (run a real form submission once M12-02 is deployed), then M12-03 (Email Service) once the domain's DNS is on Cloudflare (M13), then the **consent wording approval** (see Problems). Read `PLAN.md` and `plan/contracts.md` before extending.
+M12-01, M12-02, M12-04 and M12-05 are built, and the **consent wording is approved (D53)** — one shared consent reused on the newsletter, course waitlist and analysis-request forms. Remaining: prove the live double opt-in (run a real form submission once M12-02 is deployed), then M12-03 (Email Service) once the domain's DNS is on Cloudflare (M13).
 
 ## Done
 - 2026-11-04, M12-01 scaffold (D44): `site/src/worker/index.ts` — a Worker `fetch` that answers only `/api/` paths (wrangler `main` and `assets.run_worker_first: ["/api/*"]`), with a `/api/newsletter` endpoint that validates JSON, rejects the honeypot, checks a signed timestamp and an HMAC-SHA-256 signature, validates the email and the list/lang, and rate-limits per IP (stub Map); provider calls left as marked TO DO. `site/wrangler.jsonc` now sets `main` to the script and `run_worker_first` to `["/api/*"]`. i18n strings in `site/src/i18n/newsletter.{json,ts}` and a `site/src/components/sections/newsletter/HomeSection.astro` form. Evidence: `npm run build` → 18 pages, exit 0; the worker bundles clean under esbuild; `wrangler deploy --dry-run` reads config without error.
