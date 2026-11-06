@@ -4,9 +4,14 @@ import Page from '../../../layouts/Page.astro';
 import { t } from '../../../i18n/core';
 import { horoscopeStrings } from '../../../i18n/horoscope';
 import ZodiacWheel from '../../../components/sections/horoscope/ZodiacWheel.astro';
+import { getCollection } from 'astro:content';
 
 const lang = 'en';
 const year = 2026;
+// The lens shows each sign's opening paragraph (the `answer` of its page, M07-05).
+const answers = Object.fromEntries(
+  (await getCollection('horoscope', (e) => e.data.lang === 'en' && e.data.year === year)).map((e) => [e.data.sign, e.data.answer]),
+);
 const title = t(horoscopeStrings, 'hubTitle', lang);
 const description = t(horoscopeStrings, 'hubIntro', lang);
 const url = '/en/horoscope/';
@@ -16,7 +21,7 @@ const url = '/en/horoscope/';
     <div class="container">
       <h1>{title}</h1>
       <p class="intro">{t(horoscopeStrings, 'listIntro', lang)}</p>
-      <ZodiacWheel lang={lang} year={year} />
+      <ZodiacWheel lang={lang} year={year} answers={answers} />
     </div>
   </div>
 </Page>

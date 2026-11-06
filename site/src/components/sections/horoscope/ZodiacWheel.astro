@@ -1,6 +1,7 @@
 ---
-// Zodiac wheel / sign grid (M07-01): a navigable list of all 12 sign links. No JS needed (works for keyboard/screen
-// readers); a JS lens/preview enhancement can layer on later. 3×4 grid under 768 px.
+// Zodiac wheel / sign grid (M07-01, lens M07-05): a navigable list of all 12 sign links. No JS needed (works for keyboard/screen
+// readers); the lens is a progressive enhancement (plan/concept.md, signature interaction 3): choosing a sign moves the lens to it
+// and shows its opening paragraph. 3×4 grid under 768 px; the lens is desktop-only (concept.md, Mobile and tablet).
 import { t, type Lang } from '../../../i18n/core';
 import { horoscopeStrings } from '../../../i18n/horoscope';
 import { signName, SIGN_SLUG_SR } from '../../../i18n/horoscope';
@@ -10,18 +11,22 @@ interface Props {
   lang: Lang;
   year: number;
   headingLevel?: 'h2' | 'h3';
+  /** Opening paragraph per sign (the `answer` of the sign page), shown in the lens. Without it the lens only marks the sign. */
+  answers?: Record<string, string>;
 }
-const { lang, year, headingLevel = 'h2' } = Astro.props;
+const { lang, year, headingLevel = 'h2', answers } = Astro.props;
 const Heading = headingLevel;
 const signs = Object.keys(SIGN_SLUG_SR);
+const hasLens = Boolean(answers && Object.keys(answers).length > 0);
+const readLabel = t(horoscopeStrings, 'readHoroscope', lang);
 ---
-<nav class="zodiac" aria-label={t(horoscopeStrings, 'ariaSignLinks', lang)}>
+<nav class="zodiac" aria-label={t(horoscopeStrings, 'ariaSignLinks', lang)} data-zodiac data-lens={hasLens ? '' : undefined}>
   <div class="grid">
     {signs.map((sign) => {
       const slug = SIGN_SLUG_SR[sign];
       const href = lang === 'sr' ? `/horoskop/${slug}/` : `/en/horoscope/${sign}/`;
       return (
-        <a class="sign" href={href}>
+        <a class="sign" href={href} data-sign={sign} aria-current={undefined}>
           <svg class="glyph" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             {ZODIAC_GLYPHS[sign].map((d) => <path d={d} />)}
           </svg>
@@ -31,7 +36,60 @@ const signs = Object.keys(SIGN_SLUG_SR);
       );
     })}
   </div>
+  {hasLens && (
+    <div class="lens" data-lens-panel hidden aria-live="polite">
+      <p class="lens-name" data-lens-name></p>
+      <p class="lens-text" data-lens-text></p>
+    </div>
+  )}
 </nav>
+{hasLens && (
+  <script type="application/json" data-lens-data set:html={JSON.stringify({ answers, readLabel })} />
+)}
+{hasLens && (
+  <script>
+    // Progressive enhancement: without JS the wheel stays a plain list of 12 links (concept.md).
+    // The lens follows the chosen sign (click, focus or arrow keys) and shows its opening paragraph.
+    const data = JSON.parse(document.querySelector('[data-lens-data]').textContent);
+    for (const nav of document.querySelectorAll('[data-zodiac][data-lens]')) {
+      const panel = nav.querySelector('[data-lens-panel]');
+      const nameEl = nav.querySelector('[data-lens-name]');
+      const textEl = nav.querySelector('[data-lens-text]');
+      const signs = [...nav.querySelectorAll('.sign')];
+      if (!panel || !nameEl || !textEl) continue;
+      const show = (sign) => {
+        const text = data.answers[sign.dataset.sign];
+        if (!text) return;
+        for (const s of signs) s.removeAttribute('aria-current');
+        sign.setAttribute('aria-current', 'true');
+        nameEl.textContent = sign.querySelector('.name').textContent;
+        textEl.textContent = text;
+        let link = panel.querySelector('[data-lens-link]');
+        if (!link) {
+          link = document.createElement('a');
+          link.className = 'lens-link';
+          link.dataset.lensLink = '';
+          panel.append(link);
+        }
+        link.href = sign.href;
+        link.textContent = data.readLabel;
+        panel.hidden = false;
+      };
+      for (const sign of signs) {
+        sign.addEventListener('click', () => show(sign));
+        sign.addEventListener('focus', () => show(sign));
+      }
+      nav.addEventListener('keydown', (event) => {
+        const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+        if (!step) return;
+        const current = signs.indexOf(document.activeElement);
+        if (current === -1) return;
+        event.preventDefault();
+        signs[(current + step + signs.length) % signs.length].focus();
+      });
+    }
+  </script>
+)}
 <style>
   .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--am-space-3); list-style: none; padding: 0; margin: 0; }
   .sign {
@@ -42,10 +100,23 @@ const signs = Object.keys(SIGN_SLUG_SR);
   }
   .sign:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .sign:focus-visible { outline: 2px solid var(--am-focus); outline-offset: 2px; }
+  /* The lens: the chosen sign gets the gold hairline of the brand kit (direction D). */
+  .sign[aria-current="true"] { border-color: var(--am-gold); box-shadow: 0 0 0 1px var(--am-gold), 0 4px 16px rgba(212, 175, 92, .22); }
   /* Gold zodiac glyph (Gorica, 2026-11-06), decorative: the sign name next to it carries the meaning. */
   .glyph { width: 32px; height: 32px; color: var(--am-gold); flex: none; margin: 0 auto; }
   .name { font: var(--am-text-ui); font-weight: 600; text-align: center; max-width: 100%; line-height: 1.25; }
   .year { font: var(--am-text-small, var(--am-text-body)); color: var(--am-muted); }
+  .lens {
+    margin-top: var(--am-space-5); padding: var(--am-space-5); border-radius: var(--am-radius-card);
+    background: var(--am-white); border: 1px solid var(--am-line); border-left: 3px solid var(--am-gold);
+  }
+  .lens-name { margin: 0 0 var(--am-space-2); font: var(--am-text-h4); }
+  .lens-text { margin: 0 0 var(--am-space-4); max-width: var(--am-measure); }
+  .lens-link { font: var(--am-text-ui); color: var(--am-action); text-decoration: underline; text-underline-offset: 3px; }
+  .lens-link:hover { color: var(--am-action-hover); }
+  .lens-link:focus-visible { outline: 2px solid var(--am-focus); outline-offset: 2px; }
   @media (max-width: 767px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  /* The lens is desktop-only (concept.md): on touch screens the wheel stays a plain grid of links. */
+  @media (hover: none) and (pointer: coarse) { .lens { display: none; } }
 </style>

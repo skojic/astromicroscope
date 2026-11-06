@@ -3,6 +3,7 @@
 //  2. Playing a video swaps in a youtube-nocookie iframe.
 //  3. The language switch on a video page goes to the same video in the other language.
 //  4. Every page has exactly one h1 and a skip link that lands on <main>.
+//  5. The zodiac wheel lens (M07-05): choosing a sign shows its opening paragraph; without JS the wheel is a plain list.
 import { readdir } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -43,6 +44,33 @@ if (video) {
   check(page.url() === base + video.replace('/video/', '/en/videos/'), `${video}: language switch went to ${page.url()}`);
   await page.close();
 } else console.log('no video pages: checks 1-3 skipped');
+
+// 5: zodiac wheel lens (M07-05)
+for (const hub of ['/horoskop/', '/en/horoscope/']) {
+  if (!urls.includes(hub)) continue;
+  const lens = await browser.newPage();
+  await lens.goto(base + hub);
+  const panel = lens.locator('[data-lens-panel]');
+  check(await panel.isHidden(), `${hub}: lens is visible before a sign is chosen`);
+  // The signs are links: stop the navigation so the lens can be observed on the hub itself.
+  await lens.evaluate(() => document.querySelectorAll('.sign').forEach((a) => a.addEventListener('click', (e) => e.preventDefault())));
+  const first = lens.locator('.sign').first();
+  await first.click();
+  check(await panel.isVisible(), `${hub}: lens did not open after choosing a sign`);
+  const text = (await lens.locator('[data-lens-text]').textContent())?.trim() ?? '';
+  check(text.length > 40, `${hub}: lens text is too short (${text.length} chars)`);
+  check((await first.getAttribute('aria-current')) === 'true', `${hub}: chosen sign is not marked aria-current`);
+  // Arrow keys move between signs and the lens follows.
+  await lens.keyboard.press('ArrowRight');
+  const second = lens.locator('.sign').nth(1);
+  check((await second.getAttribute('aria-current')) === 'true', `${hub}: ArrowRight did not move the lens to the next sign`);
+  // Without JavaScript the wheel is still a list of 12 links.
+  const noJs = await browser.newPage({ javaScriptEnabled: false });
+  await noJs.goto(base + hub);
+  check((await noJs.locator('.sign').count()) === 12, `${hub}: without JS the wheel is not 12 links`);
+  await noJs.close();
+  await lens.close();
+}
 
 // 4: headings and skip link
 const page = await browser.newPage();

@@ -5,16 +5,21 @@ import { t, type Lang } from '../../../i18n/core';
 import { horoscopeStrings } from '../../../i18n/horoscope';
 import ZodiacWheel from './ZodiacWheel.astro';
 import Button from '../../ui/Button.astro';
+import { getCollection } from 'astro:content';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const year = 2026;
+// The lens shows each sign's opening paragraph (the `answer` of its page, M07-05).
+const answers = Object.fromEntries(
+  (await getCollection('horoscope', (e) => e.data.lang === lang && e.data.year === year)).map((e) => [e.data.sign, e.data.answer]),
+);
 ---
 <section class="horoscope" aria-labelledby="horoscope-title">
   <div class="container">
     <h2 id="horoscope-title">{t(horoscopeStrings, 'hubTitle', lang)}</h2>
     <p>{t(horoscopeStrings, 'hubIntro', lang)}</p>
-    <ZodiacWheel lang={lang} year={year} headingLevel="h3" />
+    <ZodiacWheel lang={lang} year={year} headingLevel="h3" answers={answers} />
     <p class="actions">
       <Button href={lang === 'sr' ? '/horoskop/' : '/en/horoscope/'}>{t(horoscopeStrings, 'readHoroscope', lang)}</Button>
     </p>
