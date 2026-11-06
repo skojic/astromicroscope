@@ -19,6 +19,7 @@ const { lang } = Astro.props;
     <div class="text">
       <h2 id="about-title">{t(aboutStrings, 'homeTitle', lang)}</h2>
       <p class="intro">{t(aboutStrings, 'homeIntro', lang)}</p>
+      <blockquote class="quote">{t(aboutStrings, 'jungQuote', lang)}</blockquote>
       <p class="who">
         <strong>Gorica Vićentijević</strong>
         <span>{t(aboutStrings, 'credential', lang)}</span>
@@ -43,6 +44,7 @@ const { lang } = Astro.props;
   .text { max-width: var(--am-measure); }
   h2 { margin: 0 0 var(--am-space-5); font-size: clamp(2rem, 3.4vw, 2.9rem); text-wrap: balance; }
   .intro { margin: 0 0 var(--am-space-5); line-height: 1.7; }
+  .quote { margin: 0 0 var(--am-space-5); padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font: italic 1.05rem/1.6 var(--am-font-serif); color: var(--am-muted); max-width: var(--am-measure); }
   .who { margin: 0 0 var(--am-space-5); display: flex; flex-direction: column; gap: var(--am-space-1); }
   .who strong { font: var(--am-text-h4); letter-spacing: var(--am-tracking-heading); }
   .who span { font: var(--am-text-small); color: var(--am-muted); }
