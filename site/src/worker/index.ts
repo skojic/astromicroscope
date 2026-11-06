@@ -231,20 +231,32 @@ function timingSafeEqual(a, b) {
   return out === 0;
 }
 
-/** Fixed-window per-IP cap; a simple Map is fine for a low-traffic personal site (M12-04 may promote to KV). */
+/** Fixed-window per-IP cap (M12-04) using the KV `RATE_STORE` namespace. Each IP has a rolling count over a short window
+ * (KV has millisecond granularity in limits, so we use a per-IP key storing `{ start, count }`, incremented on each hit and
+ * reset when the window passes). The key auto-expires shortly after the window so stale entries are reclaimed. */
 async function underRateLimit(request, env) {
   const ip = request.headers.get('cf-connecting-ip') ?? 'unknown';
   const now = Date.now();
   const windowMs = 60_000;
   const maxPerWindow = 5;
-  const key = `${ip}`;
+  const key = `rate:${ip}`;
 
-  const store = env.RATE_STORE ?? globalThis.__am_rate ?? (globalThis.__am_rate = new Map());
-  const entry = store.get(key);
-  if (entry && now - entry.start < windowMs) {
-    entry.count += 1;
-    return entry.count <= maxPerWindow;
+  const store = env.RATE_STORE;
+  if (!store) return true; // no binding (non-production): rate-limit disabled
+
+  let entry;
+  try {
+    const raw = await store.get(key, 'json');
+    if (raw && now - raw.start < windowMs) entry = raw;
+  } catch {
+    return true; // KV read failure must not block the form
   }
-  store.set(key, { start: now, count: 1 });
-  return true;
+
+  const next = entry ? { start: entry.start, count: entry.count + 1 } : { start: now, count: 1 };
+  try {
+    await store.put(key, JSON.stringify(next), { expirationTtl: Math.ceil(windowMs / 1000) + 5 });
+  } catch {
+    // best effort: if we cannot persist, let the request through (consistent with "must not block")
+  }
+  return next.count <= maxPerWindow;
 }
