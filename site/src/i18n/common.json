@@ -1,3 +1,7 @@
 {
-  "pending": { "sr": "Uskoro: ovaj odeljak još nije napravljen.", "en": "Coming soon: this section is not built yet." }
+  "pending": { "sr": "Uskoro: ovaj odeljak još nije napravljen.", "en": "Coming soon: this section is not built yet." },
+  "consent": {
+    "sr": "Slažem se da Astromicroscope koristi moje podatke za potrebe ovog zahteva. Mogu da povučem saglasnost u svakom trenutku.",
+    "en": "I agree to Astromicroscope using my data for the purpose of this request. I can withdraw my consent at any time."
+  }
 }

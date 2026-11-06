@@ -3,6 +3,7 @@
 import Page from '../../layouts/Page.astro';
 import { t } from '../../i18n/core';
 import { analysesStrings } from '../../i18n/analyses';
+import { commonStrings } from '../../i18n/common';
 import { analyses } from '../../data/analyses';
 
 export function getStaticPaths() {
@@ -32,6 +33,7 @@ const url = `/analize/${id}/`;
       </dl>
 
       <p><a class="btn" href="mailto:astromicroscope@gmail.com">{t(analysesStrings, 'requestBtn', lang)}</a></p>
+      <p class="consent">{t(commonStrings, 'consent', lang)}</p>
       <p class="note">Forma za zahtev stiže u M12; do tada, e-pošta na astromicroscope@gmail.com.</p>
     </div>
   </article>
@@ -46,5 +48,6 @@ const url = `/analize/${id}/`;
   .fact ul { margin: 0; padding-left: var(--am-space-4); }
   .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
   .btn:hover { background: var(--am-action-hover); }
-  .note { margin-top: var(--am-space-4); color: var(--am-muted); font-size: .9rem; }
+  .consent { margin-top: var(--am-space-3); font: var(--am-text-small); color: var(--am-muted); max-width: var(--am-measure); }
+  .note { margin-top: var(--am-space-2); color: var(--am-muted); font-size: .9rem; }
 </style>

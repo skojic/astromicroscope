@@ -10,10 +10,10 @@
 | Last updated | 2026-11-06 |
 
 ## Next step
-All seven sections now exist and `Sections.astro` renders them (no `Pending` left). What keeps M05 from G1:
-1. **English home links into Serbian pages.** Only videos have `/en/` routes; the learn, horoscope, articles, analyses and about sections on `/en/` link to Serbian pages and the articles section lists Serbian articles under a Serbian heading. Closes with the English routes for M06–M10 (M14).
-2. **Concept gaps** (`plan/concept.md`, Home page): About should carry a Jung quote and three facts (no home strings exist; needs content from Gorica, not invented); the analyses panel has no gold hairline; the horoscope wheel does not move a lens to the chosen sign (M07).
-3. Meta description of the English home still unapproved (see Problems).
+All seven sections now exist and `Sections.astro` renders them (no `Pending` left), and every section is **language-aware** (the sections on `/en/` render English content and link to `/en/...`; each is lang-aware, and the article/learn/analyses/horoscope home sections follow `lang`). The previous blocker (English home linking into Serbian pages) is **closed** by the English routes for M06–M10 (M14, built 2026-11-06).
+Remaining before M05 G1:
+1. **Concept gaps** (`plan/concept.md`, Home page): About should carry a Jung quote and three facts (no home strings exist; needs content from Gorica, not invented); the analyses panel has no gold hairline; the horoscope wheel does not move a lens to the chosen sign (M07).
+2. **Meta description** of the English home is not approved (see Problems).
 Then G1 for the finished page.
 
 ## Done
