@@ -44,7 +44,7 @@ From the old site (`docs/sadrzaj/stari-sajt/`, about 20,000 words) and Filip's d
 │ ARTICLES: one featured long read + three in a list           │
 │ VIDEOS: three YouTube lessons (player loads on click)        │
 │ PRIVATE ANALYSES: Midnight panel with gold hairline          │
-│ ABOUT: arch portrait, Jung quote, three facts                │
+│ ABOUT: arch portrait, Jung quote                             │
 │ NEWSLETTER · FOOTER                                          │
 └──────────────────────────────────────────────────────────────┘
 ```
