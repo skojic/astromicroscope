@@ -27,8 +27,8 @@ const { lang } = Astro.props;
 <style>
   .sky { position: relative; isolation: isolate; overflow: hidden; background: var(--am-sky); color: var(--am-sky-text); }
   .hero { display: grid; gap: var(--am-space-7); align-items: center; padding: var(--am-space-7) 0 var(--am-space-8); }
-  @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1.05fr; gap: 48px; padding: var(--am-space-8) 0 var(--am-space-9); } }
-  h1 { color: var(--am-white); margin-bottom: var(--am-space-5); }
+  @media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; padding: var(--am-space-8) 0 var(--am-space-9); } }
+  h1 { color: var(--am-white); margin-bottom: var(--am-space-5); font-size: clamp(3rem, 5vw, 4.8rem); text-wrap: balance; }
   .lede { font: var(--am-text-lede); max-width: 32ch; margin-bottom: var(--am-space-6); color: rgba(234, 240, 248, .86); }
   .ctas { display: flex; flex-wrap: wrap; gap: var(--am-space-3); }
 </style>

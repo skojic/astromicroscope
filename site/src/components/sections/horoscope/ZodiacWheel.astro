@@ -37,8 +37,8 @@ const signs = Object.keys(SIGN_SLUG_SR);
   .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--am-space-3); list-style: none; padding: 0; margin: 0; }
   .sign {
     display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: var(--am-space-2);
-    padding: var(--am-space-4) var(--am-space-2); min-width: 0; border-radius: var(--am-radius); text-decoration: none;
-    border: 1px solid var(--am-line, #d3d8df); box-sizing: border-box; overflow-wrap: anywhere; transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease);
+    padding: var(--am-space-4) var(--am-space-2); min-width: 0; border-radius: var(--am-radius-card); text-decoration: none;
+    border: 1px solid var(--am-line); box-sizing: border-box; overflow-wrap: anywhere; transition: border-color var(--am-duration-fast) var(--am-ease), box-shadow var(--am-duration-fast) var(--am-ease);
     color: var(--am-ink);
   }
   .sign:hover { border-color: var(--am-action); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
