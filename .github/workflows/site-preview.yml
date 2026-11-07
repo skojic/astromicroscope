@@ -1,15 +1,17 @@
 # Preview of every pull request that touches the site, on Filip's Cloudflare account (M00-08, D16, D36).
 # - Build is the non-production build: noindex, robots.txt Disallow (D24). The custom domain is never touched here.
-# - Uses `wrangler preview` (open beta in wrangler 4.157.0); URL: https://pr-<number>-astromicroscope.<account subdomain>.workers.dev
+# - D56: the preview is its OWN Worker, `astromicroscope-preview`, deployed with `wrangler deploy --name
+#   astromicroscope-preview` (no Worker Previews, no custom domain, no routes). URL: https://astromicroscope-preview.<account subdomain>.workers.dev
+#   Before 2026-11-07 this workflow used `wrangler preview`, which publishes branches of the PRODUCTION Worker: every
+#   preview deploy overwrote the production build on astromicroscope.com, and the production address served the noindex
+#   preview build. The smoke test below is the regression test: it must not pass on a preview build.
 # - Needs two repository secrets, CLOUDFLARE_API_TOKEN (its own Account API token, limited to this account and to Workers,
 #   not Srdjan's personal token) and CLOUDFLARE_ACCOUNT_ID. Without them (or on a pull request from a fork) the job
 #   skips with a notice and the check stays green.
-# - D56: the Worker it deploys is the same Worker as the production one, so a preview deploy overwrites the production
-#   build on astromicroscope.com (it happened on 2026-11-07: the production address served the noindex preview build).
-#   `deploy:preview` is a deployment step: keep the preview workflow on the temporary address, and run the production
-#   deploy (`site-deploy` with `production: true`) after the preview, so the custom domain stays on the production build.
 # - `pull_request`, not `pull_request_target`: a pull request from a fork never receives the secrets.
-# - The preview is deleted when the pull request is closed.
+# - The preview Worker stays deployed (it is a single shared Worker, not one per pull request), so the "closed" cleanup
+#   job is disabled (`if: false`): a closed pull request must not delete it. It is never a required check: a preview is a
+#   convenience, not a gate.
 name: site-preview
 
 on:
@@ -60,19 +62,24 @@ jobs:
       - name: Build (non-production, noindex)
         if: steps.gate.outputs.enabled == 'true'
         run: npm run build
-      - name: Create or update the preview
+      - name: Deploy the preview Worker
         id: preview
         if: steps.gate.outputs.enabled == 'true'
         env:
-          PR: ${{ github.event.pull_request.number }}
           # The Worker's runtime environment (D56): the preview address runs the preview build, the smoke test reads it.
           SITE_ENV: preview
         run: |
           set -euo pipefail
-          out="$(npx --no-install wrangler preview --name "pr-${PR}" --json)"
-          # wrangler prints progress lines before the JSON object
-          url="$(printf '%s\n' "$out" | sed -n '/^{/,$p' | jq -er '.preview.urls[0]')"
-          echo "url=$url" >> "$GITHUB_OUTPUT"
+          # A separate Worker: never the production one, so astromicroscope.com keeps its production build.
+          npx --no-install wrangler deploy --name astromicroscope-preview
+          echo "url=https://astromicroscope-preview.filipvicentijevic99.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Smoke test of the preview Worker
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          set -euo pipefail
+          # The address is shared by every preview, so the comment may be the first deploy to a cold Worker: give it a
+          # moment (the retries in the smoke test) and the URL still works.
+          node scripts/smoke.mjs "https://astromicroscope-preview.filipvicentijevic99.workers.dev" --mode preview --retries 4
       - name: Comment the address on the pull request (one comment, updated)
         if: steps.gate.outputs.enabled == 'true'
         env:
@@ -84,7 +91,7 @@ jobs:
         run: |
           set -euo pipefail
           marker='<!-- site-preview -->'
-          body="${marker}"$'\n'"**Pregled / Preview** (${SHA:0:7}): ${URL}/"$'\n\n'"Privremeni pregled, nije za pretraživače (noindex). / Temporary preview, not for search engines (noindex). Briše se kad se PR zatvori. / Deleted when the PR is closed."
+          body="${marker}"$'\n'"**Pregled / Preview** (${SHA:0:7}): ${URL}/"$'\n\n'"Privremeni pregled, nije za pretraživače (noindex). Adresa je zajednička za sve PR-ove: prikazuje najnoviji pregled. / Temporary preview, not for search engines (noindex). The address is shared by every pull request: it shows the newest preview."
           id="$(gh api "repos/${REPO}/issues/${PR}/comments" --paginate --jq "[.[] | select(.body | contains(\"${marker}\"))][0].id // empty")"
           if [ -n "$id" ]; then
             gh api -X PATCH "repos/${REPO}/issues/comments/${id}" -f body="$body" > /dev/null
@@ -93,7 +100,10 @@ jobs:
           fi
 
   cleanup:
-    if: github.event.action == 'closed'
+    # Disabled on purpose: the preview is one shared Worker (`astromicroscope-preview`) for every pull request, so a
+    # closed pull request must not delete it. `wrangler delete --name astromicroscope-preview --force` when the preview
+    # is no longer needed.
+    if: false
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -123,6 +133,6 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - if: steps.gate.outputs.enabled == 'true'
         run: npm ci
-      - name: Delete the preview of this pull request
+      - name: Delete the preview Worker
         if: steps.gate.outputs.enabled == 'true'
-        run: npx --no-install wrangler preview delete --name "pr-${PR}" --skip-confirmation
+        run: npx --no-install wrangler delete --name astromicroscope-preview --force
