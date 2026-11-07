@@ -18,7 +18,7 @@
     "import:videos": "node scripts/import-videos.mjs",
     "test:seo": "node scripts/seo-check.mjs",
     "deploy:dry-run": "wrangler deploy --dry-run",
-    "deploy:preview": "npm run build && wrangler deploy --name astromicroscope-preview",
+    "deploy:production": "npm run build && wrangler deploy",
     "test:axe": "node scripts/visual.mjs",
     "check:docs": "node scripts/check-docs.mjs",
     "status:sync": "node scripts/check-docs.mjs --fix",
