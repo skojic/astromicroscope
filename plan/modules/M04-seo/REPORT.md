@@ -7,7 +7,7 @@
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
-| Last updated | 2026-11-04 |
+| Last updated | 2026-11-07 |
 
 ## Next step
 The `uploadDate` finding of the validators is fixed (2026-11-04, PR #12, evidence in the test table). Then Rich Results Test and Schema Markup Validator again on a page of each new type (Article, ProfilePage, Person page once M06 and M10 exist), and a hreflang return-link check once more pages exist. Then `testing/checklists/seo.md` per template. M06, M10, M07 call the JSON-LD builders for their types.
@@ -21,7 +21,7 @@ The `uploadDate` finding of the validators is fixed (2026-11-04, PR #12, evidenc
 - M04-04 `sitemap.xml` with hreflang alternates and `robots.txt` generated after the build from the finished pages (D27). Production: allow all, sitemap line. Elsewhere: `Disallow: /`.
 
 ## Not done
-- Structured data validation: done for the types that exist (home sr/en, video hub, video pages) on 2026-11-04, see Test evidence; the `uploadDate` finding is fixed and re-checked; open: Article, ProfilePage and page-level Person once those pages exist (Article `datePublished` is also date-only in `jsonld.ts`: check it with the Rich Results Test when M06 builds the first article).
+- Structured data validation: done for home sr/en, video hub, video pages (2026-11-04) and for Article and ProfilePage (Schema Markup Validator, 2026-11-07, see Test evidence); Rich Results Test for Article/ProfilePage still not run; the `uploadDate` finding is fixed and re-checked; open: Article, ProfilePage and page-level Person once those pages exist (Article `datePublished` is also date-only in `jsonld.ts`: check it with the Rich Results Test when M06 builds the first article).
 - Per-page-type OG images beyond the default card.
 - Course, Product, Event JSON-LD.
 - Crawler policy for AI training bots: decided, allowed (D37); `robots.txt` already allows every crawler and names none.
@@ -54,6 +54,10 @@ The `uploadDate` finding of the validators is fixed (2026-11-04, PR #12, evidenc
 | `uploadDate` fix (PR #12): `npm test`, `npm run build`, `npm run test:seo` | `ℹ pass 26`, `ℹ fail 0`; `18 page(s) built`; page has `"uploadDate":"2026-09-22T19:46:51+00:00"`; `seo-check: 18 pages, 0 failures`; on a copy of `dist/` with the bare date put back the audit fails: `uploadDate "2026-09-22" has no time and timezone` | 2026-11-04 |
 | Google Rich Results Test, Code mode, same video JSON-LD with the full timestamp | `2 valid items detected`: Breadcrumbs 1 valid; Videos 1 valid, no issues listed (before: `2 non-critical issues`). First attempt returned `Something went wrong`, a retry succeeded | 2026-11-04 |
 
+| Schema Markup Validator (URL mode) on the live preview, Article page `/tekstovi/astro-vodic-kroz-finansije/` and sign page `/horoskop/bik/` (both carry Article, Person and ProfilePage) | both: `0 ERRORS 0 WARNINGS 4 ITEMS` (BreadcrumbList, ProfilePage, Article, WebSite); the live HTML has the same JSON-LD types as the local `dist/` | 2026-11-07 |
+| Google Rich Results Test (Article, ProfilePage) | not run: the browser tool was denied on search.google.com ("Permission denied for this action on this domain"); the preview's `Disallow: /` also blocks URL mode (see 2026-11-04) | 2026-11-07 |
+
 ## History
+- 2026-11-07: Schema Markup Validator on an article and a sign page: 0 errors, 0 warnings. Noted, not changed: Article `datePublished` is date-only (`2025-10-25`); the page's JSON-LD repeats WebSite, Organization and Person inside a second nested `@graph`.
 - 2026-11-02: plan created.
 - 2026-11-03: built; G1 passed; CI green.
