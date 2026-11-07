@@ -7,12 +7,11 @@
 | Owner | Srdjan + Filip |
 | Branch | `feature/m13-launch` (not created yet) |
 | Last commit | — |
-| Last updated | 2026-11-07, site check under 2 minutes; the production address is still the preview build (D56) |
+| Last updated | 2026-11-07, Search Console done (issue #65); only the registrar transfer (M13-08) left |
 
 ## Next step
-**The production address currently serves the preview build (noindex, `Disallow: /`; found 2026-11-07, D56):** the last deploy that reached `astromicroscope.com` was a preview deploy (run 42359836583, 09:27), so the production site went back to noindex. Dispatch `site-deploy` with `production: true`; from D56 the smoke test of that run fails unless the production build really is deployed. The three checks that were "M13-07" are now a manual run of the strict production audit and the three-browser check, plus the production deploy itself.
-Remaining M13 tasks: **M13-01** crawl both languages (`npm run crawl -- https://astromicroscope.com --mode production --strict`; missing English pairs are now pending, D49), **M13-02** finish the redirects (the `_redirects` file is built, PR #53; the 410 mechanism for the 143 spam URLs is still an open decision — they currently answer 404, which Google treats as removal), **M13-04** Search Console + Bing + sitemap submit. **M13-03, M13-07 done:** see Done.
-**DNS (D54):** the nameservers are on Cloudflare (`bradley/demi.ns.cloudflare.com`), the zone is **active**; `astromicroscope.com` served the production build on 2026-11-07 (run 42359143509) and then went back to the preview build with the next preview deploy (D56). Email Routing is enabled with a catch-all to `astromicroscope@gmail.com`. The **registrar transfer to Cloudflare is scheduled for 2026-11-29** and is optional for launch. Open: the DS record (key tag 2371) at Hostinger, and the `www`→apex redirect is done.
+**Nothing except the registrar transfer (M13-08, 2026-11-29).** Everything else is done or dropped (Srdjan, 2026-11-07: "delete everything else left as not important except registrar transfer"). The production address serves the production build, every merge deploys itself (D60) and the deploy's smoke test is green; the strict crawl is clean; redirects and the 410 are verified; Search Console and Bing are verified with the sitemap submitted and no security issues (issue #65, Filip).
+**M13-08:** transfer the domain from Hostinger to Cloudflare on 2026-11-29 (unlock, EPP code, ~$11, keep the registrant contact unchanged — ICANN 60-day rule) and add the DNSSEC DS record at the registrar once the transfer is done.
 
 ## Done
 - Item, with evidence: the command run and the result line, or a PR link.

@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| Stage | testing |
+| Stage | done |
 | Last gate passed | G1 |
 | Owner | Srdjan |
 | Branch | `main` (owner bypass) |
 | Last commit | see `git log` |
-| Last updated | 2026-11-07 |
+| Last updated | 2026-11-07, done; the Rich Results Test is dropped as not important |
 
 ## Next step
-The `uploadDate` finding of the validators is fixed (2026-11-04, PR #12, evidence in the test table). Then Rich Results Test and Schema Markup Validator again on a page of each new type (Article, ProfilePage, Person page once M06 and M10 exist), and a hreflang return-link check once more pages exist. Then `testing/checklists/seo.md` per template. M06, M10, M07 call the JSON-LD builders for their types.
+None. The module is done: the Schema Markup Validator passes on Article and ProfilePage (2026-11-07), the hreflang and canonical checks run in `site-ci` (`test:seo`) on every change, and the structured data is live. The Rich Results Test and the per-template SEO checklist are **dropped** (Srdjan, 2026-11-07: "delete everything else left as not important").
 
 ## Done
 - 2026-11-04, `site/scripts/seo-check.mjs` (`npm run test:seo`, in `site-ci`, preview and production build): per page title and description present, unique and within length, canonical is the page itself, hreflang sr, en and x-default with return links to built pages, Open Graph and Twitter tags, `og:image` exists, JSON-LD parses and has the fields its type needs, image alt and files; site-wide sitemap against the built pages, robots.txt per environment, noindex per environment, every internal link and anchor, no "click here" text. Evidence: preview and production build both `seo-check: 18 pages, 0 failures, 10 pending routes`; against two broken copies of `dist` it exited 1 and named all 11 planted faults (wrong canonical, missing x-default, broken link, missing anchor, duplicate title, "click here", image without alt, missing hreflang return link, missing JSON-LD `uploadDate`, sitemap entry missing, `og:image` file missing); `SEO_STRICT=1` exits 1 while pages are unbuilt. Not covered: Google's Rich Results Test and the Schema Markup Validator (need a public URL), external links.

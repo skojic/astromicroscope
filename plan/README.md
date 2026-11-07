@@ -19,6 +19,18 @@ How the Astromicroscope website gets built: by two developers, in parallel, modu
 ## Decisions this plan rests on
 Direction D brand kit in `brand/` (D08) · Astro, React only where a component needs it (D09) · every text in Serbian and English (D10) · developers Srdjan Kojic and Filip Vicentijevic (D11) · this folder replaces `modules/` (D12) · courses and CMS in iteration 2 (D14) · security baseline `specs/09` (D15) · hosting on Filip's Cloudflare account, Workers with static assets (D16).
 
+## Deferred (Srdjan, 2026-11-07)
+
+Closed as not important for now ("delete everything else left as not important except registrar transfer"). No further work is planned on them; their reports stay as history.
+
+| Item | What it was | Where |
+|---|---|---|
+| M04 Rich Results Test | the Rich Results Test on Article and ProfilePage, by hand (the Schema Markup Validator is done) | `modules/M04-seo/REPORT.md` |
+| Child automations | Dependabot auto-merge and the weekly `videos-import` pull request, never proven end-to-end on a personal repository | `status/decisions.md` D46 |
+| A separate preview Worker | a per-pull-request preview on its own Worker (the preview stage itself is gone, D60) | `status/decisions.md` D60 |
+| The security hardening plan | the edge rate limit is already live (10 req / 10 s on `/api/`); the rest of the plan (HSTS preload, DMARC/DKIM, 2FA sweep, AI-crawler settings) was withdrawn | `status/log.md` 2026-11-07 |
+| Browser checks beyond Chromium | the Firefox/WebKit layout run (manual: `VISUAL_BROWSERS=chromium,firefox,webkit npm run test:axe`) | `testing/gates.md` |
+
 ## Modules
 
 Size: S = up to a few days, M = about a week, L = more than a week (rough, to be corrected in the reports).

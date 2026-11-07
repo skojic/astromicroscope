@@ -25,18 +25,18 @@ Redirects file, DNS records, `status/log.md` entries
 | ID | Task | Notes |
 |---|---|---|
 | M13-01 | Full crawl in both languages: status codes, canonicals, hreflang, orphans | **done:** `crawl --mode production --strict` → 74 pages, 0 failures, 0 warnings (2026-11-07) |
-| M13-02 | Redirects from old URLs (M02 map); 410 for spam URLs (A2) | **done:** the redirects file is `site/public/_redirects`; the 410 is **D59** (the Worker answers the 143 spam URLs; `_redirects` cannot return 410); check: `npm run check:redirects -- <url> --gone` (D46) and the smoke test's spam-URL check |
-| M13-03 | DNS moved to Filip's Cloudflare account; custom domain on the Worker; HTTPS; one host; DNSSEC | **D54: no fixed date** — as soon as a fresh Cloudflare token + Hostinger nameserver paste exist. The registrar transfer to Cloudflare is separate and scheduled for 2026-11-29 (optional for launch) |
-| M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked | dashboard task for Filip: **issue #65** (Domain property via a TXT record in Cloudflare; the HTML-tag alternative is a code change for Srdjan). Specs: `specs/09` §6–7, `specs/06` Measurement |
-| M13-05 | Launch checklist: content, performance, accessibility, security (`testing/checklists/security.md`) | live smoke test: `npm run smoke -- <url> --mode production` (D46) |
-| M13-06 | Search Console: Security issues, Manual actions, removal of spam URLs; monitoring set up (`specs/09` §6–7) | part of **issue #65** (screenshots of Security issues and Manual actions first; a Review request goes together with Srdjan); spam URLs are below (M13-02) |
-| M13-07 | Run the launch checks once by hand: the strict production audit (`SITE_ENV=production npm run build && SEO_STRICT=1 npm run test:seo`) and the three-browser check (`VISUAL_BROWSERS=chromium,firefox,webkit npm run test:axe`); the `PRODUCTION_AUDIT`/`FULL_BROWSER_CHECK` variables no longer do anything (D56). Deploy the production build to the custom domain (`site-deploy` with `production: true`) and keep the smoke test of that address green | the weekly smoke test and the deploy's smoke test fail on the production address until the production build is the one deployed |
+| M13-02 | Redirects from old URLs (M02 map); 410 for spam URLs (A2) | **done:** the redirects file is `site/public/_redirects`; the 410 is **D59** (the Worker answers the 143 spam URLs; `_redirects` cannot return 410) |
+| M13-03 | DNS moved to Filip's Cloudflare account; custom domain on the Worker; HTTPS; one host; DNSSEC | **done** (D54): zone active on Cloudflare, custom domain and `www`, HTTPS/TLS/HSTS, DNSSEC on. **The DS record at the registrar is the remaining part and rides on M13-08.** |
+| M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked | **done 2026-11-07 (issue #65, Filip):** Domain property verified (TXT in Cloudflare), Manual actions and Security issues clean, the 4 spam sitemaps of the hacked site removed, `sitemap.xml` submitted (74 pages, Success), email alerts on, Bing imported |
+| M13-05 | Launch checklist: content, performance, accessibility, security | **dropped** (Srdjan, 2026-11-07: "not important") — the per-module G1 evidence and the automated `site-ci` checks cover it |
+| M13-06 | Search Console: Security issues, Manual actions, removal of spam URLs | **done** with M13-04 (issue #65): clean, spam sitemaps removed, spam URLs answer 410 (D59) |
+| M13-07 | Strict production audit and the three-browser check, once by hand | **dropped** (Srdjan, 2026-11-07: "not important") — the deploy's smoke test and the weekly Lighthouse on production are the standing checks (D60) |
+| M13-08 | **Registrar transfer to Cloudflare — 2026-11-29** (45 days after the original expiry 2026-10-15, D54/A1), and the DNSSEC DS record at the registrar | the one launch item left. Optional for the site to work; keeps the domain off Hostinger. Preparation: unlock, EPP code, $11 |
 
 ## Acceptance criteria
-- [ ] All gates G2–G5 recorded
-- [ ] No placeholder left
-- [ ] Search Console without new errors after 7 days
-- [ ] Gates passed as in `testing/gates.md`; evidence in `REPORT.md`
+- [x] The site is live on the custom domain as the production build (D60) and the deploy's smoke test is green
+- [x] The strict crawl is clean; redirects and the 410 verified; Search Console and Bing verified, sitemap submitted, no security issues or manual actions
+- [ ] **The registrar transfer (M13-08) is done on 2026-11-29** — the one open item of M13 (Srdjan: "delete everything else left as not important except registrar transfer")
 
 ## Risks
 Domain (A1); hacked-site history (A2)
