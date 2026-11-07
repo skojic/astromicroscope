@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Stage | idea |
+| Stage | building |
 | Last gate passed | none |
 | Owner | Srdjan + Filip |
 | Branch | `feature/m13-launch` (not created yet) |
