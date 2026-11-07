@@ -25,7 +25,7 @@ Redirects file, DNS records, `status/log.md` entries
 | ID | Task | Notes |
 |---|---|---|
 | M13-01 | Full crawl in both languages: status codes, canonicals, hreflang, orphans | `npm run crawl -- <url> --mode production --strict` (D46) |
-| M13-02 | Redirects from old URLs (M02 map); 410 for spam URLs (A2) | the redirects file is `site/public/_redirects` (contracts.md: "redirects file"); mechanism for 410 still to decide; check: `npm run check:redirects -- <url> --gone` (D46) |
+| M13-02 | Redirects from old URLs (M02 map); 410 for spam URLs (A2) | **done:** the redirects file is `site/public/_redirects`; the 410 is **D59** (the Worker answers the 143 spam URLs; `_redirects` cannot return 410); check: `npm run check:redirects -- <url> --gone` (D46) and the smoke test's spam-URL check |
 | M13-03 | DNS moved to Filip's Cloudflare account; custom domain on the Worker; HTTPS; one host; DNSSEC | **D54: no fixed date** — as soon as a fresh Cloudflare token + Hostinger nameserver paste exist. The registrar transfer to Cloudflare is separate and scheduled for 2026-11-29 (optional for launch) |
 | M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked | dashboard task for Filip: **issue #65** (Domain property via a TXT record in Cloudflare; the HTML-tag alternative is a code change for Srdjan). Specs: `specs/09` §6–7, `specs/06` Measurement |
 | M13-05 | Launch checklist: content, performance, accessibility, security (`testing/checklists/security.md`) | live smoke test: `npm run smoke -- <url> --mode production` (D46) |

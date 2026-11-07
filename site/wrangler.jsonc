@@ -6,8 +6,14 @@
   "main": "./src/worker/index.ts",
   "assets": {
     "directory": "./dist",
-    // Only the /api/ subtree runs the Worker; pages keep serving from the static assets (D44).
-    "run_worker_first": ["/api/*"],
+    // The Worker runs before the assets (D59), so it asks them itself (env.ASSETS) whether a path is a page; every page
+    // and file the site has is answered by the static assets, exactly as before.
+    "binding": "ASSETS",
+    // P07 (D59): the Worker answers the paths the static router does not have, which means it has to run for every
+    // request: it returns the 410 for the spam URLs, the 404 page for an unknown path, and hands every real page and
+    // file to the static assets (D44). A named-rule list cannot cover "every path with a trailing slash" without
+    // colliding with the general "/*" rule, so the whole Worker runs first. Before D59 this was ["/api/*"].
+    "run_worker_first": true,
     // dist/404.html (sr) and dist/en/404.html (en) are served for unknown paths; see src/integrations/not-found.mjs
     "not_found_handling": "404-page",
     // Astro builds with trailingSlash: 'always' (astro.config.mjs), so folder index files are served with a trailing slash
