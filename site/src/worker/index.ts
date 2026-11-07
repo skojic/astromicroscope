@@ -185,10 +185,44 @@ async function storeConfirmation(subscriberId, email, lang, list, env) {
   const token = `${id}.${expiry}.${sig}`;
   await store.put(`confirm:${token}`, id, { expirationTtl: Math.floor(CONFIRM_TTL_MS / 1000) });
 
-  // M12-03 TO DO: send the double-opt-in email via Cloudflare Email Service (send_email binding) with a link
-  //   `${siteUrl}/api/confirm?token=${token}` and sr/en subject+body. Blocked on the domain DNS move (M13), so this
-  //   is a no-op until the sender domain is onboarded. Until then subscribers stay `unconfirmed` (they receive no
-  //   campaigns — safe but silent).
+  // M12-03: send the double-opt-in email via Cloudflare Email Service (send_email binding) with the confirmation link.
+  await sendEmail(
+    env,
+    email,
+    lang === 'en'
+      ? 'Confirm your Astromicroscope subscription'
+      : 'Potvrdi prijavu na Astromicroscope',
+    lang === 'en'
+      ? `Click this link to confirm your subscription: ${siteUrl(env)}/api/confirm?token=${encodeURIComponent(token)}`
+      : `Klikni na ovaj link da potvrdiš prijavu: ${siteUrl(env)}/api/confirm?token=${encodeURIComponent(token)}`,
+  );
+}
+
+/** The site's real origin (the custom domain in production; the temporary address otherwise). */
+function siteUrl(env) {
+  return (env.SITE_URL && env.SITE_URL !== '' ? env.SITE_URL : 'https://astromicroscope.com').replace(/\/+$/, '');
+}
+
+/**
+ * M12-03: send an email through Cloudflare Email Service. The binding is `EMAIL_SENDER` in wrangler.jsonc, restricted to
+ * send from `noreply@astromicroscope.com`. Best-effort: if the binding or the sender domain is not onboarded yet it
+ * answers null and the caller treats the request as success anyway (the confirmation link is still minted; MailerLite
+ * keeps the subscriber `unconfirmed`, so nothing is sent to real people until the email actually goes out).
+ */
+async function sendEmail(env, to, subject, text) {
+  const sender = env.EMAIL_SENDER;
+  if (!sender || !to || !subject || !text) return null;
+  try {
+    await sender.send({
+      from: 'noreply@astromicroscope.com',
+      to: [to],
+      subject,
+      text,
+    });
+    return true;
+  } catch {
+    return null; // best-effort: never fail the subscribe because the mail did not send
+  }
 }
 
 const CONFIRM_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days to click the confirmation link
