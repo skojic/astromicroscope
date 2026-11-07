@@ -2,17 +2,18 @@
 
 | | |
 |---|---|
-| Stage | building |
-| Last gate passed | none |
+| Stage | done |
+| Last gate passed | G4 (standing owner approval, D45; G1 evidence 2026-11-07, D51) |
 | Owner | Filip (+ review) |
-| Branch | `feature/m14-translation` (local, rebased on `main` 2026-11-06) |
-| Last commit | `39d92b8` M14-03: English yearly horoscope 2026, all 12 signs |
-| Last updated | 2026-11-06, all 22 content files in English, drafts removed (Gorica approved) |
+| Branch | `feature/m14-translation`, merged in PR #39 (`881b7b2`); `/en/` routes by Srdjan in PR #44 |
+| Last commit | `881b7b2` M14: engleski prevod celog sadržaja (PR #39) |
+| Last updated | 2026-11-07, G1 passed, module done |
 
 ## Next step
-- Done 2026-11-06: **English `/en/` routes built** (the batch below). Remaining (optional polish): English i18n strings on any home-section/hero keys that still lack an `en` value; review the new `/en/` pages on the preview. Done 2026-11-06: Gorica approved publication, `draft: true` removed from all 44 files (sr and en).
+None. Module done (G1, 2026-11-07). Later English for new content (2027 horoscope, new articles) follows `glossary.md`.
 
 ## Done
+- **G1 (2026-11-07):** all tasks done; PR #39 green (`ci-gate`) and merged as `881b7b2`; the 22 Serbian files and their 22 English pairs render live on the production site (checked by Filip on astromicroscope.com: `/tekstovi/podznak/` + `/en/articles/rising-sign/`, `/horoskop/ovan/` + `/en/horoscope/aries/`, `/o-meni/` + `/en/about/`); `check-content` passes in production mode; no placeholder text.
 - **M14-01 glossary:** `plan/modules/M14-translation/glossary.md` (signs, planets, houses, dignities, aspects, techniques, titles, style, English file names). American spelling, as in the site's existing English strings. Commits `91e9c87` (glossary) and `e1b36e7` (spelling rule).
 - **M14-02 pages:** `site/src/content/pages/en/about.md`, `why-astromicroscope.md`, `contact.md` (`e1b36e7`); Jung quote in Gorica's chosen English wording (`docs/sadrzaj/05`).
 - **M14-04 articles, part 1:** `childrens-horoscope.md`, `second-house-money.md`, `return-to-yourself.md` (`d5f61d4`). Answers 58–59 words, descriptions ≤ 155.
@@ -51,6 +52,7 @@ Built the English mirrors at `site/src/pages/en/`: articles (`/en/articles/` hub
 | `SITE_ENV=production node scripts/check-content.mjs` | `Content check passed (production).` (after removing the drafts) | 2026-11-06 |
 
 ## History
+- 2026-11-07: G1 passed (PR #39 merged, `/en/` pages live); stage done.
 - 2026-11-06: rebased on `main` (Srdjan built M06–M10, reallocated 2026-11-05); remaining 4 articles and the 12 signs of 2026 translated. All 22 content files have an English pair; `check-content` passes, the production check fails only on `draft: true`.
 - 2026-11-04: glossary; pages About, Why Astromicroscope, Contact; articles children's chart, second house, return to yourself. Local branch, not pushed.
 - 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
