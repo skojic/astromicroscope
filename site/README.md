@@ -48,7 +48,7 @@ Run from `site/`.
 | `npm run crawl -- <url> [--mode production] [--strict]` | Crawl of a deployed address: status codes, canonicals, hreflang pairs, orphans (launch check M13-01) |
 | `npm run check:redirects -- <url> [--gone]` | The redirects file and, with `--gone`, 410 for the 143 spam URLs of the old site (M13-02) |
 | `npm run test:links` | External links of the built site (after `npm run build`) |
-| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the **preview Worker** `https://astromicroscope-preview.filipvicentijevic99.workers.dev`. It is a separate Worker (`wrangler deploy --name astromicroscope-preview`), so it never touches `astromicroscope.com`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. **Normally nobody runs this:** the `site-preview` workflow deploys it for every pull request (D56) |
+| `npm run deploy:production` | Build and deploy to `astromicroscope.com`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. **Normally nobody runs this:** `site-deploy` deploys every green push to `main` (D60) |
 
 `npm install` changes `package-lock.json`; use it only when M00 changes dependencies.
 
@@ -64,15 +64,14 @@ Run from `site/`.
 
 More folders (`src/layouts/`, `src/styles/`, `src/i18n/`, `src/components/`, `src/content/`, `src/data/`) are added during M00 as listed in `plan/contracts.md` §1.
 
-## Preview Worker (D56)
-Two Workers in the same Cloudflare account, one build each:
+## Deploy (D60)
+One Worker, one build, one address. There is no preview stage:
 
-| Worker | Address | Build | Who deploys it |
+| Worker | Address | Build | Deployed by |
 |---|---|---|---|
-| `astromicroscope` | `astromicroscope.com` (custom domain) | `SITE_ENV=production`: indexable, robots.txt allows crawling and names the sitemap | `site-deploy` with `production: true` (manual) |
-| `astromicroscope-preview` | `https://astromicroscope-preview.filipvicentijevic99.workers.dev` | non-production: `noindex`, robots.txt `Disallow: /` | `site-preview` for every pull request; `site-deploy` on a manual run with the preview mode |
+| `astromicroscope` | `astromicroscope.com` (custom domain) | `SITE_ENV=production`: indexable, robots.txt allows crawling and names the sitemap | `site-deploy`, automatically after every green push to `main` |
 
-The preview is a separate Worker, not Worker Previews and not a branch of the production Worker: `wrangler preview` publishes branches of the production Worker and the custom domain follows the branch, so a preview deploy overwrote the production build on `astromicroscope.com` (2026-11-07). The preview Worker has no routes and no custom domain, so it can only be reached on its own address. It is one Worker for all pull requests (the newest preview is what the address shows). To delete it when it is not needed: `wrangler delete --name astromicroscope-preview --force`.
+Every merge to `main` is a release: `site-ci` must be green (`ci-gate`), and `site-deploy` builds the production build and deploys it to the custom domain, then smoke-tests it. A red smoke test is a failed release. The pull request is where a change is reviewed and checked; there is no per-pull-request preview address any more (D60 replaced the preview stage of D36, D56 and D57).
 
 The smoke test checks that a production address serves the production build: `node scripts/smoke.mjs https://astromicroscope.com --mode production`. The Worker's `SITE_ENV` (the same variable at build time) must match the address; a mismatch answers `/api/*` with 404 `build-not-production`.
 

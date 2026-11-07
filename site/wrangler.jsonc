@@ -21,10 +21,8 @@
   },
   // Temporary *.workers.dev address while the site is unfinished; the custom domain is attached at launch (M13), not here.
   "workers_dev": true,
-  // D56: the previews are a SEPARATE Worker (`astromicroscope-preview`, see "Preview Worker" in README.md), so a preview
-  // deploy never overwrites this Worker on the custom domain. `wrangler preview` is not used: it publishes branches of
-  // this Worker, and the custom domain follows the branch. This block is kept for Worker Previews only.
-  "previews": {},
+  // D60: there is no preview stage and no `wrangler preview`: every merge to main deploys this Worker to the custom
+  // domain (site-deploy.yml). The `previews` block is gone with it.
   // M12-02 double opt-in: stores the confirmation token -> subscriber id mapping (7-day TTL).
   // M12-04: per-IP rate-limit counters (fixed window) — REUSES the same KV but with short TTL keys.
   // NOTE (2026-11-07): the Cloudflare `send_email` binding was removed. It only delivers to addresses verified in

@@ -1,24 +1,16 @@
 name: site-deploy
 
-# Deploys after site-ci passed on main, then runs the smoke test against it. No human, no personal token:
-# the dedicated CI token of the repository secrets does it.
-#   - Automatic runs (workflow_run after a green site-ci) build the temporary address as NON-production (noindex) — D36.
-#   - A manual dispatch with `production: true` builds and deploys SITE_ENV=production to the CUSTOM domain astromicroscope.com (M13, D54/D55).
-# D56: the preview runs on its OWN Worker, `astromicroscope-preview` (site-preview.yml); this workflow deploys the Worker
-# `astromicroscope`, which owns the custom domain. The automatic run therefore deploys the production Worker and the
-# preview Worker after the production build, so a preview build never lands on astromicroscope.com.
+# D60 (2026-11-07, supersedes D36's preview part): every green push to main deploys straight to PRODUCTION
+# (astromicroscope.com), the Worker `astromicroscope`. There is no preview stage any more: no per-pull-request preview,
+# no second Worker and no manual dispatch. The pull request is reviewed and checked (`ci-gate`) before it is merged, and
+# the merge is the release. A manual dispatch is a repair lever (deploy main again under the same gate); it is not
+# `production: false` — a non-production build must never reach the custom domain.
 on:
   workflow_run:
     workflows: [site-ci]
     types: [completed]
     branches: [main]
   workflow_dispatch:
-    inputs:
-      production:
-        description: "Deploy the production build (SITE_ENV=production) to astromicroscope.com instead of the noindex preview"
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -38,7 +30,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       REPO: ${{ github.repository }}
     steps:
-      - name: Resolve deploy mode and newest commit
+      - name: Check the secrets and that this is the newest commit of main
         id: gate
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
@@ -52,25 +44,7 @@ jobs:
             echo "run=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # D56: the preview Worker is only deployed by a production build, so the preview never carries the noindex build.
-          # An automatic run on the temporary address is not a preview: it would overwrite the preview Worker with one build.
-          preview="false"
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.production }}" = "true" ]; then
-            preview="true"
-          fi
-          echo "preview=$preview" >> "$GITHUB_OUTPUT"
           echo "run=true" >> "$GITHUB_OUTPUT"
-          # Production only from a manual dispatch with the flag; automatic runs stay on the noindex preview (D36).
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.production }}" = "true" ]; then
-            mode="production"
-            url="https://astromicroscope.com"
-          else
-            mode="preview"
-            # D56: the preview Worker, not the Worker that owns the custom domain.
-            url="https://astromicroscope-preview.filipvicentijevic99.workers.dev"
-          fi
-          echo "mode=$mode" >> "$GITHUB_OUTPUT"
-          echo "url=$url" >> "$GITHUB_OUTPUT"
       # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
       - if: steps.gate.outputs.run == 'true'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -86,28 +60,26 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         working-directory: site
         run: npm ci
-      - name: "Build (${{ steps.gate.outputs.mode }})"
+      # SITE_ENV=production is both the assets build and the Worker's environment (D56): indexable pages, robots.txt
+      # allows crawling and names the sitemap, and the API answers ('production'). The dry-run is the last check that the
+      # configuration and the generated Worker module are right before the upload.
+      - name: Build (production)
         if: steps.gate.outputs.run == 'true'
         working-directory: site
-        run: npm run build
+        run: |
+          npm run build
+          npx --no-install wrangler deploy --dry-run
         env:
-          SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
-      # SITE_ENV is the Worker's runtime environment too (D56): the API's own headers carry the Worker's environment, so a
-      # preview build must run on the preview address and the production build on the custom domain. A mismatch makes the
-      # smoke test fail with the build environment named. D56: the Worker is a different one in each mode, so a preview
-      # build never lands on the custom domain.
+          SITE_ENV: production
       - name: Deploy the Worker
         if: steps.gate.outputs.run == 'true'
         working-directory: site
+        run: npx --no-install wrangler deploy
         env:
-          SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
-        run: |
-          if [ "${{ steps.gate.outputs.mode }}" = "production" ]; then
-            npx --no-install wrangler deploy
-          else
-            npx --no-install wrangler deploy --name astromicroscope-preview
-          fi
-      - name: Smoke test of the deployed address
+          SITE_ENV: production
+      # The smoke test is the gate of the deploy: a production build on the custom domain (the environment header, no
+      # noindex, robots.txt, sitemap, the 410 for a spam URL, the form endpoint). A red run is a failed release.
+      - name: Smoke test of the production address
         if: steps.gate.outputs.run == 'true'
         working-directory: site
-        run: node scripts/smoke.mjs "${{ steps.gate.outputs.url }}" --mode "${{ steps.gate.outputs.mode }}"
+        run: node scripts/smoke.mjs https://astromicroscope.com --mode production

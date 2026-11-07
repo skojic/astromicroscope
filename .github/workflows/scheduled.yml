@@ -1,7 +1,7 @@
 name: scheduled
 
 # Checks that nobody has to remember (A4, D56). A failing run emails the owner of the repository.
-#   daily 05:17 UTC   smoke test of the production site (astromicroscope.com) and of the preview Worker (D56)
+#   daily 05:17 UTC   smoke test of the production site (astromicroscope.com) — the only address since D60
 #   Monday 05:41 UTC  external links, dependency audit, Lighthouse on the production site
 on:
   schedule:
@@ -21,10 +21,8 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
-      - name: Smoke test of production (headers, languages, 404 pages, robots, sitemap, no noindex)
+      - name: Smoke test of production (headers, languages, 404 pages, robots, sitemap, no noindex, a spam URL 410)
         run: node site/scripts/smoke.mjs https://astromicroscope.com --mode production
-      - name: Smoke test of the preview Worker
-        run: node site/scripts/smoke.mjs https://astromicroscope-preview.filipvicentijevic99.workers.dev --mode preview
 
   weekly:
     if: github.event_name == 'workflow_dispatch' || github.event.schedule == '41 5 * * 1'

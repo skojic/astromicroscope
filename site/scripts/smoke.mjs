@@ -1,12 +1,14 @@
 // Smoke test of a deployed address (A1 after every deploy, A4 daily, G5 live smoke test).
 //   node scripts/smoke.mjs [baseUrl] [--mode preview|production] [--retries 4]
-// preview (default): the temporary address, every response is noindex and robots.txt disallows everything (D24, D36).
+// production (default since D60): the custom domain, indexable, robots.txt allows crawling. `--mode preview` is still
+// there for a locally served build (`npx serve dist`, `wrangler dev`): every response is noindex and robots.txt disallows
+// everything (D24), so a preview build deployed by mistake fails the production check.
 // production: indexable, robots.txt allows crawling and names the sitemap.
 // A failing run is repeated (default 4 tries, 8 s apart) because a fresh deploy takes a moment to reach every edge.
 import { fileURLToPath } from 'node:url';
 
-// The preview Worker (D56): a separate Worker from the production one, so a preview deploy never touches astromicroscope.com.
-export const DEFAULT_URL = 'https://astromicroscope-preview.filipvicentijevic99.workers.dev';
+// The site's only address since D60: every merge to main deploys there.
+export const DEFAULT_URL = 'https://astromicroscope.com';
 
 /** Headers every page must send (specs/09 section 4, src/integrations/headers.mjs). */
 export const REQUIRED_HEADERS = ['strict-transport-security', 'content-security-policy', 'x-content-type-options', 'referrer-policy', 'permissions-policy'];
@@ -102,7 +104,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const opt = (name, fallback) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : fallback; };
   const base = (args.find((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--')) ?? process.env.SMOKE_URL ?? DEFAULT_URL).replace(/\/$/, '');
-  const mode = opt('mode', 'preview');
+  const mode = opt('mode', 'production');
   if (!['preview', 'production'].includes(mode)) throw new Error(`--mode must be preview or production, got ${mode}`);
   const { results, attempt } = await smoke(base, mode, Number(opt('retries', 4)));
   for (const r of results) console.log(`${r.problem ? 'FAIL' : ' ok '}  ${r.name}${r.problem ? `: ${r.problem}` : ''}`);
