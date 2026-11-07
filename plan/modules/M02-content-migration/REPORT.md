@@ -2,17 +2,18 @@
 
 | | |
 |---|---|
-| Stage | building |
-| Last gate passed | G0 (2026-11-04) |
+| Stage | done |
+| Last gate passed | G4 (standing owner approval, D45; G1 evidence 2026-11-07, D51) |
 | Owner | Filip |
 | Branch | `feature/m02-content-migration` merged in PR #13; English pairs and publication on `feature/m14-translation` (PR #39) |
 | Last commit | `78fec8c` M02-02: convert the five transit articles to the article schema |
-| Last updated | 2026-11-06, Gorica approved publication; `draft: true` removed from all 22 Serbian files |
+| Last updated | 2026-11-07, G1 passed, module done |
 
 ## Next step
-1. PR #39 (M14) brings the English pairs and removes `draft: true`; when it is merged, G1 for M02 (build without warnings, both languages) can be run.
+None. Module done (G1, 2026-11-07). The registrar/DNS work is M13; new content goes through M06/M07.
 
 ## Done
+- **G1 (2026-11-07):** all tasks done; PR #39 green (`ci-gate`) and merged as `881b7b2`; the 22 Serbian files and their 22 English pairs render live on the production site (checked by Filip on astromicroscope.com: `/tekstovi/podznak/` + `/en/articles/rising-sign/`, `/horoskop/ovan/` + `/en/horoscope/aries/`, `/o-meni/` + `/en/about/`); `check-content` passes in production mode; no placeholder text.
 - **M02-01** old-URL map: all 28 pages have a new URL and a target file or a written reason (table “Old-URL map” below). Commit `47a2a64`.
 - **M02-02 batch 1** (5 of 10 articles, the texts without transits): `potencijali.md`, `kako-da-vratis-sebe-sebi.md`, `podznak.md`, `astro-vodic-kroz-finansije.md`, `sta-otkriva-decji-horoskop.md` in `site/src/content/articles/sr/`. Commit `e4abd1c`. Answer word counts 50, 48, 51, 48, 48; titles 25–56 characters; descriptions 119–134 characters. Every text has `draft: true` (not yet approved by Gorica).
 - **M02-02 batch 2** (the five transit articles): `mars-u-strelcu.md`, `retrogradni-uran.md`, `eklipsa.md`, `jupiter-u-lavu.md`, `saturn.md`. Commit `78fec8c`. **Gorica, 2026-11-04: keep only `jupiter-u-lavu.md` and `saturn.md`**; Mars (Nov–Dec 2025), Uranus (until April 2026) and the eclipses (Feb–Mar 2026) are past and are removed; their old URLs redirect to `/tekstovi/` (map rows 6–8). Answers 53, 54, 50, 50, 48 words; titles 36–59 characters; descriptions 121–143 characters; `transits` filled for Mars, Uranus, Jupiter. All `draft: true`. M02-02 is complete: 7 articles go to the new site, 3 old pages have a written reason (map).
@@ -134,6 +135,7 @@ Also for M13, not pages of this module: `/` stays `/`; the 143 spam URLs in `doc
 | `npm run build` | not run (npm registry blocked, HTTP 403) | 2026-11-03 |
 
 ## History
+- 2026-11-07: G1 passed (PR #39 merged, both languages live on astromicroscope.com); stage done.
 - 2026-11-06: Gorica approved publication; drafts removed; open horoscope points stay as written.
 - 2026-11-04: M02-04 pages (O meni, Zašto Astromicroscope, Kontakt); all M02 tasks done.
 - 2026-11-04: M02-03: 12 signs of the 2026 horoscope converted, dates corrected, tone „ti”.
