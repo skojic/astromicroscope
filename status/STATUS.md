@@ -38,7 +38,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M09 Private analyses | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06; form send via M12 | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06; M10-05 out of scope by D33 | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
-| M12 Forms | Srdjan | building | M12-03 email live 2026-11-07; remaining: prove the live double-opt-in (G1) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
+| M12 Forms | Srdjan | building | MailerLite double opt-in to enable — assigned to Filip in issue #59; then prove the live confirmation (G1) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | building | production live on astromicroscope.com 2026-11-07; remaining M13-01/02/04/07; registrar transfer 2026-11-29 (not a blocker) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
 | M14 English translation | Filip | building | EN routes for M06–M10 built 2026-11-06; glossary + all 22 content files published (no drafts) PR #39 | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
