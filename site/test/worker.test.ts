@@ -3,18 +3,22 @@
 // uploaded to astromicroscope.com and the smoke test reported 28/28, while the production site sent noindex and
 // `Disallow: /` in robots.txt. The Worker's own environment is the header the smoke test checks (x-astromicroscope-env);
 // a Worker whose build does not match its environment refuses every /api/* request with 404.
+// The Worker imports its generated module (the 404 pages and the spam paths), which the build writes (P07, D59), so it is
+// loaded after the module exists: in CI the build has run before the unit tests (`npm run build` first). Without a build
+// the failure says to run one.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-// The Worker imports its generated module, written by the build (P07, D59): build first or the import fails with a
-// module-not-found that says so.
-import { requireGenerated } from './generated-worker.mjs';
-requireGenerated();
-// @ts-expect-error plain TypeScript worker, no types here
-import worker from '../src/worker/index.ts';
+// @ts-expect-error plain .mjs without types
+import { GENERATED } from './generated-worker.mjs';
 import { evaluateBuild } from '../scripts/smoke.mjs';
 
 const TOKEN = 'https://astromicroscope.com/api/form-token';
 const env = (value: string) => ({ SITE_ENV: value });
+
+// @ts-expect-error plain TypeScript worker, no types here
+const worker = await import('../src/worker/index.ts').then((m) => m.default, (e) => {
+  throw new Error(`${e.message}\nrun \`npm run build\` first: it writes ${GENERATED.replace(/^.*\/site\//, 'site/')} (P07, D59)`);
+});
 
 test('worker: a preview build answers /api/* from a production Worker with 404', async () => {
   const res = await worker.fetch(new Request(TOKEN), env('production'));
