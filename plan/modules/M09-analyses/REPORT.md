@@ -7,10 +7,10 @@
 | Owner | Srdjan (reallocated 2026-11-05; built to add content) |
 | Branch | (see log commit) |
 | Last commit | — |
-| Last updated | 2026-11-05 |
+| Last updated | 2026-11-07 |
 
 ## Next step
-M09-01..M09-03 built for SR. Remaining: M09-04 request form (M12 sends; currently analysis pages link to email), gates G1–G4, English mirrors (M14).
+M09-01..M09-03 built for SR. Remaining: M09-04 request form (M12 sends; currently analysis pages link to email), and G1 (green `site-ci`, D51). English mirrors built 2026-11-06 (M14: `/en/analyses/` hub + 4).
 
 ## Done
 - 2026-11-05, M09-01 `data/analyses.ts` — the four services per D19 (`docs/sadrzaj/04`): natal, solar, karmic, consultation, with durations, RSD + EUR prices, Gorica's own summaries/descriptions, includes/needs/format.
@@ -21,8 +21,7 @@ M09-01..M09-03 built for SR. Remaining: M09-04 request form (M12 sends; currentl
 
 ## Not done
 - M09-04 request form (fields/validation) — M12 sends; analysis pages use a mailto fallback for now.
-- English mirror (M14).
-- Gates G1–G4 not yet run.
+- G1 evidence (green `site-ci` on `main`); the old gates G2–G4 were folded into the launch gate by D51.
 
 ## Problems and blockers
 - Request form send waits on M12 (DNS move, D54: no fixed date — not the 2026-11-29 registrar transfer).
@@ -42,6 +41,7 @@ M09-01..M09-03 built for SR. Remaining: M09-04 request form (M12 sends; currentl
 | `check-docs` | 0 problems | 2026-11-05 |
 
 ## History
+- 2026-11-07: report cleaned up: English mirrors built (M14, 2026-11-06); gates reduced to G1 + launch gate (D51).
 - 2026-11-05: M09-01..03 built (SR) by Srdjan.
 - 2026-11-03: plan read by Filip; questions recorded (Phase 0, task 5).
 - 2026-11-02: plan created.

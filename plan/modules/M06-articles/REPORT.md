@@ -7,10 +7,10 @@
 | Owner | Srdjan (reallocated 2026-11-05; built to add content, not waiting on the original split) |
 | Branch | (see log commit) |
 | Last commit | — |
-| Last updated | 2026-11-05 |
+| Last updated | 2026-11-07 |
 
 ## Next step
-M06-01 (article template), M06-03 (hub), M06-04 (home section), M06-05 (Article JSON-LD) built for SR. Remaining: M06-02 TransitTimeline (optional — transit data in frontmatter, body narrates it), English mirrors (M14), per-topic hub pages (part of M06-03; one combined hub now), and gates G1–G4.
+M06-01 (article template), M06-03 (hub), M06-04 (home section), M06-05 (Article JSON-LD) built for SR. Remaining: M06-02 TransitTimeline (optional — transit data in frontmatter, body narrates it), per-topic hub pages (part of M06-03; one combined hub now), and G1 (green `site-ci`, D51). English mirrors built 2026-11-06 (M14: `/en/articles/` hub + 7).
 
 ## Done
 - 2026-11-05, M06-01 article template `/tekstovi/<slug>/` (7 pages via `getStaticPaths`): answer-box first, published/updated dates, topics in data, reading column ~64 chars, body ~1.1875rem, reuses M10 `AuthorBox`.
@@ -23,18 +23,17 @@ M06-01 (article template), M06-03 (hub), M06-04 (home section), M06-05 (Article 
 ## Not done
 - M06-02 TransitTimeline component (optional; data present in frontmatter).
 - Per-topic hub pages (part of M06-03) — one combined hub now; topic pages deferred.
-- English mirrors (M14).
-- Gates G1–G4 not yet run.
+- G1 evidence (green `site-ci` on `main`); the old gates G2–G4 were folded into the launch gate by D51.
 
 ## Problems and blockers
 - Long article may need splitting (B3, 4,095 words) — currently rendered whole.
-- Content `draft: true` (M02) + no en pairs → production build still gated.
+- None. The `draft: true` flags are removed and the English pairs exist (M02/M14, PR #39).
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
 
 ## Requests to other modules
-- To M14: English article + hub mirror.
+- To M14: done (English article + hub built 2026-11-06).
 - M07: a shared TransitTimeline would service both — currently unused.
 
 ## Test evidence
@@ -45,6 +44,7 @@ M06-01 (article template), M06-03 (hub), M06-04 (home section), M06-05 (Article 
 | `check-docs` | 0 problems | 2026-11-05 |
 
 ## History
+- 2026-11-07: report cleaned up: English mirrors built (M14, 2026-11-06); gates reduced to G1 + launch gate (D51); draft/en-pair blocker removed.
 - 2026-11-05: M06-01..05 built (SR) by Srdjan.
 - 2026-11-03: plan read by Filip; questions recorded under Problems and blockers (Phase 0, task 5).
 - 2026-11-02: plan created.
