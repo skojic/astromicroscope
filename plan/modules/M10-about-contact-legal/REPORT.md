@@ -10,7 +10,7 @@
 | Last updated | 2026-11-05 |
 
 ## Next step
-M10-01 + M10-02 + M10-03 + M10-04 are built. Remaining: M10-05 (legal shells) is out of scope by D33; verify gates (G1 build, G2 CI, G3 review, G4 owner) and confirm with Gorica the About-text interpretation (drop the Nikola Stojanović paragraph, D20). English pairs behind M14.
+M10-01 + M10-02 + M10-03 + M10-04 are built. Remaining: M10-05 (legal shells) is out of scope by D33; verify gates (G1 build, G2 CI, G3 review, G4 owner) (the About-text interpretation, dropping the Nikola Stojanović paragraph, is approved: D55). English pairs behind M14.
 
 ## Done
 - 2026-11-05, M10-02 `AuthorBox.astro`: author card (portrait via `Image`, credential, Instagram/YouTube links), heading level prop; used by articles (M06) and horoscope (M07).
@@ -28,8 +28,8 @@ M10-01 + M10-02 + M10-03 + M10-04 are built. Remaining: M10-05 (legal shells) is
 
 ## Problems and blockers
 - Resolved: portrait received (A8), imported.
-- Question (Gorica): About keeps the old text up to the Nikola Stojanović paragraph (D20). Interpreted as: drop that paragraph, keep the rest. To confirm with her.
-- Content is `draft: true` (M02), so production build still blocked until Gorica approves + M14.
+- Closed by D55 (2026-11-07): About keeps the old text up to the Nikola Stojanović paragraph (D20); that paragraph is dropped, the rest kept.
+- None: the drafts are removed and all text is approved (M02/M14, D55).
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).

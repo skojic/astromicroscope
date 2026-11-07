@@ -13,8 +13,7 @@
 All seven sections now exist and `Sections.astro` renders them (no `Pending` left), and every section is **language-aware** (the sections on `/en/` render English content and link to `/en/...`; each is lang-aware, and the article/learn/analyses/horoscope home sections follow `lang`). The previous blocker (English home linking into Serbian pages) is **closed** by the English routes for M06–M10 (M14, built 2026-11-06).
 Remaining before M05 G1:
 1. **Concept gaps**: closed. Jung quote and gold hairline on the analyses panel: PR #47 (2026-11-06); wheel lens: M07-05 (2026-11-07). The "three facts" in About were dropped (Srdjan, 2026-11-07): About carries the Jung quote only.
-2. **Meta description** of the English home is not approved (see Problems).
-Then G1 for the finished page.
+Then G1 for the finished page. (The English meta description is approved, D55.)
 
 ## Done
 - M05-01 hero: H1 as HTML text (LCP element), lede, two buttons, strings from `docs/sadrzaj/01` (`src/i18n/home.json`).
@@ -27,7 +26,7 @@ Then G1 for the finished page.
 - Reduced-motion and touch behaviour checked by reading the code and the media queries, not on a device.
 
 ## Problems and blockers
-- The meta description of the English home page in `docs/sadrzaj/01` is longer than 155 characters; `home.json` uses a shortened version that has not been approved by Gorica.
+- None. The shortened English meta description in `home.json` is approved (D55, 2026-11-07).
 
 ## Done (2026-11-06, review of the assembled page)
 - Reviewed `/` at 390, 768 and 1440 px and `/en/` at 768 px (Chromium screenshots). Four sections stacked on white with 64+64 px padding, so the gaps read as uneven: horoscope and videos now sit on beige bands (`--am-bg-alt`), giving white, beige, white, beige, midnight, beige, white; the sign cards are white on the beige band.
