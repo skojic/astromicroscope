@@ -31,7 +31,7 @@ A working Astro project in `site/` that every other module builds on: SR/EN rout
 | M00-05 | Content collection schemas from `contracts.md` §3, including a build failure on missing translations and `[placeholder]` in production |  |
 | M00-06 | Base and Page layouts with the props from `contracts.md` §5; `ui/` buttons, links, cards, `Pending.astro` |  |
 | M00-07 | CI: build, HTML validation, axe, Lighthouse budgets on every pull request |  |
-| M00-08 | Hosting on **Filip's Cloudflare account** (2FA on, Srdjan as member): Worker with static assets (Cloudflare Pages is now part of Workers, per wrangler 4.151 and Cloudflare docs of 2026-10-12); preview URL per pull request; deploy from CI with a token limited to this Worker | D16 |
+| M00-08 | Hosting on **Filip's Cloudflare account** (Srdjan as member): Worker with static assets (Cloudflare Pages is now part of Workers, per wrangler 4.151 and Cloudflare docs of 2026-10-12); preview URL per pull request; deploy from CI with a token limited to this Worker | D16 |
 | M00-09 | Security headers via `_headers` (`specs/09` §4); previews `noindex` | D15 |
 | M00-10 | Turn on Dependabot security updates; pin third-party actions to commit SHAs | `specs/09` §3 |
 

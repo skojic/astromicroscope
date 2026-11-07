@@ -28,7 +28,7 @@ Closed as not important for now ("delete everything else left as not important e
 | M04 Rich Results Test | the Rich Results Test on Article and ProfilePage, by hand (the Schema Markup Validator is done) | `modules/M04-seo/REPORT.md` |
 | Child automations | Dependabot auto-merge and the weekly `videos-import` pull request, never proven end-to-end on a personal repository | `status/decisions.md` D46 |
 | A separate preview Worker | a per-pull-request preview on its own Worker (the preview stage itself is gone, D60) | `status/decisions.md` D60 |
-| The security hardening plan | the edge rate limit is already live (10 req / 10 s on `/api/`); the rest of the plan (HSTS preload, DMARC/DKIM, 2FA sweep, AI-crawler settings) was withdrawn | `status/log.md` 2026-11-07 |
+| The security hardening plan | the parts that stayed: the edge rate limit on the write endpoints (2 req / 10 s, D62) and Cloudflare's verified-bot directory. Withdrawn: HSTS preload (permanent for subdomains, D62), DMARC/DKIM, the 2FA sweep (2FA is out of the project, D62) | `status/log.md` 2026-11-07, D62 |
 | Browser checks beyond Chromium | the Firefox/WebKit layout run (manual: `VISUAL_BROWSERS=chromium,firefox,webkit npm run test:axe`) | `testing/gates.md` |
 
 ## Modules

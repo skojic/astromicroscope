@@ -31,14 +31,14 @@ Srđan radi M00 (temelj), M03 (zaglavlje i podnožje), M04 (SEO), M05 (početna)
 
 ## 3. Faza 0: tvoji zadaci sada (bez koda)
 
-1. **Uključi dvofaktorsku prijavu (2FA) na svom GitHub nalogu** i javi Srđanu. (GitHub → Settings → Password and authentication.)
-2. **Napravi Cloudflare nalog za sajt** (odluka D16), uključi 2FA i dodaj Srđana kao člana. Ne pravi još ništa na njemu; postavljanje radi M00.
+1. ~~Uključi dvofaktorsku prijavu (2FA) na svom GitHub nalogu~~ — **ukinuto** (D62: 2FA se više ne traži).
+2. **Napravi Cloudflare nalog za sajt** (odluka D16) i dodaj Srđana kao člana. Ne pravi još ništa na njemu; postavljanje radi M00. **Urađeno:** nalog postoji, zona je aktivna.
 3. **Razgovor sa Goricom.** Prođi sa njom kroz [`docs/sadrzaj/upitnik-za-goricu.md`](../docs/sadrzaj/upitnik-za-goricu.md):
    - pitanja 8–10 (kursevi) preskoči, kursevi su 2027;
    - **najvažnije:** 1 (ti ili vi), 7 (dečja astrologija kao usluga?), 12–17 (koje analize, cene, kako se zakazuje), 20–26 (newsletter, kontakt, pravno);
    - pitaj i kada stiže **novi godišnji horoskop** (stari važi još oko mesec dana);
    - pitaj je za **portret** i za originalni **vektorski logo** od dizajnera, ako postoji;
-   - podseti je da promeni lozinku i uključi 2FA na Gmail-u, Instagramu i YouTube-u (`specs/09-security.md` §2).
+   - podseti je da promeni lozinku na Gmail-u, Instagramu i YouTube-u (`specs/09-security.md` §2; 2FA se ne traži, D62).
    Odgovore upiši u upitnik i u fajlove `docs/sadrzaj/01–07`, umesto teksta u `[uglastim zagradama]`. To radiš kroz granu `docs/odgovori-gorice` i pull request.
 4. **Spisak spam adresa sa starog sajta.** Iz backupa baze izvuci adrese (URL) onih oko 140 spam članaka i stavi ih u `docs/sadrzaj/stari-sajt/spam-adrese.md` (samo adrese, bez sadržaja). Trebaće u M13 da Google dobije status 410 za njih.
 5. **Napravi svoj plan rada.** Za svaki svoj modul pročitaj `PLAN.md`; ako nešto fali ili nije jasno, dopiši pitanje u `REPORT.md` tog modula, pod „Problems and blockers”, i javi Srđanu. Ako misliš da zadatke treba podeliti drugačije, predloži to kroz pull request na `PLAN.md`.

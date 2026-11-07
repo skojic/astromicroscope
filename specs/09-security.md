@@ -15,17 +15,19 @@ The old WordPress site was compromised: about 140 casino spam posts were injecte
 - The old site is **never restored**, and its backup is never uploaded anywhere or added to the repository.
 
 ## 2. Accounts: the real attack surface now
-Whoever controls these accounts controls the site. Each one needs a strong unique password (password manager) and two-factor authentication. The project no longer tracks this (D43).
+Whoever controls these accounts controls the site. Each one needs a strong unique password (a password manager). **Two-factor authentication is not part of this project and is not asked for anywhere** (D62: Srdjan, "2FA - stop asking for that, it will not happen, remove the ask"). The security work goes into what the site itself controls: DNS, DNS records that cannot be forged (DNSSEC), the edge (rate limits, bot directory), the headers and the API. The state table below is history; no action on it is expected.
 
-| Account | Who | State on 2026-11-02 | Action |
+The table is history (state on 2026-11-02); **no action on 2FA is expected** (D62).
+
+| Account | Who | Then | Done since |
 |---|---|---|---|
-| GitHub `skojic` (owner) | Srdjan | 2FA on (`gh api user`) | keep |
-| GitHub `filipvicentijevic99` | Filip | unknown (not visible to the owner on a personal repo) | Filip turns on 2FA and confirms |
-| Cloudflare account that hosts the site | Filip (decision D16) | does not exist for this site yet | 2FA on; Srdjan added as a member; API tokens limited to this site only |
-| Domain registrar (Hostinger) | Gorica / Srdjan | domain in expired state | renew; 2FA; registrar lock on; auto-renew on |
-| Old Hostinger hosting, WordPress | — | expired, compromised | change passwords anyway; never reuse them |
-| Email astromicroscope@gmail.com | Gorica | unknown | new password; 2FA; check forwarding rules and connected apps |
-| Instagram, YouTube @astromicroscope | Gorica | unknown | 2FA; remove unknown logins |
+| GitHub `skojic` (owner) | Srdjan | 2FA on | — |
+| GitHub `filipvicentijevic99` | Filip | unknown | — |
+| Cloudflare account that hosts the site | Filip (D16) | did not exist yet | created, zone active, the site on it; Srdjan is a member; API tokens limited to the account |
+| Domain registrar (Hostinger) | Gorica / Srdjan | domain expired | renewed to 2027-10-15, auto-renew on, lock on; **transfer to Cloudflare 2026-11-29** (M13-08, D54) |
+| Old Hostinger hosting, WordPress | — | expired, compromised | gone; the old site is never restored |
+| Email astromicroscope@gmail.com | Gorica | unknown | Email Routing live (catch-all to the inbox) |
+| Instagram, YouTube @astromicroscope | Gorica | unknown | — |
 
 When someone leaves the project: remove their GitHub access, Cloudflare membership and any tokens on the same day.
 
@@ -55,7 +57,7 @@ Set in M00 (and checked in M13) through the hosting's `_headers` file:
 - Renew now, then turn on auto-renew and registrar lock.
 - DNS moves to the Cloudflare account that hosts the site (needed for a custom domain on Workers).
 - DNSSEC on after the move.
-- If email moves to the domain later: SPF, DKIM and DMARC records.
+- SPF is on (`v=spf1 include:_spf.mx.cloudflare.net ~all`, set by Email Routing). **DMARC and DKIM are not adopted** (withdrawn with the security hardening plan, D61/D62): a DNS record change outside the plan.
 
 ## 6. Cleaning up after the old site (M13)
 - After the domain points to the new site: add it to Google Search Console, check **Security issues** and **Manual actions**, and submit the new sitemap.
