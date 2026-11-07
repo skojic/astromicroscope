@@ -1,0 +1,32 @@
+# Redirects for the old site (M02-01 old-URL map, M13-02). 301 from the old WordPress URL to the new one.
+# Sign targets use the flat /horoskop/<slug>/ structure the site actually builds (M07-02, D31).
+/potencijali/            /tekstovi/potencijali/  301
+/kako-da-vratis-sebe-sebi/ /tekstovi/kako-da-vratis-sebe-sebi/ 301
+/ljudi-su-vise-od-onoga-sto-se-vidi-na-prvi-pogled-njihov-pravi-potencijal-lezi-u-tome-sta-su-sposobni-postati-a-ne-u-onome-sta-trenutno-jesu-abraham-maslow/ /tekstovi/podznak/ 301
+/astro-vodic-kroz-finansije/ /tekstovi/astro-vodic-kroz-finansije/ 301
+/sta-otkriva-decji-horoskop/ /tekstovi/sta-otkriva-decji-horoskop/ 301
+# Past transits removed by Gorica (2026-11-04): redirect to the articles hub instead of a 404.
+/mars-u-strelcu/         /tekstovi/  301
+/retrogradni-uran/       /tekstovi/  301
+/eklipsa/                /tekstovi/  301
+/jupiter-u-lavu/         /tekstovi/jupiter-u-lavu/  301
+/saturn/                 /tekstovi/saturn/  301
+# Yearly horoscope signs (2026 edition at launch, D41), flat structure per M07.
+/ovan/                   /horoskop/ovan/    301
+/bik/                    /horoskop/bik/     301
+/blizanci/               /horoskop/blizanci/ 301
+/rak/                    /horoskop/rak/     301
+/lav/                    /horoskop/lav/     301
+/devica/                 /horoskop/devica/  301
+/vaga/                   /horoskop/vaga/    301
+/skorpija/               /horoskop/skorpija/ 301
+/strelac/                /horoskop/strelac/ 301
+/jarac/                  /horoskop/jarac/   301
+/vodolija/               /horoskop/vodolija/ 301
+/riba/                   /horoskop/ribe/    301
+# Old hub pages and services replaced on the new site.
+/godisnji-horoskop/      /horoskop/  301
+/blog/                   /tekstovi/  301
+/konsultacije/           /analize/   301
+/zasto-astromicroscope/  /o-meni/    301
+# /o-meni/ and /kontakt/ map to the same new URL (no redirect needed).
