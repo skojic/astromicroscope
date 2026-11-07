@@ -19,11 +19,10 @@
   "previews": {},
   // M12-02 double opt-in: stores the confirmation token -> subscriber id mapping (7-day TTL).
   // M12-04: per-IP rate-limit counters (fixed window) — REUSES the same KV but with short TTL keys.
-  // M12-03: Cloudflare Email Service, on the custom domain. Sends the double-opt-in confirmation
-  // and the contact/analysis-request emails FROM the zone's domain (noreply@astromicroscope.com).
-  "send_email": [
-    { "name": "EMAIL_SENDER", "allowed_sender_addresses": ["noreply@astromicroscope.com"] }
-  ],
+  // NOTE (2026-11-07): the Cloudflare `send_email` binding was removed. It only delivers to addresses verified in
+  // Email Routing, so it cannot send a newsletter confirmation to arbitrary subscribers. MailerLite sends the
+  // double-opt-in email itself when the subscriber is created as `unconfirmed` on a double-opt-in group.
+
   "kv_namespaces": [
     { "binding": "CONFIRM_STORE", "id": "cccb4f92a62d477d94f9e0df46f195aa" },
     { "binding": "RATE_STORE", "id": "3a4d42d289ea46ae83fd4b2aa96a1d42" }

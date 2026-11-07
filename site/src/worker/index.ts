@@ -173,56 +173,30 @@ async function handleConfirm(url, env) {
 
 const CONFIRM_SALT = 'astromicroscope-confirm-v1';
 
-/** Mint and store a confirmation token; the email (M12-03) is the marked TODO that activates after the DNS move. */
+/**
+ * M12-02/M12-03: the double-opt-in confirmation is sent BY MAILERLITE, not by us.
+ *
+ * MailerLite sends the confirmation email itself when a subscriber is created with `status: "unconfirmed"` on a group
+ * that has double opt-in enabled (MailerLite dashboard -> the group -> double opt-in). That is why the subscriber is
+ * posted as `unconfirmed` in `mailerLiteSubscribe`, and why there is no send here.
+ *
+ * The Cloudflare `send_email` binding cannot do this: it only delivers to addresses verified in Email Routing (it
+ * answers "destination address is not a verified address" for any other recipient), so it suits a contact form that
+ * mails the site owner, never a newsletter to arbitrary subscribers. Tried and removed 2026-11-07.
+ *
+ * `/api/confirm` below stays as the fallback link handler for the case MailerLite's confirmation page is not used.
+ */
 async function storeConfirmation(subscriberId, email, lang, list, env) {
   const store = env.CONFIRM_STORE;
-  if (!store) return; // no KV binding yet: confirmation is minted but not persistable (non-production)
+  if (!store) return; // no KV binding (non-production): nothing to persist
 
   const id = String(subscriberId);
   const expiry = Date.now() + CONFIRM_TTL_MS;
   const secret = env.FORM_SIGNING_SECRET;
+  if (typeof secret !== 'string' || secret === '') return;
   const sig = await sign(`${CONFIRM_SALT}|${id}.${expiry}`, secret);
   const token = `${id}.${expiry}.${sig}`;
   await store.put(`confirm:${token}`, id, { expirationTtl: Math.floor(CONFIRM_TTL_MS / 1000) });
-
-  // M12-03: send the double-opt-in email via Cloudflare Email Service (send_email binding) with the confirmation link.
-  await sendEmail(
-    env,
-    email,
-    lang === 'en'
-      ? 'Confirm your Astromicroscope subscription'
-      : 'Potvrdi prijavu na Astromicroscope',
-    lang === 'en'
-      ? `Click this link to confirm your subscription: ${siteUrl(env)}/api/confirm?token=${encodeURIComponent(token)}`
-      : `Klikni na ovaj link da potvrdiš prijavu: ${siteUrl(env)}/api/confirm?token=${encodeURIComponent(token)}`,
-  );
-}
-
-/** The site's real origin (the custom domain in production; the temporary address otherwise). */
-function siteUrl(env) {
-  return (env.SITE_URL && env.SITE_URL !== '' ? env.SITE_URL : 'https://astromicroscope.com').replace(/\/+$/, '');
-}
-
-/**
- * M12-03: send an email through Cloudflare Email Service. The binding is `EMAIL_SENDER` in wrangler.jsonc, restricted to
- * send from `noreply@astromicroscope.com`. Best-effort: if the binding or the sender domain is not onboarded yet it
- * answers null and the caller treats the request as success anyway (the confirmation link is still minted; MailerLite
- * keeps the subscriber `unconfirmed`, so nothing is sent to real people until the email actually goes out).
- */
-async function sendEmail(env, to, subject, text) {
-  const sender = env.EMAIL_SENDER;
-  if (!sender || !to || !subject || !text) return null;
-  try {
-    await sender.send({
-      from: 'noreply@astromicroscope.com',
-      to: [to],
-      subject,
-      text,
-    });
-    return true;
-  } catch {
-    return null; // best-effort: never fail the subscribe because the mail did not send
-  }
 }
 
 const CONFIRM_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days to click the confirmation link
