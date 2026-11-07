@@ -25,7 +25,7 @@ M02 content; `docs/sadrzaj/02` (articles part)
 | ID | Task | Notes |
 |---|---|---|
 | M06-01 | Article template: answer box, headings, pull quote, related, previous/next |  |
-| M06-02 | TransitTimeline component (used by M07 too) |  |
+| M06-02 | TransitTimeline component (used by M07 too) | built 2026-11-07 |
 | M06-03 | Hub and topic pages |  |
 | M06-04 | Home section: one featured + three |  |
 | M06-05 | Article JSON-LD props for M04 |  |

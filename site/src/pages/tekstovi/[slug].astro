@@ -3,6 +3,7 @@
 // published/updated dates, topic links, the M10 AuthorBox, and Article JSON-LD (M04). SR-only (en mirror is M14).
 import Page from '../../layouts/Page.astro';
 import { getCollection, render } from 'astro:content';
+import TransitTimeline from '../../components/sections/articles/TransitTimeline.astro';
 import AuthorBox from '../../components/sections/about/AuthorBox.astro';
 import { article, person, profilePage, graph } from '../../components/seo/jsonld';
 import { t, type Lang } from '../../i18n/core';
@@ -45,6 +46,7 @@ const paths = { sr: url, en: enPath };
           {updated && updStr !== pubStr && <><span> · {t(articleStrings, 'updatedOn', lang)}: {updStr}</span></>}
         </p>
         <p class="answer">{answer}</p>
+        <TransitTimeline transits={entry.data.transits} lang={lang} />
       </header>
       <div class="body">
         <Content />

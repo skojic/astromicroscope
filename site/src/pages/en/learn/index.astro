@@ -28,6 +28,7 @@ const description = t(learnStrings, 'hubMeta', lang);
         <h2 id="waitlist-title">{t(learnStrings, 'coursesTitle', lang)}</h2>
         <p>{t(learnStrings, 'coursesIntro', lang)}</p>
         <a class="btn" href="mailto:astromicroscope@gmail.com">{t(learnStrings, 'waitlistBtn', lang)}</a>
+        <p class="consent">{t(learnStrings, 'consent', lang)}</p>
         <p class="note">The waitlist uses the M12 form; until then, email astromicroscope@gmail.com.</p>
       </section>
     </div>
@@ -48,5 +49,6 @@ const description = t(learnStrings, 'hubMeta', lang);
   .waitlist { padding: var(--am-space-5); border-radius: var(--am-radius); background: var(--am-bg-alt); border: 1px solid var(--am-line, #d3d8df); max-width: var(--am-measure); }
   .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
   .btn:hover { background: var(--am-action-hover); }
+  .consent { margin: var(--am-space-2) 0 0; font: var(--am-text-small); font-size: .8rem; line-height: 1.4; color: var(--am-muted); max-width: 44ch; }
   .note { margin-top: var(--am-space-3); color: var(--am-muted); font-size: .9rem; }
 </style>

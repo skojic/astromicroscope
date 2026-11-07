@@ -1,0 +1,47 @@
+---
+// Transit timeline (M06-02, also used by M07; plan/concept.md, signature interaction 4): a static bar with dates, no animation.
+// The text carries the meaning (planet, sign, dates), the bar is decoration, so screen readers get a plain list.
+import { t, type Lang } from '../../../i18n/core';
+import { signName } from '../../../i18n/horoscope';
+import { transitStrings, planetName, formatTransitDate, fill, transitBars, type Transit } from '../../../i18n/transits';
+
+interface Props { transits?: Transit[]; lang: Lang }
+const { transits = [], lang } = Astro.props;
+const bars = transitBars(transits);
+const rows = transits.map((tr, n) => {
+  const from = formatTransitDate(tr.from, lang);
+  const to = formatTransitDate(tr.to, lang);
+  return {
+    label: fill(t(transitStrings, 'transitIn', lang), { planet: planetName(tr.planet, lang), sign: signName(tr.sign, lang) }),
+    from, to,
+    fromIso: new Date(tr.from).toISOString().slice(0, 10),
+    toIso: new Date(tr.to).toISOString().slice(0, 10),
+    spoken: fill(t(transitStrings, 'fromTo', lang), { from, to }),
+    bar: bars[n],
+  };
+});
+---
+{rows.length > 0 && (
+  <ul class="transits" aria-label={t(transitStrings, 'ariaLabel', lang)}>
+    {rows.map((r) => (
+      <li class="transit">
+        <p class="label">{r.label}</p>
+        <svg class="track" aria-hidden="true" focusable="false" width="100%" height="6"><rect class="rail" x="0" y="0" width="100%" height="6" rx="3" /><rect class="fill" x={`${r.bar.left}%`} y="0" width={`${r.bar.width}%`} height="6" rx="3" /></svg>
+        <p class="dates">
+          <span class="sr-only">{r.spoken}</span>
+          <span aria-hidden="true"><time datetime={r.fromIso}>{r.from}</time> – <time datetime={r.toIso}>{r.to}</time></span>
+        </p>
+      </li>
+    ))}
+  </ul>
+)}
+<style>
+  .transits { list-style: none; margin: var(--am-space-5) 0; padding: 0; max-width: var(--am-measure); display: grid; gap: var(--am-space-4); }
+  .transit { padding: var(--am-space-3) 0; border-top: 1px solid var(--am-line); }
+  .label { margin: 0 0 var(--am-space-2); font: var(--am-text-ui); font-weight: 600; }
+  .track { display: block; width: 100%; height: 6px; }
+  .rail { fill: var(--am-line); }
+  .fill { fill: var(--am-gold); }
+  .dates { margin: var(--am-space-2) 0 0; color: var(--am-muted); font: var(--am-text-small, var(--am-text-body)); }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>

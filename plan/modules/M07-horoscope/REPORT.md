@@ -13,6 +13,7 @@
 M07-01..M07-04 effectively built (SR): hub, zodiac wheel, sign pages, home section. English mirrors built 2026-11-06 (M14). JS lens built 2026-11-07 (M07-05, pushed to `main` directly). Remaining: G1 (green PR), and the lens text on the hub pages is only checked in Chromium. TransitTimeline (M06-02) is still needed if we want the transit timeline on sign pages — currently transit **data** is in the content frontmatter but not rendered as a timeline component (the body already narrates the transits).
 
 ## Done
+- 2026-11-07, TransitTimeline (M06-02) shown on the sign pages in SR and EN.
 - 2026-11-07, M07-05 zodiac wheel lens: `ZodiacWheel.astro` takes `answers` per sign (hub pages SR + EN and the home section pass them); on focus/click/arrow keys the chosen sign gets `aria-current` and a gold hairline, and the panel shows its opening paragraph and a read link; desktop-only (hidden on `hover: none`), without JS it stays 12 links. New e2e check 5 in `site/scripts/e2e.mjs`.
 - 2026-11-05, M07-04 home section `sections/horoscope/HomeSection.astro` (M05 auto-picks it).
 - 2026-11-05, M07-03 hub `/horoskop/`: title + `ZodiacWheel` linking all 12 signs.
@@ -24,16 +25,15 @@ M07-01..M07-04 effectively built (SR): hub, zodiac wheel, sign pages, home secti
 
 ## Not done
 - G1: CI result on `main` for the lens.
-- TransitTimeline component (M06-02) — transit `data` is present but not rendered as a timeline.
 
 ## Problems and blockers
-- M07 blocked on M06-02 TransitTimeline only if we want the transit timeline widget; the content itself narrates transits so it's a polish, not a block.
+- None.
 
 ## Decisions taken in this module
 - Date, decision, why (move project-wide ones to `status/decisions.md`).
 
 ## Requests to other modules
-- M06: a TransitTimeline component would slot into the sign page if/when built; currently optional.
+- M06: TransitTimeline built 2026-11-07, placed under the answer box of the sign pages.
 - M14: English sign pages + hub mirror.
 
 ## Test evidence

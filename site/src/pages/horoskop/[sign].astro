@@ -3,6 +3,7 @@
 // Renders the sign markdown from M02, the AuthorBox, and Article JSON-LD (M04). Uses the Serbian slug per D31.
 import Page from '../../layouts/Page.astro';
 import { getCollection, render } from 'astro:content';
+import TransitTimeline from '../../components/sections/articles/TransitTimeline.astro';
 import AuthorBox from '../../components/sections/about/AuthorBox.astro';
 import { article, person, profilePage, graph } from '../../components/seo/jsonld';
 import { horoscopeStrings } from '../../i18n/horoscope';
@@ -36,6 +37,7 @@ const crumbName = horoscopeStrings[sign as keyof typeof horoscopeStrings]?.[lang
       <header class="hero">
         <h1>{title}</h1>
         <p class="answer">{answer}</p>
+        <TransitTimeline transits={entry.data.transits} lang={lang} />
         <AuthorBox lang={lang} headingLevel="h3" />
       </header>
       <div class="body">

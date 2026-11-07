@@ -2,6 +2,7 @@
 // M07-02/M07-03 EN: the yearly-horoscope sign page (`/en/horoscope/<sign>/`). Mirrors the SR page with lang="en".
 import Page from '../../../layouts/Page.astro';
 import { getCollection, render } from 'astro:content';
+import TransitTimeline from '../../../components/sections/articles/TransitTimeline.astro';
 import AuthorBox from '../../../components/sections/about/AuthorBox.astro';
 import { article, person, profilePage, graph } from '../../../components/seo/jsonld';
 import { t } from '../../../i18n/core';
@@ -36,6 +37,7 @@ const paths = { sr: `/horoskop/${SIGN_SLUG_SR[sign]}/`, en: url };
       <header class="hero">
         <h1>{title}</h1>
         <p class="answer">{answer}</p>
+        <TransitTimeline transits={entry.data.transits} lang={lang} />
         <AuthorBox lang={lang} headingLevel="h3" />
       </header>
       <div class="body">

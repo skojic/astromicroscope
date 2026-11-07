@@ -1,0 +1,15 @@
+{
+  "transitIn": { "sr": "{planet}, znak {sign}", "en": "{planet} in {sign}" },
+  "ariaLabel": { "sr": "Trajanje tranzita", "en": "Transit dates" },
+  "fromTo": { "sr": "od {from} do {to}", "en": "from {from} to {to}" },
+  "sun": { "sr": "Sunce", "en": "Sun" },
+  "moon": { "sr": "Mesec", "en": "Moon" },
+  "mercury": { "sr": "Merkur", "en": "Mercury" },
+  "venus": { "sr": "Venera", "en": "Venus" },
+  "mars": { "sr": "Mars", "en": "Mars" },
+  "jupiter": { "sr": "Jupiter", "en": "Jupiter" },
+  "saturn": { "sr": "Saturn", "en": "Saturn" },
+  "uranus": { "sr": "Uran", "en": "Uranus" },
+  "neptune": { "sr": "Neptun", "en": "Neptune" },
+  "pluto": { "sr": "Pluton", "en": "Pluto" }
+}
