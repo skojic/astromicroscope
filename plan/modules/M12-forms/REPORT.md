@@ -7,10 +7,10 @@
 | Owner | Srdjan |
 | Branch | `feature/m12-forms` (pushed 2026-11-04; M12-04 on a follow-up) |
 | Last commit | — |
-| Last updated | 2026-11-04 |
+| Last updated | 2026-11-07 |
 
 ## Next step
-M12-01, M12-02, M12-04 and M12-05 are built, and the **consent wording is approved (D53)** — one shared consent reused on the newsletter, course waitlist and analysis-request forms. Remaining: prove the live double opt-in (run a real form submission once M12-02 is deployed), then M12-03 (Email Service) once the **DNS move** is done (D54: no fixed date; the 2026-11-29 registrar transfer is separate and not a blocker).
+M12-01, M12-02, M12-03, M12-04 and M12-05 are built; the **consent wording is approved (D53)**. **M12-03 is live (2026-11-07):** the worker sends the double-opt-in email through Cloudflare Email Service (`EMAIL_SENDER` binding, from `noreply@astromicroscope.com`), and the binding is deployed. **Live proof (2026-11-07):** a real submission to `https://astromicroscope.com/api/newsletter` returned `{"ok":true}` and the subscriber landed in MailerLite as `unconfirmed` (id `203464437587248364`, deleted after the test); `/api/confirm` rejects invalid/missing tokens. The one piece not verifiable from here is the email arriving in a real inbox (needs a real address) — the send is best-effort and the subscriber stays `unconfirmed` until the link is clicked. Remaining: a human clicks a real confirmation email to close the loop, then G1.
 
 ## Done
 - 2026-11-04, M12-01 scaffold (D44): `site/src/worker/index.ts` — a Worker `fetch` that answers only `/api/` paths (wrangler `main` and `assets.run_worker_first: ["/api/*"]`), with a `/api/newsletter` endpoint that validates JSON, rejects the honeypot, checks a signed timestamp and an HMAC-SHA-256 signature, validates the email and the list/lang, and rate-limits per IP (stub Map); provider calls left as marked TO DO. `site/wrangler.jsonc` now sets `main` to the script and `run_worker_first` to `["/api/*"]`. i18n strings in `site/src/i18n/newsletter.{json,ts}` and a `site/src/components/sections/newsletter/HomeSection.astro` form. Evidence: `npm run build` → 18 pages, exit 0; the worker bundles clean under esbuild; `wrangler deploy --dry-run` reads config without error.
