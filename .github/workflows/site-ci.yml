@@ -78,14 +78,16 @@ jobs:
         if: steps.files.outputs.site == 'true'
         working-directory: site
         run: npx playwright install --with-deps chromium
-      - name: Unit tests
-        if: steps.files.outputs.site == 'true'
-        working-directory: site
-        run: npm test
+      # The build comes first: it writes the Worker's generated module (the 404 pages and the spam paths, P07/D59) and
+      # the unit tests import the Worker.
       - name: Build (content checks run first)
         if: steps.files.outputs.site == 'true'
         working-directory: site
         run: npm run build
+      - name: Unit tests
+        if: steps.files.outputs.site == 'true'
+        working-directory: site
+        run: npm test
       - name: HTML validation
         if: steps.files.outputs.site == 'true'
         working-directory: site
