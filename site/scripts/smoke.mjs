@@ -75,6 +75,12 @@ export async function runOnce(base, mode) {
     const loc = r.headers.get('location') ?? '';
     check('/en redirects to /en/', [301, 302, 307, 308].includes(r.status) && /\/en\/$/.test(loc) ? null : `got ${r.status} ${loc}`);
   } catch (e) { check('/en redirects to /en/', String(e.message ?? e)); }
+  // P07 (D59): one of the 143 spam URLs of the old hacked site answers 410 Gone (it was 404 before, which is only a
+  // softer removal). The first URL of the list in the repository keeps this check honest without copying the list.
+  try {
+    const r = await get(`${base}/casinia-casino-quickhit-slots-rapid-wins-and-insta/`);
+    check('a spam URL answers 410 Gone', r.status === 410 ? null : `got ${r.status} (the Worker should answer 410, P07/D59)`);
+  } catch (e) { check('a spam URL answers 410 Gone', String(e.message ?? e)); }
   const robots = await page('/robots.txt', { status: 200 });
   if (robots) check('robots.txt content', evaluateRobots(robots.text, mode));
   const sitemap = await page('/sitemap.xml', { status: 200 });

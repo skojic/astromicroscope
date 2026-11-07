@@ -26,3 +26,8 @@ pnpm-debug.log*
 # Lighthouse CI output
 .lighthouseci/
 .lighthouseci-live/
+# Generated at every build from the 404 pages and the spam list (src/integrations/not-found.mjs, P07/D59).
+src/worker/generated/
+
+# Local wrangler state (`wrangler dev`): not part of the site.
+.wrangler/
