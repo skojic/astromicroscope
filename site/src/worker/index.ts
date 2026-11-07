@@ -10,11 +10,20 @@
 //
 // The providers (MailerLite M12-02, Email Service M12-03) plug into the marked spots; no secret is stored here — they
 // are Worker secrets in the Cloudflare dashboard, read through env bindings (specs/09 §2).
+//
+// SITE_ENV is the Worker's runtime environment (D56): "production" on the custom domain, "preview" on the preview
+// address. The build carries the same value (the _headers file names the environment the assets were made for), so a
+// Worker build that does not match its environment answers every /api/* request with 404 build-not-production, and the
+// deploy's smoke test fails instead of the site silently going noindex. The Worker's environment is named in the
+// response header (x-astromicroscope-env) and the smoke test checks it against the address.
 
 export default {
   async fetch(request, env, _ctx) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, '') || '/';
+
+    const workerEnv = env.SITE_ENV === 'production' ? 'production' : 'preview';
+    if (workerEnv !== buildEnv()) return json({ ok: false, error: 'build-not-production' }, 404);
 
     if (request.method === 'GET' && path === '/api/form-token') {
       return issueFormToken(env);
@@ -32,12 +41,20 @@ export default {
   },
 };
 
+/** The environment named in the Worker's responses, so the smoke test can prove a production address runs the production build. */
+const ENV_HEADER = 'x-astromicroscope-env';
+
 /** @param {{ ok: boolean, [k: string]: unknown }} body */
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'content-type': 'application/json; charset=utf-8' },
+    headers: { 'content-type': 'application/json; charset=utf-8', [ENV_HEADER]: buildEnv() },
   });
+}
+
+/** The environment the assets were built for (SITE_ENV=production at build time, read by the deploy). */
+function buildEnv() {
+  return process.env.SITE_ENV === 'production' ? 'production' : 'preview';
 }
 
 /** Mint a fresh challenge (M12-04): the current time and the HMAC of `FORM_SALT|ts`. Valid for one hour (see verify). */

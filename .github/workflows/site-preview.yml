@@ -4,6 +4,10 @@
 # - Needs two repository secrets, CLOUDFLARE_API_TOKEN (its own Account API token, limited to this account and to Workers,
 #   not Srdjan's personal token) and CLOUDFLARE_ACCOUNT_ID. Without them (or on a pull request from a fork) the job
 #   skips with a notice and the check stays green.
+# - D56: the Worker it deploys is the same Worker as the production one, so a preview deploy overwrites the production
+#   build on astromicroscope.com (it happened on 2026-11-07: the production address served the noindex preview build).
+#   `deploy:preview` is a deployment step: keep the preview workflow on the temporary address, and run the production
+#   deploy (`site-deploy` with `production: true`) after the preview, so the custom domain stays on the production build.
 # - `pull_request`, not `pull_request_target`: a pull request from a fork never receives the secrets.
 # - The preview is deleted when the pull request is closed.
 name: site-preview
@@ -61,6 +65,8 @@ jobs:
         if: steps.gate.outputs.enabled == 'true'
         env:
           PR: ${{ github.event.pull_request.number }}
+          # The Worker's runtime environment (D56): the preview address runs the preview build, the smoke test reads it.
+          SITE_ENV: preview
         run: |
           set -euo pipefail
           out="$(npx --no-install wrangler preview --name "pr-${PR}" --json)"

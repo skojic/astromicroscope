@@ -23,6 +23,18 @@ export function evaluateNoindex(header, mode) {
   return noindex ? `x-robots-tag: noindex on production (${header})` : null;
 }
 
+/**
+ * The build the address serves matches the address (D56): the Worker's x-astromicroscope-env header names the build the
+ * assets were made for (the _headers file). A mismatched build answers every /api/* request with 404 build-not-production.
+ * On a preview address a mismatch is a notice: a production build may sit there until the next deploy. On production it
+ * is a failure, and the build is the wrong one: the preview build, which is noindex and has no MailerLite form.
+ */
+export function evaluateBuild(env, mode) {
+  const build = env === 'production' ? 'production' : 'preview';
+  if (build === mode) return null;
+  return mode === 'preview' ? 'notice' : `the preview build is deployed as production (build environment ${build})`;
+}
+
 async function get(url) {
   const res = await fetch(url, { redirect: 'manual', headers: { 'user-agent': 'astromicroscope-smoke' }, signal: AbortSignal.timeout(15000) });
   return { status: res.status, headers: res.headers, text: await res.text() };
@@ -46,6 +58,9 @@ export async function runOnce(base, mode) {
     check('/ sends x-content-type-options: nosniff', /nosniff/i.test(home.headers.get('x-content-type-options') ?? '') ? null : 'not nosniff');
     check('/ csp has frame-ancestors', /frame-ancestors/.test(home.headers.get('content-security-policy') ?? '') ? null : 'missing frame-ancestors');
     check('/ robots header', evaluateNoindex(home.headers.get('x-robots-tag'), mode));
+    const build = evaluateBuild(home.headers.get('x-astromicroscope-env'), mode);
+    if (build === 'notice') console.log('notice  / build environment differs from the preview address');
+    else check('/ build environment', build);
     check('/ robots meta', mode === 'preview' ? (/<meta name="robots" content="noindex"/.test(home.text) ? null : 'no robots meta noindex') : (/<meta name="robots" content="[^"]*noindex/.test(home.text) ? 'robots meta noindex on production' : null));
   }
   await page('/en/', { status: 200, lang: 'en' });

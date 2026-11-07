@@ -30,7 +30,7 @@ Redirects file, DNS records, `status/log.md` entries
 | M13-04 | Search Console and Bing Webmaster Tools; sitemap submitted; security issues checked |  |
 | M13-05 | Launch checklist: content, performance, accessibility, security (`testing/checklists/security.md`) | live smoke test: `npm run smoke -- <url> --mode production` (D46) |
 | M13-06 | Search Console: Security issues, Manual actions, removal of spam URLs; monitoring set up (`specs/09` §6–7) | |
-| M13-07 | Set the repository variables `PRODUCTION_AUDIT=true` (D48: strict production audit) and `FULL_BROWSER_CHECK=true` (D51: full three-browser layout check) | both stay set after launch |
+| M13-07 | Run the launch checks once by hand: the strict production audit (`SITE_ENV=production npm run build && SEO_STRICT=1 npm run test:seo`) and the three-browser check (`VISUAL_BROWSERS=chromium,firefox,webkit npm run test:axe`); the `PRODUCTION_AUDIT`/`FULL_BROWSER_CHECK` variables no longer do anything (D56). Deploy the production build to the custom domain (`site-deploy` with `production: true`) and keep the smoke test of that address green | the weekly smoke test and the deploy's smoke test fail on the production address until the production build is the one deployed |
 
 ## Acceptance criteria
 - [ ] All gates G2–G5 recorded

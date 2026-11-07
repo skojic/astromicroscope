@@ -1,7 +1,21 @@
 name: site-ci
 
-# Every pull request and every push to main. `ci-gate` is the one check that branch protection requires (D45): it is green when
-# every job that had to run passed. The site job is skipped when a change touches no site file, so docs-only changes are not blocked.
+# Every pull request and every push to main. `ci-gate` is the one check that branch protection requires (D45, D56):
+# it is green when the job that had to run passed. The check is skipped when a change touches no site file, so docs-only
+# changes are not blocked.
+#
+# D56 (2026-11-07): the job stays under 2 minutes. The full three-browser run took 9 min 20 s (run 42357555983), so the
+# browser set went back to one (Chromium, one width per device class) and every check that duplicates another one is gone:
+#   - the axe check, the e2e check and the layout check are one script (`scripts/visual.mjs`): one page load per page and
+#     width, accessibility and interaction checked there, 'load' instead of 'networkidle';
+#   - the production SEO audit is gone: the preview build is the same HTML, only robots.txt and the robots meta differ;
+#   - the production build is gone: the production build runs on deploy (site-deploy), and the weekly Lighthouse runs on
+#     the production site;
+#   - Lighthouse runs in the weekly job, not on every change; on the deployed site it measures the real edge, not the
+#     GitHub runner;
+#   - the docs check stays as a fast local command (`npm run check:docs`), not a job.
+# The "changes" job and "ci-gate" are one job: a job with a condition starts in about a minute, so the separate jobs
+# were costing more than the work they guarded.
 on:
   pull_request:
   push:
@@ -10,22 +24,25 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: site-ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  changes:
-    # Which parts of the repository this change touches. No checkout: the GitHub API lists the changed files.
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: read
-    outputs:
-      site: ${{ steps.files.outputs.site }}
+  ci-gate:
+    name: ci-gate
+    # ubuntu-24.04 pinned: the migrated ubuntu-26 image both hangs on `playwright install --with-deps` and lacks
+    # Chromium's native libraries (2026-11-04, status/log.md).
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: site
     steps:
-      - id: files
+      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      - name: Which files changed
+        id: files
         env:
           GH_TOKEN: ${{ github.token }}
           EVENT: ${{ github.event_name }}
@@ -45,99 +62,34 @@ jobs:
             echo "site=true" >> "$GITHUB_OUTPUT"
           else
             echo "site=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No site files in this change: unit tests, build and browser checks are skipped."
           fi
-
-  site:
-    needs: changes
-    if: needs.changes.outputs.site == 'true'
-    # ubuntu-24.04 pinned: the migrated ubuntu-26 image both hangs on `playwright install --with-deps` and lacks WebKit's
-    # native libraries, so the cross-browser layout check cannot launch browsers there (2026-11-04, status/log.md).
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: site
-    steps:
-      # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - if: steps.files.outputs.site == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - if: steps.files.outputs.site == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
           cache: npm
           cache-dependency-path: site/package-lock.json
-      - run: npm ci
+      - if: steps.files.outputs.site == 'true'
+        run: npm ci
+      - name: Install Chromium
+        if: steps.files.outputs.site == 'true'
+        run: npx playwright install --with-deps chromium
       - name: Unit tests
+        if: steps.files.outputs.site == 'true'
         run: npm test
       - name: Build (content checks run first)
+        if: steps.files.outputs.site == 'true'
         run: npm run build
       - name: HTML validation
+        if: steps.files.outputs.site == 'true'
         run: npm run test:html
-      - name: Install browsers (Chromium always; Firefox and WebKit only for the full launch check, D51)
-        # --with-deps is restored: it hangs on ubuntu-26, but this job is pinned to ubuntu-24.04 where it works (2026-11-04).
-        run: |
-          if [ "${{ vars.FULL_BROWSER_CHECK }}" = "true" ]; then
-            npx playwright install --with-deps chromium firefox webkit
-          else
-            npx playwright install --with-deps chromium
-          fi
-      - name: Accessibility (axe, WCAG 2.2 A and AA)
+      # One browser check: accessibility (axe), skip link, phone menu, layout, video facade, zodiac lens (D56).
+      - name: Browser checks (accessibility, layout, facade, lens)
+        if: steps.files.outputs.site == 'true'
         run: npm run test:axe
-      - name: Browser checks (no YouTube request before play, language switch, skip link)
-        run: npm run test:e2e
-      # D51: pull requests check the layout in Chromium only; Firefox and WebKit join when the repository variable
-      # FULL_BROWSER_CHECK is true (M13-07 sets it together with PRODUCTION_AUDIT for the launch gate).
-      - name: Cross-browser layout (Chromium; overflow, one h1, console and request errors)
-        run: npm run test:visual
-        env:
-          SHOTS_DIR: ${{ runner.temp }}/shots
-          VISUAL_BROWSERS: ${{ vars.FULL_BROWSER_CHECK == 'true' && 'chromium,firefox,webkit' || 'chromium' }}
-      - name: Upload the screenshots of the layout check
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: visual-screenshots
-          path: ${{ runner.temp }}/shots
-          retention-days: 7
-          if-no-files-found: ignore
-      - name: Lighthouse budgets (single run, mobile, D51)
-        run: npm run test:lighthouse
-      - name: SEO and link audit (preview build)
+      - name: SEO and link audit
+        if: steps.files.outputs.site == 'true'
         run: npm run test:seo
-      # The production build differs from the preview build: indexable pages, robots.txt allows crawling. Keep this step last, it replaces dist/.
-      # D48: skipped until launch. With the M02 draft content on main (draft: true, no English pairs before M14) the strict
-      # production audit can never pass during the build phase. M13-07 sets the repository variable PRODUCTION_AUDIT=true.
-      - name: SEO and link audit (production build)
-        if: vars.PRODUCTION_AUDIT == 'true'
-        env:
-          SITE_ENV: production
-          PUBLIC_CF_WEB_ANALYTICS_TOKEN: ${{ secrets.PUBLIC_CF_WEB_ANALYTICS_TOKEN }}
-        run: npm run build && npm run test:seo
-
-  docs:
-    # Consistency of status/, plan/ and the decisions (rule 5 of AGENTS.md). Plain Node, no install.
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24
-      # D51: documentation consistency is a warning, not a blocker. The problems are printed and a workflow warning is
-      # raised; `npm run status:sync` (run locally) repairs what can be derived.
-      - name: Documents agree with each other (warning only, D51)
-        run: node site/scripts/check-docs.mjs || echo "::warning::check-docs found problems — run 'npm run status:sync' locally; this does not block (D51)"
-
-  ci-gate:
-    if: always()
-    needs: [changes, site, docs]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Every job that had to run passed
-        env:
-          RESULTS: ${{ needs.changes.result }} ${{ needs.site.result }} ${{ needs.docs.result }}
-        run: |
-          echo "changes site docs: $RESULTS"
-          for r in $RESULTS; do
-            case "$r" in
-              success|skipped) ;;
-              *) echo "::error::a required job did not pass ($r)"; exit 1 ;;
-            esac
-          done
