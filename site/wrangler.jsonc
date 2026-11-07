@@ -15,7 +15,9 @@
   },
   // Temporary *.workers.dev address while the site is unfinished; the custom domain is attached at launch (M13), not here.
   "workers_dev": true,
-  // Required by `wrangler preview` (per-pull-request previews in CI). Empty: a preview has the same settings as the Worker.
+  // D56: the previews are a SEPARATE Worker (`astromicroscope-preview`, see "Preview Worker" in README.md), so a preview
+  // deploy never overwrites this Worker on the custom domain. `wrangler preview` is not used: it publishes branches of
+  // this Worker, and the custom domain follows the branch. This block is kept for Worker Previews only.
   "previews": {},
   // M12-02 double opt-in: stores the confirmation token -> subscriber id mapping (7-day TTL).
   // M12-04: per-IP rate-limit counters (fixed window) — REUSES the same KV but with short TTL keys.

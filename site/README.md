@@ -38,7 +38,7 @@ Run from `site/`.
 | `npm test` | Unit tests for the language helpers and the content checks |
 | `npm run check` | Brand CSS in sync with `brand/`; every string and content file translated; with `SITE_ENV=production` also no `[placeholder]` and no unchecked ephemeris |
 | `npm run sync:brand` | Regenerate `src/styles/tokens.css` and `fonts.css` from `brand/` |
-| `npm run test:html`, `test:axe`, `test:lighthouse` | HTML validation, axe (WCAG 2.2 A/AA), Lighthouse budgets on the built `dist/`. For axe locally: `npx playwright install chromium`, or `PW_CHANNEL=chrome` to use installed Chrome |
+| `npm run test:html`, `test:axe` | HTML validation, and the browser check on the built `dist/` (axe WCAG 2.2 A/AA, one `<h1>`, skip link, phone menu, no horizontal overflow, video facade, lens; Chromium). `VISUAL_BROWSERS=chromium,firefox,webkit` adds the three-browser run. Needs `npx playwright install chromium` (or `PW_CHANNEL=chrome` to use installed Chrome). Lighthouse is the live run: `npm run test:lighthouse:live` |
 | `npm run preview` | Serve the built `dist/` locally to check it before a pull request |
 | `npm run astro -- --help` | Astro CLI help |
 | `npm run deploy:dry-run` | `wrangler deploy --dry-run`: reads `dist/` and `wrangler.jsonc`, uploads nothing, needs no token |
@@ -48,7 +48,7 @@ Run from `site/`.
 | `npm run crawl -- <url> [--mode production] [--strict]` | Crawl of a deployed address: status codes, canonicals, hreflang pairs, orphans (launch check M13-01) |
 | `npm run check:redirects -- <url> [--gone]` | The redirects file and, with `--gone`, 410 for the 143 spam URLs of the old site (M13-02) |
 | `npm run test:links` | External links of the built site (after `npm run build`) |
-| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the temporary address `https://astromicroscope.filipvicentijevic99.workers.dev`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. Not for production: the custom domain is attached at launch (M13). **Normally nobody runs this:** the `site-deploy` workflow deploys every green push to `main` (D46) |
+| `npm run deploy:preview` | Build (non-production, so `noindex`) and deploy to the **preview Worker** `https://astromicroscope-preview.filipvicentijevic99.workers.dev`. It is a separate Worker (`wrangler deploy --name astromicroscope-preview`), so it never touches `astromicroscope.com`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. **Normally nobody runs this:** the `site-preview` workflow deploys it for every pull request (D56) |
 
 `npm install` changes `package-lock.json`; use it only when M00 changes dependencies.
 
@@ -63,6 +63,18 @@ Run from `site/`.
 | `scripts/`, `test/` | Checks and their tests |
 
 More folders (`src/layouts/`, `src/styles/`, `src/i18n/`, `src/components/`, `src/content/`, `src/data/`) are added during M00 as listed in `plan/contracts.md` §1.
+
+## Preview Worker (D56)
+Two Workers in the same Cloudflare account, one build each:
+
+| Worker | Address | Build | Who deploys it |
+|---|---|---|---|
+| `astromicroscope` | `astromicroscope.com` (custom domain) | `SITE_ENV=production`: indexable, robots.txt allows crawling and names the sitemap | `site-deploy` with `production: true` (manual) |
+| `astromicroscope-preview` | `https://astromicroscope-preview.filipvicentijevic99.workers.dev` | non-production: `noindex`, robots.txt `Disallow: /` | `site-preview` for every pull request; `site-deploy` on a manual run with the preview mode |
+
+The preview is a separate Worker, not Worker Previews and not a branch of the production Worker: `wrangler preview` publishes branches of the production Worker and the custom domain follows the branch, so a preview deploy overwrote the production build on `astromicroscope.com` (2026-11-07). The preview Worker has no routes and no custom domain, so it can only be reached on its own address. It is one Worker for all pull requests (the newest preview is what the address shows). To delete it when it is not needed: `wrangler delete --name astromicroscope-preview --force`.
+
+The smoke test checks that a production address serves the production build: `node scripts/smoke.mjs https://astromicroscope.com --mode production`. The Worker's `SITE_ENV` (the same variable at build time) must match the address; a mismatch answers `/api/*` with 404 `build-not-production`.
 
 ## How work reaches `main`
 A branch named `feature/…`, `fix/…` or `docs/…`, a pull request, and the owner's approval (`CONTRIBUTING.md`). Every work session ends with updates to the module's `REPORT.md`, `status/STATUS.md` (with its `Updated:` date) and `status/log.md`.

@@ -5,7 +5,8 @@
 // A failing run is repeated (default 4 tries, 8 s apart) because a fresh deploy takes a moment to reach every edge.
 import { fileURLToPath } from 'node:url';
 
-export const DEFAULT_URL = 'https://astromicroscope.filipvicentijevic99.workers.dev';
+// The preview Worker (D56): a separate Worker from the production one, so a preview deploy never touches astromicroscope.com.
+export const DEFAULT_URL = 'https://astromicroscope-preview.filipvicentijevic99.workers.dev';
 
 /** Headers every page must send (specs/09 section 4, src/integrations/headers.mjs). */
 export const REQUIRED_HEADERS = ['strict-transport-security', 'content-security-policy', 'x-content-type-options', 'referrer-policy', 'permissions-policy'];

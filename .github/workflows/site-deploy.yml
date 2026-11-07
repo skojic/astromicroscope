@@ -4,6 +4,9 @@ name: site-deploy
 # the dedicated CI token of the repository secrets does it.
 #   - Automatic runs (workflow_run after a green site-ci) build the temporary address as NON-production (noindex) — D36.
 #   - A manual dispatch with `production: true` builds and deploys SITE_ENV=production to the CUSTOM domain astromicroscope.com (M13, D54/D55).
+# D56: the preview runs on its OWN Worker, `astromicroscope-preview` (site-preview.yml); this workflow deploys the Worker
+# `astromicroscope`, which owns the custom domain. The automatic run therefore deploys the production Worker and the
+# preview Worker after the production build, so a preview build never lands on astromicroscope.com.
 on:
   workflow_run:
     workflows: [site-ci]
@@ -49,6 +52,13 @@ jobs:
             echo "run=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # D56: the preview Worker is only deployed by a production build, so the preview never carries the noindex build.
+          # An automatic run on the temporary address is not a preview: it would overwrite the preview Worker with one build.
+          preview="false"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.production }}" = "true" ]; then
+            preview="true"
+          fi
+          echo "preview=$preview" >> "$GITHUB_OUTPUT"
           echo "run=true" >> "$GITHUB_OUTPUT"
           # Production only from a manual dispatch with the flag; automatic runs stay on the noindex preview (D36).
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.production }}" = "true" ]; then
@@ -56,7 +66,8 @@ jobs:
             url="https://astromicroscope.com"
           else
             mode="preview"
-            url="https://astromicroscope.filipvicentijevic99.workers.dev"
+            # D56: the preview Worker, not the Worker that owns the custom domain.
+            url="https://astromicroscope-preview.filipvicentijevic99.workers.dev"
           fi
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
           echo "url=$url" >> "$GITHUB_OUTPUT"
@@ -83,13 +94,19 @@ jobs:
           SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
       # SITE_ENV is the Worker's runtime environment too (D56): the API's own headers carry the Worker's environment, so a
       # preview build must run on the preview address and the production build on the custom domain. A mismatch makes the
-      # smoke test fail with the build environment named.
+      # smoke test fail with the build environment named. D56: the Worker is a different one in each mode, so a preview
+      # build never lands on the custom domain.
       - name: Deploy the Worker
         if: steps.gate.outputs.run == 'true'
         working-directory: site
-        run: npx --no-install wrangler deploy
         env:
           SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
+        run: |
+          if [ "${{ steps.gate.outputs.mode }}" = "production" ]; then
+            npx --no-install wrangler deploy
+          else
+            npx --no-install wrangler deploy --name astromicroscope-preview
+          fi
       - name: Smoke test of the deployed address
         if: steps.gate.outputs.run == 'true'
         working-directory: site
