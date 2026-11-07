@@ -24,10 +24,11 @@ export function evaluateNoindex(header, mode) {
 }
 
 /**
- * The build the address serves matches the address (D56): the Worker's x-astromicroscope-env header names the build the
- * assets were made for (the _headers file). A mismatched build answers every /api/* request with 404 build-not-production.
- * On a preview address a mismatch is a notice: a production build may sit there until the next deploy. On production it
- * is a failure, and the build is the wrong one: the preview build, which is noindex and has no MailerLite form.
+ * The build the address serves matches the address (D56): the x-astromicroscope-env header names the build the address
+ * was built for. The _headers file sets it on the page; the Worker sends it on its API responses. A Worker build that does
+ * not match its environment answers every /api/* request with 404 build-not-production. On a preview address a mismatch
+ * is a notice: a production build may sit there until the next deploy. On production it is a failure, and the build is
+ * the wrong one: the preview build, which is noindex and has no MailerLite form.
  */
 export function evaluateBuild(env, mode) {
   const build = env === 'production' ? 'production' : 'preview';
