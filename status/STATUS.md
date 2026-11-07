@@ -29,7 +29,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 |---|---|---|---|---|
 | M00 Foundation | Srdjan | done | — | [REPORT](../plan/modules/M00-foundation/REPORT.md) |
 | M01 Brand kit and logo | Srdjan | done | — | [REPORT](../plan/modules/M01-brand-kit/REPORT.md) |
-| M02 Content migration | Filip | building | G1 after PR #39 (English pairs, drafts removed 2026-11-06, Gorica approved). Done: all tasks M02-01 to M02-06 (7 articles, 12 signs of 2026, 3 pages) |
+| M02 Content migration | Filip | done | — (G1 2026-11-07: PR #39, both languages live) |
 | M03 Site shell | Srdjan | done | — | [REPORT](../plan/modules/M03-site-shell/REPORT.md) |
 | M04 SEO | Srdjan | testing | Rich Results Test for Article/ProfilePage (Schema Markup Validator done 2026-11-07), G2/G3 | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | G1 (green `site-ci`); lens built, English meta description approved (D55) | [REPORT](../plan/modules/M05-home/REPORT.md) |
@@ -41,7 +41,7 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | building | MailerLite double opt-in to enable — assigned to Filip in issue #59; then prove the live confirmation (G1) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | building | production live on astromicroscope.com 2026-11-07; remaining M13-01/02/04/07; registrar transfer 2026-11-29 (not a blocker) | [REPORT](../plan/modules/M13-launch/REPORT.md) |
-| M14 English translation | Filip | building | EN routes for M06–M10 built 2026-11-06; glossary + all 22 content files published (no drafts) PR #39 | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+| M14 English translation | Filip | done | — (G1 2026-11-07: 22 sr/en pairs live, `/en/` routes PR #44) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
 ## Brand
 | Item | Stage | Notes |
