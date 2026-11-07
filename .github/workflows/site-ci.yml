@@ -36,11 +36,10 @@ jobs:
     # ubuntu-24.04 pinned: the migrated ubuntu-26 image both hangs on `playwright install --with-deps` and lacks
     # Chromium's native libraries (2026-11-04, status/log.md).
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: site
     steps:
       # Third-party actions are pinned to a full commit SHA (specs/09 section 3).
+      # The file check runs before checkout, when site/ does not exist yet, so no working directory is set here; each
+      # site step below sets its own.
       - name: Which files changed
         id: files
         env:
@@ -73,23 +72,30 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm ci
       - name: Install Chromium
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npx playwright install --with-deps chromium
       - name: Unit tests
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm test
       - name: Build (content checks run first)
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm run build
       - name: HTML validation
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm run test:html
       # One browser check: accessibility (axe), skip link, phone menu, layout, video facade, zodiac lens (D56).
       - name: Browser checks (accessibility, layout, facade, lens)
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm run test:axe
       - name: SEO and link audit
         if: steps.files.outputs.site == 'true'
+        working-directory: site
         run: npm run test:seo
