@@ -42,10 +42,13 @@ for (const [name, type, widths, channel] of PLAN) {
     const ctx = await browser.newContext({ viewport: { width, height: 900 } });
     const page = await ctx.newPage();
     let problems = [];
-    page.on('console', (m) => { if (m.type() === 'error') problems.push(`console error: ${m.text().slice(0, 160)}`); });
+    // "Failed to load resource" console noise is already reported by the response handler (with the URL), so skip it here.
+    page.on('console', (m) => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) problems.push(`console error: ${m.text().slice(0, 160)}`); });
     page.on('pageerror', (e) => problems.push(`page error: ${String(e.message).slice(0, 160)}`));
     page.on('requestfailed', (r) => problems.push(`request failed: ${r.url().slice(0, 120)}`));
-    page.on('response', (r) => { if (r.status() >= 400 && !r.url().endsWith('/favicon.ico')) problems.push(`HTTP ${r.status()}: ${r.url().slice(0, 120)}`); });
+    // /api/* lives on the deployed Worker, not in the static dist/ this check serves: a 404 there is expected.
+    const isApi = (u) => /\/api\//.test(u);
+    page.on('response', (r) => { if (r.status() >= 400 && !r.url().endsWith('/favicon.ico') && !isApi(r.url())) problems.push(`HTTP ${r.status()}: ${r.url().slice(0, 120)}`); });
     for (const url of urls) {
       problems = [];
       await page.goto(base + url, { waitUntil: 'networkidle' });

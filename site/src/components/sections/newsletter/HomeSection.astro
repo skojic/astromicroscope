@@ -69,15 +69,30 @@ const messages = JSON.stringify({
     const successText = messages.success || '';
     const errorText = messages.error || '';
 
+    // The server rejects a challenge younger than 3 s (a human fills a form) and older than 1 h.
+    // So fetch the token when the page loads, not on submit: by the time the visitor has typed an
+    // address the token is old enough, and a stale one is refreshed before it expires.
+    let challenge = null;
+    const loadToken = async () => {
+      try {
+        const token = await fetch(tokenUrl).then((r) => r.json());
+        if (token.ok) challenge = token;
+      } catch {
+        challenge = null;
+      }
+    };
+    loadToken();
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (status) status.textContent = '';
       try {
-        const token = await fetch(tokenUrl).then((r) => r.json());
-        if (!token.ok) throw new Error('no token');
+        // Refresh if missing or older than 50 minutes (the server allows up to 1 h).
+        if (!challenge || Date.now() - challenge.ts > 50 * 60 * 1000) await loadToken();
+        if (!challenge) throw new Error('no token');
         if (tsInput && sigInput) {
-          tsInput.value = String(token.ts);
-          sigInput.value = token.sig;
+          tsInput.value = String(challenge.ts);
+          sigInput.value = challenge.sig;
         }
         if (hpInput) hpInput.value = '';
 
