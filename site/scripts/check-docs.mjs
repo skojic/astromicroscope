@@ -10,8 +10,11 @@ import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const STAGES = ['idea', 'specced', 'approved', 'building', 'testing', 'review', 'done', 'blocked'];
-// Which "Last gate passed" values fit a stage (testing/gates.md: G0 approved, G1 testing, G2/G3 review, G4/G5 done).
-export const GATES_FOR_STAGE = { idea: ['none'], specced: ['none'], approved: ['G0'], building: ['none', 'G0'], testing: ['G1'], review: ['G2', 'G3'], done: ['G4', 'G5'] };
+// Which "Last gate passed" values fit a stage. D51 (testing/gates.md) collapsed the per-module ceremony to G1 (module
+// gate) and G5 (launch gate): a module is `done` when its G1 evidence is complete, and G4 (owner approval) is standing
+// for the iteration-1 modules. G0 stays for the approved stage, G2/G3 for the review stage and the old G4/G5 records
+// stay as history, so all of them fit a module report.
+export const GATES_FOR_STAGE = { idea: ['none'], specced: ['none'], approved: ['G0'], building: ['none', 'G0'], testing: ['G1'], review: ['G1', 'G2', 'G3'], done: ['G1', 'G4', 'G5'] };
 
 const firstWord = (s) => s.trim().split(/[\s(]/)[0];
 

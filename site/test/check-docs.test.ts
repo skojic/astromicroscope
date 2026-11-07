@@ -17,6 +17,9 @@ test('two owners are "both", as in the STATUS table', () => {
 test('every stage has a rule for the last gate, except blocked', () => {
   for (const s of STAGES) assert.ok(s === 'blocked' || GATES_FOR_STAGE[s as keyof typeof GATES_FOR_STAGE], s);
   assert.ok(GATES_FOR_STAGE.review.includes('G2') && !GATES_FOR_STAGE.review.includes('G4'));
+  // D51: G1 closes a module, so it fits the review and done stages; G4 and G5 are the historical records.
+  assert.ok(GATES_FOR_STAGE.done.includes('G1'), 'G1 fits a done module');
+  assert.ok(GATES_FOR_STAGE.review.includes('G1'), 'G1 fits a review module');
 });
 
 test('STATUS rows give module id, owner and stage', () => {
