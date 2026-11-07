@@ -1,8 +1,8 @@
 name: scheduled
 
-# Checks that nobody has to remember (A4). A failing run emails the owner of the repository.
-#   daily 05:17 UTC   smoke test of the deployed address
-#   Monday 05:41 UTC  external links, dependency audit, Lighthouse on the deployed address
+# Checks that nobody has to remember (A4, D56). A failing run emails the owner of the repository.
+#   daily 05:17 UTC   smoke test of the production site (astromicroscope.com) and of the temporary address
+#   Monday 05:41 UTC  external links, dependency audit, Lighthouse on the production site
 on:
   schedule:
     - cron: '17 5 * * *'
@@ -21,10 +21,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
-      - name: Smoke test (headers, languages, 404 pages, robots, sitemap)
-        run: node site/scripts/smoke.mjs --mode preview
-      - name: Crawl (status codes, canonicals, hreflang pairs, orphans)
-        run: node site/scripts/crawl.mjs https://astromicroscope.filipvicentijevic99.workers.dev --mode preview
+      - name: Smoke test of production (headers, languages, 404 pages, robots, sitemap, no noindex)
+        run: node site/scripts/smoke.mjs https://astromicroscope.com --mode production
+      - name: Smoke test of the temporary address
+        run: node site/scripts/smoke.mjs https://astromicroscope.filipvicentijevic99.workers.dev --mode preview
 
   weekly:
     if: github.event_name == 'workflow_dispatch' || github.event.schedule == '41 5 * * 1'
@@ -45,5 +45,5 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: External links of the built site
         run: npm run build && npm run test:links
-      - name: Lighthouse on the deployed address (median of 3, mobile)
+      - name: Lighthouse on the production site (median of 3, mobile)
         run: npm run test:lighthouse:live

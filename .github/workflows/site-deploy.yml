@@ -81,10 +81,15 @@ jobs:
         run: npm run build
         env:
           SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
+      # SITE_ENV is the Worker's runtime environment too (D56): the API's own headers carry the Worker's environment, so a
+      # preview build must run on the preview address and the production build on the custom domain. A mismatch makes the
+      # smoke test fail with the build environment named.
       - name: Deploy the Worker
         if: steps.gate.outputs.run == 'true'
         working-directory: site
         run: npx --no-install wrangler deploy
+        env:
+          SITE_ENV: ${{ steps.gate.outputs.mode == 'production' && 'production' || '' }}
       - name: Smoke test of the deployed address
         if: steps.gate.outputs.run == 'true'
         working-directory: site

@@ -42,9 +42,11 @@ const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || undef
 const page = await browser.newPage();
 
 // ---------- read every page ----------
+// The page is a static file: a static server has answered at load, and nothing adds a head tag after it, so 'load' is
+// enough (the usual 'networkidle' waits ~500 ms per page for nothing, D56).
 const data = {};
 for (const url of urls) {
-  await page.goto(base + url);
+  await page.goto(base + url, { waitUntil: 'load' });
   data[url] = await page.evaluate(() => {
     const meta = (sel, a = 'content') => document.querySelector(sel)?.getAttribute(a) ?? null;
     const ld = [];
