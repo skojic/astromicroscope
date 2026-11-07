@@ -71,6 +71,8 @@ jobs:
           npx --no-install wrangler deploy --dry-run
         env:
           SITE_ENV: production
+          # M12-05 (D44): the Web Analytics beacon is only rendered when this token is present in the build.
+          PUBLIC_CF_WEB_ANALYTICS_TOKEN: ${{ secrets.PUBLIC_CF_WEB_ANALYTICS_TOKEN }}
       - name: Deploy the Worker
         if: steps.gate.outputs.run == 'true'
         working-directory: site
