@@ -27,6 +27,7 @@ transits:
     sign: aries
     from: 2026-01-26
     to: 2038-05-21
+oldUrl: "/bik/"
 ephemerisChecked: true
 ---
 

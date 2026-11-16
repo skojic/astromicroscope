@@ -17,7 +17,7 @@ const answers = Object.fromEntries(
 ---
 <section class="horoscope" aria-labelledby="horoscope-title">
   <div class="container">
-    <h2 id="horoscope-title">{t(horoscopeStrings, 'hubTitle', lang)}</h2>
+    <h2 id="horoscope-title">{t(horoscopeStrings, 'hubTitle', lang)} <span class="new">{t(horoscopeStrings, 'newLabel', lang)}</span></h2>
     <p>{t(horoscopeStrings, 'hubIntro', lang)}</p>
     <ZodiacWheel lang={lang} year={year} headingLevel="h3" answers={answers} />
     <p class="actions">
@@ -28,6 +28,8 @@ const answers = Object.fromEntries(
 <style>
   .horoscope { padding: var(--am-space-8) 0; background: var(--am-bg-alt); }
   h2 { margin: 0 0 var(--am-space-5); }
+  /* "New" pill next to the title while the new year's horoscope is fresh; gold on midnight is the brand's allowed text pairing. */
+  .new { display: inline-block; vertical-align: middle; margin-left: var(--am-space-2); padding: var(--am-space-1) var(--am-space-3); border-radius: var(--am-radius-pill); background: var(--am-midnight); color: var(--am-gold); font: var(--am-text-label); letter-spacing: .04em; text-transform: uppercase; }
   p { margin-bottom: var(--am-space-5); }
   .actions { margin-top: var(--am-space-5); }
 </style>
