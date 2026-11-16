@@ -2,14 +2,14 @@
 // Home section (M07-04): the yearly horoscope — a link and the zodiac wheel. M05 imports this with one prop, `lang`
 // (plan/contracts.md section 5).
 import { t, type Lang } from '../../../i18n/core';
-import { horoscopeStrings } from '../../../i18n/horoscope';
+import { horoscopeStrings, CURRENT_HOROSCOPE_YEAR } from '../../../i18n/horoscope';
 import ZodiacWheel from './ZodiacWheel.astro';
 import Button from '../../ui/Button.astro';
 import { getCollection } from 'astro:content';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const year = 2026;
+const year = CURRENT_HOROSCOPE_YEAR;
 // The lens shows each sign's opening paragraph (the `answer` of its page, M07-05).
 const answers = Object.fromEntries(
   (await getCollection('horoscope', (e) => e.data.lang === lang && e.data.year === year)).map((e) => [e.data.sign, e.data.answer]),

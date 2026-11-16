@@ -7,7 +7,7 @@ import AuthorBox from '../../../components/sections/about/AuthorBox.astro';
 import { article, person, profilePage, graph } from '../../../components/seo/jsonld';
 import { t } from '../../../i18n/core';
 import { horoscopeStrings } from '../../../i18n/horoscope';
-import { SIGN_SLUG_SR } from '../../../i18n/horoscope';
+import { SIGN_SLUG_SR, CURRENT_HOROSCOPE_YEAR } from '../../../i18n/horoscope';
 
 export function getStaticPaths() {
   return Object.keys(SIGN_SLUG_SR).map((sign) => ({ params: { sign }, props: { sign } }));
@@ -15,8 +15,8 @@ export function getStaticPaths() {
 const { sign } = Astro.props;
 const lang = 'en' as const;
 const entries = await getCollection('horoscope');
-const entry = entries.find((e) => e.id === `en/2026/${sign}`);
-if (!entry) throw new Error(`Missing horoscope entry: en/2026/${sign}.md (run M14)`);
+const entry = entries.find((e) => e.id === `en/${CURRENT_HOROSCOPE_YEAR}/${sign}`);
+if (!entry) throw new Error(`Missing horoscope entry: en/${CURRENT_HOROSCOPE_YEAR}/${sign}.md (run M14)`);
 const { Content } = await render(entry);
 const { title, description, translationKey, answer } = entry.data;
 const year = entry.data.year;
