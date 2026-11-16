@@ -22,6 +22,8 @@ None. Module done (G1, 2026-11-07). Later English for new content (2027 horoscop
 - Every answer 54–59 words, title ≤ 70, description ≤ 155 (checked by the writing script per file).
 - Translation by the assistant directly (no separate machine draft), reviewed in the same pass (D40).
 
+- **Horoscope 2027 (2026-11-16):** `horoscope/en/2027/<sign>.md` for all 12 signs, translated from Gorica's 2027 text (with the corrected dates), glossary style, "you" for her "vi"; same transits as the Serbian files; answers 48–60 words, titles ≤ 70, descriptions ≤ 155; closing "Important to know" section + the consultation line, as in 2026.
+
 ## Done — English routes (2026-11-06)
 Built the English mirrors at `site/src/pages/en/`: articles (`/en/articles/` hub + 7), horoscope (`/en/horoscope/` hub + 12), learn (`/en/learn/`), analyses (`/en/analyses/` hub + 4), about (`/en/about/`), contact (`/en/contact/`). Added a `horoscope` entry to `routes.ts`; made the home sections and `ZodiacWheel` language-aware (English home links only to `/en/...`); wired `paths={{sr,en}}` on the Serbian pages and `en/` pages so hreflang + the language switch point at the real pair; added a short `hubMeta` description to `learn.json` (the `hubIntro` was 174 chars and broke the ≤160 SEO description rule). Build 47 → **76 pages**; `test:seo` 0 failures / 0 pending; `test:html` 0; `test:axe` 0.
 
@@ -48,10 +50,12 @@ Built the English mirrors at `site/src/pages/en/`: articles (`/en/articles/` hub
 ## Test evidence
 | Check | Result | Date |
 |---|---|---|
+| `check-content` (non-production + production), 24 horoscope-2027 files | passed | 2026-11-16 |
 | `node scripts/check-content.mjs` | `Content check passed (non-production).` | 2026-11-06 |
 | `SITE_ENV=production node scripts/check-content.mjs` | `Content check passed (production).` (after removing the drafts) | 2026-11-06 |
 
 ## History
+- 2026-11-16: horoscope 2027 translated (12 signs), branch `feature/horoscope-2027`.
 - 2026-11-07: G1 passed (PR #39 merged, `/en/` pages live); stage done.
 - 2026-11-06: rebased on `main` (Srdjan built M06–M10, reallocated 2026-11-05); remaining 4 articles and the 12 signs of 2026 translated. All 22 content files have an English pair; `check-content` passes, the production check fails only on `draft: true`.
 - 2026-11-04: glossary; pages About, Why Astromicroscope, Contact; articles children's chart, second house, return to yourself. Local branch, not pushed.

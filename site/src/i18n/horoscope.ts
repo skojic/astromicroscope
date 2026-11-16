@@ -4,6 +4,9 @@ import type { Lang } from './core';
 
 export const horoscopeStrings = defineStrings('horoscope', horoscope as Strings);
 
+/** The year the site shows: the hub, the home section and the sign pages read `src/content/horoscope/{sr,en}/<year>/`. Only one year is kept in the repo. */
+export const CURRENT_HOROSCOPE_YEAR = 2027;
+
 /** The Serbian URL slug for a sign, per D31 (the sign page lives at /horoskop/<serbian slug>/). */
 export const SIGN_SLUG_SR: Record<string, string> = {
   aries: 'ovan',

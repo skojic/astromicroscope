@@ -1,7 +1,7 @@
 ---
 // Zodiac wheel / sign grid (M07-01, lens M07-05): a navigable list of all 12 sign links. No JS needed (works for keyboard/screen
 // readers); the lens is a progressive enhancement (plan/concept.md, signature interaction 3): choosing a sign moves the lens to it
-// and shows its opening paragraph. 3×4 grid under 768 px; the lens is desktop-only (concept.md, Mobile and tablet).
+// and shows its opening paragraph; on desktop hovering a sign is enough. 3×4 grid under 768 px; the lens is desktop-only (concept.md, Mobile and tablet).
 import { t, type Lang } from '../../../i18n/core';
 import { horoscopeStrings } from '../../../i18n/horoscope';
 import { signName, SIGN_SLUG_SR } from '../../../i18n/horoscope';
@@ -49,7 +49,8 @@ const readLabel = t(horoscopeStrings, 'readHoroscope', lang);
 {hasLens && (
   <script>
     // Progressive enhancement: without JS the wheel stays a plain list of 12 links (concept.md).
-    // The lens follows the chosen sign (click, focus or arrow keys) and shows its opening paragraph.
+    // The lens follows the chosen sign (hover, click, focus or arrow keys) and shows its opening paragraph.
+    // Hover only on a real mouse (`hover: hover`); the lens is hidden on touch screens anyway. It stays on the last sign, no flicker on leave.
     const data = JSON.parse(document.querySelector('[data-lens-data]').textContent);
     for (const nav of document.querySelectorAll('[data-zodiac][data-lens]')) {
       const panel = nav.querySelector('[data-lens-panel]');
@@ -75,7 +76,9 @@ const readLabel = t(horoscopeStrings, 'readHoroscope', lang);
         link.textContent = data.readLabel;
         panel.hidden = false;
       };
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       for (const sign of signs) {
+        if (canHover) sign.addEventListener('mouseenter', () => show(sign));
         sign.addEventListener('click', () => show(sign));
         sign.addEventListener('focus', () => show(sign));
       }

@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-07 · Branch: `main` (D54: DNS move now, registrar transfer 2026-11-29) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-16 · Branch: `main` (D54: DNS move now, registrar transfer 2026-11-29) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** **The site is live on `astromicroscope.com` in production** (2026-11-07, D60): every green merge to `main` deploys straight to the custom domain (D60: no preview stage, no preview Worker; `site-deploy` smoke-tests the production address after each deploy). All content modules are built (M00–M11, M12 forms), M02 content and M14 translations published (PR #39), M06–M10 SR + EN pages, home assembly (PRs #43, #47, #52). M12-03 double-opt-in email live and proven on production (D58), www→apex redirect live. M13 is closed except the registrar transfer (M13-08, 2026-11-29): redirects and the 410 are live (D59), the strict crawl is clean, Search Console and Bing are verified (issue #65), and HSTS preload is on the list (D62).
@@ -34,14 +34,14 @@ Details, next step and evidence: `plan/modules/MNN-*/REPORT.md`. Plan overview: 
 | M04 SEO | Srdjan | done | — (Rich Results Test dropped 2026-11-07 as not important; the Schema Markup Validator passed) | [REPORT](../plan/modules/M04-seo/REPORT.md) |
 | M05 Home page | Srdjan | building | G1 (green `site-ci`); lens built, English meta description approved (D55) | [REPORT](../plan/modules/M05-home/REPORT.md) |
 | M06 Articles | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06 (the M14 routes) | [REPORT](../plan/modules/M06-articles/REPORT.md) |
-| M07 Yearly horoscope | Srdjan | building | Lens built and on `main` 2026-11-07 (G1 evidence = CI on main). SR + EN built 2026-11-06 (the M14 routes) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
+| M07 Yearly horoscope | Srdjan | building | Lens built and on `main` 2026-11-07 (G1 evidence = CI on main). SR + EN built 2026-11-06 (the M14 routes). 2026-11-16: horoscope 2027 replaces 2026 (Filip, `feature/horoscope-2027`, Srdjan's review) | [REPORT](../plan/modules/M07-horoscope/REPORT.md) |
 | M08 Education (free learning + waitlist) | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06; waitlist send via M12 | [REPORT](../plan/modules/M08-education/REPORT.md) |
 | M09 Private analyses | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06; form send via M12 | [REPORT](../plan/modules/M09-analyses/REPORT.md) |
 | M10 About, contact, legal | Srdjan (reallocated 2026-11-05) | building | — SR + EN built 2026-11-06; M10-05 out of scope by D33 | [REPORT](../plan/modules/M10-about-contact-legal/REPORT.md) |
 | M11 Videos | Srdjan | done | — | [REPORT](../plan/modules/M11-videos/REPORT.md) |
 | M12 Forms | Srdjan | building | double opt-in proven live (D58, issue #59 closed; the confirmation email is in English, Serbian needs a paid plan) | [REPORT](../plan/modules/M12-forms/REPORT.md) |
 | M13 QA and launch | both | building | live and Search Console done (issue #65); **only the registrar transfer 2026-11-29 (M13-08) left**; M13-05/07 dropped | [REPORT](../plan/modules/M13-launch/REPORT.md) |
-| M14 English translation | Filip | done | — (G1 2026-11-07: 22 sr/en pairs live, `/en/` routes PR #44) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
+| M14 English translation | Filip | done | — (G1 2026-11-07: 22 sr/en pairs live, `/en/` routes PR #44; 2026-11-16 horoscope 2027 in English, same PR as M07) | [REPORT](../plan/modules/M14-translation/REPORT.md) |
 
 ## Brand
 | Item | Stage | Notes |

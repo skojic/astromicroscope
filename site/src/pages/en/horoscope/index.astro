@@ -2,12 +2,12 @@
 // M07-03 EN: the horoscope hub (`/en/horoscope/`): a titled intro + the zodiac wheel linking all 12 signs.
 import Page from '../../../layouts/Page.astro';
 import { t } from '../../../i18n/core';
-import { horoscopeStrings } from '../../../i18n/horoscope';
+import { horoscopeStrings, CURRENT_HOROSCOPE_YEAR } from '../../../i18n/horoscope';
 import ZodiacWheel from '../../../components/sections/horoscope/ZodiacWheel.astro';
 import { getCollection } from 'astro:content';
 
 const lang = 'en';
-const year = 2026;
+const year = CURRENT_HOROSCOPE_YEAR;
 // The lens shows each sign's opening paragraph (the `answer` of its page, M07-05).
 const answers = Object.fromEntries(
   (await getCollection('horoscope', (e) => e.data.lang === 'en' && e.data.year === year)).map((e) => [e.data.sign, e.data.answer]),
