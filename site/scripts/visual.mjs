@@ -57,7 +57,10 @@ for (const [width, height] of VIEWPORTS) {
   // "Failed to load resource" console noise is already reported by the response handler (with the URL), so skip it here.
   page.on('console', (m) => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) problems.push(`console error: ${m.text().slice(0, 160)}`); });
   page.on('pageerror', (e) => problems.push(`page error: ${String(e.message).slice(0, 160)}`));
-  page.on('requestfailed', (r) => problems.push(`request failed: ${r.url().slice(0, 120)}`));
+  // net::ERR_ABORTED is the browser cancelling a request when the page navigates on (Chromium starts some font and
+  // image fetches after the 'load' event since Playwright 1.65, and the next goto aborts them); the server answers
+  // everything, so a real 404 still arrives as an HTTP response and is caught above.
+  page.on('requestfailed', (r) => { if (r.failure()?.errorText !== 'net::ERR_ABORTED') problems.push(`request failed: ${r.url().slice(0, 120)}`); });
   // /api/* lives on the deployed Worker, not in the static dist/ this check serves: a 404 there is expected.
   const isApi = (u) => /\/api\//.test(u);
   page.on('response', (r) => { if (r.status() >= 400 && !r.url().endsWith('/favicon.ico') && !isApi(r.url())) problems.push(`HTTP ${r.status()}: ${r.url().slice(0, 120)}`); });
