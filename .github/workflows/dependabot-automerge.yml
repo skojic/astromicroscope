@@ -21,7 +21,9 @@ jobs:
         run: |
           set -euo pipefail
           ok=0
-          if printf '%s' "$TITLE" | grep -q -E '^Bump the .+ group'; then
+          # Dependabot titles follow the repository's commit style, e.g. "chore(deps): bump the ... group ...", so the
+          # conventional-commit prefix is optional and the match ignores case.
+          if printf '%s' "$TITLE" | grep -q -i -E '^([a-z]+(\([^)]*\))?!?: )?bump the .+ group'; then
             ok=1 # a grouped update holds minor and patch bumps only (dependabot.yml)
           else
             versions="$(printf '%s' "$TITLE" | sed -n -E 's/.* from v?([0-9]+)[^ ]* to v?([0-9]+).*/\1 \2/p')"
