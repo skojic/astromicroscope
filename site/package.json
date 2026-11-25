@@ -28,15 +28,15 @@
     "check:redirects": "node scripts/check-redirects.mjs"
   },
   "dependencies": {
-    "astro": "7.4.11",
+    "astro": "7.4.13",
     "yaml": "2.9.1"
   },
   "devDependencies": {
     "@lhci/cli": "0.16.1",
     "html-validate": "11.21.1",
-    "playwright": "1.65.0",
-    "wrangler": "4.161.0",
-    "axe-core": "4.14.0"
+    "playwright": "1.65.1",
+    "wrangler": "4.165.0",
+    "axe-core": "4.14.1"
   },
   "overrides": {
     "basic-ftp": "6.2.5",
