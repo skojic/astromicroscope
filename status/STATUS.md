@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-16 · Branch: `main` (D54: DNS move now, registrar transfer 2026-11-29) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
+Updated: 2026-11-25 · Branch: `main` (D54: DNS move now, registrar transfer 2026-11-29) · Stages: idea → specced → approved → building → testing → review → done (or blocked) · Gates: `testing/gates.md`
 
 ## Now
 - **Current focus:** **The site is live on `astromicroscope.com` in production** (2026-11-07, D60): every green merge to `main` deploys straight to the custom domain (D60: no preview stage, no preview Worker; `site-deploy` smoke-tests the production address after each deploy). All content modules are built (M00–M11, M12 forms), M02 content and M14 translations published (PR #39), M06–M10 SR + EN pages, home assembly (PRs #43, #47, #52). M12-03 double-opt-in email live and proven on production (D58), www→apex redirect live. M13 is closed except the registrar transfer (M13-08, 2026-11-29): redirects and the 410 are live (D59), the strict crawl is clean, Search Console and Bing are verified (issue #65), and HSTS preload is on the list (D62).
