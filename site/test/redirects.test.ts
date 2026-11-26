@@ -42,13 +42,10 @@ test('crawler: internal paths only, assets and other hosts skipped, relative lin
   assert.deepEqual([h.lang, h.title, h.description, h.canonical, h.hreflang.en], ['en', 'T', 'D', 'https://a/b/', 'https://a/en/']);
 });
 
-test('smoke expectations: preview must disallow and be noindex, production the opposite', () => {
-  assert.equal(evaluateRobots('User-agent: *\nDisallow: /\n', 'preview'), null);
-  assert.ok(evaluateRobots('User-agent: *\nAllow: /\nSitemap: https://a/sitemap.xml\n', 'preview'));
-  assert.equal(evaluateRobots('User-agent: *\nAllow: /\nSitemap: https://a/sitemap.xml\n', 'production'), null);
-  assert.ok(evaluateRobots('User-agent: *\nAllow: /\n', 'production'));
-  assert.equal(evaluateNoindex('noindex', 'preview'), null);
-  assert.ok(evaluateNoindex(null, 'preview'));
-  assert.ok(evaluateNoindex('noindex', 'production'));
-  assert.equal(evaluateNoindex(null, 'production'), null);
+test('smoke expectations: production allows crawling, names the sitemap and is not noindex', () => {
+  assert.equal(evaluateRobots('User-agent: *\nAllow: /\nSitemap: https://a/sitemap.xml\n'), null);
+  assert.ok(evaluateRobots('User-agent: *\nAllow: /\n')); // no Sitemap line
+  assert.ok(evaluateRobots('User-agent: *\nDisallow: /\n')); // a local build's robots.txt
+  assert.ok(evaluateNoindex('noindex'));
+  assert.equal(evaluateNoindex(null), null);
 });

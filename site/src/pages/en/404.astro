@@ -2,7 +2,7 @@
 import Page from '../../layouts/Page.astro';
 import NotFound from '../../components/shell/NotFound.astro';
 import { t } from '../../i18n/core';
-import { shellStrings } from '../../i18n/shell';
+import { shellStrings } from '../../i18n/strings';
 const lang = 'en';
 ---
 <Page lang={lang} title={t(shellStrings, 'notFoundTitle', lang)} description={t(shellStrings, 'notFoundText', lang)} translationKey="404" noindex>

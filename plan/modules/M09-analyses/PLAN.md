@@ -68,4 +68,4 @@ An accordion, if used, follows the disclosure pattern (`button` + `aria-expanded
 | ANALYSIS-03 | Request form (see contact) | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-private-analyses.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

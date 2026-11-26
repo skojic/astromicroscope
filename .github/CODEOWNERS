@@ -40,6 +40,6 @@
 /plan/modules/M14-translation/REPORT.md
 /plan/modules/M14-translation/glossary.md
 /docs/sadrzaj/
-# Every work session updates these two (rule 5 of AGENTS.md); the docs check in site-ci keeps them consistent.
+# Every work session updates these two (rule 5 of AGENTS.md); `npm run check:docs` (a local command since D56) keeps them consistent.
 /status/STATUS.md
 /status/log.md

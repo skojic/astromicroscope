@@ -1,0 +1,35 @@
+---
+// M07-03: the horoscope hub (`/horoskop/`, `/en/horoscope/`), one body for both languages: a titled intro + the zodiac
+// wheel linking all 12 signs.
+import Page from '../../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang } from '../../../i18n/core';
+import { horoscopeStrings, CURRENT_HOROSCOPE_YEAR } from '../../../i18n/horoscope';
+import { pathFor } from '../../../i18n/routes';
+import ZodiacWheel from './ZodiacWheel.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const year = CURRENT_HOROSCOPE_YEAR;
+// The lens shows each sign's opening paragraph (the `answer` of its page, M07-05).
+const answers = Object.fromEntries(
+  (await getCollection('horoscope', (e) => e.data.lang === lang && e.data.year === year)).map((e) => [e.data.sign, e.data.answer]),
+);
+const title = t(horoscopeStrings, 'hubTitle', lang);
+const description = t(horoscopeStrings, 'hubIntro', lang);
+const url = pathFor('horoscope', lang);
+---
+<Page lang={lang} title={title} description={description} translationKey="horoscope" breadcrumbs={[{ name: t(horoscopeStrings, 'currentYearLabel', lang), url }]} paths={{ sr: pathFor('horoscope', 'sr'), en: pathFor('horoscope', 'en') }}>
+  <div class="hub">
+    <div class="container">
+      <h1>{title}</h1>
+      <p class="intro">{t(horoscopeStrings, 'listIntro', lang)}</p>
+      <ZodiacWheel lang={lang} year={year} answers={answers} />
+    </div>
+  </div>
+</Page>
+<style>
+  .hub { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
+  .intro { margin: 0 0 var(--am-space-6); max-width: 64ch; }
+</style>

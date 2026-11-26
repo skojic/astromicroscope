@@ -1,0 +1,50 @@
+---
+// M09-02: one page per analysis (`/analize/<id>/`, `/en/analyses/<id>/`), one body for both languages: summary,
+// includes, needs, duration, format, request CTA.
+import Page from '../../../layouts/Page.astro';
+import { t, type Lang } from '../../../i18n/core';
+import { analysesStrings, commonStrings, shellStrings } from '../../../i18n/strings';
+import { pathFor, entryPaths } from '../../../i18n/routes';
+import { analyses } from '../../../data/analyses';
+
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const a = analyses.find((x) => x.id === id);
+if (!a) throw new Error(`Missing analysis: ${id}`);
+const title = a.name[lang];
+const description = a.summary[lang].slice(0, 120);
+const paths = entryPaths('analyses', id);
+const url = paths[lang]!;
+---
+<Page lang={lang} title={title} description={description} translationKey={`analysis-${id}`} breadcrumbs={[{ name: t(shellStrings, 'analyses', lang), url: pathFor('analyses', lang) }, { name: a.name[lang], url }]} paths={paths}>
+  <article class="analysis">
+    <div class="container">
+      <header>
+        <h1>{a.name[lang]}</h1>
+        <p class="summary">{a.summary[lang]}</p>
+      </header>
+
+      <dl class="facts">
+        <div class="fact"><dt>{t(analysesStrings, 'includesLabel', lang)}</dt><dd><ul>{a.includes[lang].map((i) => <li>{i}</li>)}</ul></dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'durationLabel', lang)}</dt><dd>{a.duration?.[lang] ?? '—'}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'needsLabel', lang)}</dt><dd>{a.needs[lang]}</dd></div>
+        <div class="fact"><dt>{t(analysesStrings, 'formatLabel', lang)}</dt><dd>{a.format[lang]}</dd></div>
+      </dl>
+
+      <p><a class="btn" href="mailto:astromicroscope@gmail.com">{t(analysesStrings, 'requestBtn', lang)}</a></p>
+      <p class="consent">{t(commonStrings, 'consent', lang)}</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .analysis { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); max-width: var(--am-measure); }
+  .summary { margin: 0 0 var(--am-space-6); max-width: var(--am-measure); line-height: 1.75; }
+  .facts { margin: 0 0 var(--am-space-6); display: grid; gap: var(--am-space-4); max-width: var(--am-measure); }
+  .fact dt { font-weight: 700; margin-bottom: var(--am-space-1); }
+  .fact dd { margin: 0; line-height: 1.6; }
+  .fact ul { margin: 0; padding-left: var(--am-space-4); }
+  .btn { display: inline-block; padding: 15px 22px; border-radius: var(--am-radius-pill); background: var(--am-action); color: var(--am-white); text-decoration: none; font: var(--am-text-ui); }
+  .btn:hover { background: var(--am-action-hover); }
+  .consent { margin: var(--am-space-2) 0 0; font: var(--am-text-small); font-size: .8rem; line-height: 1.4; color: var(--am-muted); max-width: 44ch; }
+</style>

@@ -1,5 +1,5 @@
-// SEO and link audit of the built site (dist/), the automated part of G2 (testing/gates.md) and testing/checklists/seo.md.
-// Needs a built dist/ and a Chromium, like scripts/axe.mjs. No network: external links are not followed.
+// SEO and link audit of the built site (dist/), part of site-ci (testing/gates.md, G1).
+// Needs a built dist/ and a Chromium, like scripts/visual.mjs. No network: external links are not followed.
 //
 // Per page: title and description present, unique and not too long; canonical is the page itself; hreflang sr, en and
 // x-default with return links to pages that exist; Open Graph and Twitter tags, og:image exists; JSON-LD parses and has
@@ -7,19 +7,16 @@
 // Site-wide: sitemap lists every indexable page and nothing else; robots.txt matches the environment; every internal
 // link and #anchor resolves; no "click here" link text.
 //
-// Pages of modules that are not built yet (routes in src/i18n/routes.ts) are reported as pending, not as failures.
-// SEO_STRICT=1 turns pending links into failures: use it for the launch gate (M13).
+// Every page needs its pair in the other language (hreflang sr, en and x-default, both built), and every internal link
+// must resolve: the English mirror is complete (M14), so a missing English page is a failure, never a later work item.
 import { readdir, readFile, access } from 'node:fs/promises';
 import { join, relative, sep, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { serveDist } from './serve-dist.mjs';
-import { ROUTES } from '../src/i18n/routes.ts';
 
 const dist = process.env.SEO_DIST ?? fileURLToPath(new URL('../dist', import.meta.url)); // SEO_DIST: audit another folder (used to test the audit itself)
-const strict = process.env.SEO_STRICT === '1';
 const failures = [];
-const pending = new Map();
 const fail = (where, msg) => failures.push(`${where}: ${msg}`);
 
 const exists = (p) => access(p).then(() => true, () => false);
@@ -73,15 +70,16 @@ server.close();
 
 // ---------- environment ----------
 const robotsTxt = await readFile(join(dist, 'robots.txt'), 'utf8').catch(() => '');
-const preview = /^Disallow:\s*\/\s*$/m.test(robotsTxt);
+// A local or CI build (SITE_ENV is not production) disallows everything and is noindex; a production build the opposite.
+const local = /^Disallow:\s*\/\s*$/m.test(robotsTxt);
 const home = data['/'];
 if (!home?.canonical) throw new Error('dist/index.html has no canonical link: cannot tell the site origin');
 const origin = new URL(home.canonical).origin;
 const indexable = urls.filter((u) => !is404(u));
-console.log(`seo-check: ${urls.length} pages (${indexable.length} indexable), ${preview ? 'preview/local build (robots: Disallow /)' : 'production build'}, origin ${origin}${strict ? ', strict' : ''}`);
+console.log(`seo-check: ${urls.length} pages (${indexable.length} indexable), ${local ? 'local build (robots: Disallow /)' : 'production build'}, origin ${origin}`);
 
-if (!preview && !/^Allow:\s*\/\s*$/m.test(robotsTxt)) fail('robots.txt', 'production robots.txt does not allow crawling');
-if (!preview && !/^Sitemap:\s*\S+/m.test(robotsTxt)) fail('robots.txt', 'no Sitemap line'); // a preview robots.txt only says Disallow
+if (!local && !/^Allow:\s*\/\s*$/m.test(robotsTxt)) fail('robots.txt', 'production robots.txt does not allow crawling');
+if (!local && !/^Sitemap:\s*\S+/m.test(robotsTxt)) fail('robots.txt', 'no Sitemap line'); // a local robots.txt only says Disallow
 
 // ---------- per page ----------
 const seen = { title: new Map(), description: new Map() };
@@ -95,7 +93,7 @@ for (const url of urls) {
   const d = data[url];
   const noindex = /noindex/.test(d.robots ?? '');
   if (is404(url)) { if (!noindex) fail(url, '404 page without noindex'); continue; }
-  if (preview ? !noindex : noindex) fail(url, preview ? 'preview build page without noindex' : `noindex in a production build (${d.robots})`);
+  if (local ? !noindex : noindex) fail(url, local ? 'local build page without noindex' : `noindex in a production build (${d.robots})`);
 
   if (!d.title) fail(url, 'no title');
   else { if (d.title.length > 70) fail(url, `title is ${d.title.length} characters`); seen.title.set(d.title, [...(seen.title.get(d.title) ?? []), url]); }
@@ -105,23 +103,12 @@ for (const url of urls) {
   if (!d.canonical) fail(url, 'no canonical');
   else if (new URL(d.canonical).pathname !== url) fail(url, `canonical ${d.canonical} is not the page itself`);
 
-  // M14 pending: during the build phase a page in only Serbian (no en pair, or an en link to an unbuilt page) is a
-  // pending English work item, not a failure — the strict mode (launch gate, SEO_STRICT=1) still requires full pairs.
-  if (strict) { for (const k of ['sr', 'en', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`); }
-  else {
-    for (const k of ['sr', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`);
-    if (!d.hreflang['en'] && d.hreflang['sr']) pending.set(`en ${url}`, [...(pending.get(`en ${url}`) ?? []), url]);
-  }
+  for (const k of ['sr', 'en', 'x-default']) if (!d.hreflang[k]) fail(url, `no hreflang ${k}`);
   const self = url.startsWith('/en/') ? 'en' : 'sr';
   for (const lang of ['sr', 'en']) {
     if (!d.hreflang[lang]) continue;
     const target = new URL(d.hreflang[lang], origin).pathname;
-    if (!data[target]) {
-      // D48-consistent: during the build phase the English mirror exists only after M14. A preview build (not strict)
-      // treats a missing/unbuilt English pair as pending work, not a failure. The strict mode (launch gate) still fails.
-      if (!strict && lang === 'en') { pending.set(target, [...(pending.get(target) ?? []), url]); continue; }
-      fail(url, `hreflang ${lang} points to ${target}, which is not built`); continue;
-    }
+    if (!data[target]) { fail(url, `hreflang ${lang} points to ${target}, which is not built`); continue; }
     const back = data[target].hreflang[self];
     if (!back || new URL(back, origin).pathname !== url) fail(url, `${target} has no hreflang ${self} link back to this page`);
   }
@@ -156,7 +143,6 @@ for (const u of indexable) if (!inSitemap.has(u) && !/noindex/.test(data[u].robo
 for (const u of inSitemap) if (!data[u]) fail('sitemap.xml', `lists ${u}, which is not built`);
 
 // ---------- links ----------
-const known = new Set(Object.values(ROUTES).flatMap((p) => Object.values(p)));
 const BAD_TEXT = new Set(['click here', 'here', 'klikni ovde', 'kliknite ovde', 'ovde']);
 async function resolves(pathname) {
   const p = decodeURIComponent(pathname);
@@ -173,22 +159,14 @@ for (const url of urls) {
     if (!l.hidden && !l.text && !l.label) fail(url, `link to ${l.href} has no text`); // aria-hidden duplicates (thumbnail links) are skipped
     if (BAD_TEXT.has(l.text)) fail(url, `link text "${l.text}" is not descriptive (${l.href})`);
     const path = target.pathname;
-    if (!(await resolves(path))) {
-      if (known.has(path)) pending.set(path, [...(pending.get(path) ?? []), url]);
-      else fail(url, `broken internal link ${l.href}`);
-      continue;
-    }
+    if (!(await resolves(path))) { fail(url, `broken internal link ${l.href}`); continue; }
     if (target.hash && target.hash.length > 1) {
       const dest = data[path] ?? data[path.endsWith('/') ? path : path + '/'];
       if (dest && !dest.ids.includes(decodeURIComponent(target.hash.slice(1)))) fail(url, `link ${l.href}: no element with id "${target.hash.slice(1)}" on ${path}`);
     }
   }
 }
-if (pending.size) {
-  console.log(`pending (route exists in routes.ts, page not built yet): ${[...pending].map(([p, from]) => `${p} (${from.length} pages)`).join(', ')}`);
-  if (strict) for (const [p, from] of pending) fail(from[0], `link to ${p}, whose page is not built (SEO_STRICT=1)`);
-}
 
 if (failures.length) console.error(`\nFAIL\n${failures.map((f) => `  - ${f}`).join('\n')}`);
-console.log(`seo-check: ${urls.length} pages, ${failures.length} failures, ${pending.size} pending routes`);
+console.log(`seo-check: ${urls.length} pages, ${failures.length} failures`);
 process.exit(failures.length ? 1 : 0);

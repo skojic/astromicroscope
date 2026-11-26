@@ -1,5 +1,5 @@
 // Crawl of a deployed site: the launch check M13-01 (status codes, canonicals, hreflang, orphans) against the live address.
-//   node scripts/crawl.mjs <baseUrl> [--mode preview|production] [--strict]
+//   node scripts/crawl.mjs <baseUrl> [--strict]
 // Follows internal links from / and /en/, then fetches every sitemap URL. Without --strict, internal links to pages that do
 // not exist yet (modules not built) are warnings; with --strict (launch gate) they fail, as do redirect chains and orphans.
 // seo-check.mjs does the same on the built files; this one sees what the server really sends.
@@ -48,7 +48,7 @@ async function fetchPage(base, path) {
   return { status: 0, chain, finalPath: path, html: '' };
 }
 
-export async function crawl(base, { mode = 'preview', strict = false, max = 300 } = {}) {
+export async function crawl(base, { strict = false, max = 300 } = {}) {
   const failures = [], warnings = [];
   const problem = (where, msg, soft = false) => (soft && !strict ? warnings : failures).push(`${where}: ${msg}`);
   const pages = new Map(); // path -> result
@@ -75,8 +75,7 @@ export async function crawl(base, { mode = 'preview', strict = false, max = 300 
       if (!h.canonical) problem(path, 'no canonical');
       else if (new URL(h.canonical).pathname !== path && !r.chain.length) problem(path, `canonical ${h.canonical} is not the page itself`);
       const noindex = /noindex/i.test(h.robots ?? '');
-      if (mode === 'preview' && !noindex) problem(path, 'preview page without noindex');
-      if (mode === 'production' && noindex) problem(path, 'noindex on production');
+      if (noindex) problem(path, 'noindex on production');
       for (const lang of ['sr', 'en']) {
         const alt = h.hreflang[lang];
         if (!alt) { problem(path, `no hreflang ${lang}`); continue; }
@@ -114,11 +113,10 @@ export async function crawl(base, { mode = 'preview', strict = false, max = 300 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const base = args.find((a) => /^https?:/.test(a))?.replace(/\/$/, '');
-  if (!base) throw new Error('usage: node scripts/crawl.mjs <baseUrl> [--mode preview|production] [--strict]');
-  const mode = args.includes('--mode') ? args[args.indexOf('--mode') + 1] : 'preview';
-  const { pages, failures, warnings } = await crawl(base, { mode, strict: args.includes('--strict') });
+  if (!base) throw new Error('usage: node scripts/crawl.mjs <baseUrl> [--strict]');
+  const { pages, failures, warnings } = await crawl(base, { strict: args.includes('--strict') });
   for (const w of warnings) console.log(`warn  ${w}`);
   for (const f of failures) console.log(`FAIL  ${f}`);
-  console.log(`crawl: ${base} (${mode}${args.includes('--strict') ? ', strict' : ''}) ${pages} pages, ${failures.length} failure(s), ${warnings.length} warning(s)`);
+  console.log(`crawl: ${base}${args.includes('--strict') ? ' (strict)' : ''} ${pages} pages, ${failures.length} failure(s), ${warnings.length} warning(s)`);
   if (failures.length) process.exit(1);
 }

@@ -11,6 +11,6 @@
 - [ ] Grana se zove `feature/…`, `fix/…` ili `docs/…`
 - [ ] PR radi jednu stvar
 - [ ] Tekst postoji na srpskom i engleskom (ako ima teksta za korisnike)
-- [ ] Prošao sam odgovarajuće stavke iz `testing/gates.md` i `testing/checklists/`
+- [ ] `ci-gate` je zelen (testovi, build, HTML, provera u pregledaču, SEO); za izmenu sadržaja i odgovarajuće stavke iz `testing/checklists/`
 - [ ] Ažurirao sam `REPORT.md` modula, `status/STATUS.md` i `status/log.md`
 - [ ] Nema privremenog teksta (`[cena]`, `[datum]` …) osim onog koji je naveden u `specs/04-content.md`

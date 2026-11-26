@@ -1,9 +1,8 @@
 // Smoke test of a deployed address (A1 after every deploy, A4 daily, G5 live smoke test).
-//   node scripts/smoke.mjs [baseUrl] [--mode preview|production] [--retries 4]
-// production (default since D60): the custom domain, indexable, robots.txt allows crawling. `--mode preview` is still
-// there for a locally served build (`npx serve dist`, `wrangler dev`): every response is noindex and robots.txt disallows
-// everything (D24), so a preview build deployed by mistake fails the production check.
-// production: indexable, robots.txt allows crawling and names the sitemap.
+//   node scripts/smoke.mjs [baseUrl] [--retries 4]
+// The address is production (D60: every merge to main deploys there, there is no other stage): indexable, robots.txt
+// allows crawling and names the sitemap, and the build is the production build. A local build (noindex, robots.txt
+// disallows everything, D24) deployed by mistake fails this check.
 // A failing run is repeated (default 4 tries, 8 s apart) because a fresh deploy takes a moment to reach every edge.
 import { fileURLToPath } from 'node:url';
 
@@ -13,30 +12,24 @@ export const DEFAULT_URL = 'https://astromicroscope.com';
 /** Headers every page must send (specs/09 section 4, src/integrations/headers.mjs). */
 export const REQUIRED_HEADERS = ['strict-transport-security', 'content-security-policy', 'x-content-type-options', 'referrer-policy', 'permissions-policy'];
 
-export function evaluateRobots(text, mode) {
-  if (mode === 'preview') return /^Disallow:\s*\/\s*$/m.test(text) ? null : 'robots.txt does not disallow everything on a preview';
+export function evaluateRobots(text) {
   if (!/^Allow:\s*\/\s*$/m.test(text)) return 'robots.txt does not allow crawling';
   if (!/^Sitemap:\s*\S+/m.test(text)) return 'robots.txt has no Sitemap line';
   return null;
 }
 
-export function evaluateNoindex(header, mode) {
-  const noindex = /noindex/i.test(header ?? '');
-  if (mode === 'preview') return noindex ? null : 'no x-robots-tag: noindex on a preview';
-  return noindex ? `x-robots-tag: noindex on production (${header})` : null;
+export function evaluateNoindex(header) {
+  return /noindex/i.test(header ?? '') ? `x-robots-tag: noindex on production (${header})` : null;
 }
 
 /**
- * The build the address serves matches the address (D56): the x-astromicroscope-env header names the build the address
- * was built for. The _headers file sets it on the page; the Worker sends it on its API responses. A Worker build that does
- * not match its environment answers every /api/* request with 404 build-not-production. On a preview address a mismatch
- * is a notice: a production build may sit there until the next deploy. On production it is a failure, and the build is
- * the wrong one: the preview build, which is noindex and has no MailerLite form.
+ * The address serves the production build (D56): the x-astromicroscope-env header names the build the address was built
+ * for. The _headers file sets it on the page; the Worker sends it on its API responses. A Worker build that does not match
+ * its environment answers every /api/* request with 404 build-not-production. Anything but `production` (a local build,
+ * or no header at all) is a failure: that build is noindex and has no MailerLite form.
  */
-export function evaluateBuild(env, mode) {
-  const build = env === 'production' ? 'production' : 'preview';
-  if (build === mode) return null;
-  return mode === 'preview' ? 'notice' : `the preview build is deployed as production (build environment ${build})`;
+export function evaluateBuild(env) {
+  return env === 'production' ? null : `a non-production build is deployed (build environment ${env ?? 'none'})`;
 }
 
 async function get(url) {
@@ -44,7 +37,7 @@ async function get(url) {
   return { status: res.status, headers: res.headers, text: await res.text() };
 }
 
-export async function runOnce(base, mode) {
+export async function runOnce(base) {
   const results = [];
   const check = (name, problem) => results.push({ name, problem: problem ?? null });
   const page = async (path, expect) => {
@@ -61,11 +54,9 @@ export async function runOnce(base, mode) {
     for (const h of REQUIRED_HEADERS) check(`/ sends ${h}`, home.headers.get(h) ? null : 'missing');
     check('/ sends x-content-type-options: nosniff', /nosniff/i.test(home.headers.get('x-content-type-options') ?? '') ? null : 'not nosniff');
     check('/ csp has frame-ancestors', /frame-ancestors/.test(home.headers.get('content-security-policy') ?? '') ? null : 'missing frame-ancestors');
-    check('/ robots header', evaluateNoindex(home.headers.get('x-robots-tag'), mode));
-    const build = evaluateBuild(home.headers.get('x-astromicroscope-env'), mode);
-    if (build === 'notice') console.log('notice  / build environment differs from the preview address');
-    else check('/ build environment', build);
-    check('/ robots meta', mode === 'preview' ? (/<meta name="robots" content="noindex"/.test(home.text) ? null : 'no robots meta noindex') : (/<meta name="robots" content="[^"]*noindex/.test(home.text) ? 'robots meta noindex on production' : null));
+    check('/ robots header', evaluateNoindex(home.headers.get('x-robots-tag')));
+    check('/ build environment', evaluateBuild(home.headers.get('x-astromicroscope-env')));
+    check('/ robots meta', /<meta name="robots" content="[^"]*noindex/.test(home.text) ? 'robots meta noindex on production' : null);
   }
   await page('/en/', { status: 200, lang: 'en' });
   await page('/video/', { status: 200, lang: 'sr-Latn' });
@@ -84,16 +75,16 @@ export async function runOnce(base, mode) {
     check('a spam URL answers 410 Gone', r.status === 410 ? null : `got ${r.status} (the Worker should answer 410, P07/D59)`);
   } catch (e) { check('a spam URL answers 410 Gone', String(e.message ?? e)); }
   const robots = await page('/robots.txt', { status: 200 });
-  if (robots) check('robots.txt content', evaluateRobots(robots.text, mode));
+  if (robots) check('robots.txt content', evaluateRobots(robots.text));
   const sitemap = await page('/sitemap.xml', { status: 200 });
   if (sitemap) check('sitemap.xml is a urlset', /<urlset/.test(sitemap.text) ? null : 'not a sitemap');
   return results;
 }
 
-export async function smoke(base, mode, retries = 4, delayMs = 8000) {
+export async function smoke(base, retries = 4, delayMs = 8000) {
   let results;
   for (let attempt = 1; attempt <= retries; attempt++) {
-    results = await runOnce(base, mode);
+    results = await runOnce(base);
     if (results.every((r) => !r.problem)) return { results, attempt };
     if (attempt < retries) await new Promise((r) => setTimeout(r, delayMs));
   }
@@ -104,11 +95,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const opt = (name, fallback) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : fallback; };
   const base = (args.find((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--')) ?? process.env.SMOKE_URL ?? DEFAULT_URL).replace(/\/$/, '');
-  const mode = opt('mode', 'production');
-  if (!['preview', 'production'].includes(mode)) throw new Error(`--mode must be preview or production, got ${mode}`);
-  const { results, attempt } = await smoke(base, mode, Number(opt('retries', 4)));
+  const { results, attempt } = await smoke(base, Number(opt('retries', 4)));
   for (const r of results) console.log(`${r.problem ? 'FAIL' : ' ok '}  ${r.name}${r.problem ? `: ${r.problem}` : ''}`);
   const failed = results.filter((r) => r.problem);
-  console.log(`smoke: ${base} (${mode}) ${results.length - failed.length}/${results.length} checks passed, attempt ${attempt}`);
+  console.log(`smoke: ${base} ${results.length - failed.length}/${results.length} checks passed, attempt ${attempt}`);
   if (failed.length) process.exit(1);
 }

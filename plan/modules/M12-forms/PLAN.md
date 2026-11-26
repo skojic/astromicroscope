@@ -70,4 +70,4 @@ Errors in text next to the field, announced via `aria-live`; double opt-in; cons
 | NEWS-03 | Confirmation and error states | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-newsletter.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

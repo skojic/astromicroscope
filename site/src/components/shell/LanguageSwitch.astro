@@ -2,7 +2,7 @@
 // Plain links to the paired page (specs/05 rule 5): crawlers follow them, and no script is needed.
 import { LANGS, t, type Lang } from '../../i18n/core';
 import { switchTarget, type Paths } from '../../i18n/routes';
-import { shellStrings } from '../../i18n/shell';
+import { shellStrings } from '../../i18n/strings';
 
 interface Props { lang: Lang; translationKey: string; paths?: Partial<Paths> }
 const { lang, translationKey, paths } = Astro.props;

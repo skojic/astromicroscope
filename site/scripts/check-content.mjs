@@ -1,5 +1,6 @@
 // Content checks that run before every build (M00-05; specs/05, testing/checklists/content.md).
-//  - every key in src/i18n/*.json has sr and en text
+//  - (every key in src/i18n/*.json having sr and en text is checked by defineStrings when the build loads the strings,
+//    src/i18n/core.ts; this script only adds the production placeholder check for them)
 //  - every content file sits in its language folder, has the same-named front matter `lang`, and has a pair in the other language with the same translationKey
 //  - a file with `draft: true` may lack its pair outside production
 //  - with SITE_ENV=production: no [placeholder] text (in string values and the body, not in YAML list syntax), no `ephemerisChecked: false`, no `draft: true`
@@ -41,16 +42,14 @@ function splitFrontMatter(text) {
 export async function checkContent({ root, production }) {
   const problems = [];
 
-  // Interface strings
-  for (const file of (await walk(join(root, 'src/i18n'))).filter((f) => f.endsWith('.json'))) {
+  // Interface strings: a missing sr or en text already fails the build (defineStrings, src/i18n/core.ts).
+  if (production) for (const file of (await walk(join(root, 'src/i18n'))).filter((f) => f.endsWith('.json'))) {
     const data = JSON.parse(await readFile(file, 'utf8'));
     const name = relative(root, file);
     for (const [key, texts] of Object.entries(data)) {
       for (const lang of LANGS) {
         const text = texts?.[lang];
-        if (typeof text !== 'string' || text.trim() === '') problems.push(`${name}: "${key}" has no "${lang}" text`);
-        else if (production && PLACEHOLDER.test(text)) problems.push(`${name}: "${key}" (${lang}) contains a placeholder`);
-        PLACEHOLDER.lastIndex = 0;
+        if (typeof text === 'string' && text.match(PLACEHOLDER)) problems.push(`${name}: "${key}" (${lang}) contains a placeholder`);
       }
     }
   }

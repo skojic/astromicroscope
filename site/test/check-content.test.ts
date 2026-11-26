@@ -33,9 +33,10 @@ test('wrong lang folder fails', async () => {
   assert.match((await checkContent({ root, production: false }))[0], /lang is "en"/);
 });
 
-test('missing interface translation fails', async () => {
-  const root = await site({ 'src/i18n/x.json': JSON.stringify({ k: { sr: 'a' } }) });
-  assert.match((await checkContent({ root, production: false }))[0], /"k" has no "en" text/);
+test('an interface string with a placeholder fails only in production', async () => {
+  const root = await site({ 'src/i18n/x.json': JSON.stringify({ k: { sr: 'Cena: [cena]', en: 'Price' } }) });
+  assert.deepEqual(await checkContent({ root, production: false }), []);
+  assert.match((await checkContent({ root, production: true }))[0], /"k" \(sr\) contains a placeholder/);
 });
 
 test('placeholders fail only in production; markdown links are fine', async () => {

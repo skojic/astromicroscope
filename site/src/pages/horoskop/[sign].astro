@@ -1,61 +1,9 @@
 ---
-// M07-02/M07-03: the yearly-horoscope sign page (`/horoskop/<serbian-slug>/`, `/en/horoscope/<sign>/`).
-// Renders the sign markdown from M02, the AuthorBox, and Article JSON-LD (M04). Uses the Serbian slug per D31.
-import Page from '../../layouts/Page.astro';
-import { getCollection, render } from 'astro:content';
-import TransitTimeline from '../../components/sections/articles/TransitTimeline.astro';
-import AuthorBox from '../../components/sections/about/AuthorBox.astro';
-import { article, person, profilePage, graph } from '../../components/seo/jsonld';
-import { horoscopeStrings } from '../../i18n/horoscope';
-import { SIGN_SLUG_SR, SLUG_TO_SIGN, CURRENT_HOROSCOPE_YEAR } from '../../i18n/horoscope';
-
-// SR only; the English /en/horoscope/** mirror is a separate file under pages/en/horoscope/.
+// The Serbian sign page lives at /horoskop/<serbian slug>/ (D31).
+import SignPage from '../../components/sections/horoscope/SignPage.astro';
+import { SIGN_SLUG_SR } from '../../i18n/horoscope';
 export function getStaticPaths() {
-  return Object.entries(SIGN_SLUG_SR).map(([sign, slug]) => ({
-    params: { sign: slug },
-    props: { sign, lang: 'sr' as const },
-  }));
+  return Object.entries(SIGN_SLUG_SR).map(([sign, slug]) => ({ params: { sign: slug }, props: { sign } }));
 }
-const { sign, lang } = Astro.props;
-const entries = await getCollection('horoscope');
-const entry = entries.find((e) => e.id === `sr/${CURRENT_HOROSCOPE_YEAR}/${sign}`);
-if (!entry) throw new Error(`Missing horoscope entry: sr/${CURRENT_HOROSCOPE_YEAR}/${sign}.md (run M02)`);
-const { Content } = await render(entry);
-const { title, description, translationKey, answer } = entry.data;
-const year = entry.data.year;
-const url = `/horoskop/${SIGN_SLUG_SR[sign]}/`;
-const jsonLd = graph(lang, [
-  article({ headline: title, url, published: `${year}-01-01`, lang, description }),
-  person(lang),
-  profilePage(lang, url),
-]);
-const crumbName = horoscopeStrings[sign as keyof typeof horoscopeStrings]?.[lang] ?? sign;
 ---
-<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: 'Godišnji horoskop', url: '/horoskop/' }, { name: crumbName, url }]} jsonLd={jsonLd} paths={{ sr: url, en: `/en/horoscope/${sign}/` }}>
-  <article class="sign-page">
-    <div class="container">
-      <header class="hero">
-        <h1>{title}</h1>
-        <p class="answer">{answer}</p>
-        <TransitTimeline transits={entry.data.transits} lang={lang} />
-        <AuthorBox lang={lang} headingLevel="h3" />
-      </header>
-      <div class="body">
-        <Content />
-      </div>
-    </div>
-  </article>
-</Page>
-<style>
-  .sign-page { padding: var(--am-space-8) 0 var(--am-space-8); }
-  .hero { margin-bottom: var(--am-space-6); max-width: var(--am-measure); }
-  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); }
-  .answer { font-size: 1.125rem; font-weight: 500; margin-bottom: 0; max-width: var(--am-measure); padding: var(--am-space-4); background: var(--am-bg-alt); border-left: 3px solid var(--am-action); }
-  .body :global(h2) { margin: var(--am-space-7) 0 var(--am-space-4); font-size: clamp(1.7rem, 3vw, 2.2rem); }
-  .body :global(h3) { margin: var(--am-space-6) 0 var(--am-space-3); }
-  .body :global(p) { max-width: var(--am-measure); line-height: 1.75; }
-  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
-  .body :global(a) { color: var(--am-action); }
-  .body :global(ul), .body :global(ol) { padding-left: var(--am-space-4); }
-  .body :global(li) { line-height: 1.75; }
-</style>
+<SignPage lang="sr" sign={Astro.props.sign} />

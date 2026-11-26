@@ -88,6 +88,14 @@ jobs:
         if: steps.files.outputs.site == 'true'
         working-directory: site
         run: npm test
+      # The production rules of the content check (no [placeholder], no draft, no ephemerisChecked: false) used to run
+      # only in site-deploy, after the merge: a placeholder then failed the release instead of the pull request.
+      - name: Production content check (placeholders, drafts)
+        if: steps.files.outputs.site == 'true'
+        working-directory: site
+        run: node scripts/check-content.mjs
+        env:
+          SITE_ENV: production
       - name: HTML validation
         if: steps.files.outputs.site == 'true'
         working-directory: site

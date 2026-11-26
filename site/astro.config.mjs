@@ -4,7 +4,7 @@ import headers from './src/integrations/headers.mjs';
 import notFound from './src/integrations/not-found.mjs';
 import seoFiles from './src/integrations/seo-files.mjs';
 
-// SITE_ENV=production only on the production deploy; everything else (dev, CI, previews) is non-production.
+// SITE_ENV=production only on the production deploy; everything else (dev, CI) is a local, non-production build.
 const isProduction = process.env.SITE_ENV === 'production';
 
 // https://astro.build/config
