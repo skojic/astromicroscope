@@ -108,4 +108,4 @@ Placeholders are written as `[placeholder]`; the content gate fails while any re
 - **Interactive parts** (star field, lens, zodiac wheel, mobile menu) are small client scripts or islands. React only if a component really needs it (decision D09); the first React component needs a note in `status/decisions.md`.
 
 ## 6. Quality bar for every module
-Before asking for review: the build passes, both languages render, the module's checks in `testing/test-plan.md` pass, budgets from `specs/07` hold, and `REPORT.md` is updated with the evidence.
+Before asking for review: the build passes, both languages render, the module's pull request is green (`site-ci`, G1 in `testing/gates.md`), budgets from `specs/07` hold, and `REPORT.md` is updated with the evidence.

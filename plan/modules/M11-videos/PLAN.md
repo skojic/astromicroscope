@@ -69,4 +69,4 @@ Serbian titles on English pages have `lang="sr"`. The play button has a name tha
 | VIDEO-04 | Facade player | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-youtube-feed.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

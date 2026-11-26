@@ -2,7 +2,7 @@
 // Facade (M11-03): a thumbnail link. Nothing from YouTube loads until the visitor plays it; without JavaScript it is a plain link to YouTube.
 import { Image } from 'astro:assets';
 import { t, type Lang } from '../../../i18n/core';
-import { videoStrings } from '../../../i18n/videos';
+import { videoStrings } from '../../../i18n/strings';
 import { videoTitle, type Video } from './data';
 
 interface Props { lang: Lang; video: Video; priority?: boolean }

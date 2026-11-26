@@ -69,4 +69,4 @@ Meaningful alt text on the portrait in both languages.
 | ABOUT-03 | Author box for articles | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-about.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

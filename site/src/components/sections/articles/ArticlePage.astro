@@ -1,0 +1,62 @@
+---
+// M06-01/M06-05: the article page (`/tekstovi/<slug>/`, `/en/articles/<slug>/`), one body for both languages. Renders
+// the article markdown with the answer box first, published/updated dates, the TransitTimeline, the M10 AuthorBox, and
+// Article JSON-LD (M04). The other language's version is found by translationKey (language switch and hreflang).
+import Page from '../../../layouts/Page.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import TransitTimeline from './TransitTimeline.astro';
+import AuthorBox from '../about/AuthorBox.astro';
+import { article, person, profilePage, graph } from '../../seo/jsonld';
+import { t, type Lang } from '../../../i18n/core';
+import { articleStrings, shellStrings } from '../../../i18n/strings';
+import { pathFor, entryPaths } from '../../../i18n/routes';
+import { articleSlugs } from './entries';
+
+interface Props { lang: Lang; entry: CollectionEntry<'articles'> }
+const { lang, entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, translationKey, answer, published, updated } = entry.data;
+const paths = entryPaths('articles', articleSlugs(await getCollection('articles'), translationKey));
+const url = paths[lang]!;
+const pubStr = published instanceof Date ? published.toISOString().slice(0, 10) : String(published);
+const updStr = updated instanceof Date ? updated.toISOString().slice(0, 10) : String(updated);
+const jsonLd = graph(lang, [
+  article({ headline: title, url, published: pubStr, updated: updStr, lang, description }),
+  person(lang),
+  profilePage(lang, url),
+]);
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: t(shellStrings, 'articles', lang), url: pathFor('articles', lang) }, { name: title, url }]} jsonLd={jsonLd} paths={paths}>
+  <article class="article">
+    <div class="container">
+      <header class="meta">
+        <h1>{title}</h1>
+        <p class="byline">
+          <span>{t(articleStrings, 'publishedOn', lang)}: {pubStr}</span>
+          {updated && updStr !== pubStr && <><span> · {t(articleStrings, 'updatedOn', lang)}: {updStr}</span></>}
+        </p>
+        <p class="answer">{answer}</p>
+        <TransitTimeline transits={entry.data.transits} lang={lang} />
+      </header>
+      <div class="body">
+        <Content />
+      </div>
+      <AuthorBox lang={lang} headingLevel="h3" />
+    </div>
+  </article>
+</Page>
+<style>
+  .article { padding: var(--am-space-8) 0 var(--am-space-8); }
+  .meta { margin: 0 0 var(--am-space-6); max-width: var(--am-measure); }
+  h1 { margin: 0 0 var(--am-space-3); font: var(--am-text-display); }
+  .byline { margin: 0 0 var(--am-space-4); color: var(--am-muted); font-size: .95rem; }
+  .answer { font-size: 1.125rem; font-weight: 500; margin-bottom: 0; padding: var(--am-space-4); background: var(--am-bg-alt); border-left: 3px solid var(--am-action); }
+  .body { max-width: var(--am-measure); }
+  .body :global(p) { line-height: 1.75; font-size: 1.1875rem; }
+  .body :global(h2) { margin: var(--am-space-7) 0 var(--am-space-4); font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .body :global(h3) { margin: var(--am-space-6) 0 var(--am-space-3); }
+  .body :global(blockquote) { margin: var(--am-space-6) 0; padding-left: var(--am-space-4); border-left: 3px solid var(--am-action); font-style: italic; }
+  .body :global(a) { color: var(--am-action); }
+  .body :global(ul), .body :global(ol) { padding-left: var(--am-space-4); }
+  .body :global(li) { line-height: 1.75; }
+</style>

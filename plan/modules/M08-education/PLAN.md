@@ -66,4 +66,4 @@ Card links: the whole card may be clickable, but only one link is focusable per 
 | LEARN-03 | Empty state when a format has nothing yet (“Uskoro / Coming soon” + waitlist) | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-learn-formats.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

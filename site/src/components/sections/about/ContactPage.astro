@@ -1,0 +1,40 @@
+---
+// M10-04: the Contact page (`/kontakt/`, `/en/contact/`), one body for both languages. Contact info per D21:
+// astromicroscope@gmail.com, no other social networks. Static contact info + email link.
+import Page from '../../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang } from '../../../i18n/core';
+import { aboutStrings, shellStrings } from '../../../i18n/strings';
+import { pathFor } from '../../../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const id = lang === 'sr' ? 'sr/kontakt' : 'en/contact';
+const entry = (await getCollection('pages')).find((e) => e.id === id);
+if (!entry) throw new Error(`Missing content page: pages/${id}.md`);
+const { title, description, translationKey } = entry.data;
+const email = t(aboutStrings, 'contactEmail', lang);
+const url = pathFor('contact', lang);
+---
+<Page lang={lang} title={title} description={description} translationKey={translationKey} breadcrumbs={[{ name: t(shellStrings, 'contact', lang), url }]} paths={{ sr: pathFor('contact', 'sr'), en: pathFor('contact', 'en') }}>
+  <article class="contact">
+    <div class="container">
+      <h1>{title.replace(/ · .*/, '')}</h1>
+      <p class="intro">{t(aboutStrings, 'contactIntro', lang)}</p>
+      <p class="email-row">
+        <span class="label">{t(aboutStrings, 'contactEmailLabel', lang)}:</span>
+        <a class="email" href={`mailto:${email}`}>{email}</a>
+      </p>
+      <p class="note">{t(aboutStrings, 'contactNote', lang)}</p>
+    </div>
+  </article>
+</Page>
+<style>
+  .contact { padding: var(--am-space-8) 0 var(--am-space-8); }
+  h1 { margin: 0 0 var(--am-space-4); font: var(--am-text-display); max-width: var(--am-measure); }
+  .intro { margin: 0 0 var(--am-space-5); font-size: 1.125rem; max-width: var(--am-measure); }
+  .email-row { margin: 0 0 var(--am-space-4); max-width: var(--am-measure); }
+  .label { font-weight: 600; margin-right: var(--am-space-1); }
+  .email { color: var(--am-action); text-decoration: underline; overflow-wrap: anywhere; }
+  .note { color: var(--am-muted); max-width: var(--am-measure); }
+</style>

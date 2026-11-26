@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { z } from 'astro/zod';
 import raw from '../../../data/videos.json';
 import { type Lang } from '../../../i18n/core';
+import { entryPaths, type Paths } from '../../../i18n/routes';
 import { cleanText, shortDescription } from './text';
 
 const schema = z.array(z.object({
@@ -32,7 +33,7 @@ export const CHANNEL_URL = 'https://www.youtube.com/@astromicroscope';
 
 /** Both routes show every video: the interface follows the page language, the video stays in its own language. */
 export function videoPaths(v: Pick<Video, 'slug'>) {
-  return { sr: `/video/${v.slug}/`, en: `/en/videos/${v.slug}/` } as const;
+  return entryPaths('videos', v.slug) as Paths;
 }
 
 export function formatDate(iso: string, lang: Lang): string {

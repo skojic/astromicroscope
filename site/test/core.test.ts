@@ -45,3 +45,24 @@ test('route pairs and the language switch target', () => {
   assert.deepEqual(alternates('some-article', { sr: '/tekstovi/x/' }), { sr: '/tekstovi/x/' });
   assert.equal(switchTarget('en', 'some-article', { sr: '/tekstovi/x/' }), '/en/');
 });
+
+import { entryPath, entryPaths } from '../src/i18n/routes.ts';
+import { articleSlug, articleSlugs } from '../src/components/sections/articles/entries.ts';
+
+test('entry paths: one slug for both languages, translated slugs, and a missing language', () => {
+  assert.equal(entryPath('analyses', 'en', 'natal'), '/en/analyses/natal/');
+  assert.deepEqual(entryPaths('analyses', 'natal'), { sr: '/analize/natal/', en: '/en/analyses/natal/' });
+  assert.deepEqual(entryPaths('horoscope', { sr: 'ovan', en: 'aries' }), { sr: '/horoskop/ovan/', en: '/en/horoscope/aries/' });
+  assert.deepEqual(entryPaths('articles', { sr: 'podznak' }), { sr: '/tekstovi/podznak/' });
+});
+
+test('article slugs are paired by translationKey', () => {
+  const entries = [
+    { id: 'sr/podznak', data: { translationKey: 'rising-sign' } },
+    { id: 'en/rising-sign', data: { translationKey: 'rising-sign' } },
+    { id: 'sr/saturn', data: { translationKey: 'saturn' } },
+  ];
+  assert.equal(articleSlug('sr/podznak'), 'podznak');
+  assert.deepEqual(articleSlugs(entries, 'rising-sign'), { sr: 'podznak', en: 'rising-sign' });
+  assert.deepEqual(articleSlugs(entries, 'saturn'), { sr: 'saturn' });
+});

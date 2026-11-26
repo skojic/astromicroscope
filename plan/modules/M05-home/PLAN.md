@@ -69,4 +69,4 @@ The interactive chart works with arrow keys and clicks, not only with the pointe
 | HERO-03 | Reduced-motion and mobile variants | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-hero.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

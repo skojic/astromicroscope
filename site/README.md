@@ -38,14 +38,13 @@ Run from `site/`.
 | `npm test` | Unit tests for the language helpers and the content checks |
 | `npm run check` | Brand CSS in sync with `brand/`; every string and content file translated; with `SITE_ENV=production` also no `[placeholder]` and no unchecked ephemeris |
 | `npm run sync:brand` | Regenerate `src/styles/tokens.css` and `fonts.css` from `brand/` |
-| `npm run test:html`, `test:axe` | HTML validation, and the browser check on the built `dist/` (axe WCAG 2.2 A/AA, one `<h1>`, skip link, phone menu, no horizontal overflow, video facade, lens; Chromium). `VISUAL_BROWSERS=chromium,firefox,webkit` adds the three-browser run. Needs `npx playwright install chromium` (or `PW_CHANNEL=chrome` to use installed Chrome). Lighthouse is the live run: `npm run test:lighthouse:live` |
+| `npm run test:html`, `test:axe` | HTML validation, and the browser check on the built `dist/` (axe WCAG 2.2 A/AA, one `<h1>`, skip link, phone menu, no horizontal overflow, video facade, lens; Chromium). Needs `npx playwright install chromium` (or `PW_CHANNEL=chrome` to use installed Chrome). Lighthouse is the live run: `npm run test:lighthouse:live` |
 | `npm run preview` | Serve the built `dist/` locally to check it before a pull request |
 | `npm run astro -- --help` | Astro CLI help |
 | `npm run deploy:dry-run` | `wrangler deploy --dry-run`: reads `dist/` and `wrangler.jsonc`, uploads nothing, needs no token |
-| `npm run test:visual` | Every built page in Chromium (360, 768, 1024, 1440 px), Firefox and WebKit (360, 1440 px): no horizontal overflow, one `<h1>`, no console or request errors. `SHOTS_DIR=folder` saves screenshots; needs `npx playwright install chromium firefox webkit` |
 | `npm run check:docs` / `npm run status:sync` | Stages, gates, D-numbers and the `Updated:` date of `status/` and `plan/` agree; `status:sync` rewrites what can be derived |
-| `npm run smoke -- <url> [--mode production]` | Headers, languages, 404 pages, robots and sitemap of a deployed address |
-| `npm run crawl -- <url> [--mode production] [--strict]` | Crawl of a deployed address: status codes, canonicals, hreflang pairs, orphans (launch check M13-01) |
+| `npm run smoke -- <url>` | Headers, languages, 404 pages, robots and sitemap of a deployed address |
+| `npm run crawl -- <url> [--strict]` | Crawl of a deployed address: status codes, canonicals, hreflang pairs, orphans (launch check M13-01) |
 | `npm run check:redirects -- <url> [--gone]` | The redirects file and, with `--gone`, 410 for the 143 spam URLs of the old site (M13-02) |
 | `npm run test:links` | External links of the built site (after `npm run build`) |
 | `npm run deploy:production` | Build and deploy to `astromicroscope.com`. Needs `CLOUDFLARE_API_TOKEN` in the environment for that one command (Srdjan keeps it in the macOS keychain); never `export` it in a shell profile, and never commit it. **Normally nobody runs this:** `site-deploy` deploys every green push to `main` (D60) |
@@ -73,7 +72,7 @@ One Worker, one build, one address. There is no preview stage:
 
 Every merge to `main` is a release: `site-ci` must be green (`ci-gate`), and `site-deploy` builds the production build and deploys it to the custom domain, then smoke-tests it. A red smoke test is a failed release. The pull request is where a change is reviewed and checked; there is no per-pull-request preview address any more (D60 replaced the preview stage of D36, D56 and D57).
 
-The smoke test checks that a production address serves the production build: `node scripts/smoke.mjs https://astromicroscope.com --mode production`. The Worker's `SITE_ENV` (the same variable at build time) must match the address; a mismatch answers `/api/*` with 404 `build-not-production`.
+The smoke test checks that a production address serves the production build: `node scripts/smoke.mjs https://astromicroscope.com`. The Worker's `SITE_ENV` (the same variable at build time) must match the build: `production` on the custom domain, `local` everywhere else; a mismatch answers `/api/*` with 404 `build-not-production`.
 
 ## How work reaches `main`
 A branch named `feature/…`, `fix/…` or `docs/…`, a pull request, and the owner's approval (`CONTRIBUTING.md`). Every work session ends with updates to the module's `REPORT.md`, `status/STATUS.md` (with its `Updated:` date) and `status/log.md`.

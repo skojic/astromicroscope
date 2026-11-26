@@ -4,7 +4,7 @@ import Page from '../../layouts/Page.astro';
 import Hero from '../../components/home/Hero.astro';
 import Sections from '../../components/home/Sections.astro';
 import { t } from '../../i18n/core';
-import { homeStrings } from '../../i18n/home';
+import { homeStrings } from '../../i18n/strings';
 const lang = 'en';
 ---
 <Page lang={lang} title={t(homeStrings, 'title', lang)} description={t(homeStrings, 'description', lang)} translationKey="home">

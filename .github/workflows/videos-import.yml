@@ -1,7 +1,8 @@
 name: videos-import
 
-# Weekly: reads the channel feed (M11-01). When a new video appeared, the job builds and tests the site, then opens a pull
-# request from a feature/ branch with auto-merge enabled (D45). GitHub merges it when `ci-gate` and `branch-name` are green,
+# Weekly: reads the channel feed (M11-01). When a new video appeared, the job opens a pull request from a feature/ branch
+# with auto-merge enabled (D45). The pull request runs `site-ci` like any other (unit tests, build, HTML validation, browser
+# and SEO checks), so the job does not run them itself first. GitHub merges it when `ci-gate` and `branch-name` are green,
 # and that push to main triggers the deploy (site-deploy). The GitHub Actions app is not a bypass actor because this is a
 # personal repository - GitHub only accepts the Actions app as a bypass actor on organisation-owned repositories - so the bot
 # goes through a pull request instead of pushing to main directly (D45). Nothing new in the feed means nothing is committed.
@@ -9,11 +10,6 @@ on:
   schedule:
     - cron: '23 6 * * 1'
   workflow_dispatch:
-    inputs:
-      test_pr:
-        description: 'Open a PR from an empty commit, to prove the bot may merge to main (ruleset bypass)'
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -26,8 +22,7 @@ concurrency:
 
 jobs:
   import:
-    # ubuntu-24.04 pinned: the ubuntu-26 image hangs on `playwright install --with-deps` and lacks Chromium's libraries (2026-11-04).
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: site
@@ -55,14 +50,6 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No new video in the feed."
           fi
-      - name: Tests and build with the new data
-        if: steps.diff.outputs.changed == 'true'
-        run: |
-          npm test
-          npm run build
-          npm run test:html
-          npx playwright install --with-deps chromium
-          npm run test:seo
       - name: Open a pull request and enable auto-merge
         if: steps.diff.outputs.changed == 'true'
         run: |
@@ -70,23 +57,10 @@ jobs:
           git config user.name "Srdjan Kojic"
           git config user.email "srdjan.m.kojic@gmail.com"
           git add src/data/videos.json src/assets/videos
-          git commit -m "Videos: import the channel feed" -m "Weekly import of the channel feed (M11-01): new or changed videos and their thumbnails; tests, build, HTML validation and the SEO audit passed first."
+          git commit -m "Videos: import the channel feed" -m "Weekly import of the channel feed (M11-01): new or changed videos and their thumbnails. site-ci checks this pull request before it merges."
           branch="feature/videos-import-$(date -u +%Y%m%d-%H%M%S)"
           git switch -c "$branch"
           git push -u origin "$branch"
           pr="$(gh pr create --base main --head "$branch" --title "Videos: import the channel feed" --body "Weekly import of the channel feed (M11-01). Auto-merge enabled: it merges when \`ci-gate\` and \`branch-name\` are green.")"
-          gh pr merge --auto --squash "$pr"
-          echo "Auto-merge enabled on $pr"
-      - name: Test pull request (manual run only)
-        if: github.event_name == 'workflow_dispatch' && inputs.test_pr
-        run: |
-          set -euo pipefail
-          git config user.name "Srdjan Kojic"
-          git config user.email "srdjan.m.kojic@gmail.com"
-          git commit --allow-empty -m "CI: test that the Actions bot may merge to main"
-          branch="feature/test-import-pr-$(date -u +%Y%m%d-%H%M%S)"
-          git switch -c "$branch"
-          git push -u origin "$branch"
-          pr="$(gh pr create --base main --head "$branch" --title "CI: test bot merge to main" --body "Manual test (test_pr) that the Actions bot may merge to main without a human approval.")"
           gh pr merge --auto --squash "$pr"
           echo "Auto-merge enabled on $pr"

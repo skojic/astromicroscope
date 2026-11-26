@@ -30,13 +30,14 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       REPO: ${{ github.repository }}
     steps:
+      # Missing secrets fail the run (red, and GitHub emails the owner): production is the only target since D60, so a
+      # skipped deploy would leave a merged change silently unreleased.
       - name: Check the secrets and that this is the newest commit of main
         id: gate
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::notice::No Cloudflare secrets: deploy skipped."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            echo "::error::CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set: the merge to main cannot be deployed."
+            exit 1
           fi
           latest="$(gh api "repos/$REPO/commits/main" --jq .sha)"
           if [ "$COMMIT" != "$latest" ]; then
@@ -84,4 +85,4 @@ jobs:
       - name: Smoke test of the production address
         if: steps.gate.outputs.run == 'true'
         working-directory: site
-        run: node scripts/smoke.mjs https://astromicroscope.com --mode production
+        run: node scripts/smoke.mjs https://astromicroscope.com

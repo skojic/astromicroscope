@@ -1,4 +1,4 @@
-// Writes dist/_headers (specs/09 section 4). Previews and local builds send X-Robots-Tag: noindex.
+// Writes dist/_headers (specs/09 section 4). Local and CI builds (SITE_ENV is not production) send X-Robots-Tag: noindex.
 // The _headers file also carries the environment the build was made for (D56): x-astromicroscope-env, the same header
 // the Worker sends on its API responses, so the deploy's smoke test checks that a production address really runs the
 // production build.
@@ -26,7 +26,7 @@ export function buildHeaders({ isProduction }) {
     `Content-Security-Policy: ${csp}`,
   ];
   if (!isProduction) all.push('X-Robots-Tag: noindex');
-  all.push(`X-Astromicroscope-Env: ${isProduction ? 'production' : 'preview'}`);
+  all.push(`X-Astromicroscope-Env: ${isProduction ? 'production' : 'local'}`);
   return `/*\n${all.map((h) => `  ${h}`).join('\n')}\n\n/_astro/*\n  Cache-Control: public, max-age=31536000, immutable\n`;
 }
 

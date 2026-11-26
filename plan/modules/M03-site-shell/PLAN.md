@@ -71,7 +71,7 @@ Keyboard order: skip link, logo, nav, language switch, button. Mobile menu: a bu
 | NAV-04 | Active-page state | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-header-nav.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.
 
 ### Component spec: Language switch
 
@@ -100,7 +100,7 @@ Each target is at least 24×24 px; the link names include the language name in t
 | LANG-02 | hreflang `<link>` tags in `<head>` (see seo-head) | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-language-switch.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.
 
 ### Component spec: Footer
 
@@ -129,4 +129,4 @@ Link texts name the destination (“Instagram @astromicroscope”).
 | FOOTER-02 | Legal pages linked | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-footer.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.

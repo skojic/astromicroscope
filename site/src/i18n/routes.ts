@@ -20,6 +20,25 @@ export function pathFor(key: RouteKey, lang: Lang): string {
   return ROUTES[key][lang];
 }
 
+/** A page inside a section: entryPath('articles', 'en', 'rising-sign') -> '/en/articles/rising-sign/'. */
+export function entryPath(section: RouteKey, lang: Lang, slug: string): string {
+  return `${ROUTES[section][lang]}${slug}/`;
+}
+
+/**
+ * Both language paths of one entry. `slug` is one string when the slug is the same in both languages (analyses, videos),
+ * or one per language when it is translated (articles, the Serbian sign slugs of the horoscope). A language without a
+ * slug has no page, so it is left out (no hreflang, and the language switch falls back to that language's home page).
+ */
+export function entryPaths(section: RouteKey, slug: string | Partial<Record<Lang, string>>): Partial<Paths> {
+  const out: Partial<Paths> = {};
+  for (const lang of LANGS) {
+    const s = typeof slug === 'string' ? slug : slug[lang];
+    if (s) out[lang] = entryPath(section, lang, s);
+  }
+  return out;
+}
+
 /** The page in each language, or `undefined` for a language that has no pair (M04 then writes no hreflang for it). */
 export function alternates(translationKey: string, paths?: Partial<Paths>): Partial<Paths> {
   const known = (ROUTES as Record<string, Paths>)[translationKey];

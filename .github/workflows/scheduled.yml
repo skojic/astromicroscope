@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 24
       - name: Smoke test of production (headers, languages, 404 pages, robots, sitemap, no noindex, a spam URL 410)
-        run: node site/scripts/smoke.mjs https://astromicroscope.com --mode production
+        run: node site/scripts/smoke.mjs https://astromicroscope.com
 
   weekly:
     if: github.event_name == 'workflow_dispatch' || github.event.schedule == '41 5 * * 1'

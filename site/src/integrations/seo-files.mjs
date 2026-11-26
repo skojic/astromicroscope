@@ -36,11 +36,11 @@ export function buildSitemap(entries) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
 }
 
-/** Crawlers: all allowed in production (AI training crawlers are open decision P03, so no rule for them yet); nothing in previews. */
+/** Crawlers: all allowed in production (AI training crawlers are open decision P03, so no rule for them yet); nothing in local and CI builds. */
 export function buildRobots({ isProduction, site }) {
   return isProduction
     ? `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`
-    : `# Preview or local build: not for search engines.\nUser-agent: *\nDisallow: /\n`;
+    : `# Local build: not for search engines.\nUser-agent: *\nDisallow: /\n`;
 }
 
 /** @param {{ isProduction: boolean, site: string }} options @returns {import('astro').AstroIntegration} */

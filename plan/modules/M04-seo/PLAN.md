@@ -72,4 +72,4 @@ No runtime cost; nothing here may block rendering except the critical CSS.
 | SEO-07 | robots.txt per decision P03 | idea | |
 
 #### Tests
-See `testing/test-plan.md`, row MOD-seo-head.
+Checked by `site-ci` (G1 in `testing/gates.md`): unit tests, build, HTML validation, browser check and SEO audit.
